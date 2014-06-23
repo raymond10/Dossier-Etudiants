@@ -1,0 +1,63 @@
+<webobject name = "formLogin">
+  <table width = "100%" border = "0">
+    <tr valign = "middle">
+      <td align = "right" width = "50%">
+        <nobr>
+          <font class = "subTitle"><webobject name = "strLoginLabel" />&nbsp;:</font>
+        </nobr>
+      </td>
+      <td width = "50%"> <webobject name = "txtLogin" /> </td>
+    </tr>
+    <tr valign = "middle">
+      <td align = "right" width = "50%">
+        <nobr>
+          <font class = "subTitle"><webobject name = "strPassLabel" />&nbsp;:</font>
+        </nobr>
+      </td>
+      <td width = "50%"><webobject name = "txtPassw" /></td>
+    </tr>
+    <tr>
+      <td align = "center" colspan = "2">
+        <br />
+        <webobject name = "btnConnect" />
+      </td>
+    </tr>
+  </table>
+</webobject>
+<center>
+  <webobject name = "erreurLogin">
+    <hr class = "subLine" />
+    <b>
+      <font class = "textError">Erreur de 
+        <nobr>Login !</nobr>
+      </font>
+      <br />
+      Veuillez v&eacute;rifier votre saisie.</b>
+  </webobject>
+  <webobject name = "erreurAdresse">
+    <hr class = "subLine" />
+    <b>
+      <font class = "textError">Erreur dans la 
+        <nobr>base !</nobr>
+      </font>
+      <br />
+      Veuillez contacter le service informatique.</b>
+  </webobject>
+  <webobject name = "erreurPassword">
+    <hr class = "subLine" />
+    <b>
+      <font class = "textError">Erreur de mot de 
+        <nobr>passe !<br /></nobr>
+      </font>Veuillez
+      vérifier votre saisie.</b>
+  </webobject>
+  <webobject name = "erreurDroits">
+    <hr class = "subLine" />
+    <b>
+      <font class = "textError">Acc&egrave;s non 
+        <nobr>autoris&eacute; !</nobr>
+      </font>
+      <br />
+      Vous n'avez pas le droit de vous connecter.</b>
+  </webobject>
+</center>

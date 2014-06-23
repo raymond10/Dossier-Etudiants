@@ -1,0 +1,24 @@
+{
+    listDiplome = {
+        class = EOFetchSpecification; 
+        entityName = EOVueDiplwithprd; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOAndQualifier; 
+            qualifiers = (
+                {
+                    class = EOKeyValueQualifier; 
+                    key = diplDebut; 
+                    selectorName = "isLessThanOrEqualTo:"; 
+                    value = {"_key" = periode; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = diplFerm; 
+                    selectorName = "isGreaterThanOrEqualTo:"; 
+                    value = {"_key" = periode; class = EOQualifierVariable; }; 
+                }
+            ); 
+        }; 
+    }; 
+}

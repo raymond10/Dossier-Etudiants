@@ -1,0 +1,64 @@
+{
+    attributes = (
+        {
+            columnName = "ETU_ID"; 
+            externalType = NUMBER; 
+            name = ETUID; 
+            valueClassName = NSNumber; 
+            valueType = l; 
+        }, 
+        {
+            columnName = "PIMP_DATE"; 
+            externalType = DATE; 
+            name = PIMPDATE; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            columnName = "PIMP_ID"; 
+            externalType = NUMBER; 
+            name = PIMPID; 
+            valueClassName = NSNumber; 
+            valueType = i; 
+        }, 
+        {
+            columnName = "PIMP_INFOS_IMPRESSION"; 
+            externalType = VARCHAR; 
+            name = PIMPINFOSIMPRESSION; 
+            valueClassName = NSString; 
+            width = 200; 
+        }, 
+        {
+            columnName = "USER_ID"; 
+            externalType = NUMBER; 
+            name = USERID; 
+            valueClassName = NSNumber; 
+            valueType = l; 
+        }
+    ); 
+    attributesUsedForLocking = (ETUID, PIMPDATE, PIMPID, PIMPINFOSIMPRESSION, USERID); 
+    className = "etudiants.utt.fr.eo.EOProfilImpression"; 
+    classProperties = (etudiantID, ETUID, PIMPDATE, PIMPINFOSIMPRESSION, USERID, utilisateur); 
+    externalName = "GERRY.PROFIL_IMPRESSION"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOProfilImpression; 
+    primaryKeyAttributes = (PIMPID); 
+    relationships = (
+        {
+            destination = EOIndividu; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = indivId; sourceAttribute = ETUID; }); 
+            name = etudiantID; 
+        }, 
+        {
+            destination = "FwkLoginWebApp_Individu"; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = indivId; sourceAttribute = USERID; }); 
+            name = utilisateur; 
+        }
+    ); 
+}

@@ -1,0 +1,239 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = CYCLE; 
+            externalType = VARCHAR2; 
+            name = cycle; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DEB_AN_UNIV"; 
+            externalType = VARCHAR2; 
+            name = debAnUniv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DEB_PRD_UNIV"; 
+            externalType = VARCHAR2; 
+            name = debPrdUniv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPL_ABR"; 
+            externalType = VARCHAR2; 
+            name = diplAbr; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 7; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = DIPLOME; 
+            externalType = VARCHAR2; 
+            name = diplome; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPLOME_AN"; 
+            externalType = VARCHAR2; 
+            name = diplomeAn; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            columnName = "DIPLOME_$C"; 
+            externalType = VARCHAR2; 
+            isReadOnly = Y; 
+            name = diplomec; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "FERM_AN_UNIV"; 
+            externalType = VARCHAR2; 
+            name = fermAnUniv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "FERM_PRD_UNIV"; 
+            externalType = VARCHAR2; 
+            name = fermPrdUniv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }, 
+        {
+            columnName = "PRD_TYPE_$C"; 
+            externalType = VARCHAR2; 
+            name = prdTypec; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            columnName = "PROFIL_C_$F"; 
+            externalType = VARCHAR2; 
+            name = profilCf; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "SITE_UT_URL"; 
+            externalType = VARCHAR2; 
+            name = siteUtUrl; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 300; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "STG_DATE"; 
+            externalType = VARCHAR2; 
+            name = stgDate; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 30; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "STOP_AN_UNIV"; 
+            externalType = VARCHAR2; 
+            name = stopAnUniv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "STOP_PRD_UNIV"; 
+            externalType = VARCHAR2; 
+            name = stopPrdUniv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        cycle, 
+        debAnUniv, 
+        debPrdUniv, 
+        diplAbr, 
+        diplome, 
+        diplomeAn, 
+        diplomec, 
+        fermAnUniv, 
+        fermPrdUniv, 
+        prdTypec, 
+        profilCf, 
+        siteUtUrl, 
+        stgDate, 
+        stopAnUniv, 
+        stopPrdUniv
+    ); 
+    className = "etudiants.utt.fr.eo.EODiplome"; 
+    classProperties = (
+        cycle, 
+        debAnUniv, 
+        debPrdUniv, 
+        diplAbr, 
+        diplome, 
+        diplomeAn, 
+        diplomec, 
+        diplOptions, 
+        eoEtuMineurs, 
+        eoVueAfficherdiplomes, 
+        etuInscrAdms, 
+        fermAnUniv, 
+        fermPrdUniv, 
+        prdTypec, 
+        profilCf, 
+        refPeriode, 
+        refPeriode0, 
+        refPeriode1, 
+        siteUtUrl, 
+        stgDate, 
+        stopAnUniv, 
+        stopPrdUniv
+    ); 
+    externalName = "GERRY.DIPLOME"; 
+    fetchSpecificationDictionary = {}; 
+    name = EODiplome; 
+    primaryKeyAttributes = (diplomec); 
+    relationships = (
+        {
+            destination = EODiplOption; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = diplomec; sourceAttribute = diplomec; }); 
+            name = diplOptions; 
+        }, 
+        {
+            destination = EOEtuMineur; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = diplomec; sourceAttribute = diplomec; }); 
+            name = eoEtuMineurs; 
+        }, 
+        {
+            destination = EOVueAfficherdiplome; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = codeDiplome; sourceAttribute = diplomec; }); 
+            name = eoVueAfficherdiplomes; 
+        }, 
+        {
+            destination = EOEtudiantInscrAdm; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = diplomec; sourceAttribute = diplomec; }); 
+            name = etuInscrAdms; 
+        }, 
+        {
+            destination = EORefPeriode; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = anUniv; sourceAttribute = fermAnUniv; }); 
+            name = refPeriode; 
+        }, 
+        {
+            destination = EORefPeriode; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = anUniv; sourceAttribute = stopAnUniv; }); 
+            name = refPeriode0; 
+        }, 
+        {
+            destination = EORefPeriode; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = (
+                {destinationAttribute = anUniv; sourceAttribute = debAnUniv; }, 
+                {destinationAttribute = prdUniv; sourceAttribute = debPrdUniv; }, 
+                {destinationAttribute = prdUniv; sourceAttribute = fermPrdUniv; }, 
+                {destinationAttribute = prdUniv; sourceAttribute = stopPrdUniv; }
+            ); 
+            name = refPeriode1; 
+        }
+    ); 
+}

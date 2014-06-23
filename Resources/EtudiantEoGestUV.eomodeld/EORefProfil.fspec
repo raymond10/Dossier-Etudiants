@@ -1,0 +1,27 @@
+{
+    Legende = {
+        class = EOFetchSpecification; 
+        entityName = EORefProfil; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOAndQualifier; 
+            qualifiers = (
+                {
+                    class = EOKeyValueQualifier; 
+                    key = diplomeC; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = diplomeC; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = legende; 
+                    selectorName = "isNotEqualTo:"; 
+                    value = {class = EONull; }; 
+                }
+            ); 
+        }; 
+        sortOrderings = (
+            {class = EOSortOrdering; key = profilOrdre; selectorName = compareAscending; }
+        ); 
+    }; 
+}

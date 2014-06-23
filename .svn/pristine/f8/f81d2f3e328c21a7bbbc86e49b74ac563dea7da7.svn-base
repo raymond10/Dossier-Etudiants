@@ -1,0 +1,68 @@
+package gestionuv.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+import com.webobjects.eocontrol.EOAndQualifier;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.eocontrol.EOFetchSpecification;
+import com.webobjects.eocontrol.EOQualifier;
+import com.webobjects.eocontrol.EOSortOrdering;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSMutableArray;
+
+@SuppressWarnings("all")
+public class EORefProfilTotal extends _EORefProfilTotal {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9092243590656857547L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EORefProfilTotal.class);
+
+	public static final EOSortOrdering SORT_BY_ORDRE = EOSortOrdering
+			.sortOrderingWithKey("ordre", EOSortOrdering.CompareAscending);
+
+	// CLAUSE WHERE AVEC NVL POUR DIPLSPEC
+	private static EOQualifier nvlDiplcSpec(String diplSpec) {
+		return EOQualifier.qualifierWithQualifierFormat("diplSpecc=%@",
+				new NSArray("NULL"));
+	}
+
+	private static EOQualifier diplcSpec(String diplSpec) {
+		return EOQualifier.qualifierWithQualifierFormat("diplSpecc)=%@",
+				new NSArray(diplSpec));
+	}
+
+	private static EOQualifier diplomeC(String diplC) {
+		return EOQualifier.qualifierWithQualifierFormat("diplomec=%@",
+				new NSArray(diplC));
+	}
+
+	private static EOQualifier nivEntree(String entree) {
+		return EOQualifier.qualifierWithQualifierFormat("nivEntree=%@",
+				new NSArray(entree));
+	}
+
+	public static NSArray totalSelect(EOEditingContext myContext,
+			String codeDiplome, String diplSpec, String nivEntree) {
+		NSMutableArray quals = new NSMutableArray();
+		quals.addObject(diplomeC(codeDiplome));
+		if (diplSpec.equals("*")) {
+			quals.addObject(nvlDiplcSpec(diplSpec));
+		} else {
+			quals.addObject(diplcSpec(diplSpec));
+		}
+		quals.addObject(nivEntree(nivEntree));
+		EOQualifier qual = new EOAndQualifier(quals);
+		EOFetchSpecification spec = new EOFetchSpecification(
+				"EORefProfilTotal", qual, new NSArray(SORT_BY_ORDRE));
+		spec.setUsesDistinct(true);
+		NSArray disp = myContext.objectsWithFetchSpecification(spec);
+		return disp;
+	}
+
+	// Test NVL Java
+	public <T> T nvl(T a, T b) {
+		return (a == null) ? b : a;
+	}
+}

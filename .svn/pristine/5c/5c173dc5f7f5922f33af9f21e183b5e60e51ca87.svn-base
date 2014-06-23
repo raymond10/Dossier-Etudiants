@@ -1,0 +1,149 @@
+/**
+ * 
+ */
+package etudiants.utt.fr.util;
+
+import com.webobjects.appserver.WOApplication;
+
+import etudiants.utt.fr.server.Application;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+public class LesURLs {
+	
+	private String reportUrl;
+	private String reportPwd;
+	private String reportExportPath;
+	private String exportURL;
+	private String hostname;
+	private String localSig;
+	private String repPhoto;
+	private Application apps;
+	
+	public LesURLs() {
+		// TODO Auto-generated constructor stub
+		apps = (Application) WOApplication.application();
+		reportUrl = apps.reportURL();
+		reportPwd = apps.reportPwd();
+		reportExportPath = apps.reportExportPath();
+		exportURL = apps.exportURL();
+		hostname = apps.reportServer();
+		localSig = apps.imgServer();
+		repPhoto = apps.repPhoto();
+	}
+
+	/**
+	 * @return the apps
+	 */
+	public Application getApps() {
+		return apps;
+	}
+
+	/**
+	 * @param apps the apps to set
+	 */
+	public void setApps(Application apps) {
+		this.apps = apps;
+	}
+
+	/**
+	 * @return the reportUrl
+	 */
+	public String getReportUrl() {
+		return reportUrl;
+	}
+
+	/**
+	 * @param reportUrl the reportUrl to set
+	 */
+	public void setReportUrl(String reportUrl) {
+		this.reportUrl = reportUrl;
+	}
+
+	/**
+	 * @return the reportPwd
+	 */
+	public String getReportPwd() {
+		return reportPwd;
+	}
+
+	/**
+	 * @param reportPwd the reportPwd to set
+	 */
+	public void setReportPwd(String reportPwd) {
+		this.reportPwd = reportPwd;
+	}
+
+	/**
+	 * @return the reportExportPath
+	 */
+	public String getReportExportPath() {
+		return reportExportPath;
+	}
+
+	/**
+	 * @param reportExportPath the reportExportPath to set
+	 */
+	public void setReportExportPath(String reportExportPath) {
+		this.reportExportPath = reportExportPath;
+	}
+
+	/**
+	 * @return the exportURL
+	 */
+	public String getExportURL() {
+		return exportURL;
+	}
+
+	/**
+	 * @param exportURL the exportURL to set
+	 */
+	public void setExportURL(String exportURL) {
+		this.exportURL = exportURL;
+	}
+
+	/**
+	 * @return the hostname
+	 */
+	public String getHostname() {
+		return hostname;
+	}
+
+	/**
+	 * @param hostname the hostname to set
+	 */
+	public void setHostname(String hostname) {
+		this.hostname = hostname;
+	}
+
+	/**
+	 * @return the localSig
+	 */
+	public String getLocalSig() {
+		return localSig;
+	}
+
+	/**
+	 * @param localSig the localSig to set
+	 */
+	public void setLocalSig(String localSig) {
+		this.localSig = localSig;
+	}
+
+	/**
+	 * @return the repPhoto
+	 */
+	public String getRepPhoto() {
+		return repPhoto;
+	}
+
+	/**
+	 * @param repPhoto the repPhoto to set
+	 */
+	public void setRepPhoto(String repPhoto) {
+		this.repPhoto = repPhoto;
+	}
+
+}

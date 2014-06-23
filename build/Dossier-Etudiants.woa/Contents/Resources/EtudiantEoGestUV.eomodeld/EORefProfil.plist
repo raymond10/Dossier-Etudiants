@@ -1,0 +1,97 @@
+{
+    attributes = (
+        {
+            columnName = "DIPLOME_$C"; 
+            externalType = VARCHAR2; 
+            name = diplomeC; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = LEGENDE; 
+            externalType = VARCHAR2; 
+            name = legende; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 10; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = LEGENDE2; 
+            externalType = VARCHAR2; 
+            name = legende2; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 10; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PROFIL_ABR"; 
+            externalType = VARCHAR2; 
+            name = profilAbr; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 10; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "PROFIL_ID"; 
+            externalType = NUMBER; 
+            name = profilId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PROFIL_LIB"; 
+            externalType = VARCHAR2; 
+            name = profilLib; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 40; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PROFIL_ORDRE"; 
+            externalType = VARCHAR2; 
+            name = profilOrdre; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }
+    ); 
+    attributesUsedForLocking = (diplomeC, legende, legende2, profilAbr, profilId, profilLib, profilOrdre); 
+    className = "gestionuv.utt.fr.eo.EORefProfil"; 
+    classProperties = (
+        diplomeC, 
+        eoDiplomes, 
+        eoVueAfficherdiplome, 
+        legende, 
+        legende2, 
+        profilAbr, 
+        profilLib, 
+        profilOrdre
+    ); 
+    externalName = "GEST_UV.REF_PROFIL"; 
+    name = EORefProfil; 
+    primaryKeyAttributes = (profilId); 
+    relationships = (
+        {
+            destination = EODiplome; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = diplomec; sourceAttribute = diplomeC; }); 
+            name = eoDiplomes; 
+        }, 
+        {
+            destination = EOVueAfficherdiplome; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = codeDiplome; sourceAttribute = diplomeC; }); 
+            name = eoVueAfficherdiplome; 
+        }
+    ); 
+}

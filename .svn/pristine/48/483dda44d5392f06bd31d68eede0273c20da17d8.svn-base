@@ -1,0 +1,161 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = DEBUT; 
+            externalType = VARCHAR2; 
+            name = debut; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4000; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = DEMISSIONAIRE; 
+            externalType = VARCHAR2; 
+            name = demissionaire; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            columnName = "DIPLOME_ETU"; 
+            externalType = VARCHAR2; 
+            name = diplomeEtu; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPLOME_SPEC"; 
+            externalType = VARCHAR2; 
+            name = diplomeSpec; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 18; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = FIN; 
+            externalType = VARCHAR2; 
+            name = fin; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4000; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = ID; 
+            externalType = NUMBER; 
+            name = id; 
+            valueType = d; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "LIBELLE_DIPLOME"; 
+            externalType = VARCHAR2; 
+            name = libelleDiplome; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 67; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "NUM_DIPLOME"; 
+            externalType = VARCHAR2; 
+            name = numDiplome; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 10; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "NUMERO_ETU"; 
+            externalType = NUMBER; 
+            name = numeroEtu; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PRD_DEBUT"; 
+            externalType = VARCHAR2; 
+            name = prdDebut; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PRD_FIN"; 
+            externalType = VARCHAR2; 
+            name = prdFin; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = REORIENTATION; 
+            externalType = VARCHAR2; 
+            name = reorientation; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = SITUATION; 
+            externalType = VARCHAR2; 
+            name = situation; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 30; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = TRANSFERT; 
+            externalType = VARCHAR2; 
+            name = transfert; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        debut, 
+        demissionaire, 
+        diplomeEtu, 
+        diplomeSpec, 
+        fin, 
+        id, 
+        libelleDiplome, 
+        numDiplome, 
+        numeroEtu, 
+        prdDebut, 
+        prdFin, 
+        reorientation, 
+        situation, 
+        transfert
+    ); 
+    className = "etudiants.utt.fr.eo.EOVueAfficherparcours"; 
+    classProperties = (
+        debut, 
+        demissionaire, 
+        diplomeEtu, 
+        diplomeSpec, 
+        fin, 
+        libelleDiplome, 
+        numDiplome, 
+        numeroEtu, 
+        prdDebut, 
+        prdFin, 
+        reorientation, 
+        situation, 
+        transfert
+    ); 
+    externalName = "GERRY.VUE_AFFICHERPARCOURS"; 
+    name = EOVueAfficherparcours; 
+    primaryKeyAttributes = (id); 
+}

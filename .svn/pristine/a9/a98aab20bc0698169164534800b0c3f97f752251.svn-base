@@ -1,0 +1,56 @@
+{
+    attributes = (
+        {
+            columnName = ID; 
+            externalType = VARCHAR2; 
+            isReadOnly = Y; 
+            name = id; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 12; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = LIBELLE; 
+            externalType = VARCHAR2; 
+            name = libelle; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 15; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = ORDRE; 
+            externalType = VARCHAR2; 
+            name = ordre; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 14; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = PDIPLOME; 
+            externalType = VARCHAR2; 
+            name = pdiplome; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = PPERIODE; 
+            externalType = VARCHAR2; 
+            name = pperiode; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }
+    ); 
+    attributesUsedForLocking = (id, libelle, ordre, pdiplome, pperiode); 
+    className = "etudiants.utt.fr.eo.EOVueSpecMast"; 
+    classProperties = (id, libelle, ordre, pdiplome, pperiode); 
+    externalName = "GERRY.VUE_SPEC_MAST"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOVueSpecMast; 
+    primaryKeyAttributes = (id); 
+}

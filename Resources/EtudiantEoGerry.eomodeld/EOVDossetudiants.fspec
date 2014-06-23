@@ -1,0 +1,14 @@
+{
+    dossEtudiant = {
+        class = EOFetchSpecification; 
+        entityName = EOVDossetudiants; 
+        isDeep = YES; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOKeyValueQualifier; 
+            key = id; 
+            selectorName = "isEqualTo:"; 
+            value = {"_key" = indivId; class = EOQualifierVariable; }; 
+        }; 
+    }; 
+}

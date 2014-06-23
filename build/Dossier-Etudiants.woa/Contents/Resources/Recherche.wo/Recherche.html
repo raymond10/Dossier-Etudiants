@@ -1,0 +1,203 @@
+<webobject name = "wrapper">
+  <script type = "text/javascript" language = "javascript">
+    Element.hide('busy');
+  </script>
+  <div metal:fill-slot = "contenu">
+    <webobject name = "errors">
+      <div class = "warn"> Vous n'&ecirc;tes pas autoris&eacute; &agrave; consulter ce dossier. </div>
+    </webobject>
+    <webobject name = "user">
+      <div class = "br"></div>
+      <webobject name = "browser">
+        <webobject name = "nav">Navigation</webobject>
+      </webobject>
+      <h3>Recherche d'&eacute;tudiants&nbsp;<webobject name = "Indicateur1" /></h3>
+      <div class = "info">
+        La recherche peut s'effectuer : 
+        <ul>
+          <li>par dipl&ocirc;me, p&eacute;riode, niveau ou UV</li>
+          <li>ou par nom et/ou pr&eacute;nom</li>
+          <li>ou par num&eacute;ro</li>
+        </ul>
+      </div>
+      <div class = "br"></div>
+      <div class = "form">
+        <webobject name = "recherche">
+          <div class = "divTable">
+            <div class = "divRow">
+              <div class = "divCell">
+                <label for = "periode" class = "prem">P&eacute;riode</label>
+              </div>
+              <div class = "divCell">
+                <webobject name = "periode" />&nbsp;&nbsp; 
+                <wo name = "prdDiplAOF" />
+                <wo name = "prdNivoAOF" />
+                <wo name = "prduvAOF" />
+                &nbsp;&nbsp; 
+              </div>
+              <div class = "divCell"> 
+                <label for = "diplome" class = "premDipl">Dipl&ocirc;me</label>
+              </div>
+              <div class = "divCell">
+                <wo name = "diplomeAUC">
+                  <webobject name = "con1"><webobject name = "diplome1" /></webobject>&nbsp;&nbsp; 
+                  <webobject name = "con2"><webobject name = "diplome2" /></webobject>&nbsp;&nbsp; 
+                  <wo name = "diplNivoAOF" />
+                </wo>
+                &nbsp;&nbsp; 
+              </div>
+              <div class = "divCell">
+                <label for = "niveau" class = "prem">Niveau</label>
+              </div>
+              <div class = "divCell">
+                <webobject name = "niveauAUC">
+                  <webobject name = "cond1"><webobject name = "niveau_1" /></webobject>&nbsp;&nbsp;
+                  <webobject name = "cond2"><webobject name = "niveau_2" /></webobject>&nbsp;&nbsp;
+                </webobject>
+                &nbsp;&nbsp; 
+              </div>
+              <div class = "divCell">
+                <label for = "uv" class = "prem">&nbsp;&nbsp;UV</label>
+              </div>
+              <div class = "divCell">
+                <webobject name = "uvAUC"><webobject name = "uv" />&nbsp;&nbsp;</webobject>
+                &nbsp;&nbsp; 
+              </div>
+            </div>
+          </div>
+          <hr class = "hr" />
+          <div class = "divTable">
+            <div class = "divRow">
+              <div class = "divCell">
+                <label for = "nom" class = "prem">Nom</label>&nbsp;
+              </div>
+              <div class = "divCell"><webobject name = "nom" /></div>
+              <div class = "divCell">
+                <label for = "prenom" class = "prem">Pr&eacute;nom</label>&nbsp; 
+              </div>
+              <div class = "divCell"><webobject name = "prenom" /></div>
+              <div class = "divCell">
+                <span class = "aide aide-champ">nom exact ou d&eacute;but du nom suivi de '*' (ex: Martin ou Mart*)</span>
+              </div>
+            </div>
+          </div>
+          <hr class = "hr" />
+          <label for = "num" class = "prem">Num&eacute;ro</label>&nbsp;
+          <webobject name = "num" />
+          <span class = "aide aide-champ">num&eacute;ro d'&eacute;tudiant (identifiant du syst&egrave;me)</span>
+          <span class = "erreur">
+            <wo name = "ErrorMsg">
+              <wo name = "isError">
+                <script type = "text/javascript" language = "javascript">
+                  Element.hide('busy');
+                  alert('<webobject name = "MessageErreur" />');
+                  onClick=Element.hide('busy');
+                </script>
+              </wo>
+            </wo>
+          </span>
+          <webobject name = "conseil">
+            <hr class = "hr" />
+            <label for = "conseilles" class = "prem1">Etudiants conseill&eacute;s</label>
+            <wo name = "Observe1"><webobject name = "conseille" /></wo>
+          </webobject>
+          <div class = "action">
+            <webobject name = "rechercher" />
+            <webobject name = "AsbRechercherFunc" />
+          </div>
+        </webobject>
+      </div>
+      <wo name = "listResult">
+        <div class = "form">
+          <webobject name = "noResult">
+            <webobject name = "tooMuch">
+              <div><webobject name = "tooData" /></div>
+            </webobject>
+            <webobject name = "empty">
+              <div> Il n'y a pas d'&eacute;tudiant correspondant &agrave; ces crit&egrave;res de recherche. </div>
+            </webobject>
+          </webobject>
+          <webobject name = "foundResults">
+            <div class = "action">
+              <span> <webobject name = "barDeNavigation" /> </span>
+            </div>
+            <div class = "divTable">
+              <webobject name = "dataEtudiants">
+                <div class = "divRowSearch">
+                  <div class = "divCell"><webobject name = "EtuPhoto" />&nbsp;&nbsp;&nbsp;</div>
+                  <div class = "divCellSearch">
+                    <div>
+                      <b>
+                        <webobject name = "civilite" />&nbsp;<webobject name = "prenomEtu" />&nbsp;<webobject name = "nomEtu" />
+                      </b>
+                      <span><webobject name = "etuDatenais" /></span>
+                      <webobject name = "emailLink"><webobject name = "Email" /></webobject>
+                      N&deg;<b><webobject name = "etuId" /></b>
+                    </div>
+                    <ul>
+                      <webobject name = "lParcours">
+                        <webobject name = "hasParcours">
+                          <li>
+                            <b><webobject name = "libelle" /></b>
+                            de 
+                            <b><webobject name = "debut" /></b>
+                            &agrave; 
+                            <b><webobject name = "fin" /></b>
+                            <span>
+                              <b><webobject name = "dipl_spec" /></b>
+                            </span>
+                            <span>
+                              <webobject name = "hasDiplome">
+                                <webobject name = "lblNum" />
+                                <b><webobject name = "num_diplome" /> </b>
+                              </webobject>
+                            </span>
+                            <span>
+                              <webobject name = "hasSituation"> <webobject name = "situation" /></webobject>
+                            </span>
+                          </li>
+                        </webobject>
+                      </webobject>
+                      <webobject name = "hasMineur">
+                        <li>Mineur(s)&nbsp;:&nbsp;<webobject name = "mineurs" /> </li>
+                      </webobject>
+                    </ul>
+                  </div>
+                  <div class = "divCell">
+                    <ul>
+                      <li>
+                        <webobject name = "profil">Profil de formation</webobject>
+                      </li>
+                      <li>
+                        <webobject name = "resultatUv">R&eacute;sultats aux UV</webobject>
+                      </li>
+                      <li>
+                        <webobject name = "dossierAdm">Dossier administratif</webobject>
+                      </li>
+                      <li>
+                        <webobject name = "edt">Emploi du temps</webobject>
+                      </li>
+                      <li>
+                        <webobject name = "imprimProfil">Imprimer le profil</webobject>
+                      </li>
+                      <webobject name = "accessGctc">
+                        <li>
+                          <webobject name = "versGestionContact">gestion des contacts</webobject>
+                        </li>
+                      </webobject>
+                    </ul>
+                  </div>
+                </div>
+              </webobject>
+            </div>
+            <div class = "action">
+              <span> <webobject name = "barDeNavigation" /> </span>
+            </div>
+          </webobject>
+        </div>
+      </wo>
+    </webobject>
+  </div>
+  <webobject name = "Busy10" />
+  <webobject name = "ExceptionModalDialog" />
+</webobject>

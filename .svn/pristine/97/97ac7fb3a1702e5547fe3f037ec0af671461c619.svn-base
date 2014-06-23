@@ -1,0 +1,15 @@
+package etudiants.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+public class EORefCivilite extends _EORefCivilite {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7002750064912950002L;
+	public static final String C_CIVILITE_MONSIEUR = "M.";
+	public static final String C_CIVILITE_MADAME = "MME";
+	public static final String C_CIVILITE_MADEMOISELLE = "MLLE";
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EORefCivilite.class);
+}

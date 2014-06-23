@@ -1,0 +1,4 @@
+css : ERXStyleSheet {
+	filename = "css/etudiant.css";
+	media = "print"; 
+}

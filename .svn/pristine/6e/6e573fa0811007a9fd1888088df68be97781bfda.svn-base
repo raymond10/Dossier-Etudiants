@@ -1,0 +1,141 @@
+{
+    attributes = (
+        {
+            columnName = "CODE_SITUATION"; 
+            externalType = VARCHAR2; 
+            name = codeSituation; 
+            valueClassName = NSString; 
+            width = 5; 
+        }, 
+        {
+            columnName = DECISION; 
+            externalType = VARCHAR2; 
+            name = decision; 
+            valueClassName = NSString; 
+            width = 50; 
+        }, 
+        {
+            columnName = "DIPLOME_$C"; 
+            externalType = VARCHAR2; 
+            name = diplome; 
+            valueClassName = NSString; 
+            width = 5; 
+        }, 
+        {
+            columnName = "DIPL_SPEC_$C"; 
+            externalType = VARCHAR2; 
+            name = diplSpec; 
+            valueClassName = NSString; 
+            width = 5; 
+        }, 
+        {
+            columnName = "ETU_ID"; 
+            externalType = NUMBER; 
+            name = etuId; 
+            precision = 7; 
+            valueClassName = NSNumber; 
+            valueType = i; 
+        }, 
+        {
+            columnName = FORMATION; 
+            externalType = VARCHAR2; 
+            name = formation; 
+            valueClassName = NSString; 
+            width = 7; 
+        }, 
+        {
+            columnName = "NIVEAU_ADM"; 
+            externalType = VARCHAR2; 
+            name = niveauAdm; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 2; 
+        }, 
+        {
+            columnName = NOM; 
+            externalType = VARCHAR2; 
+            name = nom; 
+            valueClassName = NSString; 
+            width = 80; 
+        }, 
+        {
+            columnName = PERIODE; 
+            externalType = VARCHAR2; 
+            name = periode; 
+            valueClassName = NSString; 
+            width = 6; 
+        }, 
+        {
+            columnName = PRENOM; 
+            externalType = VARCHAR2; 
+            name = prenom; 
+            valueClassName = NSString; 
+            width = 40; 
+        }, 
+        {
+            columnName = "RES_PEDAG"; 
+            externalType = VARCHAR2; 
+            name = resPedag; 
+            valueClassName = NSString; 
+            width = 4; 
+        }, 
+        {
+            columnName = SENTREE; 
+            externalType = VARCHAR2; 
+            name = sEntree; 
+            valueClassName = NSString; 
+            width = 6; 
+        }, 
+        {
+            columnName = SITUATION; 
+            externalType = VARCHAR2; 
+            name = situation; 
+            valueClassName = NSString; 
+            width = 30; 
+        }, 
+        {
+            columnName = UVS; 
+            externalType = VARCHAR2; 
+            name = uvs; 
+            valueClassName = NSString; 
+            width = 4000; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        codeSituation, 
+        decision, 
+        diplome, 
+        diplSpec, 
+        etuId, 
+        formation, 
+        niveauAdm, 
+        nom, 
+        periode, 
+        prenom, 
+        resPedag, 
+        sEntree, 
+        situation, 
+        uvs
+    ); 
+    className = "gestionuv.utt.fr.eo.EOVueVerInsUv"; 
+    classProperties = (
+        codeSituation, 
+        decision, 
+        diplome, 
+        diplSpec, 
+        etuId, 
+        formation, 
+        niveauAdm, 
+        nom, 
+        periode, 
+        prenom, 
+        resPedag, 
+        sEntree, 
+        situation, 
+        uvs
+    ); 
+    externalName = "GEST_UV.VUE_VER_INSUV"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOVueVerInsUv; 
+    primaryKeyAttributes = (etuId, periode); 
+}

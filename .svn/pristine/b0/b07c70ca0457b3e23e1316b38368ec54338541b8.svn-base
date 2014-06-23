@@ -1,0 +1,55 @@
+{
+    attributes = (
+        {
+            columnName = "DIPLOME_$C"; 
+            externalType = VARCHAR2; 
+            name = "diplome$c"; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "ETU_ID"; 
+            externalType = NUMBER; 
+            isReadOnly = Y; 
+            name = etuId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PRD_DEBUT"; 
+            externalType = VARCHAR2; 
+            name = prdDebut; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PRD_FIN"; 
+            externalType = VARCHAR2; 
+            name = prdFin; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "REORIENT_$F"; 
+            externalType = VARCHAR2; 
+            name = "reorient$f"; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }
+    ); 
+    attributesUsedForLocking = ("diplome$c", etuId, prdDebut, prdFin, "reorient$f"); 
+    className = "gestionuv.utt.fr.eo.EOVueProfilParcours"; 
+    classProperties = ("diplome$c", etuId, prdDebut, prdFin, "reorient$f"); 
+    externalName = "GEST_UV.VUE_PROFIL_PARCOURS"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOVueProfilParcours; 
+    primaryKeyAttributes = (etuId); 
+}

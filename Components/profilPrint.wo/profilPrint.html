@@ -1,0 +1,315 @@
+<html xmlns = "http://www.w3.org/1999/xhtml" xml:lang = "fr" lang = "fr">
+  <head>
+    <meta http-equiv = "Content-Type" content = "text/html; charset=utf-8" />
+    <title>DOSSIER ETUDIANT</title>
+        <style type="text/css">
+          body { 
+		      width:12 in;
+		      height:9 in;
+		      margin:0.25in; 
+		      -fs-flow-top:"header";
+		      -fs-flow-bottom:"footer";
+		      -fs-flow-left:"left";
+		      -fs-flow-right:"right";
+		      padding:1em;
+		      /*border:thin solid #ccc;*/
+		      font-size:.8em;
+      	 }
+      	 
+			symb9632 {
+				color: #5B2998;
+			}
+			
+			.symb9650 {
+				color: #12A267;
+			}
+			
+			.symb9679 {
+				color: #BC8B1B;
+			}
+			
+			.symb9674 {
+				color: #227BEC;
+			}
+			
+			.symb215 {
+				color: #000;
+			}
+			
+			.symb2 {
+				color: #12A267;
+			}
+      	 
+			.symb {
+				font-family: Tahoma, "Lucida Console", Verdana, Arial, Times !important;
+				font-size: 14px !important;
+				font-weight: bold !important;
+				margin-top: -5px !important;
+			}
+			
+			.symbV {
+				background: transparent url(../image/tick2.png) center left no-repeat;
+				padding-left: 5px;
+				padding-right: 15px;
+			}
+    </style>
+    <webobject name = "shortcut_icon" />
+    <webobject name = "icon" />
+    <webobject name = "LinkCssPrint" />
+  </head>
+  <webobject name = "Body">
+    <table cellpadding = "0" cellspacing = "0" border = "0" width = "100%">
+      <tr>
+        <td>
+          <table cellpadding = "0" cellspacing = "0" class = "resume" width = "100%">
+            <tr>
+              <td rowspan = "5" style = "border:1px solid lightgray"><webobject name = "EtuPhoto" /></td>
+            </tr>
+            <tr>
+              <td>
+                <table cellspacing = "0" cellpadding = "0" border = "0" width = "100%">
+                  <tr style = "border:0">
+                    <td align = "left" style = "border:1px solid lightgray">
+                      <span>&nbsp;<webobject name = "nomEtu" />&nbsp; 
+                      </span>
+                    </td>
+                    <td align = "right" style = "border:1px solid lightgray">
+                      <span><webobject name = "etuEmail" /></span>
+                      N&deg; 
+                      <b><webobject name = "etuId" /></b>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style = "border:1px solid lightgray">
+                <b>N&eacute;(e) le</b>
+                <span><webobject name = "etuDateNais" /></span>
+                &agrave; 
+                <span><webobject name = "etuComNais" /></span>
+                <b>BAC</b>
+                <span><webobject name = "etuBac" /></span>
+                en 
+                <span><webobject name = "etuAnBac" /></span>
+              </td>
+            </tr>
+            <tr>
+              <td style = "border:1px solid lightgray">
+                <b>Conseiller</b>
+                <span>
+                  &nbsp;<webobject name = "etuConseil" />&nbsp;</span>
+                <b>Dernier dipl&ocirc;me obtenu</b>
+                <span><webobject name = "etuDerDipl" /></span>
+              </td>
+            </tr>
+            <tr>
+              <td style = "border:1px solid lightgray">
+                <webobject name = "hasDernEtab">
+                  <b>Dernier &eacute;tablissement</b>
+                  <span> <webobject name = "etuDerEtablis" /> </span>
+                </webobject>
+                <webobject name = "der_inscription">
+                  <b>Derni&egrave;re inscription</b>
+                  <span><webobject name = "etuFormation" /></span>
+                </webobject>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <webobject name = "hasDiplome">
+      <div class = "form">
+        <webobject name = "diplomeList">
+          <webobject name = "initTotalDipl" />
+          <p align = "left">
+            <h4 align = "left">
+                <span><webobject name = "diplLib" /></span>
+                de 
+                <span><webobject name = "diplDebut" /></span>
+                &agrave; 
+                <span><webobject name = "diplFin" /></span>
+            </h4>
+            <webobject name = "intList" />
+            <webobject name = "diplomeHasLegende">
+              <div class = "legende" align = "left">
+                <b>L&eacute;gende</b>
+                : 
+                <webobject name = "lengendeList">
+                  <span class = "symb symb<webobject name = "symbole"/>">&<webobject name = "symboles" />;</span>&nbsp;
+                  <span><webobject name = "legendeLib" /></span>&nbsp;&nbsp;&nbsp;&nbsp; 
+                </webobject>
+                <span class = "symb symbV"></span>Profil minimum valid&eacute; 
+              </div>
+            </webobject>
+          </p>
+          <div class = "show">
+            <table cellspacing = "0" cellpadding = "0" summary = "profil" class = "profil <webobject name="orientation"/>">
+              <tr>
+                <td class = "coin-sg"></td>
+                <webobject name = "categories">
+                  <th class = "entete-haut ent-categ"><webobject name = "categorie" /></th>
+                </webobject>
+                <th class = "entete-haut ent-categ">Observations</th>
+              </tr>
+              <webobject name = "toutLeParcours">
+                <webobject name = "initTotalParc" />
+                <tr>
+                  <td class = "entete-haut sem">
+                    <b><webobject name = "unLibelle" /></b>
+                    <br />
+                    <span><webobject name = "uneFormation" /></span>
+                    <br />
+                    <br />
+                  </td>
+                  <webobject name = "categories1">
+                    <webobject name = "initTotalCateg" />
+                    <td class = "uvs">
+                      <table cellspacing = "0" cellpadding = "0" border = "0">
+                        <webobject name = "selectUv">
+                          <webobject name = "uvCondition">
+                            <tr>
+                              <td style = "width:95%;padding:0;white-space:nowrap">
+                                <webobject name = "uv" />&nbsp;<webobject name = "resuv" />&nbsp;<webobject name = "credit" />
+                              </td>
+                              <td style = "width:5%;padding:0;line-height:12px;" class = "symb symb<webobject name = "symboleUv"/>">&<webobject name = "symbolesUv" />;</td>
+                            </tr>
+                          </webobject>
+                        </webobject>
+                      </table>
+                    </td>
+                  </webobject>
+                  <td class = "observation">
+                    <div class = "decision2"><webobject name = "uneDecision" /></div>
+                    <div><webobject name = "unStage" /></div>
+                    <div><webobject name = "uneObservation" /></div>
+                    <div>
+                      <span><webobject name = "uneSituation" /></span>
+                    </div>
+                    <div>
+                      <webobject name = "haveSoutenance">Soutenance : le 
+                        <span><webobject name = "uneSoutenance" /></span>
+                      </webobject>
+                    </div>
+                    <div style = "text-align:right">
+                      <webobject name = "haveDiplnum">
+                        Dipl&ocirc;m&eacute; N&deg;&nbsp; 
+                        <b><webobject name = "unDiplNum" /></b>
+                      </webobject>
+                    </div>
+                  </td>
+                </tr>
+                <tr class = "stotal odd">
+                  <td class = "lib-stotal">
+                    <webobject name = "annee">
+                      <b>Total ann&eacute;e</b>
+                    </webobject>
+                    <webobject name = "semestre">
+                      <b>Total semestre</b>
+                    </webobject>
+                  </td>
+                  <webobject name = "categories2">
+                    <td class = "stotal">
+                      <span><webobject name = "stotal" /></span>
+                    </td>
+                  </webobject>
+                  <td class = "totals"><webobject name = "ts" /></td>
+                </tr>
+              </webobject>
+              <wo name = "tgCond">
+                <tr class = "stotal odd">
+                  <td class = "lib-stotal">
+                    <b>Total</b>
+                  </td>
+                  <webobject name = "categoriesTotal">
+                    <webobject name = "calculg" />
+                    <td class = "stotal">
+                      <webobject name = "hasKey">
+                        <span> <webobject name = "tgCl" /> </span>
+                      </webobject>
+                    </td>
+                  </webobject>
+                  <wo name = "printTotalg" />
+                  <td class = "totals"> <webobject name = "tgTG" /> </td>
+                </tr>
+              </wo>
+            </table>
+          </div>
+          <div class = "br"></div>
+          <webobject name = "existsDiplomeTotaux">
+            <h5>
+              <b>Totaux</b>
+            </h5>
+            <table class = "profil" cellspacing = "0" cellpadding = "0" summary = "profil">
+              <tr>
+                <td class = "coin-sg"></td>
+                <webobject name = "categorieDiplomeCategories">
+                  <th class = "entete-haut ent-categ"><wo name = "categorieLib_abr" /></th>
+                </webobject>
+                <td style = "border: none"></td>
+              </tr>
+              <wo name = "tDiplomeTotaux">
+                <tr>
+                  <td class = "entete-haut sem">
+                    <b><wo name = "tLibelle" /></b>
+                  </td>
+                  <wo name = "toto" />
+                  <wo name = "ttTtotaux">
+                    <wo name = "pythonttId">
+                      <wo name = "pythonttOrdre">
+                        <td colspan = "<wo name = "longueur"/>" align = "center" style = "border:1px solid lightgray">
+                          <span>
+                            <b>
+                              <span><wo name = "ttotal" /></span>
+                              <wo name = "minExiste">
+                                <span>/<wo name = "dispMin" /></span>
+                              </wo>
+                            </b>
+                            <wo name = "imgDisp"> <wo name = "tick" /> </wo>
+                          </span>
+                        </td>
+                      </wo>
+                    </wo>
+                  </wo>
+                  <td colspan = "7" style = "border: none"></td>
+                </tr>
+                <wo name = "totaux2">
+                  <wo name = "egalite2">
+                    <wo name = "ordre2">
+                      <span omit-tag = ""></span>
+                    </wo>
+                  </wo>
+                </wo>
+                <wo name = "gtCond">
+                  <tr>
+                    <wo name = "totaux3">
+                      <wo name = "egalite3">
+                        <wo name = "ordre3">
+                          <td colspan = "<wo name = "ordreCol"/>" style = "border: none"></td>
+                          <td colspan = "<wo name = "longueur2"/>" align = "center" style = "border:1px solid lightgray">
+                            <span>
+                              <b>
+                                <span><wo name = "tTotal2" /></span>
+                                <wo name = "minExiste2">
+                                  <span><wo name = "dispMin2" /></span>
+                                </wo>
+                              </b>
+                              <wo name = "imgDisp2"> <wo name = "tick2" /> </wo>
+                            </span>
+                          </td>
+                          <td colspan = "6" style = "border: none"></td>
+                        </wo>
+                      </wo>
+                    </wo>
+                  </tr>
+                </wo>
+              </wo>
+            </table>
+            <br />
+          </webobject>
+        </webobject>
+      </div>
+    </webobject>
+  </webobject>
+</html>

@@ -1,0 +1,158 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "ACQUIS_$F"; 
+            externalType = VARCHAR2; 
+            name = "acquis$f"; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            columnName = "DIPLOME_$C"; 
+            externalType = VARCHAR2; 
+            name = diplomec; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "ETU_ID"; 
+            externalType = NUMBER; 
+            name = etuId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = LONGUEUR; 
+            externalType = NUMBER; 
+            name = longueur; 
+            valueType = d; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = MIN; 
+            externalType = VARCHAR2; 
+            name = min; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "ORDRE_COL"; 
+            externalType = NUMBER; 
+            name = ordreCol; 
+            valueType = d; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "ORDRE_LG"; 
+            externalType = NUMBER; 
+            name = ordreLg; 
+            valueType = d; 
+        }, 
+        {
+            columnName = "PRD_DEBUT"; 
+            externalType = VARCHAR2; 
+            name = prdDebut; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "PROFIL_PARAM_ID"; 
+            externalType = NUMBER; 
+            name = profilParamId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "PROFIL_TOTAL_ID"; 
+            externalType = NUMBER; 
+            name = profilTotalId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = TOTAL; 
+            externalType = VARCHAR2; 
+            name = total; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 10; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        "acquis$f", 
+        diplomec, 
+        etuId, 
+        longueur, 
+        min, 
+        ordreCol, 
+        ordreLg, 
+        prdDebut, 
+        profilParamId, 
+        profilTotalId, 
+        total
+    ); 
+    className = "gestionuv.utt.fr.eo.EOProfilTotaux"; 
+    classProperties = (
+        "acquis$f", 
+        diplomec, 
+        etuId, 
+        longueur, 
+        min, 
+        ordreCol, 
+        ordreLg, 
+        prdDebut, 
+        profilParam, 
+        profilParamId, 
+        profilParcours, 
+        profilTotalId, 
+        refProfilTotal, 
+        total
+    ); 
+    externalName = "GEST_UV.PROFIL_TOTAUX"; 
+    name = EOProfilTotaux; 
+    primaryKeyAttributes = (diplomec, etuId, prdDebut, profilParamId, profilTotalId); 
+    relationships = (
+        {
+            destination = EOProfilParam; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = profilParamId; sourceAttribute = profilParamId; }); 
+            name = profilParam; 
+        }, 
+        {
+            destination = EOProfilParcours; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = (
+                {destinationAttribute = diplomec; sourceAttribute = diplomec; }, 
+                {destinationAttribute = etuId; sourceAttribute = etuId; }, 
+                {destinationAttribute = prdDebut; sourceAttribute = prdDebut; }
+            ); 
+            name = profilParcours; 
+        }, 
+        {
+            destination = EORefProfilTotal; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = profilTotalId; sourceAttribute = profilTotalId; }); 
+            name = refProfilTotal; 
+        }
+    ); 
+}

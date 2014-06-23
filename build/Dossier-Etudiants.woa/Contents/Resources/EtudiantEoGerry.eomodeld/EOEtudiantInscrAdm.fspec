@@ -1,0 +1,70 @@
+{
+    toutNiveaux = {
+        class = EOFetchSpecification; 
+        entityName = EOEtudiantInscrAdm; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOAndQualifier; 
+            qualifiers = (
+                {
+                    class = EOKeyComparisonQualifier; 
+                    leftKey = "eoVueDiplSpecs.diplomec"; 
+                    rightKey = diplomec; 
+                    selectorName = "isEqualTo:"; 
+                }, 
+                {
+                    class = EOKeyComparisonQualifier; 
+                    leftKey = "eoVueDiplSpecs.diplSpecc"; 
+                    rightKey = diplSpecc; 
+                    selectorName = "isEqualTo:"; 
+                }, 
+                {
+                    class = EOOrQualifier; 
+                    qualifiers = (
+                        {
+                            class = EOAndQualifier; 
+                            qualifiers = (
+                                {
+                                    class = EOKeyValueQualifier; 
+                                    key = anUniv; 
+                                    selectorName = "isGreaterThanOrEqualTo:"; 
+                                    value = 1900; 
+                                }, 
+                                {
+                                    class = EOKeyValueQualifier; 
+                                    key = prdUniv; 
+                                    selectorName = "isGreaterThanOrEqualTo:"; 
+                                    value = 1A; 
+                                }
+                            ); 
+                        }, 
+                        {
+                            class = EOAndQualifier; 
+                            qualifiers = (
+                                {
+                                    class = EOKeyValueQualifier; 
+                                    key = anUniv; 
+                                    selectorName = "isLessThanOrEqualTo:"; 
+                                    value = 9999; 
+                                }, 
+                                {
+                                    class = EOKeyValueQualifier; 
+                                    key = prdUniv; 
+                                    selectorName = "isLessThanOrEqualTo:"; 
+                                    value = 2P; 
+                                }
+                            ); 
+                        }
+                    ); 
+                }
+            ); 
+        }; 
+        sortOrderings = (
+            {
+                class = EOSortOrdering; 
+                key = "eoVueDiplSpecs.diplSpecAbr"; 
+                selectorName = compareAscending; 
+            }
+        ); 
+    }; 
+}

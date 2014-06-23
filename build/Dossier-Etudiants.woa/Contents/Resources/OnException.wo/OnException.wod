@@ -1,0 +1,13 @@
+
+
+Erreur : WOText {
+	escapeHTML = "true";
+	value = message;
+	rows = 15;
+	style = "width:90%";
+}
+LinkRevenir : WOHyperlink {
+	action = retourAcceuil;
+	string = "Revenir sur l'accueil";
+	target = "_parent";
+}

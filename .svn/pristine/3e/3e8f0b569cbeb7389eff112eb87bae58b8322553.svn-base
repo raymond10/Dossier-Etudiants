@@ -1,0 +1,44 @@
+{
+    attributes = (
+        {
+            className = "java.lang.Number"; 
+            columnName = "INDIV_ID"; 
+            externalType = NUMBER; 
+            name = indivId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            columnName = "TYPE_RESPUV_$C"; 
+            externalType = VARCHAR2; 
+            name = typeRespuvC; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 3; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "UV_OUV_ID"; 
+            externalType = NUMBER; 
+            name = uvOuvId; 
+            precision = 7; 
+            valueType = l; 
+        }
+    ); 
+    attributesUsedForLocking = (indivId, typeRespuvC, uvOuvId); 
+    className = "gestionuv.utt.fr.eo.UvOuvResp"; 
+    classProperties = (eoUvOuvs); 
+    externalName = "GEST_UV.UV_OUV_RESP"; 
+    fetchSpecificationDictionary = {}; 
+    name = UvOuvResp; 
+    primaryKeyAttributes = (indivId, typeRespuvC, uvOuvId); 
+    relationships = (
+        {
+            destination = EOUvOuv; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = uvOuvId; sourceAttribute = uvOuvId; }); 
+            name = eoUvOuvs; 
+        }
+    ); 
+}

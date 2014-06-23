@@ -1,0 +1,316 @@
+<webobject name = "Wrapper">
+  <webobject name = "errors">
+    <div class = "warn"> Vous n'&egrave;tes pas autoris&eacute; &agrave; consulter cette page. </div>
+  </webobject>
+  <div class = "br"></div>
+  <webobject name = "browser">
+    <webobject name = "nav">Navigation</webobject>
+  </webobject>
+  <webobject name = "exportResults">
+    <h3>Liste des &eacute;tudiants par p&eacute;riode, dipl&ocirc;me ou branche ou niveau ou uv</h3>
+    <fieldset class = "recherche">
+      <legend>Recherche d'&eacute;tudiants</legend>
+      <H5>La recherche peut s'effectuer par p&eacute;riode, dipl&ocirc;me, niveau et uv.</H5>
+      <webobject name = "Recherche">
+        <table width = "100%" cellspacing = "4" cellpadding = "0" class = "tliste">
+          <tr>
+            <td>
+              <label for = "periode">P&eacute;riode</label>
+            </td>
+            <td>
+              <webobject name = "ListPeriodesObserveField"><webobject name = "periodes" /></webobject>
+            </td>
+            <td>
+              <label for = "diplome">Dipl&ocirc;me</label>
+              <td>
+                <webobject name = "ListDiplomesObserveField"><webobject name = "diplomes" /></webobject>
+              </td>
+            </td>
+            <td>
+              <label for = "niveau">Niveau</label>
+            </td>
+            <td>
+              <webobject name = "ListNiveauxObserveField"><webobject name = "niveaux" /></webobject>
+            </td>
+            <td>
+              <label for = "uv">UV</label>
+            </td>
+            <td>
+              <webobject name = "ListUvsObserveField"><webobject name = "uvs" /></webobject>
+            </td>
+          </tr>
+        </table>
+        <div class = "br"></div>
+        <div class = "actions"><webobject name = "ExportUvAction" /></div>
+      </webobject>
+    </fieldset>
+    <h5>Informations extraites :</h5>
+    <div>
+      Indiv_id ; Civilit&eacute; ; Nom ; Pr&eacute;nom ; Pr&eacute;nom_2 ; Pr&eacute;nom_3; Login; Situation individu ; mail ; 1er dipl&ocirc;me : Dipl&ocirc;me ; 
+      <br />
+      1er dipl&ocirc;me : Sp&eacute;cialit&eacute; ; 1er dipl&ocirc;me : Option ; 1er dipl&ocirc;me : Niveau ; 1er dipl&ocirc;me : Formation (initiale, continue) ;<br />
+      1er dipl&ocirc;me : situation ; Double dipl&ocirc;me : Dipl&ocirc;me ; Double dipl&ocirc;me : Sp&eacute;cialit&eacute; ; Double dipl&ocirc;me : Option ;<br />
+      Double dipl&ocirc;me : Niveau  ; Date de naissance ; Commune de naissance ; D&eacute;partement naissance ; Pays de naissance ;<br />
+      Nationalit&eacute; ; Anne bac ; S&eacute;rie bac ; Mention bac ; D&eacute;partement bac ; Ville bac ; Pays bac ; Etablissement bac ;<br />
+      Dernier dipl&ocirc;me obtenu  ; Etablissement dernier dipl&ocirc;me ; Dernier dipl&ocirc;me obtenu ; Sp&eacute;cialit&eacute; dernier dipl&ocirc;me obtenu  ;<br />
+      Autre dernier dipl&ocirc;me obtenu  ; Pays dernier dipl&ocirc;me obtenu  ; D&eacute;partement dernier dipl&ocirc;me obtenu  ;<br />
+      Ville dernier dipl&ocirc;me obtenu  ; Etablissement dernier dipl&ocirc;me obtenu ; Nom du conseiller (nom + pr&eacute;nom) ; 
+      <br />
+      Date d'entr&eacute;e (A03...) ; Cat&eacute;gorie Socioprofessionnelle du p&egrave;re ; Cat&eacute;gorie Socioprofessionnelle de la m&egrave;re ; 
+      <br />
+      Centre de s&eacute;cu ; adresse individu; adresse parent ; En stage (type de stage : TN09, TN10, TN30...) ; 
+      <br />
+      Si demande par UV, r&eacute;sultat &agrave; l'UV<br />
+    </div>
+    <!-- ------------------------------------------------------------------------------------------------------------------------- -->
+    <br />
+    <h3>Liste des &eacute;tudiants inscrits &agrave; une UV par p&eacute;riode</h3>
+    <fieldset class = "recherche">
+      <legend>Recherche d'&eacute;tudiants</legend>
+      <H5>La recherche peut s'effectuer par p&eacute;riode et uv.</H5>
+      <webobject name = "RechercheUv">
+        <table width = "100%" cellspacing = "4" cellpadding = "0" class = "tliste">
+          <tr>
+            <td>
+              <label for = "periodeUv">P&eacute;riode</label>
+            </td>
+            <td>
+              <webobject name = "ListPeriodesObserveField"><webobject name = "periodesUv" /></webobject>
+            </td>
+            <td>
+              <label for = "UvUv">UV</label>
+            </td>
+            <td>
+              <webobject name = "ListUvsObserveField"><webobject name = "uvsUv" /></webobject>
+            </td>
+          </tr>
+        </table>
+        <div class = "br"></div>
+        <div class = "actions"><webobject name = "ExportListUvAction" /></div>
+      </webobject>
+    </fieldset>
+    <h5>Informations extraites :</h5>
+    <div> UV ; Indiv_id ; Nom ; Pr&eacute;nom ; Login; Dipl&ocirc;me : Sp&eacute;cialit&eacute; ; Option ; Niveau ; mail <br /> </div>
+    <br />
+    <!-- ------------------------------------------------------------------------------------------------------------------------- -->
+    <h3>Liste des &eacute;tudiants inscrits pendant une p&eacute;riode</h3>
+    <fieldset class = "recherche">
+      <legend>Recherche d'inscription</legend>
+      <H5>La recherche s'effectue entre le bornage compris sur les semestres et les ann&eacute;es universitaire</H5>
+      <webobject name = "extract_effectif">
+        <table width = "100%" cellspacing = "4" cellpadding = "0" class = "tliste">
+          <tr>
+            <td>
+              <label for = "borne1">p&eacute;riode : borne 1</label>
+            </td>
+            <td>
+              <webobject name = "ListPeriodesObserveField"><webobject name = "periodesB1" /></webobject>
+            </td>
+            <td>
+              <label for = "borne2">p&eacute;riode : borne 2</label>
+            </td>
+            <td>
+              <webobject name = "ListPeriodesObserveField1"><webobject name = "periodesB2" /></webobject>
+            </td>
+          </tr>
+        </table>
+        <div class = "br"></div>
+        <div class = "actions"><webobject name = "ExportEffectifAction" /></div>
+      </webobject>
+    </fieldset>
+    <h5>Informations extraites :</h5>
+    <div>
+      etu_id ; inscr_id ; genre ; prenom ; nom ; login; date_naissance ; commune_naissance ; pays_naissance ; nationalite ; 
+      <br />
+      periode ; diplome_$c ; dipl_spec_$c ; dipl_spec_abr ; niveau_adm ; dipl_opt_$c ; dipl_opt_abr ; res_jury ; lib_res_jury ; situation ; 
+      <br />
+      bac_serie ; bac_serie_sise ; bac_annee ; bac_academie ; bac_mention ; bac_pays ; dernier_diplome ;<br />
+      adresse individu : pays, chez qui, boite postale, ligne 1 de l'adresse, ligne 2 de l'adresse, code postal, commune ; 
+      <br />
+      adresse parent : pays, chez qui, boite postale, ligne 1 de l'adresse, ligne 2 de l'adresse, code postal, commune ; 
+      <br />
+    </div>
+    <br />
+    <!-- ------------------------------------------------------------------------------------------------------------------------- -->
+    <h3>Liste des r&eacute;sultats des &eacute;tudiants pour une p&eacute;riode</h3>
+    <fieldset class = "recherche">
+      <legend>Recherche d'inscription</legend>
+      <H5>La recherche s'effectue sur les semestres compris dans le bornage.</H5>
+      <webobject name = "extract_resultat">
+        <table width = "100%" cellspacing = "4" cellpadding = "0" class = "tliste">
+          <tr>
+            <td>
+              <label for = "pBorne1">p&eacute;riode : borne 1</label>
+            </td>
+            <td>
+              <webobject name = "ListPeriodesObserveField"><webobject name = "pBorne1" /></webobject>
+            </td>
+            <td>
+              <label for = "pBorne2">p&eacute;riode : borne 2</label>
+            </td>
+            <td>
+              <webobject name = "ListPeriodesObserveField1"><webobject name = "pBorne2" /></webobject>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for = "uvEtu">UV</label>
+            </td>
+            <td>
+              <webobject name = "ListUvsObserveField"><webobject name = "uvEtu" /></webobject>
+            </td>
+            <td>
+              <label for = "diplomeEtu">Dipl&ocirc;me</label>
+            </td>
+            <td>
+              <webobject name = "ListDiplomesObserveField"><webobject name = "diplomeEtu" /></webobject>
+            </td>
+          </tr>
+        </table>
+        <div class = "br"></div>
+        <div class = "actions"><webobject name = "ExportResultatAction" /></div>
+      </webobject>
+    </fieldset>
+    <h5>Informations extraites :</h5>
+    <div>
+      periode ; uv ; categ_uv ; inscr_id ; etu_id ; nom ;  prenom ; login; mail ; genre ; diplome_$c ; dipl_spec_$c ; dipl_spec_abr ; 
+      <br />
+      niveau_adm ; dipl_opt_$c ; dipl_opt_abr ; resultat_uv ;  credit_ECTS ; note VMS ; note_Gerry ; bac_annee ; 
+      <br />
+      bac_serie ; bac_mention ; bac_departement ; bac_ville ; bac_etablissement ; dernier_diplome ; double_diplome ; 
+      <br />
+      DDO_dern_dipl&ocirc;me_obtenu ; DDO_specialite ; DDO_info_comp ; DDO_pays ; DDO_dept ; DDO_ville ; DDO_etab ; UTT_entree ; 
+      <br />
+    </div>
+    <!-- --------------------------------------------------------- -->
+    <h3>Liste des inscriptions aux UV</h3>
+    <fieldset class = "recherche">
+      <legend>Recherche d'&eacute;tudiants</legend>
+      <H5>La recherche peut s'effectuer par p&eacute;riode, dipl&ocirc;me, niveau et uv.</H5>
+      <webobject name = "RechercheInsUv">
+        <table width = "100%" cellspacing = "4" cellpadding = "0" class = "tliste">
+          <tr>
+            <td>
+              <label for = "perInsuv">P&eacute;riode</label>
+            </td>
+            <td>
+              <webobject name = "ListPeriodesObserveField"><webobject name = "perInsuv" /></webobject>
+            </td>
+            <td>
+              <label for = "diplInsUv">Dipl&ocirc;me</label>
+            </td>
+            <td>
+              <webobject name = "ListDiplomesObserveField"><webobject name = "diplInsUv" /></webobject>
+            </td>
+            <td>
+              <label for = "nivInsUv">Niveau</label>
+            </td>
+            <td>
+              <webobject name = "ListNiveauxObserveField"><webobject name = "nivInsUv" /></webobject>
+            </td>
+          </tr>
+        </table>
+        <div class = "br"></div>
+        <div class = "actions"><webobject name = "ExportInsUvAction" /></div>
+      </webobject>
+    </fieldset>
+    <h5>Informations extraites :</h5>
+    <div> nom;prenom; login; diplome;niveau;uvs; </div>
+    <!-- ------------------------------------------------------------------------------------------------------------------------- -->
+    <h3>Liste des d&eacute;cisions de jury pour des p&eacute;riodes</h3>
+    <fieldset class = "recherche">
+      <legend>Recherche d'inscription</legend>
+      <H5>La recherche s'effectue sur les semestres compris entre les bornes.</H5>
+      <webobject name = "extract_decision">
+        <table width = "100%" cellspacing = "4" cellpadding = "0" class = "tliste">
+          <tr>
+            <td>
+              <label for = "pBornJery1">p&eacute;riode : borne 1</label>
+            </td>
+            <td>
+              <webobject name = "ListPeriodesObserveField"><webobject name = "pBornJery1" /></webobject>
+            </td>
+            <td>
+              <label for = "pBornJery2">p&eacute;riode : borne 2</label>
+            </td>
+            <td>
+              <webobject name = "ListPeriodesObserveField1"><webobject name = "pBornJery2" /></webobject>
+            </td>
+          </tr>
+        </table>
+        <div class = "br"></div>
+        <div class = "actions"><webobject name = "ExportJuryAction" /></div>
+      </webobject>
+    </fieldset>
+    <h5>Informations extraites :</h5>
+    <div> login;nom;prenom;diplome;niveau;decision </div>
+    <!-- ------------------------------------------------------------------------ -->
+    <h3>Liste des d&eacute;cisions de jury avec codes des appr&eacute;ciations</h3>
+    <fieldset class = "recherche">
+      <legend>Recherche d'inscription</legend>
+      <H5>La recherche s'effectue sur les semestres compris entre les bornes.</H5>
+      <webobject name = "extract_decision2">
+        <table width = "100%" cellspacing = "4" cellpadding = "0" class = "tliste">
+          <tr>
+            <td>
+              <label for = "periodeJuryAp">P&eacute;riode</label>
+            </td>
+            <td>
+              <webobject name = "ListPeriodesObserveField"><webobject name = "periodeJuryAp" /></webobject>
+            </td>
+            <td>
+              <label for = "diplomeJuryAp">Dipl&ocirc;me</label>
+              <td>
+                <webobject name = "ListDiplomesObserveField"><webobject name = "diplomeJuryAp" /></webobject>
+              </td>
+            </td>
+          </tr>
+        </table>
+        <div class = "br"></div>
+        <div class = "actions"><webobject name = "ExportJuryApAction" /></div>
+      </webobject>
+    </fieldset>
+    <h5>Informations extraites :</h5>
+    <div>
+      periode ; etu_id ; nom ; prenom ; login; email ; specialite ; filiere ; niveau ; code appreciation ; observation;<br />
+      DDO_dern_dipl&ocirc;me_obtenu ; DDO_specialite ; DDO_info_comp ; DDO_pays ; DDO_dept ; DDO_ville ; DDO_etab ; UTT_entree ; 
+    </div>
+    <!-- ------------------------------------------------------------------------ -->
+    <h3>Liste des UV par semestre avec le nom du responsable de l'UV</h3>
+    <!-- , la cat&eacute;gorie de l'UV, les effectifs par UV avec la r&eacute;partition ing&eacute;nieur et master et le total -->
+    <fieldset class = "recherche">
+      <legend>Recherche d'UV par semestre</legend>
+      <H5>La recherche s'effectue sur les semestres compris entre les bornes.</H5>
+      <div class = "info">Attention : Si vous selectionnez &quot;Tous&quot; pour chaque entr&eacute;e, la g&eacute;n&eacute;ration du fichier peut prendre quelques minutes</div>
+      <webobject name = "extract_respuv">
+        <table width = "100%" cellspacing = "4" cellpadding = "0" class = "tliste">
+          <tr>
+            <td>
+              <label for = "periodeRespUV">P&eacute;riode</label>
+            </td>
+            <td>
+              <webobject name = "ListPeriodesObserveField"><webobject name = "periodeRespUV" /></webobject>
+            </td>
+            <td>
+              <label for = "diplomeRespUV">Dipl&ocirc;me</label>
+              <td>
+                <webobject name = "ListDiplomesObserveField"><webobject name = "diplomeRespUV" /></webobject>
+              </td>
+            </td>
+            <td>
+              <label for = "uvRespUV">UV</label>
+            </td>
+            <td>
+              <webobject name = "ListUvsObserveField"><webobject name = "uvRespUV" /></webobject>
+            </td>
+          </tr>
+        </table>
+        <div class = "br"></div>
+        <div class = "actions"><webobject name = "ExportRespUvAction" /></div>
+      </webobject>
+    </fieldset>
+    <h5>Informations extraites :</h5>
+    <div> P&eacute;riode; Uv; Session; Dipl&ocirc;me; Sp&eacute;cialit&eacute;; Cat&eacute;gorie; Cr&eacute;dits; Nombre d'inscrit; Responsable; Type de responsabilit&eacute; </div>
+  </webobject>
+  <webobject name = "Busy10" />
+</webobject>

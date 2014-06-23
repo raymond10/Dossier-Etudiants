@@ -1,0 +1,233 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "ACTIVE_$F"; 
+            externalType = VARCHAR2; 
+            name = activef; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            columnName = "AN_UNIV"; 
+            externalType = VARCHAR2; 
+            isReadOnly = Y; 
+            name = anUniv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "CATEG_ID_INSUV"; 
+            externalType = NUMBER; 
+            name = categIdInsuv; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            columnName = "DIPLOME_$C"; 
+            externalType = VARCHAR2; 
+            isReadOnly = Y; 
+            name = diplomec; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "ETU_ID"; 
+            externalType = NUMBER; 
+            isReadOnly = Y; 
+            name = etuId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "ETU_INSCR_UV_ID"; 
+            externalType = NUMBER; 
+            name = etuInscrUvId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            columnName = "INSCR_ADM_ID"; 
+            externalType = VARCHAR2; 
+            name = inscrAdmId; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 18; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "MODIF_MAN_$F"; 
+            externalType = VARCHAR2; 
+            name = modifManf; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "NB_CREDITS_ECTS_INSUV"; 
+            externalType = VARCHAR2; 
+            name = nbCreditsEctsInsuv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "NB_CREDITS_ECTS_INSUVP"; 
+            externalType = VARCHAR2; 
+            name = nbCreditsEctsInsuvp; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "NLE_UV_OUVERTE_ID"; 
+            externalType = NUMBER; 
+            name = nleUvOuverteId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "NOM_PRENOM"; 
+            externalType = VARCHAR2; 
+            name = nomPrenom; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 114; 
+        }, 
+        {
+            columnName = "PRD_UNIV"; 
+            externalType = VARCHAR2; 
+            isReadOnly = Y; 
+            name = prdUniv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PROFIL_$F"; 
+            externalType = VARCHAR2; 
+            name = profilf; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "PROFIL_ID"; 
+            externalType = NUMBER; 
+            name = profilId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "RAISON_ADM"; 
+            externalType = VARCHAR2; 
+            name = raisonAdm; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 500; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "RESUV_$C"; 
+            externalType = VARCHAR2; 
+            name = resuvc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 3; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "UV_$C"; 
+            externalType = VARCHAR2; 
+            name = uvc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 8; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "VMS_SESSION"; 
+            externalType = VARCHAR2; 
+            name = vmsSession; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        activef, 
+        anUniv, 
+        categIdInsuv, 
+        diplomec, 
+        etuId, 
+        etuInscrUvId, 
+        inscrAdmId, 
+        modifManf, 
+        nbCreditsEctsInsuv, 
+        nbCreditsEctsInsuvp, 
+        nleUvOuverteId, 
+        nomPrenom, 
+        prdUniv, 
+        profilf, 
+        profilId, 
+        raisonAdm, 
+        resuvc, 
+        uvc, 
+        vmsSession
+    ); 
+    className = "gestionuv.utt.fr.eo.EOVueInsuv"; 
+    classProperties = (
+        activef, 
+        anUniv, 
+        categIdInsuv, 
+        diplomec, 
+        eoEtudiantInscrAdm, 
+        etuId, 
+        inscrAdmId, 
+        modifManf, 
+        nbCreditsEctsInsuv, 
+        nbCreditsEctsInsuvp, 
+        nleUvOuverteId, 
+        nomPrenom, 
+        prdUniv, 
+        profilf, 
+        profilId, 
+        raisonAdm, 
+        resuvc, 
+        uvc, 
+        vmsSession
+    ); 
+    externalName = "GEST_UV.VUE_INSUV"; 
+    name = EOVueInsuv; 
+    primaryKeyAttributes = (etuInscrUvId); 
+    relationships = (
+        {
+            destination = EOEtudiantInscrAdm; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = (
+                {destinationAttribute = anUniv; sourceAttribute = anUniv; }, 
+                {destinationAttribute = diplomec; sourceAttribute = diplomec; }, 
+                {destinationAttribute = etuId; sourceAttribute = etuId; }, 
+                {destinationAttribute = prdUniv; sourceAttribute = prdUniv; }
+            ); 
+            name = eoEtudiantInscrAdm; 
+        }
+    ); 
+}

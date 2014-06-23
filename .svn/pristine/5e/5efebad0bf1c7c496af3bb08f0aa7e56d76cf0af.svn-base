@@ -1,0 +1,12 @@
+package gestionuv.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+public class EOVueInsuv extends _EOVueInsuv {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8029596825282964206L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EOVueInsuv.class);
+}

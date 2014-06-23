@@ -1,0 +1,12 @@
+package etudiants.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+public class EOVueSpecMast extends _EOVueSpecMast {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 423003089602167792L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EOVueSpecMast.class);
+}

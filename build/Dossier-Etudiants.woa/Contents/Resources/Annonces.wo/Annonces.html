@@ -1,0 +1,51 @@
+<webobject name = "Wrapper">
+  <div metal:fill-slot = "contenu">
+    <script type = "text/javascript" src = "js/nicEdit.js">
+    </script>
+    <script type = "text/javascript">
+            bkLib.onDomLoaded(function() {
+             new nicEditor({iconsPath : 'image/nicEditorIcons.gif'}).panelInstance('message');
+             });
+    </script>
+    <wo name = "errors">
+      <div class = "warn"> Vous n'&ecirc;tes pas autoris&eacute; &agrave; consulter ce dossier. </div>
+    </wo>
+    <wo name = "admin">
+      <div class = "br"></div>
+      <webobject name = "browser">
+        <webobject name = "nav">Navigation</webobject>
+      </webobject>
+      <h3>Configuration <webobject name = "Indicateur1" /></h3>
+      <div class = "br"></div>
+      <div class = "form">
+        <div class = "info">
+          Indiquez ici le message &agrave; diffuser aux &eacute;tudiants.<br />
+          Ce message sera visible sur la consultation du profil de formation et des r&eacute;sultats d'UV 
+        </div>
+        <div class = "br"></div>
+        <wo name = "formAdmin">
+          <wo name = "formMsg" /><br />
+          <label>Visible sur l'ent ?</label>
+          <div class = "ouinon">
+            <wo name = "Observe1" ><wo name = "radio1" />
+            Oui&nbsp;&nbsp;&nbsp;</wo> 
+            <wo name = "Observe2"><wo name = "radio2" />Non</wo>
+          </div>
+          <div class = "action"> <wo name = "savedMsg" /> </div>
+        </wo>
+        <div class = "br"></div>
+        <h4>Paiement par CB</h4>
+        <wo name = "formPCB">
+          <label>Visible sur l'ent ?</label>
+          <div class = "ouinon">
+            <wo name = "Observe3" ><wo name = "radio3" />
+            Oui&nbsp;&nbsp;&nbsp;</wo> 
+            <wo name = "Observe4"><wo name = "radio4" />Non</wo>
+          </div>
+          <div class = "action"> <wo name = "savedPcb" /> </div>
+        </wo>
+      </div>
+    </wo>
+  </div>
+  <webobject name = "Busy10" />
+</webobject>

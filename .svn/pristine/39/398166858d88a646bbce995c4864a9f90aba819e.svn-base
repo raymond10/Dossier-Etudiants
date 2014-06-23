@@ -1,0 +1,12 @@
+package etudiants.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+public class EOIndEmail extends _EOIndEmail {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -819996715420226231L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EOIndEmail.class);
+}

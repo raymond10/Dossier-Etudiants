@@ -1,0 +1,43 @@
+package etudiants.utt.fr.server;
+
+import org.login.fwkloginwebapp.server.version.LoginVersionOracleUser;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public class VersionDatabase extends LoginVersionOracleUser {
+	private static String NAME = "BD USER GERRY";
+
+	@Override
+	public String dbUserTableName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String dbVersionIdColumnName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String dbVersionDateColumnName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String name() {
+		// TODO Auto-generated method stub
+		return NAME;
+	}
+
+	@Override
+	public LoginVersionRequirements[] dependencies() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

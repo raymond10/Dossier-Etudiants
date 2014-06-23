@@ -1,0 +1,10 @@
+{
+    lesNiveaux = {
+        class = EOFetchSpecification; 
+        entityName = EOVueNivAdm; 
+        hints = {
+            EOCustomQueryExpressionHintKey = "SELECT DISTINCT t0.ID, t0.LIBELLE, t0.ORDRE, t0.PDIPLOME FROM GERRY.VUE_NIV_ADM t0 WHERE t0.ID IS NOT NULL AND t0.LIBELLE IS NOT NULL AND t0.ORDRE IS NOT NULL AND t0.PDIPLOME IS NOT NULL ORDER BY t0.ORDRE ASC"; 
+        }; 
+        prefetchingRelationshipKeyPaths = (); 
+    }; 
+}

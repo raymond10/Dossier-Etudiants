@@ -1,0 +1,173 @@
+{
+    attributes = (
+        {
+            columnName = "AN_UNIV"; 
+            externalType = VARCHAR2; 
+            isReadOnly = Y; 
+            name = anUniv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = COMMENTAIRE; 
+            externalType = VARCHAR2; 
+            name = commentaire; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 100; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "CRE_DATE"; 
+            externalType = DATE; 
+            name = creDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            columnName = "DIPLOME_$C"; 
+            externalType = VARCHAR2; 
+            name = diplomec; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            columnName = "ETU_ID"; 
+            externalType = NUMBER; 
+            isReadOnly = Y; 
+            name = etuId; 
+            valueClassName = NSNumber; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "JURY_DATE"; 
+            externalType = DATE; 
+            name = juryDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "MAJ_AUTEUR"; 
+            externalType = VARCHAR2; 
+            name = majAuteur; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 20; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "MAJ_DATE"; 
+            externalType = DATE; 
+            name = majDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            columnName = "MINEUR_$C"; 
+            externalType = VARCHAR2; 
+            isReadOnly = Y; 
+            name = mineurc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            columnName = "MIN_RES_$C"; 
+            externalType = VARCHAR2; 
+            name = minResc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            columnName = "PRD_UNIV"; 
+            externalType = VARCHAR2; 
+            isReadOnly = Y; 
+            name = prdUniv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        anUniv, 
+        commentaire, 
+        creDate, 
+        diplomec, 
+        etuId, 
+        juryDate, 
+        majAuteur, 
+        majDate, 
+        mineurc, 
+        minResc, 
+        prdUniv
+    ); 
+    className = "gestionuv.utt.fr.eo.EOEtuMineur"; 
+    classProperties = (
+        anUniv, 
+        commentaire, 
+        creDate, 
+        diplomec, 
+        eoDiplome, 
+        eoEtudiantInscrAdm, 
+        eoRefPeriode, 
+        etudiant, 
+        etuId, 
+        juryDate, 
+        majAuteur, 
+        majDate, 
+        mineurc, 
+        minResc, 
+        prdUniv
+    ); 
+    externalName = "GEST_UV.ETU_MINEUR"; 
+    name = EOEtuMineur; 
+    primaryKeyAttributes = (anUniv, etuId, mineurc, prdUniv); 
+    relationships = (
+        {
+            destination = EODiplome; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = diplomec; sourceAttribute = diplomec; }); 
+            name = eoDiplome; 
+        }, 
+        {
+            destination = EOEtudiantInscrAdm; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = (
+                {destinationAttribute = anUniv; sourceAttribute = anUniv; }, 
+                {destinationAttribute = diplomec; sourceAttribute = diplomec; }, 
+                {destinationAttribute = etuId; sourceAttribute = etuId; }, 
+                {destinationAttribute = prdUniv; sourceAttribute = prdUniv; }
+            ); 
+            name = eoEtudiantInscrAdm; 
+        }, 
+        {
+            destination = EORefPeriode; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = (
+                {destinationAttribute = anUniv; sourceAttribute = anUniv; }, 
+                {destinationAttribute = prdUniv; sourceAttribute = prdUniv; }
+            ); 
+            name = eoRefPeriode; 
+        }, 
+        {
+            destination = EOIndividu; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = indivId; sourceAttribute = etuId; }); 
+            name = etudiant; 
+        }
+    ); 
+}

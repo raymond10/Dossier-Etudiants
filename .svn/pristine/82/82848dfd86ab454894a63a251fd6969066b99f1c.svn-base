@@ -1,0 +1,15 @@
+package etudiants.utt.fr.components;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOComponent;
+
+public class HtmlTest extends WOComponent {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1945380020331577619L;
+
+	public HtmlTest(WOContext context) {
+        super(context);
+    }
+}

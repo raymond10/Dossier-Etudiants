@@ -1,0 +1,260 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "AUTEUR_MAJ"; 
+            externalType = VARCHAR2; 
+            name = auteurMaj; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 12; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "CORPS_$C"; 
+            externalType = VARCHAR2; 
+            name = corpsc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "CR_$C"; 
+            externalType = VARCHAR2; 
+            name = crc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "CRE_DATE"; 
+            externalType = DATE; 
+            name = creDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "CR_PRINC_PAIE_$I"; 
+            externalType = VARCHAR2; 
+            name = crPrincPaiei; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = FONCTION; 
+            externalType = VARCHAR2; 
+            name = fonction; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 80; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "FONCTION_DESC"; 
+            externalType = VARCHAR2; 
+            name = fonctionDesc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1000; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "GRADE_$C"; 
+            externalType = VARCHAR2; 
+            name = gradec; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 3; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "INDIV_ID"; 
+            externalType = NUMBER; 
+            name = indivId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "MODIF_DATE"; 
+            externalType = DATE; 
+            name = modifDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "OBLIG_SERV"; 
+            externalType = NUMBER; 
+            name = obligServ; 
+            precision = 3; 
+            valueType = l; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "POSTE_ID"; 
+            externalType = NUMBER; 
+            isReadOnly = Y; 
+            name = posteId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = RANG; 
+            externalType = VARCHAR2; 
+            name = rang; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "RECH_UNIT_ID"; 
+            externalType = NUMBER; 
+            name = rechUnitId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "SITU_DEBUT_DATE"; 
+            externalType = DATE; 
+            name = situDebutDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "SITU_FIN_DATE"; 
+            externalType = DATE; 
+            name = situFinDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "STATUT_$C"; 
+            externalType = VARCHAR2; 
+            name = statutc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "SUPER_INDIV_ID"; 
+            externalType = NUMBER; 
+            name = superIndivId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            columnName = "SUPPR_LOGIC_$F"; 
+            externalType = CHAR; 
+            name = supprLogicf; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "TITRE_$C"; 
+            externalType = VARCHAR2; 
+            name = titrec; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "TYPE_POSTE_$I"; 
+            externalType = CHAR; 
+            name = typePostei; 
+            valueClassName = NSString; 
+            valueType = c; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "UT_COMP_$C"; 
+            externalType = VARCHAR2; 
+            name = utCompc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        auteurMaj, 
+        corpsc, 
+        crc, 
+        creDate, 
+        crPrincPaiei, 
+        fonction, 
+        fonctionDesc, 
+        gradec, 
+        indivId, 
+        modifDate, 
+        obligServ, 
+        posteId, 
+        rang, 
+        rechUnitId, 
+        situDebutDate, 
+        situFinDate, 
+        statutc, 
+        superIndivId, 
+        supprLogicf, 
+        titrec, 
+        typePostei, 
+        utCompc
+    ); 
+    className = "etudiants.utt.fr.eo.EOUtPersPoste"; 
+    classProperties = (
+        auteurMaj, 
+        corpsc, 
+        crc, 
+        creDate, 
+        crPrincPaiei, 
+        fonction, 
+        fonctionDesc, 
+        gradec, 
+        indivId, 
+        individu, 
+        modifDate, 
+        obligServ, 
+        posteId, 
+        rang, 
+        rechUnitId, 
+        situDebutDate, 
+        situFinDate, 
+        statutc, 
+        superIndivId, 
+        supprLogicf, 
+        titrec, 
+        typePostei, 
+        utCompc
+    ); 
+    externalName = "GERRY.UT_PERS_POSTE"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOUtPersPoste; 
+    primaryKeyAttributes = (posteId); 
+    relationships = (
+        {
+            destination = EOIndividu; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = indivId; sourceAttribute = superIndivId; }); 
+            name = individu; 
+        }
+    ); 
+}

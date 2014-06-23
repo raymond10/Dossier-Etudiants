@@ -1,0 +1,12 @@
+package etudiants.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+public class EOVDossetudiants extends _EOVDossetudiants {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5086971400838539862L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EOVDossetudiants.class);
+}

@@ -1,0 +1,403 @@
+/*******************************************************************************
+ * DOSSIER-ETUDIANT
+ * Copyright UNIVERSITE DE TECHNOLOGIE DE TROYES - CEDRE (www.utt.fr), since 1993 
+ * This software is governed by the CeCILL license under French law and abiding by the
+ * rules of distribution of free software. You can use, modify and/or 
+ * redistribute the software under the terms of the CeCILL license as 
+ * circulated by CEA, CNRS and INRIA at the following URL 
+ * "http://www.cecill.info". 
+ * As a counterpart to the access to the source code and rights to copy, modify 
+ * and redistribute granted by the license, users are provided only with a 
+ * limited warranty and the software's author, the holder of the economic 
+ * rights, and the successive licensors have only limited liability. In this 
+ * respect, the user's attention is drawn to the risks associated with loading,
+ * using, modifying and/or developing or reproducing the software by the user 
+ * in light of its specific status of free software, that may mean that it
+ * is complicated to manipulate, and that also therefore means that it is 
+ * reserved for developers and experienced professionals having in-depth
+ * computer knowledge. Users are therefore encouraged to load and test the 
+ * software's suitability as regards their requirements in conditions enabling
+ * the security of their systems and/or data to be ensured and, more generally, 
+ * to use and operate it in the same conditions as regards security. The
+ * fact that you are presently reading this means that you have had knowledge 
+ * of the CeCILL license and that you accept its terms.
+ * 
+ * Do not remove this copyright message
+ ******************************************************************************/
+// DO NOT EDIT.  Make changes to EOVueDetailparcours.java instead.
+package etudiants.utt.fr.eo;
+
+import com.webobjects.eoaccess.*;
+import com.webobjects.eocontrol.*;
+import com.webobjects.foundation.*;
+import java.math.*;
+import java.util.*;
+import org.apache.log4j.Logger;
+
+import er.extensions.eof.*;
+import er.extensions.foundation.*;
+
+@SuppressWarnings("all")
+public abstract class _EOVueDetailparcours extends  ERXGenericRecord {
+  public static final String ENTITY_NAME = "EOVueDetailparcours";
+
+  // Attribute Keys
+  public static final ERXKey<String> AN_UNIV = new ERXKey<String>("anUniv");
+  public static final ERXKey<String> CODE_DIPLOME = new ERXKey<String>("codeDiplome");
+  public static final ERXKey<String> DECISION = new ERXKey<String>("decision");
+  public static final ERXKey<String> DIPLOME_NUM = new ERXKey<String>("diplomeNum");
+  public static final ERXKey<String> DIPL_OPT_C = new ERXKey<String>("diplOptC");
+  public static final ERXKey<String> DIPL_SPEC_C = new ERXKey<String>("diplSpecC");
+  public static final ERXKey<Long> ETU_ID = new ERXKey<Long>("etuId");
+  public static final ERXKey<String> FORMATION = new ERXKey<String>("formation");
+  public static final ERXKey<String> INCR_ADM_ID = new ERXKey<String>("incrAdmId");
+  public static final ERXKey<String> LIBELLE = new ERXKey<String>("libelle");
+  public static final ERXKey<String> OBSERVATION = new ERXKey<String>("observation");
+  public static final ERXKey<String> PERIODE = new ERXKey<String>("periode");
+  public static final ERXKey<String> PRD_SESSION = new ERXKey<String>("prdSession");
+  public static final ERXKey<String> PRD_UNIV = new ERXKey<String>("prdUniv");
+  public static final ERXKey<String> SITUATION = new ERXKey<String>("situation");
+  public static final ERXKey<String> SOUTENANCE = new ERXKey<String>("soutenance");
+  public static final ERXKey<String> STAGE = new ERXKey<String>("stage");
+  // Relationship Keys
+  public static final ERXKey<etudiants.utt.fr.eo.EOVueAfficherdiplome> EO_VUE_AFFICHERDIPLOME = new ERXKey<etudiants.utt.fr.eo.EOVueAfficherdiplome>("eoVueAfficherdiplome");
+
+  // Attributes
+  public static final String AN_UNIV_KEY = AN_UNIV.key();
+  public static final String CODE_DIPLOME_KEY = CODE_DIPLOME.key();
+  public static final String DECISION_KEY = DECISION.key();
+  public static final String DIPLOME_NUM_KEY = DIPLOME_NUM.key();
+  public static final String DIPL_OPT_C_KEY = DIPL_OPT_C.key();
+  public static final String DIPL_SPEC_C_KEY = DIPL_SPEC_C.key();
+  public static final String ETU_ID_KEY = ETU_ID.key();
+  public static final String FORMATION_KEY = FORMATION.key();
+  public static final String INCR_ADM_ID_KEY = INCR_ADM_ID.key();
+  public static final String LIBELLE_KEY = LIBELLE.key();
+  public static final String OBSERVATION_KEY = OBSERVATION.key();
+  public static final String PERIODE_KEY = PERIODE.key();
+  public static final String PRD_SESSION_KEY = PRD_SESSION.key();
+  public static final String PRD_UNIV_KEY = PRD_UNIV.key();
+  public static final String SITUATION_KEY = SITUATION.key();
+  public static final String SOUTENANCE_KEY = SOUTENANCE.key();
+  public static final String STAGE_KEY = STAGE.key();
+  // Relationships
+  public static final String EO_VUE_AFFICHERDIPLOME_KEY = EO_VUE_AFFICHERDIPLOME.key();
+
+  private static Logger LOG = Logger.getLogger(_EOVueDetailparcours.class);
+
+  public EOVueDetailparcours localInstanceIn(EOEditingContext editingContext) {
+    EOVueDetailparcours localInstance = (EOVueDetailparcours)EOUtilities.localInstanceOfObject(editingContext, this);
+    if (localInstance == null) {
+      throw new IllegalStateException("You attempted to localInstance " + this + ", which has not yet committed.");
+    }
+    return localInstance;
+  }
+
+  public String anUniv() {
+    return (String) storedValueForKey(_EOVueDetailparcours.AN_UNIV_KEY);
+  }
+
+  public void setAnUniv(String value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+    	_EOVueDetailparcours.LOG.debug( "updating anUniv from " + anUniv() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueDetailparcours.AN_UNIV_KEY);
+  }
+
+  public String codeDiplome() {
+    return (String) storedValueForKey(_EOVueDetailparcours.CODE_DIPLOME_KEY);
+  }
+
+  public void setCodeDiplome(String value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+    	_EOVueDetailparcours.LOG.debug( "updating codeDiplome from " + codeDiplome() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueDetailparcours.CODE_DIPLOME_KEY);
+  }
+
+  public String decision() {
+    return (String) storedValueForKey(_EOVueDetailparcours.DECISION_KEY);
+  }
+
+  public void setDecision(String value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+    	_EOVueDetailparcours.LOG.debug( "updating decision from " + decision() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueDetailparcours.DECISION_KEY);
+  }
+
+  public String diplomeNum() {
+    return (String) storedValueForKey(_EOVueDetailparcours.DIPLOME_NUM_KEY);
+  }
+
+  public void setDiplomeNum(String value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+    	_EOVueDetailparcours.LOG.debug( "updating diplomeNum from " + diplomeNum() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueDetailparcours.DIPLOME_NUM_KEY);
+  }
+
+  public String diplOptC() {
+    return (String) storedValueForKey(_EOVueDetailparcours.DIPL_OPT_C_KEY);
+  }
+
+  public void setDiplOptC(String value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+    	_EOVueDetailparcours.LOG.debug( "updating diplOptC from " + diplOptC() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueDetailparcours.DIPL_OPT_C_KEY);
+  }
+
+  public String diplSpecC() {
+    return (String) storedValueForKey(_EOVueDetailparcours.DIPL_SPEC_C_KEY);
+  }
+
+  public void setDiplSpecC(String value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+    	_EOVueDetailparcours.LOG.debug( "updating diplSpecC from " + diplSpecC() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueDetailparcours.DIPL_SPEC_C_KEY);
+  }
+
+  public Long etuId() {
+    return (Long) storedValueForKey(_EOVueDetailparcours.ETU_ID_KEY);
+  }
+
+  public void setEtuId(Long value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+    	_EOVueDetailparcours.LOG.debug( "updating etuId from " + etuId() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueDetailparcours.ETU_ID_KEY);
+  }
+
+  public String formation() {
+    return (String) storedValueForKey(_EOVueDetailparcours.FORMATION_KEY);
+  }
+
+  public void setFormation(String value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+    	_EOVueDetailparcours.LOG.debug( "updating formation from " + formation() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueDetailparcours.FORMATION_KEY);
+  }
+
+  public String incrAdmId() {
+    return (String) storedValueForKey(_EOVueDetailparcours.INCR_ADM_ID_KEY);
+  }
+
+  public void setIncrAdmId(String value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+    	_EOVueDetailparcours.LOG.debug( "updating incrAdmId from " + incrAdmId() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueDetailparcours.INCR_ADM_ID_KEY);
+  }
+
+  public String libelle() {
+    return (String) storedValueForKey(_EOVueDetailparcours.LIBELLE_KEY);
+  }
+
+  public void setLibelle(String value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+    	_EOVueDetailparcours.LOG.debug( "updating libelle from " + libelle() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueDetailparcours.LIBELLE_KEY);
+  }
+
+  public String observation() {
+    return (String) storedValueForKey(_EOVueDetailparcours.OBSERVATION_KEY);
+  }
+
+  public void setObservation(String value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+    	_EOVueDetailparcours.LOG.debug( "updating observation from " + observation() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueDetailparcours.OBSERVATION_KEY);
+  }
+
+  public String periode() {
+    return (String) storedValueForKey(_EOVueDetailparcours.PERIODE_KEY);
+  }
+
+  public void setPeriode(String value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+    	_EOVueDetailparcours.LOG.debug( "updating periode from " + periode() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueDetailparcours.PERIODE_KEY);
+  }
+
+  public String prdSession() {
+    return (String) storedValueForKey(_EOVueDetailparcours.PRD_SESSION_KEY);
+  }
+
+  public void setPrdSession(String value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+    	_EOVueDetailparcours.LOG.debug( "updating prdSession from " + prdSession() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueDetailparcours.PRD_SESSION_KEY);
+  }
+
+  public String prdUniv() {
+    return (String) storedValueForKey(_EOVueDetailparcours.PRD_UNIV_KEY);
+  }
+
+  public void setPrdUniv(String value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+    	_EOVueDetailparcours.LOG.debug( "updating prdUniv from " + prdUniv() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueDetailparcours.PRD_UNIV_KEY);
+  }
+
+  public String situation() {
+    return (String) storedValueForKey(_EOVueDetailparcours.SITUATION_KEY);
+  }
+
+  public void setSituation(String value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+    	_EOVueDetailparcours.LOG.debug( "updating situation from " + situation() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueDetailparcours.SITUATION_KEY);
+  }
+
+  public String soutenance() {
+    return (String) storedValueForKey(_EOVueDetailparcours.SOUTENANCE_KEY);
+  }
+
+  public void setSoutenance(String value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+    	_EOVueDetailparcours.LOG.debug( "updating soutenance from " + soutenance() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueDetailparcours.SOUTENANCE_KEY);
+  }
+
+  public String stage() {
+    return (String) storedValueForKey(_EOVueDetailparcours.STAGE_KEY);
+  }
+
+  public void setStage(String value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+    	_EOVueDetailparcours.LOG.debug( "updating stage from " + stage() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueDetailparcours.STAGE_KEY);
+  }
+
+  public etudiants.utt.fr.eo.EOVueAfficherdiplome eoVueAfficherdiplome() {
+    return (etudiants.utt.fr.eo.EOVueAfficherdiplome)storedValueForKey(_EOVueDetailparcours.EO_VUE_AFFICHERDIPLOME_KEY);
+  }
+  
+  public void setEoVueAfficherdiplome(etudiants.utt.fr.eo.EOVueAfficherdiplome value) {
+    takeStoredValueForKey(value, _EOVueDetailparcours.EO_VUE_AFFICHERDIPLOME_KEY);
+  }
+
+  public void setEoVueAfficherdiplomeRelationship(etudiants.utt.fr.eo.EOVueAfficherdiplome value) {
+    if (_EOVueDetailparcours.LOG.isDebugEnabled()) {
+      _EOVueDetailparcours.LOG.debug("updating eoVueAfficherdiplome from " + eoVueAfficherdiplome() + " to " + value);
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	setEoVueAfficherdiplome(value);
+    }
+    else if (value == null) {
+    	etudiants.utt.fr.eo.EOVueAfficherdiplome oldValue = eoVueAfficherdiplome();
+    	if (oldValue != null) {
+    		removeObjectFromBothSidesOfRelationshipWithKey(oldValue, _EOVueDetailparcours.EO_VUE_AFFICHERDIPLOME_KEY);
+      }
+    } else {
+    	addObjectToBothSidesOfRelationshipWithKey(value, _EOVueDetailparcours.EO_VUE_AFFICHERDIPLOME_KEY);
+    }
+  }
+  
+
+  public static EOVueDetailparcours createEOVueDetailparcours(EOEditingContext editingContext, String anUniv
+, String codeDiplome
+, Long etuId
+, String prdUniv
+, etudiants.utt.fr.eo.EOVueAfficherdiplome eoVueAfficherdiplome) {
+    EOVueDetailparcours eo = (EOVueDetailparcours) EOUtilities.createAndInsertInstance(editingContext, _EOVueDetailparcours.ENTITY_NAME);    
+		eo.setAnUniv(anUniv);
+		eo.setCodeDiplome(codeDiplome);
+		eo.setEtuId(etuId);
+		eo.setPrdUniv(prdUniv);
+    eo.setEoVueAfficherdiplomeRelationship(eoVueAfficherdiplome);
+    return eo;
+  }
+
+  public static ERXFetchSpecification<EOVueDetailparcours> fetchSpec() {
+    return new ERXFetchSpecification<EOVueDetailparcours>(_EOVueDetailparcours.ENTITY_NAME, null, null, false, true, null);
+  }
+
+  public static NSArray<EOVueDetailparcours> fetchAllEOVueDetailparcourses(EOEditingContext editingContext) {
+    return _EOVueDetailparcours.fetchAllEOVueDetailparcourses(editingContext, null);
+  }
+
+  public static NSArray<EOVueDetailparcours> fetchAllEOVueDetailparcourses(EOEditingContext editingContext, NSArray<EOSortOrdering> sortOrderings) {
+    return _EOVueDetailparcours.fetchEOVueDetailparcourses(editingContext, null, sortOrderings);
+  }
+
+  public static NSArray<EOVueDetailparcours> fetchEOVueDetailparcourses(EOEditingContext editingContext, EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings) {
+    ERXFetchSpecification<EOVueDetailparcours> fetchSpec = new ERXFetchSpecification<EOVueDetailparcours>(_EOVueDetailparcours.ENTITY_NAME, qualifier, sortOrderings);
+    fetchSpec.setIsDeep(true);
+    NSArray<EOVueDetailparcours> eoObjects = fetchSpec.fetchObjects(editingContext);
+    return eoObjects;
+  }
+
+  public static EOVueDetailparcours fetchEOVueDetailparcours(EOEditingContext editingContext, String keyName, Object value) {
+    return _EOVueDetailparcours.fetchEOVueDetailparcours(editingContext, new EOKeyValueQualifier(keyName, EOQualifier.QualifierOperatorEqual, value));
+  }
+
+  public static EOVueDetailparcours fetchEOVueDetailparcours(EOEditingContext editingContext, EOQualifier qualifier) {
+    NSArray<EOVueDetailparcours> eoObjects = _EOVueDetailparcours.fetchEOVueDetailparcourses(editingContext, qualifier, null);
+    EOVueDetailparcours eoObject;
+    int count = eoObjects.count();
+    if (count == 0) {
+      eoObject = null;
+    }
+    else if (count == 1) {
+      eoObject = eoObjects.objectAtIndex(0);
+    }
+    else {
+      throw new IllegalStateException("There was more than one EOVueDetailparcours that matched the qualifier '" + qualifier + "'.");
+    }
+    return eoObject;
+  }
+
+  public static EOVueDetailparcours fetchRequiredEOVueDetailparcours(EOEditingContext editingContext, String keyName, Object value) {
+    return _EOVueDetailparcours.fetchRequiredEOVueDetailparcours(editingContext, new EOKeyValueQualifier(keyName, EOQualifier.QualifierOperatorEqual, value));
+  }
+
+  public static EOVueDetailparcours fetchRequiredEOVueDetailparcours(EOEditingContext editingContext, EOQualifier qualifier) {
+    EOVueDetailparcours eoObject = _EOVueDetailparcours.fetchEOVueDetailparcours(editingContext, qualifier);
+    if (eoObject == null) {
+      throw new NoSuchElementException("There was no EOVueDetailparcours that matched the qualifier '" + qualifier + "'.");
+    }
+    return eoObject;
+  }
+
+  public static EOVueDetailparcours localInstanceIn(EOEditingContext editingContext, EOVueDetailparcours eo) {
+    EOVueDetailparcours localInstance = (eo == null) ? null : ERXEOControlUtilities.localInstanceOfObject(editingContext, eo);
+    if (localInstance == null && eo != null) {
+      throw new IllegalStateException("You attempted to localInstance " + eo + ", which has not yet committed.");
+    }
+    return localInstance;
+  }
+  public static NSArray<etudiants.utt.fr.eo.EOVueDetailparcours> fetchDetailParcours(EOEditingContext editingContext, NSDictionary<String, Object> bindings) {
+    EOFetchSpecification fetchSpec = EOFetchSpecification.fetchSpecificationNamed("detailParcours", _EOVueDetailparcours.ENTITY_NAME);
+    fetchSpec = fetchSpec.fetchSpecificationWithQualifierBindings(bindings);
+    return (NSArray<etudiants.utt.fr.eo.EOVueDetailparcours>)editingContext.objectsWithFetchSpecification(fetchSpec);
+  }
+  
+  public static NSArray<etudiants.utt.fr.eo.EOVueDetailparcours> fetchDetailParcours(EOEditingContext editingContext,
+	String codeDiplomeBinding,
+	String debutBinding,
+	String finBinding,
+	Long numero_etuBinding)
+  {
+    EOFetchSpecification fetchSpec = EOFetchSpecification.fetchSpecificationNamed("detailParcours", _EOVueDetailparcours.ENTITY_NAME);
+    NSMutableDictionary<String, Object> bindings = new NSMutableDictionary<String, Object>();
+    bindings.takeValueForKey(codeDiplomeBinding, "codeDiplome");
+    bindings.takeValueForKey(debutBinding, "debut");
+    bindings.takeValueForKey(finBinding, "fin");
+    bindings.takeValueForKey(numero_etuBinding, "numero_etu");
+	fetchSpec = fetchSpec.fetchSpecificationWithQualifierBindings(bindings);
+    return (NSArray<etudiants.utt.fr.eo.EOVueDetailparcours>)editingContext.objectsWithFetchSpecification(fetchSpec);
+  }
+  
+}

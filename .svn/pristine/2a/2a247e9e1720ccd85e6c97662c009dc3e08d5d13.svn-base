@@ -1,0 +1,90 @@
+package etudiants.utt.fr.components;
+
+import org.login.fwkloginwebapp.common.util.StringCtrl;
+import org.login.fwkloginwebapp.server.LoginWebAction;
+import org.login.fwkloginwebapp.server.components.LoginWebComponent;
+
+import com.webobjects.appserver.WOContext;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public class LoginCAS extends LoginWebComponent {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4701271848594207107L;
+
+	/** Le commentaire a afficher dans l'entete de al page. */
+	private String titleComment = StringCtrl.emptyString();
+
+	/** Le lien d'acces au serveur CAS. */
+	private String casLoginLink;
+
+	public LoginCAS(WOContext context) {
+		super(context);
+	}
+	
+	/**
+	 * Le URL de l'image d'une ligne horisontale dans la page.
+	 */
+	public String imageLigneSrc() {
+		return lgnApp.getImageDefaultURL("ligneApplisDegradee.gif");
+	}
+
+	/**
+	 * Retourne le URL de l'image "cles" affiches a cote de lien d'acces au
+	 * serveur CAS.
+	 */
+	public String imageClefsSrc() {
+		return lgnApp.getImageDefaultURL("clefs.gif");
+	}
+
+	/**
+	 * Retourne le lien d'acces au service CAS. Ce lien peut etre explicitement
+	 * defini a l'aide de la methode <code>setCASLoginLink</code>.
+	 * 
+	 * @see #setCASLoginLink(String)
+	 */
+	public String lienLoginCAS() {
+		if (casLoginLink == null)
+			return LoginWebAction.getLoginActionURL(context(), false, null,
+					true, null);
+		else
+			return casLoginLink;
+	}
+
+	/**
+	 * Retourne le commentaire a afficher dans le titre de la page de login.
+	 */
+	public String titleComment() {
+		if (StringCtrl.normalize(titleComment).length() > 0)
+			return new StringBuffer("<br>(").append(titleComment).append(")")
+					.toString();
+		else
+			return StringCtrl.emptyString();
+	}
+
+	/**
+	 * Definit le commentaire a afficher dans le titre de la page de login. Le
+	 * commentaire peut etre vide ou <em>null</em>.
+	 */
+	public void setTitleComment(String comment) {
+		titleComment = comment;
+	}
+
+	/**
+	 * Definit le lien d'acces au serveur de login.
+	 */
+	public void setCASLoginLink(String link) {
+		casLoginLink = link;
+	}
+
+	public String cssEtudiant() {
+		return application().resourceManager().urlForResourceNamed(
+				"css/etudiant.css", null, null, context().request());
+	}
+}

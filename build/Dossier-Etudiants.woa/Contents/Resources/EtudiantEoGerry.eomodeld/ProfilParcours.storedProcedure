@@ -1,0 +1,46 @@
+{
+    arguments = (
+        {
+            allowsNull = Y; 
+            columnName = "010_etuId"; 
+            externalType = NUMBER; 
+            name = "010_etuId"; 
+            parameterDirection = 1; 
+            valueClassName = NSNumber; 
+            valueType = i; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "020_pdiplome"; 
+            externalType = VARCHAR2; 
+            name = "020_pdiplome"; 
+            parameterDirection = 1; 
+            valueClassName = NSString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "030_pdebut"; 
+            externalType = VARCHAR2; 
+            name = "030_pdebut"; 
+            parameterDirection = 1; 
+            valueClassName = NSString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "040_pfin"; 
+            externalType = VARCHAR2; 
+            name = "040_pfin"; 
+            parameterDirection = 1; 
+            valueClassName = NSString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = 000; 
+            name = "050_returnValue"; 
+            parameterDirection = 2; 
+            valueClassName = "com.webobjects.foundation.NSMutableDictionary"; 
+        }
+    ); 
+    externalName = "GERRY.PKG_ETU_DOSSIER.PROFIL_INSPARCOURS"; 
+    name = ProfilParcours; 
+}

@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<app:service xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:cmis="http://docs.oasis-open.org/ns/cmis/core/200908/"
+	xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/"
+	xmlns:app="http://www.w3.org/2007/app">
+	<app:workspace>
+		<atom:title>default</atom:title>
+		<app:collection
+			href="http://nuxeo-dev.utt.fr/nuxeo/atom/cmis/default/children?id=6da2e737-0e4f-4ce6-af0a-cbe6b2fa8ca9">
+			<cmisra:collectionType>root</cmisra:collectionType>
+			<atom:title type="text">Root Collection</atom:title>
+			<app:accept>application/atom+xml;type=entry</app:accept>
+			<app:accept>application/cmisatom+xml</app:accept>
+		</app:collection>
+		<app:collection
+			href="http://nuxeo-dev.utt.fr/nuxeo/atom/cmis/default/types">
+			<cmisra:collectionType>types</cmisra:collectionType>
+			<atom:title type="text">Types Collection</atom:title>
+			<app:accept></app:accept>
+		</app:collection>
+		<app:collection
+			href="http://nuxeo-dev.utt.fr/nuxeo/atom/cmis/default/query">
+			<cmisra:collectionType>query</cmisra:collectionType>
+			<atom:title type="text">Query Collection</atom:title>
+			<app:accept>application/cmisquery+xml</app:accept>
+		</app:collection>
+		<app:collection
+			href="http://nuxeo-dev.utt.fr/nuxeo/atom/cmis/default/checkedout">
+			<cmisra:collectionType>checkedout</cmisra:collectionType>
+			<atom:title type="text">Checked Out Collection</atom:title>
+			<app:accept>application/cmisatom+xml</app:accept>
+		</app:collection>
+		<app:collection
+			href="http://nuxeo-dev.utt.fr/nuxeo/atom/cmis/default/update">
+			<cmisra:collectionType>update</cmisra:collectionType>
+			<atom:title type="text">Bulk Update Collection</atom:title>
+			<app:accept>application/cmisatom+xml</app:accept>
+		</app:collection>
+		<cmisra:repositoryInfo>
+			<cmis:repositoryId>default</cmis:repositoryId>
+			<cmis:repositoryName>Nuxeo Repository default</cmis:repositoryName>
+			<cmis:repositoryDescription>Nuxeo Repository default
+			</cmis:repositoryDescription>
+			<cmis:vendorName>Nuxeo</cmis:vendorName>
+			<cmis:productName>Nuxeo OpenCMIS Connector</cmis:productName>
+			<cmis:productVersion>5.8</cmis:productVersion>
+			<cmis:rootFolderId>6da2e737-0e4f-4ce6-af0a-cbe6b2fa8ca9
+			</cmis:rootFolderId>
+			<cmis:latestChangeLogToken>1392219128003</cmis:latestChangeLogToken>
+			<cmis:capabilities>
+				<cmis:capabilityACL>none</cmis:capabilityACL>
+				<cmis:capabilityAllVersionsSearchable>true
+				</cmis:capabilityAllVersionsSearchable>
+				<cmis:capabilityChanges>objectidsonly</cmis:capabilityChanges>
+				<cmis:capabilityContentStreamUpdatability>pwconly
+				</cmis:capabilityContentStreamUpdatability>
+				<cmis:capabilityGetDescendants>true</cmis:capabilityGetDescendants>
+				<cmis:capabilityGetFolderTree>true</cmis:capabilityGetFolderTree>
+				<cmis:capabilityMultifiling>false</cmis:capabilityMultifiling>
+				<cmis:capabilityPWCSearchable>true</cmis:capabilityPWCSearchable>
+				<cmis:capabilityPWCUpdatable>true</cmis:capabilityPWCUpdatable>
+				<cmis:capabilityQuery>bothcombined</cmis:capabilityQuery>
+				<cmis:capabilityRenditions>read</cmis:capabilityRenditions>
+				<cmis:capabilityUnfiling>false</cmis:capabilityUnfiling>
+				<cmis:capabilityVersionSpecificFiling>false
+				</cmis:capabilityVersionSpecificFiling>
+				<cmis:capabilityJoin>innerandouter</cmis:capabilityJoin>
+			</cmis:capabilities>
+			<cmis:aclCapability>
+				<cmis:supportedPermissions>basic</cmis:supportedPermissions>
+				<cmis:propagation>repositorydetermined</cmis:propagation>
+			</cmis:aclCapability>
+			<cmis:cmisVersionSupported>1.1</cmis:cmisVersionSupported>
+			<cmis:thinClientURI>http://nuxeo-dev.utt.fr/nuxeo/
+			</cmis:thinClientURI>
+			<cmis:changesIncomplete>false</cmis:changesIncomplete>
+			<cmis:changesOnType>cmis:document</cmis:changesOnType>
+			<cmis:changesOnType>cmis:folder</cmis:changesOnType>
+			<cmis:principalAnonymous>Guest</cmis:principalAnonymous>
+			<cmis:principalAnyone>Everyone</cmis:principalAnyone>
+		</cmisra:repositoryInfo>
+		<atom:link
+			rel="http://docs.oasis-open.org/ns/cmis/link/200908/typedescendants"
+			href="http://nuxeo-dev.utt.fr/nuxeo/atom/cmis/default/typedesc" type="application/atom+xml;type=feed" />
+		<atom:link rel="http://docs.oasis-open.org/ns/cmis/link/200908/foldertree"
+			href="http://nuxeo-dev.utt.fr/nuxeo/atom/cmis/default/foldertree?id=6da2e737-0e4f-4ce6-af0a-cbe6b2fa8ca9"
+			type="application/cmistree+xml" />
+		<atom:link
+			rel="http://docs.oasis-open.org/ns/cmis/link/200908/rootdescendants"
+			href="http://nuxeo-dev.utt.fr/nuxeo/atom/cmis/default/descendants?id=6da2e737-0e4f-4ce6-af0a-cbe6b2fa8ca9"
+			type="application/cmistree+xml" cmisra:id="6da2e737-0e4f-4ce6-af0a-cbe6b2fa8ca9" />
+		<atom:link rel="http://docs.oasis-open.org/ns/cmis/link/200908/changes"
+			href="http://nuxeo-dev.utt.fr/nuxeo/atom/cmis/default/changes" type="application/atom+xml;type=feed" />
+		<cmisra:uritemplate>
+			<cmisra:template>http://nuxeo-dev.utt.fr/nuxeo/atom/cmis/default/id?id={id}&amp;filter={filter}&amp;includeAllowableActions={includeAllowableActions}&amp;includeACL={includeACL}&amp;includePolicyIds={includePolicyIds}&amp;includeRelationships={includeRelationships}&amp;renditionFilter={renditionFilter}
+			</cmisra:template>
+			<cmisra:type>objectbyid</cmisra:type>
+			<cmisra:mediatype>application/atom+xml;type=entry</cmisra:mediatype>
+		</cmisra:uritemplate>
+		<cmisra:uritemplate>
+			<cmisra:template>http://nuxeo-dev.utt.fr/nuxeo/atom/cmis/default/path?path={path}&amp;filter={filter}&amp;includeAllowableActions={includeAllowableActions}&amp;includeACL={includeACL}&amp;includePolicyIds={includePolicyIds}&amp;includeRelationships={includeRelationships}&amp;renditionFilter={renditionFilter}
+			</cmisra:template>
+			<cmisra:type>objectbypath</cmisra:type>
+			<cmisra:mediatype>application/atom+xml;type=entry</cmisra:mediatype>
+		</cmisra:uritemplate>
+		<cmisra:uritemplate>
+			<cmisra:template>http://nuxeo-dev.utt.fr/nuxeo/atom/cmis/default/type?id={id}
+			</cmisra:template>
+			<cmisra:type>typebyid</cmisra:type>
+			<cmisra:mediatype>application/atom+xml;type=entry</cmisra:mediatype>
+		</cmisra:uritemplate>
+		<cmisra:uritemplate>
+			<cmisra:template>http://nuxeo-dev.utt.fr/nuxeo/atom/cmis/default/query?q={q}&amp;searchAllVersions={searchAllVersions}&amp;includeAllowableActions={includeAllowableActions}&amp;includeRelationships={includeRelationships}&amp;maxItems={maxItems}&amp;skipCount={skipCount}
+			</cmisra:template>
+			<cmisra:type>query</cmisra:type>
+			<cmisra:mediatype>application/atom+xml;type=feed</cmisra:mediatype>
+		</cmisra:uritemplate>
+	</app:workspace>
+	<div id="mobileNav">
+		<a id="searchIcon" href="#">
+			<img src="/images/searchIcon.png" width="24px" height="24px" alt="" />
+		</a>
+		<a id="mobileNavIcon" href="#">
+			<img src="/images/mobileNav.png" width="38px" height="20px" alt="" />
+		</a>
+	</div>
+</app:service>

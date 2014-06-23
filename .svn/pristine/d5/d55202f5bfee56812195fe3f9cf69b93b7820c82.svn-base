@@ -1,0 +1,36 @@
+{
+    attributes = (
+        {
+            columnName = ANNONCE; 
+            externalType = VARCHAR2; 
+            name = annonce; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4000; 
+        }, 
+        {
+            columnName = "PCB_$F"; 
+            externalType = VARCHAR2; 
+            isReadOnly = Y; 
+            name = pcbf; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            columnName = "VISIBLE_$F"; 
+            externalType = VARCHAR2; 
+            name = visiblef; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }
+    ); 
+    attributesUsedForLocking = (annonce, pcbf, visiblef); 
+    className = "gestionuv.utt.fr.eo.EOParamDoetu"; 
+    classProperties = (annonce, pcbf, visiblef); 
+    externalName = "GEST_UV.PARAM_DOETU"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOParamDoetu; 
+    primaryKeyAttributes = (annonce, pcbf, visiblef); 
+}

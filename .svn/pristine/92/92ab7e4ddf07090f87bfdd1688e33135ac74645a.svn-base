@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="Sources"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/JavaEOAccess"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/JavaEOControl"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/JavaFoundation"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/JavaWebObjects"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/JavaXML"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/ERExtensions"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/ERJars"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/Ajax"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/JavaWOExtensions"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/JavaMemoryAdaptor"/>
+	<classpathentry exported="true" kind="lib" path="/Library/WebObjects/Extensions/activation.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Library/WebObjects/Extensions/mail.jar"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/WOOgnl"/>
+	<classpathentry kind="con" path="WOFramework/JavaJDBCAdaptor"/>
+	<classpathentry kind="con" path="WOFramework/FwkCktlThemes"/>
+	<classpathentry kind="con" path="WOFramework/ERPrototypes"/>
+	<classpathentry kind="lib" path="/Library/WebObjects/Extensions/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="/Users/naneon/Developpements/workspace-juno/Suivi-PP/WebContent/WEB-INF/lib/spring.jar"/>
+	<classpathentry kind="con" path="WOFramework/FwkCktlReportingUTT"/>
+	<classpathentry kind="con" path="WOFramework/FwkLoginWebApp"/>
+	<classpathentry kind="con" path="WOFramework/FwkUTTAjaxWebExt"/>
+	<classpathentry kind="con" path="WOFramework/FwkCktlReportingUTTGuiAjax"/>
+	<classpathentry kind="lib" path="/Library/WebObjects/Extensions/xalan.jar"/>
+	<classpathentry kind="lib" path="Libraries/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="Libraries/arial-fonts.jar"/>
+	<classpathentry kind="lib" path="Libraries/cocktaildb-0.0.1.jar"/>
+	<classpathentry kind="lib" path="Libraries/commons-beanutils-1.5.jar"/>
+	<classpathentry kind="lib" path="Libraries/commons-collections-2.1.jar"/>
+	<classpathentry kind="lib" path="Libraries/commons-digester-1.7.jar"/>
+	<classpathentry kind="lib" path="Libraries/commons-io-2.1.jar"/>
+	<classpathentry kind="lib" path="Libraries/commons-javaflow-20060411.jar"/>
+	<classpathentry kind="lib" path="Libraries/commons-logging-1.0.2.jar"/>
+	<classpathentry kind="lib" path="Libraries/commons-logging-api-1.0.2.jar"/>
+	<classpathentry kind="lib" path="Libraries/guice-3.0.jar"/>
+	<classpathentry kind="lib" path="Libraries/icu4j-3.8.jar"/>
+	<classpathentry kind="lib" path="Libraries/itext-1.3.1.jar"/>
+	<classpathentry kind="lib" path="Libraries/j2ssh-ant-0.2.9.jar"/>
+	<classpathentry kind="lib" path="Libraries/j2ssh-common-0.2.9.jar"/>
+	<classpathentry kind="lib" path="Libraries/j2ssh-core-0.2.9.jar"/>
+	<classpathentry kind="lib" path="Libraries/j2ssh-daemon-0.2.9.jar"/>
+	<classpathentry kind="lib" path="Libraries/jasperreports-4.1.1.jar"/>
+	<classpathentry kind="lib" path="Libraries/jasperreports-fonts-4.1.1.jar"/>
+	<classpathentry kind="lib" path="Libraries/jasperreports-javaflow-4.0.2.jar"/>
+	<classpathentry kind="lib" path="Libraries/javassist-3.16.1-GA.jar"/>
+	<classpathentry kind="lib" path="Libraries/javax.inject-1.jar"/>
+	<classpathentry kind="lib" path="Libraries/lesscss-1.3.3.jar"/>
+	<classpathentry kind="lib" path="Libraries/mockito-all-1.9.0.jar"/>
+	<classpathentry kind="lib" path="Libraries/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="Libraries/poi-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="Libraries/woinject-1.1.jar"/>
+	<classpathentry kind="lib" path="Libraries/wounit-1.2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

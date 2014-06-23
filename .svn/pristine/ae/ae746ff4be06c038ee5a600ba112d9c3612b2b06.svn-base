@@ -1,0 +1,14 @@
+package etudiants.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+@SuppressWarnings("all")
+public class EOEtudiantInscrAdm extends _EOEtudiantInscrAdm {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9107675123232727222L;
+	private static Logger log = Logger.getLogger(EOEtudiantInscrAdm.class);
+
+	public static String PERIODES = AN_UNIV_KEY + PRD_UNIV_KEY;
+}

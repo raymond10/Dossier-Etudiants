@@ -1,0 +1,60 @@
+<h3>
+  <a name = "Navigation">Navigation</a>
+</h3>
+<div id = "res-menu">
+  <dl>
+    <webobject name = "lesAgents">
+      <dt class = "search">
+        <webobject name = "recherche">
+          <b>Recherche</b>
+        </webobject>
+      </dt>
+    </webobject>
+    <webobject name = "lAdmin">
+      <dt class = "edtition">
+        <webobject name = "editions">
+          <b>Editions</b>
+        </webobject>
+      </dt>
+      <dt class = "admin">
+        <webobject name = "admin">
+          <b>Annonce et config</b>
+        </webobject>
+      </dt>
+    </webobject>
+    <webobject name = "lesAgents">
+      <dt class = "extract">
+        <webobject name = "extractions">
+          <b>Extractions</b>
+        </webobject>
+      </dt>
+    </webobject>
+    <webobject name = "lesEtudiants">
+      <dt class = "profil">
+        <webobject name = "profil">
+          <b>Profil de formation</b>
+        </webobject>
+      </dt>
+      <dt class = "dosAdm">
+        <webobject name = "dossierAdm">
+          <b>Dossier administratif</b>
+        </webobject>
+      </dt>
+      <dt class = "edt">
+        <webobject name = "edt">
+          <b>Emploi du temps</b>
+        </webobject>
+      </dt>
+      <dt class = "resUv">
+        <webobject name = "resultatUv">
+          <b>R&eacute;sultats aux UV</b>
+        </webobject>
+      </dt>
+    </webobject>
+    <dt class = "edtEx">
+      <webobject name = "edtExams">
+        <b>Edt des examens</b>
+      </webobject>
+    </dt>
+  </dl>
+</div>

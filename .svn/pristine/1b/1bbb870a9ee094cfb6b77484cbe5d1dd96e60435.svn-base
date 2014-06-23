@@ -1,0 +1,37 @@
+{
+    detailParcours = {
+        class = EOFetchSpecification; 
+        entityName = EOVueDetailparcours; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOAndQualifier; 
+            qualifiers = (
+                {
+                    class = EOKeyValueQualifier; 
+                    key = etuId; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = "numero_etu"; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = codeDiplome; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = codeDiplome; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = periode; 
+                    selectorName = "isGreaterThanOrEqualTo:"; 
+                    value = {"_key" = debut; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = periode; 
+                    selectorName = "isLessThanOrEqualTo:"; 
+                    value = {"_key" = fin; class = EOQualifierVariable; }; 
+                }
+            ); 
+        }; 
+        sortOrderings = ({class = EOSortOrdering; key = incrAdmId; selectorName = compareAscending; }); 
+    }; 
+}

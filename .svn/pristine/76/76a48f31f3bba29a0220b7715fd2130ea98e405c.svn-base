@@ -1,0 +1,49 @@
+package etudiants.utt.fr.components;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WODisplayGroup;
+
+import etudiants.utt.fr.server.MyAjaxComponent;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public class NavigateurBatchBar extends MyAjaxComponent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2415410368161257822L;
+
+	public NavigateurBatchBar(WOContext context) {
+		super(context);
+	}
+
+	public boolean isStateless() {
+		return true;
+	}
+
+	/*
+	 * accessors
+	 */
+	public boolean hasObjectName() {
+		return hasBinding("objectName");
+	}
+
+	public int nextBatchIndex() {
+		int index = currentBatchIndex();
+		return ++index;
+	}
+
+	public int previousBatchIndex() {
+		int index = currentBatchIndex();
+		return --index;
+	}
+
+	public int currentBatchIndex() {
+		WODisplayGroup displayGroup = (WODisplayGroup) valueForBinding("displayGroup");
+
+		return displayGroup.currentBatchIndex();
+	}
+}

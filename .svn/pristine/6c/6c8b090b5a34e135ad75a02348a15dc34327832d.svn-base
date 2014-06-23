@@ -1,0 +1,164 @@
+package etudiants.utt.fr.components;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSLog;
+
+import etudiants.utt.fr.components.controlers.ResultatsUVCtrl;
+import etudiants.utt.fr.server.MyAjaxComponent;
+import etudiants.utt.fr.server.ProfilHelpers;
+import gestionuv.utt.fr.eo.EOParamDoetu;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+@SuppressWarnings("rawtypes")
+public class ResultatsUV extends MyAjaxComponent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8961242768240390919L;
+	private String onLoad = null;
+	private ResultatsUVCtrl ctrl;
+	private Boolean hasAnnonce = false;
+	private NSArray<EOParamDoetu> listAnnoncePcb;
+	private EOParamDoetu annoncePcb;
+	private NSArray listInsUv;
+	private boolean hasUv = false;
+
+	public ResultatsUV(WOContext context) {
+		super(context);
+		NSLog.out.appendln("ResultatsUV");
+		ctrl = new ResultatsUVCtrl(this);
+		ctrl.anneeEnCours();
+		ctrl.selectInsUV();
+		if(listInsUv != null && listInsUv.count() > 0){
+			hasUv = true;
+		} else {
+			hasUv = false;
+		}
+		ctrl.funcAnoncePcb();
+		if (annoncePcb.visiblef().equals("O")) {
+			hasAnnonce = true;
+		} else {
+			hasAnnonce = false;
+		}
+		ctrl.modalites();
+	}
+	
+	/**
+	 * @return the onLoad
+	 */
+	public String getOnLoad() {
+		return onLoad;
+	}
+
+	/**
+	 * @param onLoad the onLoad to set
+	 */
+	public void setOnLoad(String onLoad) {
+		this.onLoad = onLoad;
+	}
+
+	public void appendToResponse(WOResponse res, WOContext ctx) {
+		super.appendToResponse(res, ctx);
+		if (onLoad != null)
+			onLoad = null;
+		ProfilHelpers.insertStylesSheet(ctx, res);
+		 String message = mySession().getAlertMessage();
+			if (message != null && message.equals("") == false) {
+				String str = "<script language=\"javascript\" type=\"text/javascript\">\n";
+				str += "alert(\"" + message + "\");\n";
+				str += "</script>";
+				res.appendContentString(str);
+				mySession().setAlertMessage(null);
+			}
+	}
+
+	/**
+	 * @return the ctrl
+	 */
+	public ResultatsUVCtrl getCtrl() {
+		return ctrl;
+	}
+
+	/**
+	 * @param ctrl the ctrl to set
+	 */
+	public void setCtrl(ResultatsUVCtrl ctrl) {
+		this.ctrl = ctrl;
+	}
+
+	/**
+	 * @return the hasAnnonce
+	 */
+	public Boolean getHasAnnonce() {
+		return hasAnnonce;
+	}
+
+	/**
+	 * @param hasAnnonce the hasAnnonce to set
+	 */
+	public void setHasAnnonce(Boolean hasAnnonce) {
+		this.hasAnnonce = hasAnnonce;
+	}
+
+	/**
+	 * @return the hasUv
+	 */
+	public boolean isHasUv() {
+		return hasUv;
+	}
+
+	/**
+	 * @param hasUv the hasUv to set
+	 */
+	public void setHasUv(boolean hasUv) {
+		this.hasUv = hasUv;
+	}
+
+	/**
+	 * @return the listAnnoncePcb
+	 */
+	public NSArray<EOParamDoetu> getListAnnoncePcb() {
+		return listAnnoncePcb;
+	}
+
+	/**
+	 * @param listAnnoncePcb the listAnnoncePcb to set
+	 */
+	public void setListAnnoncePcb(NSArray<EOParamDoetu> listAnnoncePcb) {
+		this.listAnnoncePcb = listAnnoncePcb;
+	}
+
+	/**
+	 * @return the annoncePcb
+	 */
+	public EOParamDoetu getAnnoncePcb() {
+		return annoncePcb;
+	}
+
+	/**
+	 * @param annoncePcb the annoncePcb to set
+	 */
+	public void setAnnoncePcb(EOParamDoetu annoncePcb) {
+		this.annoncePcb = annoncePcb;
+	}
+
+	/**
+	 * @return the listInsUv
+	 */
+	public NSArray getListInsUv() {
+		return listInsUv;
+	}
+
+	/**
+	 * @param listInsUv the listInsUv to set
+	 */
+	public void setListInsUv(NSArray listInsUv) {
+		this.listInsUv = listInsUv;
+	}
+}

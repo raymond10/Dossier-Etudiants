@@ -1,0 +1,54 @@
+package etudiants.utt.fr.components;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.foundation.NSLog;
+import etudiants.utt.fr.server.MyAjaxComponent;
+import etudiants.utt.fr.server.ProfilHelpers;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public class EdtExams extends MyAjaxComponent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3699110410554541468L;
+	private String onLoad = null;
+	
+	public EdtExams(WOContext context) {
+		super(context);
+		NSLog.out.appendln("Emploi du temps examens");
+	}
+
+	/**
+	 * @return the onLoad
+	 */
+	public String getOnLoad() {
+		return onLoad;
+	}
+
+	/**
+	 * @param onLoad the onLoad to set
+	 */
+	public void setOnLoad(String onLoad) {
+		this.onLoad = onLoad;
+	}
+
+	public void appendToResponse(WOResponse res, WOContext ctx) {
+		super.appendToResponse(res, ctx);
+		if (onLoad != null)
+			onLoad = null;
+		ProfilHelpers.insertStylesSheet(ctx, res);
+		 String message = mySession().getAlertMessage();
+			if (message != null && message.equals("") == false) {
+				String str = "<script language=\"javascript\" type=\"text/javascript\">\n";
+				str += "alert(\"" + message + "\");\n";
+				str += "</script>";
+				res.appendContentString(str);
+				mySession().setAlertMessage(null);
+			}
+	}
+}

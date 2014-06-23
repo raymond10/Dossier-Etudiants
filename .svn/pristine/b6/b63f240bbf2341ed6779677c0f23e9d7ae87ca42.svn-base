@@ -1,0 +1,30 @@
+wrap : Wrapper {
+	
+}
+LgnLogin1 : LgnLogin {
+	loginResponder = loginResponder;
+	buttonTip = "Se connecter a application";
+}
+imgClefs: WOImage {
+	border = "0";
+	src = imageClefsSrc;
+}
+imgLigneJaune: WOImage {  
+	border = "0";
+	src = imageLigneSrc;
+	width = "100%";
+	height = "6";
+}
+imgLogo: WOImage {
+	alt = "Logo Universite";
+	src = application.mainLogoURL;
+}
+strComment: WOString {
+	escapeHTML = false;
+	value = titleComment;
+}
+
+strCopy: WOString {
+	value = application.copyright;
+	escapeHTML = false;
+}

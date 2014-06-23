@@ -1,0 +1,66 @@
+<webobject name = "Wrap">
+  <div metal:fill-slot = "contenu">
+    <webobject name = "errors">
+      <div class = "warn"> Vous n'&ecirc;tes pas autoris&eacute; &agrave; consulter ce dossier. </div>
+    </webobject>
+    <webobject name = "browser">
+      <webobject name = "nav">Navigation</webobject>
+    </webobject>
+    <webobject name = "etudiant">
+      <h3>Emploi du temps de 
+        <span><webobject name = "nom" /></span>
+        pour 
+        <span><webobject name = "periodeCourante" /></span>
+        <webobject name = "Indicateur1" />
+      </h3>
+      <ul style = "text-align:left"  id = "autresLien">
+        <li>
+          <webobject name = "dossierAdm">Dossier administratif</webobject>
+        </li>
+        <li>
+          <webobject name = "profil">Profil de formation</webobject>
+        </li>
+        <li>
+          <webobject name = "resultatUv">R&eacute;sultats aux UV</webobject>
+        </li>
+        <webobject name = "accessGctc">
+          <li>
+            <webobject name = "versGestionContact">gestion des contacts</webobject>
+          </li>
+        </webobject>
+        <br />
+        <webobject name = "status">
+          <webobject name = "retourList">Retour &agrave; la liste&nbsp;<wo name = "iCone" /></webobject>
+        </webobject>
+      </ul>
+      <webobject name = "notEdt">
+        <div class = "info">L'emploi du temps n'est pas encore publi&eacute;.</div>
+      </webobject>
+      <webobject name = "edt">
+        <div class = "form">
+          <table class = "globalTable" border = "0" cellspacing = "0" cellpadding = "0" summary = "edt">
+            <tr>
+              <th style = "border:0;background-color:white" />
+              <th>Lundi</th>
+              <th>Mardi</th>
+              <th>Mercredi</th>
+              <th>Jeudi</th>
+              <th>Vendredi</th>
+              <th>Samedi</th>
+            </tr>
+            <tr>
+              <td class = "timeline" valign = "top">
+                <webobject name = "time">
+                  <div align = "right" style = "height:20px"><webobject name = "horaireItem" /></div>
+                </webobject>
+              </td>
+              <webobject name = "html" />
+            </tr>
+          </table>
+        </div>
+      </webobject>
+      <div class = "br"></div>
+    </webobject>
+  </div>
+  <webobject name = "Busy10" />
+</webobject>

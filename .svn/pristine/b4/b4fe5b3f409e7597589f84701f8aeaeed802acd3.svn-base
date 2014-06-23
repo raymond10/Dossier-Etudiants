@@ -1,0 +1,20 @@
+package etudiants.utt.fr.components;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOComponent;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public class CssDefault extends WOComponent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1671145223601821201L;
+
+	public CssDefault(WOContext context) {
+		super(context);
+	}
+}

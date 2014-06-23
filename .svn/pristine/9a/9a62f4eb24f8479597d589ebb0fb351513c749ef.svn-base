@@ -1,0 +1,323 @@
+
+import org.login.fwkloginwebapp.common.LoginUserInfo;
+import org.login.fwkloginwebapp.server.components.LgnLogin;
+
+import com.webobjects.appserver.WOContext;
+
+import etudiants.utt.fr.server.Session;
+
+/**
+ * Ce composant represente le formulaire d'authentification de l'utilisateur. Il
+ * permet de saisir et de valider le nom d'utilisateur (login) et son mot de
+ * passe (password).
+ * <p>
+ * <div align="center"><img src="doc-files/CktlLogin-1.gif" border="1"></div>
+ * <p>
+ * Le composant comporte un formulaire HTML. <font class="importantNote">Ne
+ * placez pas <code>CktlLogin</code> dans un autre formulaire lorsque vous
+ * l'incluez dans votre page.</font>
+ * <h3>Base de donnees</h3> L'implementation actuelle du formulaire utilise la
+ * base de donnees pour authentifier un utilisateur. Les informations sur
+ * l'utilisateur sont collectes a partir des entites representants un
+ * <i>individu</i> et son <i>compte</i>. Pour ceci, le framework
+ * <code>CRIWebExt2</code> contient son propre model de donnees.
+ * <p>
+ * Par defaut, le model de donnees ne contient pas d'informations sur l'acces a
+ * la base de donnees concrete. Si le framework CRIWebExt2 est utilise dans un
+ * environement avec le service d'authentification disponible, la configuration
+ * de connexion a la base est etablie automatiquement. L'identifiant du model
+ * est ULOGIN (voir la documentation de service d'authentification pour plus
+ * d'informations).
+ * <p>
+ * Si le service d'authentification est indisponible, le dictionnaire de
+ * connexion doit etre definit explicitement dans le model. Il est compose des
+ * parametres <code>URL</code>, <code>username</code> et <code>password</code>.
+ * <h3>Bindings</h3>
+ * <p>
+ * <table width="95%" border="0" cellspacing="2" cellpadding="3" align="center">
+ * <tr align="center" class="paramBoxHeader">
+ * <td>Connecteur</td>
+ * <td>Definition</td>
+ * <td>Valeur</td>
+ * <td>Description</td>
+ * </tr>
+ * <tr align="center" valign="top" class="paramBoxContents">
+ * <td><code>loginLabel</code></td>
+ * <td>optionnel</td>
+ * <td><code>String</code><br>
+ * [<i>"Nom d'utilisateur"</i>]</td>
+ * <td align="left">Le libelle affiche a cote du champ de saisi de nom
+ * d'utilisateur (login).</td>
+ * </tr>
+ * <tr align="center" valign="top" class="paramBoxContents">
+ * <td><code>loginTip</code></td>
+ * <td>optionnel</td>
+ * <td><code>String</code><br>
+ * [<i>"Votre nom d'utilisateur (login)"</i>]</td>
+ * <td align="left">Le message affiche lorsque le courseur se trouve au-dessus
+ * du champ de saisi de nom d'utilisateur.</td>
+ * </tr>
+ * <tr align="center" valign="top" class="paramBoxContents">
+ * <td><code>passLabel</code></td>
+ * <td>optionnel</td>
+ * <td><code>String</code><br>
+ * [<i>"Mot de passe"</i>]</td>
+ * <td align="left">Le message affiche lorsque le courseur se trouve au-dessus
+ * du champ de saisi de mot de passe.</td>
+ * </tr>
+ * <tr align="center" valign="top" class="paramBoxContents">
+ * <td><code>passTip</code></td>
+ * <td>optionnel</td>
+ * <td><code>String</code><br>
+ * [<i>"Votre mot de passe (password)"</i>]</td>
+ * <td align="left">Le message affiche lorsque le courseur se trouve au-dessus
+ * du champ de saisi de mot de passe.</td>
+ * </tr>
+ * <tr align="center" valign="top" class="paramBoxContents">
+ * <td><code>buttonLabel</code></td>
+ * <td>optionnel</td>
+ * <td><code>String</code><br>
+ * [<i>"Valider"</i>]</td>
+ * <td align="left">Le libelle affiche sur le bouton de la validation de login
+ * et de mot de passe.</td>
+ * </tr>
+ * <tr align="center" valign="top" class="paramBoxContents">
+ * <td><code>buttonTip</code></td>
+ * <td>optionnel</td>
+ * <td><code>String</code><br>
+ * [<i>"Valider le nom d'utilisateur et le mot de passe saisis"</i>]</td>
+ * <td align="left">Le message affiche lorsque le courseur se positionne
+ * au-dessus du bouton de validation.</td>
+ * </tr>
+ * <tr align="center" valign="top" class="paramBoxContents">
+ * <td><code>loginResponder</code></td>
+ * <td>obligatoire</td>
+ * <td><code>CktlLoginResponder</code><br>
+ * [<i>null</i>]</td>
+ * <td align="left">L'objet qui recevera les notifications lors
+ * d'authentification d'utilisateur. Voir la documentation de l'interface
+ * <code>CktlLoginResponder</code> pour plus d'informations.</td>
+ * </tr>
+ * </table>
+ * </p>
+ * <h3>Utilisation</h3> Le composant <code>CktlLogin</code> utilise un objet
+ * implementant l'interface <code>CktlLoginResponder</code> pour effectuer
+ * certaines operations de l'authentification d'utilisateur. Lorsque
+ * l'authentification reussit, le composant appelle la methode
+ * <code>loginAccepted</code> de cet objet. Cette methode doit renvoyer le
+ * composant qui sera affiche ensuite.
+ * <p>
+ * Si l'authetification echoue, la page en cours est reaffiche avec le message
+ * de la derniere erreur.
+ * <p>
+ * Dans le cas de l'authentification reussie, la methode <code>userInfo</code>
+ * de <code>CktlLogin</code> renvoie un objet contenant l'ensemble
+ * d'informations sur l'utilisateur.
+ * <h3>Le schema d'authentification</h3> L'authentification suit le schema
+ * suivant&nbsp;:
+ * <ul>
+ * <li>teste si le login n'est pas vide. L'authentification echoue si le login
+ * n'est pas saisi;</li>
+ * <li>teste si le login est accepte. La methode <code>acceptLoginName</code> de
+ * l'objet <code>loginResponder</code> est appelle pour ce test;</li>
+ * <li>teste si le login existe dans la base. L'authentification echoue si le
+ * login n'est pas trouve;</li>
+ * <li>si le mot de passe est vide mais on ne les accepte pas,
+ * l'authentification echoue. La methode <code>acceptEmptyPassword</code> de
+ * l'objet <code>loginResponder</code> est appelle pour ce test;</li>
+ * <li>si le mot de passe d'administrateur n'est pas vide, teste s'il est egale
+ * au mot de passe saisi. La methode <code>getRootPassword</code> de l'objet
+ * <code>loginResponder</code> est appelle pour ce test;</li>
+ * <li>teste si le mot de passe saisi correspond au mot de passe d'utilisateur
+ * disponible dans la base de donnees.</li>
+ * </ul>
+ * Un message d'erreur est affiche, si au moins une des etapes n'est pas
+ * verifiee.
+ * 
+ * @see CktlLoginResponder
+ * @see fr.univlr.cri.webapp.CRIUserInfo
+ * @see fr.univlr.cri.webapp.CRIPassword
+ */
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public class CRILogin1 extends LgnLogin {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2200346522969468640L;
+	// Les noms des bindings
+	private static final String BND_LOGIN_LABEL = "loginLabel";
+	private static final String BND_LOGIN_TIP = "loginTip";
+	private static final String BND_PASS_LABEL = "passLabel";
+	private static final String BND_PASS_TIP = "passTip";
+	private static final String BND_BUTTON_LABEL = "buttonLabel";
+	private static final String BND_BUTTON_TIP = "buttonTip";
+	// Les valeurs par defaut pour les bindings
+	private static final String DFL_LOGIN_LABEL = "Nom d'utilisateur";
+	private static final String DFL_LOGIN_TIP = "Votre nom d'utilisateur (login)";
+	private static final String DFL_PASS_LABEL = "Mot de passe";
+	private static final String DFL_PASS_TIP = "Votre mot de passe (password)";
+	private static final String DFL_BUTTON_LABEL = "Valider";
+	private static final String DFL_BUTTON_TIP = "Valider le nom d'utilisateur et le mot de passe saisis";
+
+	/**
+	 * Le nom d'utilisateur saisi.
+	 */
+	protected String login;
+
+	/**
+	 * Le mot de passe d'utilisateur saisi.
+	 */
+	protected String password;
+
+	/**
+	 * Les informations sur l'utilisatuer qui a effectue le login.
+	 */
+	private LoginUserInfo loggedUserInfo;
+
+	/**
+	 * Cree un nouveau composant dans le context donnee.
+	 */
+	public CRILogin1(WOContext context) {
+		super(context);
+	}
+
+	/**
+	 * Renvoie la valeur <i>false</i>.
+	 * <p>
+	 * Voir la definition de cette methode dans la documentation de la classe
+	 * <code>WOComponent</code> (WebObjects).
+	 */
+	public boolean synchronizesVariablesWithBindings() {
+		return false;
+	}
+
+	/**
+	 * Retourne l'objet contennant les informations sur la personne dont le
+	 * login et le mot de passe ont ete saisis.
+	 */
+	public LoginUserInfo loggedUserInfo() {
+		return loggedUserInfo;
+	}
+
+	/**
+	 * Retourne le libelle du champ de login. Cette valeur peut etre definie via
+	 * le connecteur <code>loginLabel</code>.
+	 */
+	public String getLoginLabel() {
+		if (hasBinding(BND_LOGIN_LABEL))
+			return (String) valueForBinding(BND_LOGIN_LABEL);
+		return DFL_LOGIN_LABEL;
+	}
+
+	/**
+	 * Retourne le libelle du champ de mot de passe. Cette valeur peut etre
+	 * definie via le connecteur <code>passLabel</code>.
+	 */
+	public String getPassLabel() {
+		if (hasBinding(BND_PASS_LABEL))
+			return (String) valueForBinding(BND_PASS_LABEL);
+		return DFL_PASS_LABEL;
+	}
+
+	/**
+	 * Retourne le libelle du bouton de la validation. Cette valeur peut etre
+	 * definie via le connecteur <code>buttonLabel</code>.
+	 */
+	public String getButtonLabel() {
+		if (hasBinding(BND_BUTTON_LABEL))
+			return (String) valueForBinding(BND_BUTTON_LABEL);
+		return DFL_BUTTON_LABEL;
+	}
+
+	/**
+	 * Retourne le message qui est affiche lorsque la souris passe au-dessus du
+	 * champ de login. Cette valeur peut etre definie via le connecteur
+	 * <code>loginTip</code>.
+	 */
+	public String getLoginTip() {
+		if (hasBinding(BND_LOGIN_TIP))
+			return (String) valueForBinding(BND_LOGIN_TIP);
+		return DFL_LOGIN_TIP;
+	}
+
+	/**
+	 * Retourne le message qui est affiche lorsque la souris passe au-dessus du
+	 * champ de mot de passe. Cette valeur peut etre definie via le connecteur
+	 * <code>passTip</code>.
+	 */
+	public String getPassTip() {
+		if (hasBinding(BND_PASS_TIP))
+			return (String) valueForBinding(BND_PASS_TIP);
+		return DFL_PASS_TIP;
+	}
+
+	/**
+	 * Retourne le message qui est affiche lorsque la souris passe au-dessus du
+	 * bouton de la validation. Cette valeur peut etre definie via le connecteur
+	 * <code>buttonTip</code>.
+	 */
+	public String getButtonTip() {
+		if (hasBinding(BND_BUTTON_TIP))
+			return (String) valueForBinding(BND_BUTTON_TIP);
+		return DFL_BUTTON_TIP;
+	}
+
+	public boolean isErreurLogin() {
+		boolean isErreurLogin = false;
+		Session session = null;
+		if (context().hasSession()) {
+			session = (Session) session();
+			if (session.connectedUserInfo().errorCode() == LoginUserInfo.ERROR_COMPTE) {
+				isErreurLogin = true;
+			}
+		}
+		return isErreurLogin;
+	}
+
+	public boolean isErreurPassword() {
+		boolean isErreurPassword = false;
+		Session session = null;
+		if (context().hasSession()) {
+			session = (Session) session();
+			if (session.connectedUserInfo().errorCode() == LoginUserInfo.ERROR_PASSWORD) {
+				isErreurPassword = true;
+			}
+		}
+		return isErreurPassword;
+	}
+
+	public boolean isErreurBD() {
+		boolean isErreurBD = false;
+		Session session = null;
+		if (context().hasSession()) {
+			session = (Session) session();
+			if (session.connectedUserInfo().errorCode() == LoginUserInfo.ERROR_SOURCE) {
+				isErreurBD = true;
+			}
+		}
+		return isErreurBD;
+	}
+
+	public boolean isErreurDroits() {
+		boolean isErreurDroits = false;
+		Session session = null;
+		if (context().hasSession()) {
+			session = (Session) session();
+			if (session.connectedUserInfo().errorCode() == LoginUserInfo.ERROR_SOURCE) {
+				isErreurDroits = true;
+			}
+		}
+		return isErreurDroits;
+	}
+
+	public String cssEtudiant() {
+		return application().resourceManager().urlForResourceNamed(
+				"css/etudiant.css", null, null, context().request());
+	}
+
+}

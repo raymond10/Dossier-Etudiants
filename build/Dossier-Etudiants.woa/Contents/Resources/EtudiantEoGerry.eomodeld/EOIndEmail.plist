@@ -1,0 +1,73 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "AUTEUR_MAJ"; 
+            externalType = VARCHAR2; 
+            name = auteurMaj; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 12; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "CRE_DATE"; 
+            externalType = DATE; 
+            name = creDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            columnName = "EMAIL_TYPE_$C"; 
+            externalType = VARCHAR2; 
+            isReadOnly = Y; 
+            name = emailTypec; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 3; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "IND_EMAIL"; 
+            externalType = VARCHAR2; 
+            name = indEmail; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 100; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "INDIV_ID"; 
+            externalType = NUMBER; 
+            isReadOnly = Y; 
+            name = indivId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "MODIF_DATE"; 
+            externalType = DATE; 
+            name = modifDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }
+    ); 
+    attributesUsedForLocking = (auteurMaj, creDate, emailTypec, indEmail, indivId, modifDate); 
+    className = "etudiants.utt.fr.eo.EOIndEmail"; 
+    classProperties = (auteurMaj, creDate, emailTypec, indEmail, indivId, individu, modifDate); 
+    externalName = "GERRY.IND_EMAIL"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOIndEmail; 
+    primaryKeyAttributes = (emailTypec, indivId); 
+    relationships = (
+        {
+            destination = EOIndividu; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = indivId; sourceAttribute = indivId; }); 
+            name = individu; 
+        }
+    ); 
+}

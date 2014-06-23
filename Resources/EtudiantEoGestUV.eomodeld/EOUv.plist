@@ -1,0 +1,159 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "CATEG_ID_CREA"; 
+            externalType = NUMBER; 
+            name = categIdCrea; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            columnName = "CRE_DATE"; 
+            externalType = DATE; 
+            name = creDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "CREDIT_CREA"; 
+            externalType = NUMBER; 
+            name = creditCrea; 
+            valueType = d; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPLOME_CREA_$C"; 
+            externalType = VARCHAR2; 
+            name = diplomeCreac; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPL_OPT_CREA_$C"; 
+            externalType = VARCHAR2; 
+            name = diplOptCreac; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPL_SPEC_CREA_$C"; 
+            externalType = VARCHAR2; 
+            name = diplSpecCreac; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            columnName = "FICTIVE_$F"; 
+            externalType = VARCHAR2; 
+            name = fictivef; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            columnName = "GESTION_$C"; 
+            externalType = VARCHAR2; 
+            name = gestionc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "MAJ_AUTEUR"; 
+            externalType = VARCHAR2; 
+            name = majAuteur; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 20; 
+        }, 
+        {
+            columnName = "MODALITE_$F"; 
+            externalType = VARCHAR2; 
+            name = modalitef; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "MODIF_DATE"; 
+            externalType = DATE; 
+            name = modifDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "TITRE_CREA"; 
+            externalType = VARCHAR2; 
+            name = titreCrea; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 200; 
+        }, 
+        {
+            columnName = "UV_$C"; 
+            externalType = VARCHAR2; 
+            isReadOnly = Y; 
+            name = uvc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 8; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        categIdCrea, 
+        creDate, 
+        creditCrea, 
+        diplomeCreac, 
+        diplOptCreac, 
+        diplSpecCreac, 
+        fictivef, 
+        gestionc, 
+        majAuteur, 
+        modalitef, 
+        modifDate, 
+        titreCrea, 
+        uvc
+    ); 
+    className = "gestionuv.utt.fr.eo.EOUv"; 
+    classProperties = (
+        categIdCrea, 
+        creDate, 
+        creditCrea, 
+        diplomeCreac, 
+        diplOptCreac, 
+        diplSpecCreac, 
+        fictivef, 
+        gestionc, 
+        majAuteur, 
+        modalitef, 
+        modifDate, 
+        titreCrea, 
+        uvc, 
+        uvOuvs
+    ); 
+    externalName = "GEST_UV.UV"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOUv; 
+    primaryKeyAttributes = (uvc); 
+    relationships = (
+        {
+            destination = EOUvOuv; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = uvc; sourceAttribute = uvc; }); 
+            name = uvOuvs; 
+        }
+    ); 
+}

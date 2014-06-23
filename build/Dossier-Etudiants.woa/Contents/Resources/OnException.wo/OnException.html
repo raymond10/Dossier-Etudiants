@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml" xml:lang = "fr" lang = "fr">
+  <head>
+    <meta http-equiv = "Content-type" content = "text/html; charset=utf-8" />
+    <title>DOSSIER-ETUDIANTS</title>
+  </head>
+  <script>
+    function openErrorDialog() {
+    	Dialog.info(document.getElementById('erreur').innerHTML, {windowParameters: {className:"mac_os_x", title: "Exception de l'application", width:520, height:520, resizable:true, closable: true, showEffect:Effect.Appear}});
+    }
+  </script>
+  <body onload = "openErrorDialog();">
+    <div id = "erreur" style = "display:none;">
+      <div align = "center">
+        <h1>Une erreur s'est produite ....</h1>
+        <webobject name = "Erreur" />
+        <p />
+        Afin de la prendre en compte dans les plus brefs délais, 
+        un mail contenant le message d'erreur sera envoyé au(x) 
+        responsable(s) de l'application.<br />
+        <webobject name = "LinkRevenir" />
+      </div>
+    </div>
+  </body>
+</html>

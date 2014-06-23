@@ -1,0 +1,413 @@
+/*******************************************************************************
+ * DOSSIER-ETUDIANT
+ * Copyright UNIVERSITE DE TECHNOLOGIE DE TROYES - CEDRE (www.utt.fr), since 1993 
+ * This software is governed by the CeCILL license under French law and abiding by the
+ * rules of distribution of free software. You can use, modify and/or 
+ * redistribute the software under the terms of the CeCILL license as 
+ * circulated by CEA, CNRS and INRIA at the following URL 
+ * "http://www.cecill.info". 
+ * As a counterpart to the access to the source code and rights to copy, modify 
+ * and redistribute granted by the license, users are provided only with a 
+ * limited warranty and the software's author, the holder of the economic 
+ * rights, and the successive licensors have only limited liability. In this 
+ * respect, the user's attention is drawn to the risks associated with loading,
+ * using, modifying and/or developing or reproducing the software by the user 
+ * in light of its specific status of free software, that may mean that it
+ * is complicated to manipulate, and that also therefore means that it is 
+ * reserved for developers and experienced professionals having in-depth
+ * computer knowledge. Users are therefore encouraged to load and test the 
+ * software's suitability as regards their requirements in conditions enabling
+ * the security of their systems and/or data to be ensured and, more generally, 
+ * to use and operate it in the same conditions as regards security. The
+ * fact that you are presently reading this means that you have had knowledge 
+ * of the CeCILL license and that you accept its terms.
+ * 
+ * Do not remove this copyright message
+ ******************************************************************************/
+// DO NOT EDIT.  Make changes to EOVDossetudiants.java instead.
+package etudiants.utt.fr.eo;
+
+import com.webobjects.eoaccess.*;
+import com.webobjects.eocontrol.*;
+import com.webobjects.foundation.*;
+import java.math.*;
+import java.util.*;
+import org.apache.log4j.Logger;
+
+import er.extensions.eof.*;
+import er.extensions.foundation.*;
+
+@SuppressWarnings("all")
+public abstract class _EOVDossetudiants extends  ERXGenericRecord {
+  public static final String ENTITY_NAME = "EOVDossetudiants";
+
+  // Attribute Keys
+  public static final ERXKey<String> ACADEMIE_BAC = new ERXKey<String>("academieBac");
+  public static final ERXKey<String> BAC_AN = new ERXKey<String>("bacAn");
+  public static final ERXKey<String> BAC_MENTION = new ERXKey<String>("bacMention");
+  public static final ERXKey<String> BAC_SERIE = new ERXKey<String>("bacSerie");
+  public static final ERXKey<String> CIVILITE = new ERXKey<String>("civilite");
+  public static final ERXKey<String> COM_NAIS = new ERXKey<String>("comNais");
+  public static final ERXKey<String> DATE_NAISS = new ERXKey<String>("dateNaiss");
+  public static final ERXKey<String> DEPT_BAC = new ERXKey<String>("deptBac");
+  public static final ERXKey<String> DEPT_NAIS = new ERXKey<String>("deptNais");
+  public static final ERXKey<String> EMAIL = new ERXKey<String>("email");
+  public static final ERXKey<String> ETAB_BAC = new ERXKey<String>("etabBac");
+  public static final ERXKey<String> INE = new ERXKey<String>("ine");
+  public static final ERXKey<String> LANGUE_MAT = new ERXKey<String>("langueMat");
+  public static final ERXKey<String> NNI = new ERXKey<String>("nni");
+  public static final ERXKey<String> NOM = new ERXKey<String>("nom");
+  public static final ERXKey<String> PAYS_BAC = new ERXKey<String>("paysBac");
+  public static final ERXKey<String> PAYS_NAIS = new ERXKey<String>("paysNais");
+  public static final ERXKey<String> PAYS_NAT = new ERXKey<String>("paysNat");
+  public static final ERXKey<String> PRENOM = new ERXKey<String>("prenom");
+  public static final ERXKey<String> RESP_CIV = new ERXKey<String>("respCiv");
+  public static final ERXKey<String> VILLE_BAC = new ERXKey<String>("villeBac");
+  // Relationship Keys
+
+  // Attributes
+  public static final String ACADEMIE_BAC_KEY = ACADEMIE_BAC.key();
+  public static final String BAC_AN_KEY = BAC_AN.key();
+  public static final String BAC_MENTION_KEY = BAC_MENTION.key();
+  public static final String BAC_SERIE_KEY = BAC_SERIE.key();
+  public static final String CIVILITE_KEY = CIVILITE.key();
+  public static final String COM_NAIS_KEY = COM_NAIS.key();
+  public static final String DATE_NAISS_KEY = DATE_NAISS.key();
+  public static final String DEPT_BAC_KEY = DEPT_BAC.key();
+  public static final String DEPT_NAIS_KEY = DEPT_NAIS.key();
+  public static final String EMAIL_KEY = EMAIL.key();
+  public static final String ETAB_BAC_KEY = ETAB_BAC.key();
+  public static final String INE_KEY = INE.key();
+  public static final String LANGUE_MAT_KEY = LANGUE_MAT.key();
+  public static final String NNI_KEY = NNI.key();
+  public static final String NOM_KEY = NOM.key();
+  public static final String PAYS_BAC_KEY = PAYS_BAC.key();
+  public static final String PAYS_NAIS_KEY = PAYS_NAIS.key();
+  public static final String PAYS_NAT_KEY = PAYS_NAT.key();
+  public static final String PRENOM_KEY = PRENOM.key();
+  public static final String RESP_CIV_KEY = RESP_CIV.key();
+  public static final String VILLE_BAC_KEY = VILLE_BAC.key();
+  // Relationships
+
+  private static Logger LOG = Logger.getLogger(_EOVDossetudiants.class);
+
+  public EOVDossetudiants localInstanceIn(EOEditingContext editingContext) {
+    EOVDossetudiants localInstance = (EOVDossetudiants)EOUtilities.localInstanceOfObject(editingContext, this);
+    if (localInstance == null) {
+      throw new IllegalStateException("You attempted to localInstance " + this + ", which has not yet committed.");
+    }
+    return localInstance;
+  }
+
+  public String academieBac() {
+    return (String) storedValueForKey(_EOVDossetudiants.ACADEMIE_BAC_KEY);
+  }
+
+  public void setAcademieBac(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating academieBac from " + academieBac() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.ACADEMIE_BAC_KEY);
+  }
+
+  public String bacAn() {
+    return (String) storedValueForKey(_EOVDossetudiants.BAC_AN_KEY);
+  }
+
+  public void setBacAn(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating bacAn from " + bacAn() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.BAC_AN_KEY);
+  }
+
+  public String bacMention() {
+    return (String) storedValueForKey(_EOVDossetudiants.BAC_MENTION_KEY);
+  }
+
+  public void setBacMention(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating bacMention from " + bacMention() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.BAC_MENTION_KEY);
+  }
+
+  public String bacSerie() {
+    return (String) storedValueForKey(_EOVDossetudiants.BAC_SERIE_KEY);
+  }
+
+  public void setBacSerie(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating bacSerie from " + bacSerie() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.BAC_SERIE_KEY);
+  }
+
+  public String civilite() {
+    return (String) storedValueForKey(_EOVDossetudiants.CIVILITE_KEY);
+  }
+
+  public void setCivilite(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating civilite from " + civilite() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.CIVILITE_KEY);
+  }
+
+  public String comNais() {
+    return (String) storedValueForKey(_EOVDossetudiants.COM_NAIS_KEY);
+  }
+
+  public void setComNais(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating comNais from " + comNais() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.COM_NAIS_KEY);
+  }
+
+  public String dateNaiss() {
+    return (String) storedValueForKey(_EOVDossetudiants.DATE_NAISS_KEY);
+  }
+
+  public void setDateNaiss(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating dateNaiss from " + dateNaiss() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.DATE_NAISS_KEY);
+  }
+
+  public String deptBac() {
+    return (String) storedValueForKey(_EOVDossetudiants.DEPT_BAC_KEY);
+  }
+
+  public void setDeptBac(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating deptBac from " + deptBac() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.DEPT_BAC_KEY);
+  }
+
+  public String deptNais() {
+    return (String) storedValueForKey(_EOVDossetudiants.DEPT_NAIS_KEY);
+  }
+
+  public void setDeptNais(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating deptNais from " + deptNais() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.DEPT_NAIS_KEY);
+  }
+
+  public String email() {
+    return (String) storedValueForKey(_EOVDossetudiants.EMAIL_KEY);
+  }
+
+  public void setEmail(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating email from " + email() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.EMAIL_KEY);
+  }
+
+  public String etabBac() {
+    return (String) storedValueForKey(_EOVDossetudiants.ETAB_BAC_KEY);
+  }
+
+  public void setEtabBac(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating etabBac from " + etabBac() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.ETAB_BAC_KEY);
+  }
+
+  public String ine() {
+    return (String) storedValueForKey(_EOVDossetudiants.INE_KEY);
+  }
+
+  public void setIne(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating ine from " + ine() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.INE_KEY);
+  }
+
+  public String langueMat() {
+    return (String) storedValueForKey(_EOVDossetudiants.LANGUE_MAT_KEY);
+  }
+
+  public void setLangueMat(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating langueMat from " + langueMat() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.LANGUE_MAT_KEY);
+  }
+
+  public String nni() {
+    return (String) storedValueForKey(_EOVDossetudiants.NNI_KEY);
+  }
+
+  public void setNni(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating nni from " + nni() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.NNI_KEY);
+  }
+
+  public String nom() {
+    return (String) storedValueForKey(_EOVDossetudiants.NOM_KEY);
+  }
+
+  public void setNom(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating nom from " + nom() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.NOM_KEY);
+  }
+
+  public String paysBac() {
+    return (String) storedValueForKey(_EOVDossetudiants.PAYS_BAC_KEY);
+  }
+
+  public void setPaysBac(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating paysBac from " + paysBac() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.PAYS_BAC_KEY);
+  }
+
+  public String paysNais() {
+    return (String) storedValueForKey(_EOVDossetudiants.PAYS_NAIS_KEY);
+  }
+
+  public void setPaysNais(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating paysNais from " + paysNais() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.PAYS_NAIS_KEY);
+  }
+
+  public String paysNat() {
+    return (String) storedValueForKey(_EOVDossetudiants.PAYS_NAT_KEY);
+  }
+
+  public void setPaysNat(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating paysNat from " + paysNat() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.PAYS_NAT_KEY);
+  }
+
+  public String prenom() {
+    return (String) storedValueForKey(_EOVDossetudiants.PRENOM_KEY);
+  }
+
+  public void setPrenom(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating prenom from " + prenom() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.PRENOM_KEY);
+  }
+
+  public String respCiv() {
+    return (String) storedValueForKey(_EOVDossetudiants.RESP_CIV_KEY);
+  }
+
+  public void setRespCiv(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating respCiv from " + respCiv() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.RESP_CIV_KEY);
+  }
+
+  public String villeBac() {
+    return (String) storedValueForKey(_EOVDossetudiants.VILLE_BAC_KEY);
+  }
+
+  public void setVilleBac(String value) {
+    if (_EOVDossetudiants.LOG.isDebugEnabled()) {
+    	_EOVDossetudiants.LOG.debug( "updating villeBac from " + villeBac() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVDossetudiants.VILLE_BAC_KEY);
+  }
+
+
+  public static EOVDossetudiants createEOVDossetudiants(EOEditingContext editingContext) {
+    EOVDossetudiants eo = (EOVDossetudiants) EOUtilities.createAndInsertInstance(editingContext, _EOVDossetudiants.ENTITY_NAME);    
+    return eo;
+  }
+
+  public static ERXFetchSpecification<EOVDossetudiants> fetchSpec() {
+    return new ERXFetchSpecification<EOVDossetudiants>(_EOVDossetudiants.ENTITY_NAME, null, null, false, true, null);
+  }
+
+  public static NSArray<EOVDossetudiants> fetchAllEOVDossetudiantses(EOEditingContext editingContext) {
+    return _EOVDossetudiants.fetchAllEOVDossetudiantses(editingContext, null);
+  }
+
+  public static NSArray<EOVDossetudiants> fetchAllEOVDossetudiantses(EOEditingContext editingContext, NSArray<EOSortOrdering> sortOrderings) {
+    return _EOVDossetudiants.fetchEOVDossetudiantses(editingContext, null, sortOrderings);
+  }
+
+  public static NSArray<EOVDossetudiants> fetchEOVDossetudiantses(EOEditingContext editingContext, EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings) {
+    ERXFetchSpecification<EOVDossetudiants> fetchSpec = new ERXFetchSpecification<EOVDossetudiants>(_EOVDossetudiants.ENTITY_NAME, qualifier, sortOrderings);
+    fetchSpec.setIsDeep(true);
+    NSArray<EOVDossetudiants> eoObjects = fetchSpec.fetchObjects(editingContext);
+    return eoObjects;
+  }
+
+  public static EOVDossetudiants fetchEOVDossetudiants(EOEditingContext editingContext, String keyName, Object value) {
+    return _EOVDossetudiants.fetchEOVDossetudiants(editingContext, new EOKeyValueQualifier(keyName, EOQualifier.QualifierOperatorEqual, value));
+  }
+
+  public static EOVDossetudiants fetchEOVDossetudiants(EOEditingContext editingContext, EOQualifier qualifier) {
+    NSArray<EOVDossetudiants> eoObjects = _EOVDossetudiants.fetchEOVDossetudiantses(editingContext, qualifier, null);
+    EOVDossetudiants eoObject;
+    int count = eoObjects.count();
+    if (count == 0) {
+      eoObject = null;
+    }
+    else if (count == 1) {
+      eoObject = eoObjects.objectAtIndex(0);
+    }
+    else {
+      throw new IllegalStateException("There was more than one EOVDossetudiants that matched the qualifier '" + qualifier + "'.");
+    }
+    return eoObject;
+  }
+
+  public static EOVDossetudiants fetchRequiredEOVDossetudiants(EOEditingContext editingContext, String keyName, Object value) {
+    return _EOVDossetudiants.fetchRequiredEOVDossetudiants(editingContext, new EOKeyValueQualifier(keyName, EOQualifier.QualifierOperatorEqual, value));
+  }
+
+  public static EOVDossetudiants fetchRequiredEOVDossetudiants(EOEditingContext editingContext, EOQualifier qualifier) {
+    EOVDossetudiants eoObject = _EOVDossetudiants.fetchEOVDossetudiants(editingContext, qualifier);
+    if (eoObject == null) {
+      throw new NoSuchElementException("There was no EOVDossetudiants that matched the qualifier '" + qualifier + "'.");
+    }
+    return eoObject;
+  }
+
+  public static EOVDossetudiants localInstanceIn(EOEditingContext editingContext, EOVDossetudiants eo) {
+    EOVDossetudiants localInstance = (eo == null) ? null : ERXEOControlUtilities.localInstanceOfObject(editingContext, eo);
+    if (localInstance == null && eo != null) {
+      throw new IllegalStateException("You attempted to localInstance " + eo + ", which has not yet committed.");
+    }
+    return localInstance;
+  }
+  public static NSArray<etudiants.utt.fr.eo.EOVDossetudiants> fetchDossEtudiant(EOEditingContext editingContext, NSDictionary<String, Object> bindings) {
+    EOFetchSpecification fetchSpec = EOFetchSpecification.fetchSpecificationNamed("dossEtudiant", _EOVDossetudiants.ENTITY_NAME);
+    fetchSpec = fetchSpec.fetchSpecificationWithQualifierBindings(bindings);
+    return (NSArray<etudiants.utt.fr.eo.EOVDossetudiants>)editingContext.objectsWithFetchSpecification(fetchSpec);
+  }
+  
+  public static NSArray<etudiants.utt.fr.eo.EOVDossetudiants> fetchDossEtudiant(EOEditingContext editingContext,
+	Long indivIdBinding)
+  {
+    EOFetchSpecification fetchSpec = EOFetchSpecification.fetchSpecificationNamed("dossEtudiant", _EOVDossetudiants.ENTITY_NAME);
+    NSMutableDictionary<String, Object> bindings = new NSMutableDictionary<String, Object>();
+    bindings.takeValueForKey(indivIdBinding, "indivId");
+	fetchSpec = fetchSpec.fetchSpecificationWithQualifierBindings(bindings);
+    return (NSArray<etudiants.utt.fr.eo.EOVDossetudiants>)editingContext.objectsWithFetchSpecification(fetchSpec);
+  }
+  
+}

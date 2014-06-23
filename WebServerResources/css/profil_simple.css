@@ -1,0 +1,808 @@
+/* style du menu colonne gauche */
+
+#menu { 
+  list-style:none;
+  margin:0;
+  padding:0;
+  padding-left:5px;
+  padding-right:5px;
+  border:#e7e5e8 1px solid;
+}
+
+#menu li {
+  line-height:1.5em;
+  line-height:1.5em;
+  margin-left:0;
+  padding-left:0em;
+  border-bottom:#e7e5e8 1px solid;
+/*  background:transparent url(../images/pucemenu.gif) no-repeat left center;*/
+}
+
+
+#menu li.last {
+  line-height:1.5em;
+  line-height:1.5em;
+  margin-left:0;
+  padding-left:0em;
+  border-bottom:none;
+/*  background:transparent url(../images/pucemenu.gif) no-repeat left center;*/
+}
+
+
+#menu li a {
+	color:#000;
+	padding-left:10px;
+	background:transparent url(../images/pucemenu2-inac.gif) no-repeat left center;
+}
+
+#menu li a.actif {
+	color:#cf0066;
+	padding-left:10px;
+	background:transparent url(../images/pucemenu2-actif.gif) no-repeat left center;
+}
+
+.br-navi {
+	display:none;
+}
+
+.titre-navi {
+	margin-top:0;
+	padding-top:0;
+	line-height:normal;
+	padding-left:15px;
+	color:#97A6B9;
+        font-size:14px;
+}
+
+.titre-contenu {font-size:14px;color:#97A6B9;margin-top:0.5em;padding-top:0.5em;}
+
+/* style du profil */
+
+
+/* table etudiant */
+
+.etudiant {
+ margin:0;
+ padding:0;
+ border-collapse:collapse;
+ border:#D9D9D9 1px solid;
+ }
+
+.etudiant TD {
+  border-right:#D9D9D9 1px solid;
+  vertical-align:top;
+  
+  margin:0;
+  padding:2px;
+  font-size:11px;
+}
+
+.etudiant TD table {
+ width:100%;
+ height:100%;
+ border-collapse:collapse;
+
+}
+
+.etudiant TD table TD {
+  border:0;
+  margin:0;
+  font-size:11px;
+  padding:2px;
+}
+
+
+
+/* table profil 
+.profil {
+ margin:0;
+ padding:0;
+ border-collapse:collapse;
+}
+
+
+.profil TD {
+  border-right:#D9D9D9 1px solid;
+  vertical-align:top;
+  
+  margin:0;
+  padding:2px;
+}
+
+
+.profil TD table {
+ width:100%!important;
+ height:100%!important;
+ border-collapse:collapse;
+}
+
+.profil TD table TD {
+  border:0;
+  margin:0;
+  padding:2px;
+}
+*/
+/*.uvs {
+	width:100%;
+}
+
+.uvs TR TD {
+ font-family:tahoma,verdana,arial;
+ font-size:11px;
+ width:25%!important;
+}*/
+
+.uu {
+  font-size:10px;
+  font-weight:normal;
+  border:none;
+  border-top:#D9D9D9 1px solid;
+  border-collapse:collapse;
+  width:100%;
+}
+
+.uu TR TD {
+ border:0;
+ /*width:25%!important;*/
+ text-align:center;
+ 
+}
+
+.tu {
+	border-right:#D9D9D9 1px solid!important;
+}
+
+.uu1 {
+	width:50%!important;
+}
+
+.uu2 {
+	width:30%!important;
+}
+
+.uu3 {
+	width:15%!important;
+}
+
+.uu4 {
+	width:5%!important;
+}
+
+/* ligne alternées */
+.odd, .odd-c {
+ /*background-color:#F9F9F9;*/
+}
+
+.nactif {
+  background-color:#E9E9E9;
+}
+
+.even, .even-c {
+ /*background-color:#E9E9E9;*/
+}
+
+/* coin superieur gauche */
+.coin-sg {
+  border:0;
+  background-color:#FFF;
+}
+/* coin inférieur droit */
+
+.coin-id {
+  border:0!important;
+  background-color:#FFF;
+}
+
+.categorie {
+	width:70px;
+}
+
+.total {
+  border-bottom:#D9D9D9 1px solid!important;
+  border-top:#D9D9D9 1px solid;
+  padding:4px!important;
+  text-align:center!important;
+  font-weight:bold;
+  font-size:11px;  
+}
+
+.total1 {
+  border-bottom:#D9D9D9 1px solid!important;
+  border-top:#D9D9D9 1px solid;
+  padding:2px!important;
+  text-align:left!important;
+  font-weight:bold;
+  font-size:11px;
+}
+
+.total-val {
+  border-bottom:#D9D9D9 1px solid!important;
+  border-top:#D9D9D9 1px solid;
+  padding:2px!important;
+  text-align:center!important;
+  font-weight:bold;
+  font-size:11px;
+}
+
+.sstotal {
+  border-bottom:#D9D9D9 1px solid!important;
+  border-top:#D9D9D9 1px solid;
+  padding:2px!important;
+  text-align:left!important;
+  white-space:nowrap;
+  font-weight:bold;
+  background-color:#F5F5F5;
+  color:#707070;
+  font-size:11px;
+}
+
+.entete-haut {
+  border:#D9D9D9 1px solid;
+  border-left:none;
+}
+
+.even TD, .odd TD, .total, .total1, .sstotal {
+  border-top:#D9D9D9 1px solid;
+  border-left:#D9D9D9 1px solid;
+}
+
+.lib-gauche {
+  text-align:left;
+}
+
+.res {
+  text-align:center;
+}
+
+.libelle {
+	text-align:left;
+}
+
+.num {
+  text-align:right;
+}
+
+
+.valeur {
+  text-align:right!important;
+  /*font-weight:normal;*/
+}
+
+.valeur1 {
+  padding-right:10px!important;
+  text-align:right!important;
+  /*font-weight:normal;*/
+}
+
+.valeur2 {
+  text-align:left!important;
+}
+
+.valeur2 span.ee {
+  padding-right:160px;
+}
+
+.valeur2 span.ee1 {
+  padding-right:50px;
+}
+
+.totaux {
+	color:#5b2998;
+	/*background-color:#bddcf8!important;*/
+	background-color:#F9F9F9!important;
+}
+
+.total-sem {
+	/*background-color:#def3fc!important;*/
+	background-color:#F9F9F9!important;
+	color:#5b2998;
+}
+
+.sstotal-sem {
+	/*background-color:#bddcf8!important;*/
+	background-color:#F9F9F9!important;
+	color:#5b2998;
+}
+
+#legende {
+	width:680px;
+	border:#D9D9D9 1px solid;
+    padding:2px;	
+	/*
+	position:absolute;
+	left:0;
+	padding-top:50px;
+	*/
+
+}
+
+.legende {
+	color:black;
+	width:145px;
+
+	width:100%;
+}
+
+.legende TR TD {
+	white-space:wrap;
+}
+
+.legende TR TD B, .symb {
+	font-family:Tahoma,"Lucida Console",Verdana,Arial,Times;
+	font-size:14px!important;
+	font-weight:bold!important;
+	vertical-align:middle;
+	text-align:center;
+	margin-top:-3px;
+}
+
+.symb1 {
+	color:#5b2998;
+}
+
+.symb2 {
+	color:#12a267;
+}
+
+.symb3 {
+	color:#bc8b1b;
+}
+
+.symb4 {
+	color:#227bec;
+}
+
+.symb5 {
+	color:#000;
+}
+
+.br {
+  clear:both;
+  display:block;
+  margin:0;
+  padding:0;
+  height:20px;
+  line-height:0px;
+  font-size:0px;
+}
+
+.etu-resume-lib {
+	font-weight:bold;
+}
+
+/* photo */
+
+.photo {
+  text-align:center!important;
+  vertical-align:middle!important;
+}
+
+.photo img {
+  border:0;
+}
+
+
+/* appreciation */
+.appreciation {
+	text-align:right!important;
+}
+
+/* table semestre */
+.semestre {
+
+}
+
+.lg-semestre {
+	width:110px;
+	white-space:nowrap;
+}
+
+
+/* observation */
+.observation {
+  width:500px;
+  text-align:justify;
+  font-family:tahoma,verdana,arial;
+  font-size:11px;
+  height:100%;
+}
+
+
+/* --------------------------- */
+
+.recherche {
+	width:580px;
+}
+
+
+
+fieldset {
+	border:#CDCFCF 1px solid;
+	margin: 1em 0em 1em 0em;
+	padding: 0em 1em 1em 1em;
+}
+
+* html .no-marge {
+  margin:0;
+  padding:0;
+  vertical-align:top;
+}
+
+legend {
+background: #FFF;
+padding-left: 0.5em;
+padding-right: 0.5em;
+font-size: 10pt;
+}
+
+
+label {
+	padding-right:0.5em;
+}
+
+.recherche-num, .recherche-nom {
+  width:250px;
+}
+
+.droite {
+	float:right;
+}
+
+.gauche {
+	float:left;
+}
+
+.actions {
+	height:24px;
+	display:block;
+	padding-top:4px;
+	background-color:#e9edf2;
+	/*#F9F9F9;	*/
+	text-align:right;
+	border: #c1d2ee 1px solid;
+}
+
+.tool {
+  text-align:right;
+  border-bottom:#D9D9D9 1px solid;
+  padding-bottom:0.5em;
+  margin-left:2em;
+}
+
+.pdf {
+  background:transparent url(../images/pdf.gif) no-repeat top left;
+  padding-left:32px;
+  padding-bottom:2px;
+  
+}
+/* ---------------------------- */
+
+
+
+
+
+/* --------------------------- */
+    
+	A.list:link {text-decoration:none; color: #000;}
+	A.list:visited {text-decoration:none; color: #000;}
+	A.list:hover  {text-decoration: none; color: #000;}
+	
+	
+	a.list {
+		display:block;
+		height:100%;
+	}
+	
+    ul.etudiants  {
+      list-style-type: none;
+      margin:0px;
+      padding:0px;
+    }
+    ul.etudiants li.selected { background-color: #ffb; }
+    
+	li.etudiant {
+      list-style-type: none;
+      display:block;
+      margin:0;
+      padding:2px;
+      height:75px;
+	  margin-bottom:4px;
+	  width:602px;
+    }
+	
+	li.etudiant a:hover {
+		background-color: #fffcd0;
+		color:#000;
+    }
+	
+    li.etudiant img {
+		float:left;
+		margin-right:8px;
+    }
+
+    li.etudiant div.name {
+      font-weight:bold;
+      font-size:12px;
+      line-height:1.2em;
+      padding-left:65px;
+    }
+	li.etudiant div.nais {
+		font-size:12px;
+	}
+	
+	li.etudiant div.formation {
+		font-size:12px;
+		padding:0;
+		padding-top:10px;
+        padding-left:65px;
+	}	
+	
+	li.etudiant div.formation dl.ldips {
+      list-style-type: disc;
+	  padding:0;
+	  margin:0;
+
+	}		
+	
+	li.etudiant div.formation dl.ldips dd {
+      line-height:1.2em;
+	  margin-left:15px;
+
+	}			
+
+    li.etudiant div.email {
+      font-size:11px;
+      color:#888;
+    }
+
+    .informal {
+		/*padding-left:1em;*/
+		text-align:left;
+	}
+    
+	.normal {
+		font-weight:normal;
+	}	
+
+.navigation {
+  text-align:right;
+  width:600px;
+}
+/* ---------------------------------- */
+
+/* -- titre diplome profil */
+
+H4 {
+  background:transparent url(../image/pucetitre.gif) no-repeat left center;
+  padding-left:10px;
+}
+
+H4 A.lienh4,  H4 A.lienh4:visited {
+  font-size:10pt;
+  line-height:12pt;
+  background-color:white;
+  text-decoration:none;
+  color:black;
+}
+
+
+H4 A.lienh4:hover {
+  font-size:10pt;
+  line-height:12pt;
+  color:black;
+  background-color:#E9E9E9;
+  text-decoration: none;
+}
+
+
+.hide {
+  display:none;
+}
+
+.show {
+  display:block;
+}
+
+
+.auprofil {
+/* background:transparent url(../images/coche3.gif) no-repeat left center;*/
+ width:10px;
+ color:#2eb92e;
+ font-weight:bold;
+}
+
+.lgprofil TD {
+	color:red!important;
+}
+
+/*---- */
+
+
+/* formulaire ------------------------*/
+
+form {
+	padding:0;
+	margin:0;
+}
+
+.oblig {
+	background:transparent url('../images/puce.png') no-repeat left center;
+	padding-left:7px;
+	font-weight:bold;
+}
+
+.efface {
+  display:inline;
+  vertical-align:top;
+}
+
+.liste-appr {
+  overflow:auto;
+  height:220px;
+  height:auto;
+  border:#888 1px solid;
+}
+
+
+.liste {
+  overflow:auto;
+  height:228px;
+  border:#888 1px solid;
+}
+
+
+.tliste TD, .tliste TH {
+  vertical-align:top;
+}
+
+.tliste TD INPUT,.tliste TD LABEL,.tliste TD SELECT {
+  font-size:8pt;
+}
+
+.separateur {
+  height:10px;
+}
+
+.separateur hr {
+  border:0;
+  background-color: #D9D9D9;
+  height:1px;
+  
+}
+
+
+.decision {
+padding-top:15px;
+}
+
+label {
+  font-weight:bold;
+}
+
+textarea {
+  border-width:1px;
+  border-color:black;
+}
+
+.lib {
+  line-height:1.1em;
+}
+
+/* -------------------------- */
+
+/* --------------------------------------------------- */
+    div.auto_complete {
+      position:absolute;
+      width:350px;
+      background-color:white;
+      border:1px solid #888;
+      margin:0px;
+      padding:0px;
+			z-index:20;
+			height:200px;
+		
+    }
+    ul.auto_etudiants  {
+      list-style-type: none;
+      margin:0px;
+      padding:0px;
+	  background-color:white;
+    }
+    ul.auto_etudiants li.selected { background-color: #ffb; }
+    
+		li.auto_etudiant {
+      list-style-type: none;
+      display:block;
+      margin:0;
+      padding:2px;
+      height:56px;
+	  background-color:white;
+    }
+    li.auto_etudiant div.auto_image {
+      float:left;
+      width:45px;
+      height:56px;
+      margin-right:8px;
+    }
+    li.auto_etudiant div.auto_name {
+      font-weight:bold;
+      font-size:12px;
+      line-height:1.2em;
+    }
+    li.auto_etudiant div.auto_email {
+      font-size:10px;
+      color:#888;
+    }
+    #auto_list {
+      margin:0;
+      margin-top:10px;
+      padding:0;
+      list-style-type: none;
+      width:250px;
+    }
+    #auto_list li {
+      margin:0;
+      margin-bottom:4px;
+      padding:5px;
+      border:1px solid #888;
+      cursor:move;
+	  background-color:white;
+    }
+
+/* ------------------------------------------------------- */
+
+
+h5 {
+	font-size:8pt;
+	line-height:1.5em;
+	margin:0;
+	padding:0;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+
+/* -- */
+
+
+
+.uportal-input-text {
+	color: Black;
+	font-size: 11px;
+	font-family: "Lucida Grande", Verdana, Tahoma, Arial, Times;
+	background: white;
+	border:#C0C0C0 1px solid;
+  background: White url(../image/input_background.gif) repeat-x;  
+}
+
+.uportal-input-text:focus {
+	border:#E67D02 1px solid;
+}
+
+
+
+textarea {
+    border: 1px solid #cdcfcf;
+    color: Black;
+    background: White url(../image/input_background.gif) repeat-x;
+    /*width: 100%;*/
+}
+
+input {
+    font-family: "Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif;
+    color: Black;
+}
+
+select {
+    border:#cdcfcf 1px solid;
+    color: Black;
+    background-color: White;
+    vertical-align: top;
+}
+
+
+.uportal-button {
+    font-size: 11px;
+    background: White url(../icons/input_background.gif) repeat-x;
+    border:#cdcfcf 1px solid;
+}

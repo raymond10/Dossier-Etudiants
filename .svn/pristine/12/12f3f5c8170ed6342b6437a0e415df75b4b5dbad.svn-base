@@ -1,0 +1,38 @@
+package etudiants.utt.fr.EOControls;
+
+import com.webobjects.eocontrol.EOEditingContext;
+import etudiants.utt.fr.components.AComponent;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public abstract class AComponentCtrl {
+	private AComponent myComponent;
+
+	public AComponentCtrl(AComponent component) {
+		myComponent = component;
+	}
+
+	public AComponentCtrl() {
+
+	}
+
+	protected EOEditingContext edc() {
+		return myComponent.edc();
+	}
+
+	public AComponent getMyComponent() {
+		return myComponent;
+	}
+
+	public void setMyComponent(AComponent myComponent) {
+		this.myComponent = myComponent;
+	}
+
+	/*
+	 * public PersonneApplicationUser getAppUserForAnnuaire() { return
+	 * getMyComponent().getAppUserForAnnuaire(); }
+	 */
+}

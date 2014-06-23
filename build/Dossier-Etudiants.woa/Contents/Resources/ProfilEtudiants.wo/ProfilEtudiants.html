@@ -1,0 +1,306 @@
+<webobject name = "wrap">
+  <div metal:fill-slot = "contenu">
+    <webobject name = "errors">
+      <div class = "warn"> Vous n'&ecirc;tes pas autoris&eacute; &agrave; consulter ce dossier. </div>
+    </webobject>
+    <webobject name = "etudiant">
+      <h3>Parcours et profil de formation de l'&eacute;tudiant&nbsp;<webobject name = "Indicateur1" /></h3>
+      <webobject name = "annonce">
+        <div class = "warn"> <webobject name = "optAnonce" /> </div>
+      </webobject>
+      <div class = "br"></div>
+      <webobject name = "browser">
+        <webobject name = "nav">Navigation</webobject>
+      </webobject>
+      <table cellpadding = "0" cellspacing = "0" border = "0">
+        <tr>
+          <td>
+            <table cellpadding = "0" cellspacing = "0" class = "resume">
+              <tr>
+                <td rowspan = "5" style = "vertical-align: middle"><webobject name = "EtuPhoto" /></td>
+              </tr>
+              <tr>
+                <td>
+                  <table cellspacing = "0" cellpadding = "0" border = "0" width = "100%" style = "border:0">
+                    <tr style = "border:0">
+                      <td align = "left" style = "border:0">
+                        <span>&nbsp;<webobject name = "nomEtu" />&nbsp; 
+                        </span>
+                      </td>
+                      <td align = "right" style = "border:0">
+                        <span><webobject name = "etuEmail" /></span>
+                        N&deg; 
+                        <b><webobject name = "etuId" /></b>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>N&eacute;(e) le</b>
+                  <span><webobject name = "etuDateNais" /></span>
+                  &agrave; 
+                  <span><webobject name = "etuComNais" /></span>
+                  <b>BAC</b>
+                  <span><webobject name = "etuBac" /></span>
+                  en 
+                  <span><webobject name = "etuAnBac" /></span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>Conseiller</b>
+                  <span>
+                    &nbsp;<webobject name = "etuConseil" />&nbsp;</span>
+                  <b>Dernier dipl&ocirc;me obtenu</b>
+                  <span><webobject name = "etuDerDipl" /></span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <webobject name = "hasDernEtab">
+                    <b>Dernier &eacute;tablissement</b>
+                    <span> <webobject name = "etuDerEtablis" /> </span>
+                  </webobject>
+                  <webobject name = "der_inscription">
+                    <b>Derni&egrave;re inscription</b>
+                    <span><webobject name = "etuFormation" /></span>
+                  </webobject>
+                  <webobject name = "mineurs">
+                    <b>Mineur(s) :</b>
+                    <span><webobject name = "etuMineur" /></span>
+                  </webobject>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td valign = "top" align = "center" style = "padding-left:5px;padding-right:5px">
+            <ul style = "text-align:left" id = "autresLien">
+              <li>
+                <webobject name = "dossierAdm">Dossier administratif</webobject>
+              </li>
+              <li>
+                <webobject name = "resultatUv">R&eacute;sultats aux UV</webobject>
+              </li>
+              <li>
+                <webobject name = "edt">Emploi du temps</webobject>
+              </li>
+              <li>
+                <webobject name = "imprimProfil">Imprimer le profil</webobject>
+              </li>
+              <webobject name = "accessGctc">
+                <li>
+                  <webobject name = "versGestionContact">gestion des contacts</webobject>
+                </li>
+              </webobject>
+              <br />
+              <webobject name = "status">
+                <webobject name = "retourList">Retour &agrave; la liste&nbsp;<wo name = "iCone" /></webobject>
+              </webobject>
+            </ul>
+          </td>
+        </tr>
+      </table>
+      <webobject name = "hasDiplome">
+        <div class = "form">
+          <webobject name = "diplomeList">
+            <webobject name = "initTotalDipl" />
+            <h4>
+              <a href = "#" class = "lienh4">
+                <span><webobject name = "diplLib" /></span>
+                de 
+                <span><webobject name = "diplDebut" /></span>
+                &agrave; 
+                <span><webobject name = "diplFin" /></span>
+              </a>
+            </h4>
+            <div class = "show">
+              <webobject name = "intList" />
+              <webobject name = "diplomeHasLegende">
+                <div class = "legende">
+                  <b>L&eacute;gende</b>
+                  : 
+                  <webobject name = "lengendeList">
+                    <span class = "symb symb<webobject name = "symbole"/>">&<webobject name = "symboles" />;</span>&nbsp; 
+                    <span><webobject name = "legendeLib" /></span>&nbsp;&nbsp;&nbsp;&nbsp; 
+                  </webobject>
+                  <span class = "symb symbV"></span>Profil minimum valid&eacute; 
+                </div>
+              </webobject>
+              <!-- WARN  er.extensions.eof.ERXEC  - Unlocking context that wasn't unlocked in RR-Loop!  -->
+              <table cellspacing = "0" cellpadding = "0" summary = "profil" class = "profil <webobject name="orientation"/>">
+                <tr>
+                  <td class = "coin-sg"></td>
+                  <webobject name = "categories">
+                    <th class = "entete-haut ent-categ"><webobject name = "categorie" /></th>
+                  </webobject>
+                  <th class = "entete-haut ent-categ">Observations</th>
+                </tr>
+                <webobject name = "toutLeParcours">
+                  <webobject name = "initTotalParc" />
+                  <!-- testIci -->
+                  <tr>
+                    <td class = "entete-haut sem">
+                      <b><webobject name = "unLibelle" /></b>
+                      <br />
+                      <span><webobject name = "uneFormation" /></span>
+                      <br />
+                      <br />
+                    </td>
+                    <webobject name = "categories1">
+                      <webobject name = "initTotalCateg" />
+                      <td class = "uvs">
+                        <table cellspacing = "0" cellpadding = "0" border = "0">
+                          <webobject name = "selectUv">
+                            <webobject name = "uvCondition">
+                              <tr>
+                                <td style = "width:95%;padding:0;white-space:nowrap">
+                                  <webobject name = "uv" />&nbsp;<webobject name = "resuv" />&nbsp;<webobject name = "credit" />
+                                </td>
+                                <td style = "width:5%;padding:0;line-height:12px;" class = "symb symb<webobject name = "symboleUv"/>">&<webobject name = "symbolesUv" />;</td>
+                              </tr>
+                            </webobject>
+                          </webobject>
+                        </table>
+                      </td>
+                    </webobject>
+                    <td class = "observation">
+                      <div class = "decision2"><webobject name = "uneDecision" /></div>
+                      <div><webobject name = "unStage" /></div>
+                      <div><webobject name = "uneObservation" /></div>
+                      <div>
+                        <span><webobject name = "uneSituation" /></span>
+                      </div>
+                      <div>
+                        <webobject name = "haveSoutenance">Soutenance : le 
+                          <span><webobject name = "uneSoutenance" /></span>
+                        </webobject>
+                      </div>
+                      <div style = "text-align:right">
+                        <webobject name = "haveDiplnum">
+                          Dipl&ocirc;m&eacute; N&deg;&nbsp; 
+                          <b><webobject name = "unDiplNum" /></b>
+                        </webobject>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- fin testIci -->
+                  <tr class = "stotal odd">
+                    <td class = "lib-stotal">
+                      <webobject name = "annee">
+                        <b>Total ann&eacute;e</b>
+                      </webobject>
+                      <webobject name = "semestre">
+                        <b>Total semestre</b>
+                      </webobject>
+                    </td>
+                    <webobject name = "categories2">
+                      <td class = "stotal">
+                        <span><webobject name = "stotal" /></span>
+                      </td>
+                    </webobject>
+                    <td class = "totals"><webobject name = "ts" /></td>
+                  </tr>
+                </webobject>
+                <wo name = "tgCond">
+                  <!-- total uv -->
+                  <tr class = "stotal odd">
+                    <td class = "lib-stotal">
+                      <b>Total</b>
+                    </td>
+                    <webobject name = "categoriesTotal">
+                      <webobject name = "calculg" />
+                      <td class = "stotal">
+                        <webobject name = "hasKey">
+                          <span> <webobject name = "tgCl" /> </span>
+                        </webobject>
+                      </td>
+                    </webobject>
+                    <wo name = "printTotalg" />
+                    <td class = "totals"> <webobject name = "tgTG" /> </td>
+                  </tr>
+                  <!-- fin total uv -->
+                </wo>
+              </table>
+              <!-- WARN  er.extensions.eof.ERXEC  - Unlocking context that wasn't unlocked in RR-Loop!  -->
+            </div>
+            <div class = "br"></div>
+            <!-- WARN  er.extensions.eof.ERXEC  - Unlocking context that wasn't unlocked in RR-Loop!  -->
+            <webobject name = "existsDiplomeTotaux">
+              <h5>Totaux</h5>
+              <table class = "profil" cellspacing = "0" cellpadding = "0" summary = "profil">
+                <tr>
+                  <td class = "coin-sg"></td>
+                  <webobject name = "categorieDiplomeCategories">
+                    <th class = "entete-haut ent-categ"><wo name = "categorieLib_abr" /></th>
+                  </webobject>
+                  <td style = "border: none"></td>
+                </tr>
+                <wo name = "tDiplomeTotaux">
+                  <tr>
+                    <td class = "entete-haut sem">
+                      <b><wo name = "tLibelle" /></b>
+                    </td>
+                    <wo name = "toto" />
+                    <wo name = "ttTtotaux">
+                      <wo name = "pythonttId">
+                        <wo name = "pythonttOrdre">
+                          <td colspan = "<wo name = "longueur"/>" align = "center">
+                            <span>
+                              <b>
+                                <span><wo name = "ttotal" /></span>
+                                <wo name = "minExiste">
+                                  <span>/<wo name = "dispMin" /></span>
+                                </wo>
+                              </b>
+                              <wo name = "imgDisp"> <wo name = "tick" /> </wo>
+                            </span>
+                          </td>
+                        </wo>
+                      </wo>
+                    </wo>
+                    <td colspan = "7" style = "border: none"></td>
+                  </tr>
+                  <wo name = "totaux2">
+                    <wo name = "egalite2">
+                      <wo name = "ordre2">
+                        <span omit-tag = ""></span>
+                      </wo>
+                    </wo>
+                  </wo>
+                  <wo name = "gtCond">
+                    <tr>
+                      <wo name = "totaux3">
+                        <wo name = "egalite3">
+                          <wo name = "ordre3">
+                            <td colspan = "<wo name = "ordreCol"/>" style = "border: none"></td>
+                            <td colspan = "<wo name = "longueur2"/>" align = "center">
+                              <span>
+                                <b>
+                                  <span><wo name = "tTotal2" /></span>
+                                  <wo name = "minExiste2">
+                                    <span><wo name = "dispMin2" /></span>
+                                  </wo>
+                                </b>
+                                <wo name = "imgDisp2"> <wo name = "tick2" /> </wo>
+                              </span>
+                            </td>
+                            <td colspan = "6" style = "border: none"></td>
+                          </wo>
+                        </wo>
+                      </wo>
+                    </tr>
+                  </wo>
+                </wo>
+              </table>
+              <br />
+            </webobject>
+            <!-- WARN  er.extensions.eof.ERXEC  - Unlocking context that wasn't unlocked in RR-Loop!  -->
+          </webobject>
+        </div>
+      </webobject>
+    </webobject>
+  </div>
+  <webobject name = "Busy10" />
+</webobject>

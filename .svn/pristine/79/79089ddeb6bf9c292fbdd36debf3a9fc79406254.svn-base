@@ -1,0 +1,118 @@
+Wrapper : Wrapper {
+	bodyId = "admin";
+	onload = onLoad;
+	pageTitle = "Annonce et configuration";
+}
+
+formAdmin : ERXWOForm {
+	name = "admin";
+}
+
+formPCB : ERXWOForm {
+	name = "pcb";
+}
+
+errors : WOConditional {
+	condition = annoCtrl.isAutorizedUser;
+	negate = true;
+}
+
+admin : WOConditional {
+	condition = annoCtrl.isAdmin;
+}
+
+browser : WOConditional {
+	condition = browser;
+}
+
+nav : WOHyperlink {
+    id = "Navigation";
+	pageName = "Navigation";
+}
+
+formMsg : WOText{
+	name = "message";
+	id = "messageId";
+	value = annoCtrl.message;
+	cols = 40;
+	rows = 15;
+}
+
+radio1 : WORadioButton {
+    id = "visible1";
+	name = "visible";
+	selection = annoCtrl.selectVisible1;
+	value = "O";
+}
+
+Observe1 : AjaxObserveField {
+	elementName = "span";
+	action = annoCtrl.clickRadio;
+	fullSubmit = false;
+}
+
+radio2 : WORadioButton {
+	id = "visible2";
+	name = "visible";
+	selection = annoCtrl.selectVisible2;
+	value = "N";
+}
+
+Observe2 : AjaxObserveField {
+	elementName = "span";
+	action = annoCtrl.clickRadio;
+	fullSubmit = false;
+}
+
+savedMsg : LoginButton {
+	action = annoCtrl.updateMsgAnnonce;
+	name = "enregistrer";
+	value = "enregistrer";
+	text = "Valider";
+	type = "validate";
+}
+
+radio3 : WORadioButton {
+    id = "pcbf1";
+	name = "pcbf";
+	selection = annoCtrl.selectPCB1;
+	value = "O";
+}
+
+Observe3 : AjaxObserveField {
+	elementName = "span";
+	action = annoCtrl.clickRadioPcb;
+	fullSubmit = false;
+}
+
+radio4 : WORadioButton {
+	id = "pcbf2";
+	name = "pcbf";
+	selection = annoCtrl.selectPCB2;
+	value = "N";
+}
+
+Observe4 : AjaxObserveField {
+	elementName = "span";
+	action = annoCtrl.clickRadioPcb;
+	fullSubmit = false;
+}
+
+savedPcb : LoginButton {
+	action = annoCtrl.updatePcbf;
+	name = "enregistrer";
+	value = "enregistrer";
+	text = "Valider";
+	type = "validate";
+}
+
+Busy10: AjaxBusyIndicator {
+	divID = "busy10";
+}
+
+Indicateur1 : WOImage {
+	border = 0;
+	filename = "newImages/indicator_arrows.gif";
+	style = "display:none;";
+	id = "busy10";
+}

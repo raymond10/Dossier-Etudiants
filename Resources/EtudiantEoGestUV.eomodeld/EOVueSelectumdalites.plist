@@ -1,0 +1,97 @@
+{
+    attributes = (
+        {
+            columnName = CONTROLE; 
+            externalType = VARCHAR2; 
+            name = controle; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 3; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "CONTROLE_LIB"; 
+            externalType = VARCHAR2; 
+            name = controleLib; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = ID; 
+            externalType = NUMBER; 
+            name = id; 
+            valueType = d; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "NOTE_ELIM"; 
+            externalType = VARCHAR2; 
+            name = noteElim; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 15; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = OBSERVATION; 
+            externalType = VARCHAR2; 
+            name = observation; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2000; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = PERIODE; 
+            externalType = VARCHAR2; 
+            name = periode; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = UV; 
+            externalType = VARCHAR2; 
+            name = uv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 8; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "UV_OUV_ID"; 
+            externalType = NUMBER; 
+            name = uvOuvId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = VALEUR; 
+            externalType = NUMBER; 
+            name = valeur; 
+            valueType = d; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        controle, 
+        controleLib, 
+        id, 
+        noteElim, 
+        observation, 
+        periode, 
+        uv, 
+        uvOuvId, 
+        valeur
+    ); 
+    className = "gestionuv.utt.fr.eo.EOVueSelectumdalites"; 
+    classProperties = (controle, controleLib, noteElim, observation, periode, uv, uvOuvId, valeur); 
+    externalName = "GEST_UV.VUE_SELECTUMDALITES"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOVueSelectumdalites; 
+    primaryKeyAttributes = (id); 
+}

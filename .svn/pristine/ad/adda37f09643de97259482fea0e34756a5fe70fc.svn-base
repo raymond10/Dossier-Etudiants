@@ -1,0 +1,62 @@
+{
+    attributes = (
+        {
+            columnName = "CODE_DIPLOME"; 
+            externalType = VARCHAR2; 
+            name = codeDiplome; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = ID; 
+            externalType = NUMBER; 
+            name = id; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            columnName = "LIB_ABR"; 
+            externalType = VARCHAR2; 
+            name = libAbr; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = LIBELLE; 
+            externalType = VARCHAR2; 
+            name = libelle; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 100; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = ORDRE; 
+            externalType = VARCHAR2; 
+            name = ordre; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }
+    ); 
+    attributesUsedForLocking = (codeDiplome, id, libAbr, libelle, ordre); 
+    className = "gestionuv.utt.fr.eo.EOVueLescategories"; 
+    classProperties = (codeDiplome, eoVueAfficherdiplome, libAbr, libelle, ordre); 
+    externalName = "GEST_UV.VUE_LESCATEGORIES"; 
+    name = EOVueLescategories; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = EOVueAfficherdiplome; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = codeDiplome; sourceAttribute = codeDiplome; }); 
+            name = eoVueAfficherdiplome; 
+        }
+    ); 
+}

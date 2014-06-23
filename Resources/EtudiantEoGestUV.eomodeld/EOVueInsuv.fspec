@@ -1,0 +1,25 @@
+{
+    distinctEtuID = {
+        class = EOFetchSpecification; 
+        entityName = EOVueInsuv; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOAndQualifier; 
+            qualifiers = (
+                {
+                    class = EOKeyComparisonQualifier; 
+                    leftKey = etuId; 
+                    rightKey = "eoEtudiantInscrAdm.etuId"; 
+                    selectorName = "isEqualTo:"; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = uvc; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = uvc; class = EOQualifierVariable; }; 
+                }
+            ); 
+        }; 
+        usesDistinct = YES; 
+    }; 
+}

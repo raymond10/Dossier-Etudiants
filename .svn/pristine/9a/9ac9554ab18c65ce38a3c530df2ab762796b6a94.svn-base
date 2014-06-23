@@ -1,0 +1,495 @@
+wrap : Wrapper {
+	bodyId = "profil";
+	onload = onLoad;
+	pageTitle = "Parcours et profil de formation";
+}
+
+//Utilisateur autorisé
+errors : WOConditional {
+	condition = ctrl.isAutorizUser;
+	negate = true;
+}
+
+//Session utilisateur
+etudiant : WOConditional {
+	condition = ctrl.isEtudiant;
+}
+
+annonce : WOConditional {
+	condition = hasAnnonce;
+}
+
+optAnonce : WOString {
+	value = annoncePcb.annonce;
+	escapeHTML = false;
+}
+
+EtuPhoto : WOImage {
+	height = "75";
+	width = "60";
+	border = "0";
+	alt = "photo de l'étudiant";
+	id = "photo";
+	src = droitImage;
+}
+
+nomEtu : WOString {
+	value = dicEtudiant.CIV_NOM;
+}
+
+etuEmail : WOString {
+	value = dicEtudiant.EMAIL;
+}
+
+etuId : WOString {
+	value = ID;
+	//dicEtudiant.ID_ETU;
+}
+
+etuDateNais : WOString {
+	value = dicEtudiant.DATE_NAIS;
+	//dateformat = "%d/%m/%Y";
+}
+
+etuComNais : WOString {
+	value = dicEtudiant.COM_NAIS;
+}
+
+etuBac : WOString {
+	value = dicEtudiant.BAC;
+}
+
+etuAnBac : WOString {
+	value = dicEtudiant.AN_BAC;
+}
+
+etuConseil : WOString {
+	value = dicEtudiant.CONSEILLER;
+}
+
+etuDerDipl : WOString {
+	value = dicEtudiant.DER_DIPLOME;
+}
+
+hasDernEtab : WOConditional {
+	condition = hasDernierEtab;
+}
+
+etuDerEtablis : WOString {
+	value = dicEtudiant.ETAB_DER_DIPLOME;
+}
+
+der_inscription : WOConditional {
+	condition = hasInscription;
+}
+
+etuFormation : WOString {
+	value = dicEtudiant.ACT_FORMATION;
+}
+
+mineurs : WOConditional {
+	condition = hasMineur;
+}
+
+etuMineur : WOString {
+	value = mineurs;
+}
+
+dossierAdm : WOHyperlink {
+	action = ctrl.dossier;
+	onclick = "Element.show('busy10');";
+}
+
+resultatUv : WOHyperlink {
+	action = ctrl.resUv;
+	onclick = "Element.show('busy10');";
+}
+
+edt : WOHyperlink {
+	action = ctrl.emploiDuTemps;
+	onclick = "Element.show('busy10');";
+}
+
+imprimProfil : WOHyperlink {
+	action = ctrl.imprimerProfil;
+	//onclick = "Element.show('busy10');";
+	target = "_blank";
+}
+
+status : WOConditional {
+	condition = session.retourAlaListe;
+}
+
+retourList : WOHyperlink {
+	action = ctrl.retourAlaListe;
+	onclick = "Element.show('busy10');";
+}
+
+iCone : WOImage {
+    name="Retour";
+	filename = "newImages/wb16.png";
+	border = "0";
+	alt = "Retour à la liste";
+}
+
+hasDiplome : WOConditional {
+	condition = hasDiplomes;
+}
+
+diplomeList : WORepetition {
+	list = ListDiplome;
+	item = dicDiplome;
+}
+
+initTotalDipl : WOString {
+	value = totalDiplInit;
+	class="hide";
+}
+
+intList : WOString {
+	value = fetchObject;
+	class="hide";
+}
+
+diplLib : WOString {
+	value = dicDiplome.LIBELLE;
+	//diplomeItem.libelle;
+}
+
+diplDebut : WOString {
+	value = dicDiplome.DEBUT;
+	//diplomeItem.debut;
+}
+
+diplFin : WOString {
+	value = dicDiplome.FIN;
+	//diplomeItem.fin;
+}
+
+diplomeHasLegende : WOConditional {
+	condition = legendeInDiplome;
+}
+
+lengendeList : WORepetition {
+	list = listLegende;
+	item = legendeItem;
+}
+
+symbole : WOString {
+	value = legendeItem.legende;
+}
+
+symboles : WOString {
+	value = ~"#"+legendeItem.legende;
+}
+
+legendeLib : WOString {
+	value = legendeItem.profilLib;
+}
+
+orientation : WOString {
+	value = reo;
+}
+
+categories : WORepetition {
+	list = listCategory;
+	item = dicCateg;
+}
+
+categorie : WOString {
+	value = dicCateg.LIB_ABR_CATEG;
+}
+
+toutLeParcours : WORepetition {
+	list = listParcours;
+	item = dicParcours;
+}
+
+initTotalParc : WOString {
+	value = totalParcInit;
+	class = "hide";
+}
+
+unLibelle : WOString {
+	value = dicParcours.LIBELLE;
+}
+
+uneFormation : WOString {
+	value = dicParcours.FORMATION;
+}
+
+categories1 : WORepetition {
+	list = listCategory;
+	item = dicCateg1;
+}
+
+initTotalCateg : WOString {
+	value = initTotalCategs;
+	class = "hide";
+}
+
+selectUv : WORepetition {
+	list = listInsUv;
+	item = dicUv;
+}
+
+uvCondition : WOConditional {
+	condition = uvInDiplome;
+}
+
+uv : WOString {
+	value = dicUv.UV;
+}
+
+resuv : WOString {
+	value = dicUv.RESUV;
+}
+
+credit : WOString {
+	value = dicUv.CREDIT;
+}
+
+symboleUv : WOString {
+	value = dicUv.LEGENDE;
+}
+
+symbolesUv : WOString {
+	value = ~"#"+dicUv.LEGENDE;
+}
+
+uneDecision : WOString {
+	value = dicParcours.DECISION;
+	escapeHTML = false;
+}
+
+unStage : WOString {
+	value = dicParcours.STAGE;
+	escapeHTML = false;
+}
+
+uneObservation : WOString {
+	value = dicParcours.OBSERVATION;
+	escapeHTML = false;
+}
+
+uneSituation : WOString {
+	value = dicParcours.SITUATION;
+}
+
+haveSoutenance : WOConditional {
+	condition = soutenanceCond;
+}
+
+uneSoutenance : WOString {
+	value = dicParcours.SOUTENANCE;
+}
+
+haveDiplnum : WOConditional {
+	condition = diplnumCond;
+}
+
+unDiplNum : WOString {
+	value = dicParcours.DIPLOME_NUM;
+}
+
+annee : WOConditional {
+	condition = isAnnee;
+}
+
+semestre : WOConditional {
+	condition = isSemestre;
+}
+
+categories2 : WORepetition {
+	list = listCategory;
+	item = dicCateg2;
+}
+
+stotal : WOString {
+	value = totalCat;
+}
+
+ts : WOString {
+	value = totalPac;
+}
+
+tgCond : WOConditional {
+	condition = totalGcond;
+}
+
+categoriesTotal : WORepetition {
+	list = listCategory;
+	item = dicCateg3;
+}
+
+calculg : WOString {
+	value = calcul_stotalg;
+}
+hasKey : WOConditional {
+	condition = has_key;
+}
+
+tgCl : WOString {
+	value = tgClGet;
+}
+
+printTotalg : WOString {
+	value = totalgPrint;
+}
+
+tgTG : WOString {
+	value = getTgTG;
+}
+
+
+existsDiplomeTotaux : WOConditional {
+	condition = diplTotaux;
+}
+
+categorieDiplomeCategories : WORepetition {
+	list = listCategory;
+	item = dicCateg4;
+}
+
+categorieLib_abr : WOString {
+	value = dicCateg4.LIB_ABR_CATEG;
+}
+
+tDiplomeTotaux : WORepetition {
+	list = listTotal;
+	item = dicTotal;
+}
+
+tLibelle : WOString {
+	value = dicTotal.LIBELLE;
+}
+
+toto : WOConditional {
+	condition = totoIn;
+}
+
+ttTtotaux : WORepetition {
+	list = listTotaux;
+	item = dicTotaux;
+}
+
+pythonttId : WOConditional {
+	condition = pythonTtId;
+}
+
+pythonttOrdre : WOConditional {
+	condition = pythonTtOrdre;
+}
+
+longueur : WOString {
+	value = longueur;
+	//dicTotaux.LONGUEUR;
+}
+
+ttotal : WOString {
+	value = dicTotaux.TOTAL;
+}
+
+minExiste : WOConditional {
+	condition = isMin;
+}
+
+dispMin : WOString {
+	value = dicTotaux.MINI;
+}
+
+imgDisp : WOConditional {
+	condition = dispImg;
+}
+
+tick : WOImage {
+	src = "image/tick2.png";
+	width = "11"; 
+	height = "11"; 
+	alt = "acquis"; 
+	border = "0";
+}
+
+totaux2 : WORepetition {
+	list = listTotaux;
+	item = dicTotaux2;
+}
+
+egalite2 : WOConditional {
+	condition = egalites2;
+}
+
+ordre2 : WOConditional {
+	condition = tTordre2;
+}
+
+gtCond : WOConditional {
+	condition = conditionalGt;
+}
+
+totaux3 : WORepetition {
+	list = listTotaux;
+	item = dicTotaux3;
+}
+
+egalite3 : WOConditional {
+	condition = egalites3;
+}
+
+ordre3 : WOConditional {
+	condition = tTordre3;
+}
+
+ordreCol : WOString {
+	value = dicTotaux3.ORDRE_COL;
+}
+
+longueur2 : WOString {
+	value = longueur2;
+	//dicTotaux3.LONGUEUR;
+}
+
+tTotal2 : WOString {
+	value = dicTotaux3.TOTAL;
+}
+
+minExiste2 : WOConditional {
+	condition = isMin2;
+}
+
+dispMin2 : WOString {
+	value = ~"/"+dicTotaux3.MINI;
+}
+
+imgDisp2 : WOConditional {
+	condition = dispImg2;
+}
+
+tick2 : WOImage {
+	src = "image/tick2.png";
+	width = "11"; 
+	height = "11"; 
+	alt = "acquis"; 
+	border = "0";
+}
+
+Busy10: AjaxBusyIndicator {
+	divID = "busy10";
+}
+
+Indicateur1 : WOImage {
+	border = 0;
+	filename = "newImages/indicator_arrows.gif";
+	style = "display:none;";
+	id = "busy10";
+}
+
+
+
+browser : WOConditional {
+	condition = browser;
+}
+
+nav : WOHyperlink {
+	pageName = "Navigation";
+}

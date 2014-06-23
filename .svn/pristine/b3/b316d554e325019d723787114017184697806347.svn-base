@@ -1,0 +1,143 @@
+package etudiants.utt.fr.components;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WORequest;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSLog;
+import com.webobjects.foundation.NSMutableDictionary;
+
+import etudiants.utt.fr.components.controlers.EmploiDuTempsCtrl;
+import etudiants.utt.fr.eo.EOIndividu;
+import etudiants.utt.fr.server.MyAjaxComponent;
+import etudiants.utt.fr.server.ProfilHelpers;
+import etudiants.utt.fr.util.EdtUtilitaires;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+@SuppressWarnings("all")
+public class EmploiDuTemps extends MyAjaxComponent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8327991648693364521L;
+	private String onLoad = null;
+	private EmploiDuTempsCtrl edtCtrl;
+	private NSMutableDictionary dicEtudiant;
+	private NSArray listUv;
+	private NSMutableDictionary dicUv;
+	private EdtUtilitaires edtUtil;
+
+	public EmploiDuTemps(WOContext context) {
+		super(context);
+		NSLog.out.appendln("Emploi du temps");
+		edtUtil = new EdtUtilitaires();
+		edtCtrl = new EmploiDuTempsCtrl(this);
+		edtCtrl.edtUvSelection();
+		edtUtil.lesCouleurs(getListUv());
+		edtCtrl.horaires();
+		edtCtrl.edtIdSelection1();
+	}
+	
+	/**
+	 * @return the edtUtil
+	 */
+	public EdtUtilitaires getEdtUtil() {
+		return edtUtil;
+	}
+
+	/**
+	 * @param edtUtil the edtUtil to set
+	 */
+	public void setEdtUtil(EdtUtilitaires edtUtil) {
+		this.edtUtil = edtUtil;
+	}
+
+	/**
+	 * @return the onLoad
+	 */
+	public String getOnLoad() {
+		return onLoad;
+	}
+
+	/**
+	 * @param onLoad the onLoad to set
+	 */
+	public void setOnLoad(String onLoad) {
+		this.onLoad = onLoad;
+	}
+
+	public void appendToResponse(WOResponse res, WOContext ctx) {
+		super.appendToResponse(res, ctx);
+		if (onLoad != null)
+			onLoad = null;
+		ProfilHelpers.insertStylesSheet(ctx, res);
+		 String message = mySession().getAlertMessage();
+			if (message != null && message.equals("") == false) {
+				String str = "<script language=\"javascript\" type=\"text/javascript\">\n";
+				str += "alert(\"" + message + "\");\n";
+				str += "</script>";
+				res.appendContentString(str);
+				mySession().setAlertMessage(null);
+			}
+	}
+
+	/**
+	 * @return the edtCtrl
+	 */
+	public EmploiDuTempsCtrl getEdtCtrl() {
+		return edtCtrl;
+	}
+
+	/**
+	 * @param edtCtrl the edtCtrl to set
+	 */
+	public void setEdtCtrl(EmploiDuTempsCtrl edtCtrl) {
+		this.edtCtrl = edtCtrl;
+	}
+
+	/**
+	 * @return the dicEtudiant
+	 */
+	public NSMutableDictionary getDicEtudiant() {
+		return dicEtudiant;
+	}
+
+	/**
+	 * @param dicEtudiant the dicEtudiant to set
+	 */
+	public void setDicEtudiant(NSMutableDictionary dicEtudiant) {
+		this.dicEtudiant = dicEtudiant;
+	}
+
+	/**
+	 * @return the listUv
+	 */
+	public NSArray getListUv() {
+		return listUv;
+	}
+
+	/**
+	 * @param listUv the listUv to set
+	 */
+	public void setListUv(NSArray listUv) {
+		this.listUv = listUv;
+	}
+
+	/**
+	 * @return the dicUv
+	 */
+	public NSMutableDictionary getDicUv() {
+		return dicUv;
+	}
+
+	/**
+	 * @param dicUv the dicUv to set
+	 */
+	public void setDicUv(NSMutableDictionary dicUv) {
+		this.dicUv = dicUv;
+	}
+}

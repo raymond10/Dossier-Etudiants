@@ -1,0 +1,34 @@
+package etudiants.utt.fr.components;
+
+import com.webobjects.appserver.WOContext;
+
+import etudiants.utt.fr.components.controlers.NavigationCtrl;
+import etudiants.utt.fr.server.MyAjaxComponent;
+
+public class Navigation extends MyAjaxComponent {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3072115890104911384L;
+	private NavigationCtrl ctrl;
+
+	public Navigation(WOContext context) {
+        super(context);
+    }
+
+	/**
+	 * @return the ctrl
+	 */
+	public NavigationCtrl ctrl() {
+		if(ctrl == null)
+			ctrl = new NavigationCtrl(this);
+		return ctrl;
+	}
+
+	/**
+	 * @param ctrl the ctrl to set
+	 */
+	public void setCtrl(NavigationCtrl ctrl) {
+		this.ctrl = ctrl;
+	}
+}

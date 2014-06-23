@@ -1,0 +1,196 @@
+{
+    attributes = (
+        {
+            columnName = "CODE_DIPLOME"; 
+            externalType = VARCHAR2; 
+            name = codeDiplome; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = DEBUT; 
+            externalType = VARCHAR2; 
+            name = debut; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4000; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPL_SPEC"; 
+            externalType = VARCHAR2; 
+            name = diplSpec; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = FIN; 
+            externalType = VARCHAR2; 
+            name = fin; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4000; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = ID; 
+            externalType = NUMBER; 
+            name = id; 
+            valueType = d; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = LIBELLE; 
+            externalType = VARCHAR2; 
+            name = libelle; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 67; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "NIV_ENTREE"; 
+            externalType = VARCHAR2; 
+            name = nivEntree; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 10; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "NUMERO_ETU"; 
+            externalType = NUMBER; 
+            name = numeroEtu; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            columnName = "PRD_DEBUT"; 
+            externalType = VARCHAR2; 
+            name = prdDebut; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            columnName = "PRD_FIN"; 
+            externalType = VARCHAR2; 
+            name = prdFin; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            columnName = "PROFIL_C"; 
+            externalType = VARCHAR2; 
+            name = profilC; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            columnName = REORIENTE; 
+            externalType = VARCHAR2; 
+            name = reoriente; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        codeDiplome, 
+        debut, 
+        diplSpec, 
+        fin, 
+        id, 
+        libelle, 
+        nivEntree, 
+        numeroEtu, 
+        prdDebut, 
+        prdFin, 
+        profilC, 
+        reoriente
+    ); 
+    className = "etudiants.utt.fr.eo.EOVueAfficherdiplome"; 
+    classProperties = (
+        codeDiplome, 
+        debut, 
+        diplSpec, 
+        eoRefProfils, 
+        eoRefProfilTotals, 
+        eoVueDetailetudiant, 
+        eoVueDetailparcourses, 
+        eoVueLescategorieses, 
+        eoVueSelectinsuvs, 
+        fin, 
+        libelle, 
+        nivEntree, 
+        numeroEtu, 
+        prdDebut, 
+        prdFin, 
+        profilC, 
+        reoriente
+    ); 
+    externalName = "GERRY.VUE_AFFICHERDIPLOME"; 
+    name = EOVueAfficherdiplome; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = EORefProfil; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = diplomeC; sourceAttribute = codeDiplome; }); 
+            name = eoRefProfils; 
+        }, 
+        {
+            destination = EORefProfilTotal; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = (
+                {destinationAttribute = diplomec; sourceAttribute = codeDiplome; }, 
+                {destinationAttribute = diplSpecc; sourceAttribute = diplSpec; }, 
+                {destinationAttribute = nivEntree; sourceAttribute = nivEntree; }
+            ); 
+            name = eoRefProfilTotals; 
+        }, 
+        {
+            destination = EOVueDetailetudiant; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = numeroEtu; }); 
+            name = eoVueDetailetudiant; 
+        }, 
+        {
+            destination = EOVueDetailparcours; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = (
+                {destinationAttribute = codeDiplome; sourceAttribute = codeDiplome; }, 
+                {destinationAttribute = etuId; sourceAttribute = numeroEtu; }
+            ); 
+            name = eoVueDetailparcourses; 
+        }, 
+        {
+            destination = EOVueLescategories; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = codeDiplome; sourceAttribute = codeDiplome; }); 
+            name = eoVueLescategorieses; 
+        }, 
+        {
+            destination = EOVueSelectinsuv; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = (
+                {destinationAttribute = diplome; sourceAttribute = codeDiplome; }, 
+                {destinationAttribute = etuId; sourceAttribute = numeroEtu; }
+            ); 
+            name = eoVueSelectinsuvs; 
+        }
+    ); 
+}

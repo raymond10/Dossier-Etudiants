@@ -1,0 +1,67 @@
+#######################################################
+#Ne pas supprimer ce fichier, ni commenter les lignes
+#######################################################
+
+# WoLips configuration
+wolips.password=CEDRE
+wolips.host=imac-cedre.utt.fr
+wolips.port=9485
+
+# OGNL
+ognl.helperFunctions=true
+ognl.inlineBindings=true
+
+er.component.clickToOpen=true
+er.extensions.ERXApplication.responseCompressionEnabled=true
+er.extensions.ERXSharedEOLoader.PatchSharedEOLoading=true
+er.extensions.ERXResponseRewriter.javascriptTypeAttribute=true
+er.extensions.ERXEC.safeLocking=true
+er.extensions.maxPageReplacementCacheSize=5000
+
+# Utilisation de ERXDatabaseContext
+er.extensions.ERXDatabaseContext.className = er.extensions.eof.ERXDatabaseContext
+er.extensions.ERXDatabaseContext.activate = true
+er.extensions.ERXJDBCAdaptor.className=er.extensions.jdbc.ERXJDBCAdaptor
+dbEOPrototypesEntityGLOBAL=EOJDBCOraclePrototypes
+
+er.extensions.ERXFileNotificationCenter.CheckFilesPeriod=10
+
+#Correction delegate absent
+#er.extensions.ERXRaiseOnMissingEditingContextDelegate=false
+
+# Log4j Configuration
+log4j.loggerFactory=er.extensions.logging.ERXLogger$Factory
+log4j.rootCategory=INFO,A1
+log4j.appender.A1=er.extensions.logging.ERXConsoleAppender
+log4j.appender.A1.layout=er.extensions.logging.ERXPatternLayout
+log4j.appender.A1.layout.ConversionPattern=%d{MMM dd HH:mm:ss} %$[%#] %-5p %c %x - %m%n
+
+# Logger jasper
+log4j.logger.net.sf.jasperreports=INFO
+#log4j.logger.er.transaction.adaptor.EOAdaptorDebugEnabled=DEBUG
+
+# Fixes - Turning this on will show all the models that are loaded
+log4j.logger.er.extensions.fixes.ERSharedEOLoader=INFO
+
+# Affichage de connexion CAS
+log4j.logger.LoginLog=DEBUG
+
+er.extensions.ERXNSLogLog4jBridge=INFO
+log4j.logger.er.eo.ERXGenericRecord=DEBUG
+log4j.logger.er.validation.ERXEntityClassDescription=DEBUG
+log4j.logger.er.default.ERXEntityClassDescription=DEBUG
+log4j.logger.er.extensions.ERXDatabaseContextDelegate=WARN
+log4j.logger.er.extensions.ERXConfigurationManager=INFO
+
+# CSV exporter settings
+net.sf.jasperreports.export.character.encoding=UTF-8
+#net.sf.jasperreports.print.transfer.export=net.sf.jasperreports.export
+net.sf.jasperreports.print.keep.full.text=true
+#net.sf.jasperreports.export.xls.use.timezone=true
+net.sf.jasperreports.export.csv.field.delimiter=;
+net.sf.jasperreports.export.csv.record.delimiter=\n
+
+#Formulaire
+org.cedre.global.formulaires.miseenformeautomatique = true
+
+WOFrameworksBaseURL=/WebObjects/Dossier-Etudiants.woa/Contents/Frameworks

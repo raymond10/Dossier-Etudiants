@@ -1,0 +1,15 @@
+{
+    personnel = {
+        class = EOFetchSpecification; 
+        entityName = VPersonnel; 
+        isDeep = YES; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOKeyValueQualifier; 
+            key = id; 
+            selectorName = "isEqualTo:"; 
+            value = {"_key" = id; class = EOQualifierVariable; }; 
+        }; 
+        usesDistinct = YES; 
+    }; 
+}

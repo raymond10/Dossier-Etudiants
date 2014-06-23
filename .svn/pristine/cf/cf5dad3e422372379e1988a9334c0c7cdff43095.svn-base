@@ -1,0 +1,12 @@
+package gestionuv.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+public class EOProfilParcours extends _EOProfilParcours {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6223734428210911399L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EOProfilParcours.class);
+}

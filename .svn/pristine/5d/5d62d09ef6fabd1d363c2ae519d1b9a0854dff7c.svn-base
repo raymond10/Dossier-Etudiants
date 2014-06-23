@@ -1,0 +1,51 @@
+package etudiants.utt.fr.components;
+
+import com.webobjects.appserver.WOComponent;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSDictionary;
+import com.webobjects.foundation.NSLog;
+
+import etudiants.utt.fr.server.MyAjaxComponent;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public class Erreur extends MyAjaxComponent {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8334873619569197070L;
+	@SuppressWarnings("rawtypes")
+	private NSDictionary exceptionInfos;
+
+	public Erreur(WOContext context) {
+        super(context);
+        NSLog.out.appendln("Erreur");
+    }
+	
+	public WOComponent retourAccueil() {
+		Main accueil = (Main) mySession().getSavedPageWithName(Main.class.getName());
+		mySession().reset();
+		//accueil.setOnload(null);
+		return accueil;
+	}
+
+	/**
+	 * @return the exceptionInfos
+	 */
+	@SuppressWarnings("rawtypes")
+	public NSDictionary exceptionInfos() {
+		this.exceptionInfos = (NSDictionary) mySession().exceptionInfos();
+		return this.exceptionInfos;
+	}
+
+	/**
+	 * @param exceptionInfos the exceptionInfos to set
+	 */
+	@SuppressWarnings("rawtypes")
+	public void setExceptionInfos(NSDictionary exceptionInfos) {
+		this.exceptionInfos = exceptionInfos;
+	}
+}

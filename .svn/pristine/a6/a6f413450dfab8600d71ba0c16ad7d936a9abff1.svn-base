@@ -1,0 +1,121 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "DEB_PRD"; 
+            externalType = VARCHAR2; 
+            name = debPrd; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            columnName = "DIPLOME_$C"; 
+            externalType = VARCHAR2; 
+            isReadOnly = Y; 
+            name = diplomec; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPL_SPEC"; 
+            externalType = VARCHAR2; 
+            name = diplSpec; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 100; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPL_SPEC_ABR"; 
+            externalType = VARCHAR2; 
+            name = diplSpecAbr; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 7; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPL_SPEC_AN"; 
+            externalType = VARCHAR2; 
+            name = diplSpecAn; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 100; 
+        }, 
+        {
+            columnName = "DIPL_SPEC_$C"; 
+            externalType = VARCHAR2; 
+            name = diplSpecc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "DIPL_SPEC_LIB_ID"; 
+            externalType = NUMBER; 
+            name = diplSpecLibId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "FIN_PRD"; 
+            externalType = VARCHAR2; 
+            name = finPrd; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "STOP_PRD"; 
+            externalType = VARCHAR2; 
+            name = stopPrd; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        debPrd, 
+        diplomec, 
+        diplSpec, 
+        diplSpecAbr, 
+        diplSpecAn, 
+        diplSpecc, 
+        diplSpecLibId, 
+        finPrd, 
+        stopPrd
+    ); 
+    className = "etudiants.utt.fr.eo.EOVueDiplSpec"; 
+    classProperties = (
+        debPrd, 
+        diplomec, 
+        diplSpec, 
+        diplSpecAbr, 
+        diplSpecAn, 
+        diplSpecc, 
+        diplSpecLibId, 
+        eoEtudiantInscrAdm, 
+        finPrd, 
+        stopPrd
+    ); 
+    externalName = "GERRY.VUE_DIPL_SPEC"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOVueDiplSpec; 
+    primaryKeyAttributes = (diplomec); 
+    relationships = (
+        {
+            destination = EOEtudiantInscrAdm; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = diplSpecc; sourceAttribute = diplSpecc; }); 
+            name = eoEtudiantInscrAdm; 
+        }
+    ); 
+}

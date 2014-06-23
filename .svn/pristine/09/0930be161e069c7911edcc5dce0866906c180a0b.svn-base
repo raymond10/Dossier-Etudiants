@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<html lang = "fr">
+  <head>
+    <!-- xmlns = "http://www.w3.org/1999/xhtml"  <meta http-equiv = "Content-Type" content = "text/html; charset=utf-8" />-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>DOSSIER ETUDIANT</title>
+    <!-- TinyMCE -->
+    <wo name = "tinyMCE" />
+    <wo name = "tinyMCEInit" />
+    <!-- /TinyMCE -->
+    <webobject name = "shortcut_icon" />
+    <webobject name = "icon" />
+    <script src="https://cas.utt.fr/iframe/postMessage-resize-iframe-in-parent.js"></script>
+    <script type = "text/javascript">
+      if(window.history.forward(1) != null) window.history.forward(1); 
+    </script>
+    <script type = "text/javascript">
+      function openAlertWin() { 
+        Dialog.info(document.getElementById('alertWin').innerHTML, {windowParameters: {className:"mac_os_x", title: "Une erreur s'est produite", width:200, height:100, resizable:true}});  
+      } 
+      function openConfirmWin(message) { 
+        Dialog.confirm(message, {windowParameters: {className:"mac_os_x", title: "Une erreur s'est produite", width:200, height:100, resizable:true}, okLabel:"Fermer"});  
+      } 
+       	function openListeSelectionWin(id,url,title,updateContainerId,autoresizeElement,modal) { 
+       		var winid = 'WinSelectList'; 
+       		if (id == null) { 
+       			winid = 'WinSelectListUrl'; 
+       		} 
+       		if (modal == null) { 
+       			modal = false; 
+       		} 
+        	var win = Windows.getWindow(winid); 
+        	if (win != null) { 
+        		win.destroy(); 
+        	} 
+        	var d = null; 
+        	if (title == null) { 
+        		title = "Selectionner les élements dans la liste"; 
+        	} 
+        	if (url != null){ 
+        	    url=url.replace("http:","https:");
+        		// win = new Window('WinSelectListUrl', {className: "mac_os_x", title: title, top:70, left:100, width:300, height:200, resizable: true, closable: true, minimizable: false, maximizable: false, showEffectOptions: {duration:0.5}}); 
+      		// win.setAjaxContent(url,null,true,true); 
+        		win = new Window(winid, {className: "mac_os_x", title: title, top:70, left:100, width:300, height:200, resizable: true, closable: false, minimizable: false, maximizable: false, url: url, showEffectOptions: {duration:0.5}}); 
+        		if (autoresizeElement != null) { 
+        			d = Element.getDimensions($(autoresizeElement)); 
+        		} 
+        	} else if (id != null) { 
+        		win = new Window('WinSelectList', {className: "mac_os_x", title: title, top:70, left:100, width:300, height:200, resizable: true, closable: false, minimizable: false, maximizable: false, showEffectOptions: {duration:0.5}}); 
+      		win.setContent(id,true,true); 
+        	} 
+      	// var editorOnClose = { onClose: function(eventName, win) {if (id != null) document.getElementById(id).style.display='none'; } }; 
+      	// Windows.addObserver(editorOnClose);		 
+      	win.setDestroyOnClose(); 
+      	win.toFront(); 
+      	if (d != null) { 
+      		win.setSize(d.width, d.height); 
+      	}				  	 
+      	win.showCenter(true); 
+       	} 
+       	function openConfirmPanel(message) { 
+       		// Dialog.confirm(message, {windowParameters: {width:300}, okLabel: "OUI", cancelLabel: "NON", id: "myDialogId", cancel:function(win) {alert("cancel confirm panel")}, ok:function(win) {alert("validate confirm panel"); return true;} }); 
+       		return confirm(message);  
+       	} 
+       	function openAlertPanel(message) { 
+       		// Dialog.confirm(message, {windowParameters: {width:300}, okLabel: "OUI", cancelLabel: "NON", id: "myDialogId", cancel:function(win) {alert("cancel confirm panel")}, ok:function(win) {alert("validate confirm panel"); return true;} }); 
+       		alert(message);  
+       		return false; 
+       	} 
+    </script>
+  </head>
+  <webobject name = "Body">
+    <webobject name = "Notifs" />
+    <webobject name = "connectedUser">
+      <div class = "page">
+        <br />
+        <div class = "titre">
+          <table class = "useMaxWidth" cellpadding = "0" cellspacing = "0">
+            <tr valign = "middle">
+              <td class = "alignToLeft nowrap">&nbsp;</td>
+              <td class = "alignToCenter useMaxWidth">&nbsp;DOSSIER ETUDIANT&reg;&nbsp;<span class = "pageTitle"><webobject name = "PageTitle" /></span>
+              </td>
+              <td class = "alignToRight nowrap">&nbsp;<webobject name = "LinkQuitter"><webobject name = "Quitter" /></webobject>&nbsp;</td>
+            </tr>
+          </table>
+        </div>
+        <!-- sauvegarde
+              <div style = "float:left;">&nbsp;&nbsp;&nbsp;</div>
+        <div style = "vertical-align: middle">&nbsp;DOSSIER ETUDIANTS&nbsp;<span class = "pageTitle"><webobject name = "PageTitle" /></span>
+        </div>
+        <div style = "float:right;">&nbsp;<webobject name = "LinkQuitter"><webobject name = "Quitter" /></webobject>&nbsp;</div>
+       -->
+        <div id = "colonne-gauche">
+            <h3><a name="Navigation">Navigation</a></h3>
+            <div id = "res-menu">
+              <dl>
+                <webobject name = "lesAgents">
+                  <dt class = "search">
+                    <webobject name = "recherche">
+                      <b>Recherche</b>
+                    </webobject>
+                  </dt>
+                </webobject>
+                <webobject name = "lAdmin">
+                  <dt class = "edtition">
+                    <webobject name = "editions">
+                      <b>Editions</b>
+                    </webobject>
+                  </dt>
+                  <dt class = "admin">
+                    <webobject name = "admin">
+                      <b>Annonce et config</b>
+                    </webobject>
+                  </dt>
+                </webobject>
+                <webobject name = "lesAgents">
+                  <dt class = "extract">
+                    <webobject name = "extractions">
+                      <b>Extractions</b>
+                    </webobject>
+                  </dt>
+                </webobject>
+                <webobject name = "lesEtudiants">
+                  <dt class = "profil">
+                    <webobject name = "profil">
+                      <b>Profil de formation</b>
+                    </webobject>
+                  </dt>
+                  <dt class = "dosAdm">
+                    <webobject name = "dossierAdm">
+                      <b>Dossier administratif</b>
+                    </webobject>
+                  </dt>
+                  <dt class = "edt">
+                    <webobject name = "edt">
+                      <b>Emploi du temps</b>
+                    </webobject>
+                  </dt>
+                  <dt class = "resUv">
+                    <webobject name = "resultatUv">
+                      <b>R&eacute;sultats aux UV</b>
+                    </webobject>
+                  </dt>
+                </webobject>
+                <dt class = "edtEx">
+                  <webobject name = "edtExams">
+                    <b>Edt des examens</b>
+                  </webobject>
+                </dt>
+              </dl>
+            </div>
+        </div>
+        <div class = "contenu" id = "Contenu">
+          <!-- style="height:90%;" -->
+          <webobject name = "Contenu" />
+          <br/>
+        </div>
+        <br/>
+        <!-- fin contenu -->
+        <div class = "copyright">
+          <table class = "useMaxWidth" cellpadding = "0" cellspacing = "0">
+            <tr>
+              <td class = "alignToLeft nowrap" width = "30%">&nbsp;<webobject name = "Copyrights" />&nbsp;</td>
+              <td class = "alignToCenter">&nbsp;<webobject name = "UserName" />&nbsp;</td>
+              <td class = "alignToRight nowrap" width = "30%">&nbsp;<webobject name = "Version" />
+                - 
+                <webobject name = "ServerId" />&nbsp;</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <br/>
+      <!-- fin page -->
+      <div id = "alertWin" style = "display: none; position: absolute; top: 50%; left: 50%; z-index: 999;">
+        <div style = "text-align=center; color: red; background-color: white;"> <webobject name = "Message" /> </div>
+        <div style = "text-align=center; color: red; background-color: white;">
+          <webobject name = "FermerMessage">Fermer</webobject>
+        </div>
+      </div>
+      <div id = "busy" style = "display: none; position: absolute; top: 50%; left: 50%; z-index: 9999;"><webobject name = "Indicateur" /><br>Chargement en cours ...</div>
+      <webobject name = "Busy" />
+    </webobject>
+    <script type = "text/javascript">Profil_MessageContainerUpdate();</script>
+    <br/>
+  </webobject>
+</html>

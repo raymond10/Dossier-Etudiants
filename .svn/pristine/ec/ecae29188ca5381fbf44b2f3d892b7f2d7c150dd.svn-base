@@ -1,0 +1,12 @@
+package etudiants.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+public class EOVueDiplnoprd extends _EOVueDiplnoprd {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7088148324655538099L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EOVueDiplnoprd.class);
+}

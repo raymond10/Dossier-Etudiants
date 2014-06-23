@@ -1,0 +1,392 @@
+Wrapper : Wrapper {
+	bodyId = "extract";
+	onload = onLoad;
+	pageTitle = "Extractions";
+}
+
+exportResults : AjaxUpdateContainer {
+	id="exportResults";
+}
+
+//Utilisateur autorisé
+errors : WOConditional {
+	condition = controleur.isAutorizedUser;
+	negate = true;
+}
+
+browser : WOConditional {
+	condition = browser;
+}
+
+nav : WOHyperlink {
+    id = "Navigation";
+	pageName = "Navigation";
+}
+
+Busy10: AjaxBusyIndicator {
+	divID = "busy10";
+}
+
+Recherche : WOForm {
+	name = "rechercheForm";
+	multipleSubmit = true;
+}
+
+ListPeriodesObserveField : AjaxObserveField {
+	elementName = "span";
+	fullSubmit = true;
+}
+
+periodes : WOPopUpButton {
+	id = "periode";
+	list = controleur.periodes;
+	item = periodeItem;
+	selection = periodeSelect;
+	displayString = periodeItem.LIBELLE;
+}
+
+ListDiplomesObserveField : AjaxObserveField {
+	elementName = "span";
+	fullSubmit = true;
+}
+
+diplomes : WOPopUpButton {
+	id ="diplome";
+	list = controleur.diplomes;
+	item = diplomeItem;
+	selection = diplomeSelect;
+	displayString = diplomeItem.LIBELLE;
+	noSelectionString = "Tous";
+}
+
+ListNiveauxObserveField : AjaxObserveField {
+	elementName = "span";
+	//fullSubmit = true;
+}
+
+niveaux : WOPopUpButton {
+	id="niveau";
+	list = controleur.niveau;
+	item = niveauItem;
+	selection = niveauSelect;
+	displayString = niveauItem.LIBELLE;
+}
+
+ListUvsObserveField : AjaxObserveField {
+	elementName = "span";
+	fullSubmit = true;
+}
+
+uvs : WOPopUpButton {
+	id="uv";
+	list = controleur.uvs;
+	item = uvItem;
+	selection = uvSelect;
+	displayString = uvItem.MIROR_UV;
+	noSelectionString = "Toutes";
+}
+
+SimpleMenu : UttAjaxSimpleMenu {
+	buttonText = "Imprimer";
+}
+
+ExportUvAction : LoginButton {
+	action = imprimerExportUV;
+	class="rechercher";
+	text = "Exporter";
+	type = "print";
+	//onclick = "Element.show('busy');function (oC) {exportResultsUpdate();}";
+}
+
+PrintModalBox: UttAjaxWindow {
+    id = "PrintModalBox";
+    closable = true;
+    showOpener = false; 
+    title = "Imprimer l'export";
+    linkTitle = "Imprimer l'export";
+    width = 391;
+    height = 71;
+}
+
+
+ImagePrinter : WOImage {
+	alt = "Imprimer la reimputation";
+	filename = "printer32.gif";
+	framework = "app";
+	border = 0;
+}
+
+RechercheUv : WOForm {
+	name = "rechercheUvForm";
+	multipleSubmit = true;
+}
+
+periodesUv : WOPopUpButton {
+	id = "periodeUv";
+	list = controleur.periodes;
+	item = periodeUvpItem;
+	selection = periodeUvpSelect;
+	displayString = periodeUvpItem.LIBELLE;
+}
+
+uvsUv : WOPopUpButton {
+	id="uvUv";
+	list = controleur.uvs;
+	item = uvUvpItem;
+	selection = uvUvpSelect;
+	displayString = uvUvpItem.MIROR_UV;
+	noSelectionString = "Toutes";
+}
+
+ExportListUvAction : LoginButton {
+	action = imprimerExport_List_Uv1;
+	text = "Exporter";
+	type = "print";
+	//onclick = "Element.show('busy');";
+	
+}
+
+extract_effectif : WOForm {
+	id = "extract_effectif";
+	name = "extract_effectif";
+	multipleSubmit = true;
+}
+
+periodesB1 : WOPopUpButton {
+	id = "borne1";
+	list = controleur.annees;
+	item = anneeInsp1Item;
+	selection = anneeInsp1Select;
+	displayString = anneeInsp1Item.AN_LIBELLE;
+}
+
+ListPeriodesObserveField1 : AjaxObserveField {
+	elementName = "span";
+	fullSubmit = true;
+}
+
+periodesB2 : WOPopUpButton {
+	id = "borne2";
+	list = controleur.annees;
+	item = anneeInsp2Item;
+	selection = anneeInsp2Select;
+	displayString = anneeInsp2Item.AN_LIBELLE;
+}
+
+ExportEffectifAction: LoginButton {
+	action = imprimerExport_Effectif;
+	text = "Exporter";
+	type = "print";
+	//onclick = "extract_effectif.submit();return true;";
+	
+}
+
+extract_resultat : WOForm {
+	id = "extract_resultat";
+	name = "extract_resultat";
+	multipleSubmit = true;
+}
+
+pBorne1 : WOPopUpButton {
+	id = "pBorne1";
+	list = controleur.periodes;
+	item = periodeEtup1Item;
+	selection = periodeEtup1Select;
+	displayString = periodeEtup1Item.LIBELLE;
+}
+
+pBorne2 : WOPopUpButton {
+	id = "pBorne2";
+	list = controleur.periodes;
+	item = periodeEtup2Item;
+	selection = periodeEtup2Select;
+	displayString = periodeEtup2Item.LIBELLE;
+}
+
+uvEtu : WOPopUpButton {
+	id="uvEtu";
+	list = controleur.uvs;
+	item = uvEtupItem;
+	selection = uvEtupSelect;
+	displayString = uvEtupItem.MIROR_UV;
+	noSelectionString = "Toutes";
+}
+
+diplomeEtu : WOPopUpButton {
+	id ="diplomeEtu";
+	list = controleur.diplomes;
+	item = diplomeEtupItem;
+	selection = diplomeEtupSelect;
+	displayString = diplomeEtupItem.LIBELLE;
+	noSelectionString = "Tous";
+}
+
+ExportResultatAction : LoginButton {
+	action = imprimerExport_Resultat;
+	text = "Exporter";
+	type = "print";
+	//onclick = "Element.show('busy');";
+	
+}
+
+RechercheInsUv : WOForm {
+	name = "rechercheInsUvForm";
+	multipleSubmit = true;
+}
+
+perInsuv : WOPopUpButton {
+	id = "perInsuv";
+	list = controleur.periodes;
+	item = periodeInsUvItem;
+	selection = periodeInsUvSelect;
+	displayString = periodeInsUvItem.LIBELLE;
+}
+
+diplInsUv : WOPopUpButton {
+	id ="diplInsUv";
+	list = controleur.diplomes;
+	item = diplomeInsUvItem;
+	selection = diplomeInsUvSelect;
+	displayString = diplomeInsUvItem.LIBELLE;
+	noSelectionString = "Tous";
+}
+
+nivInsUv : WOPopUpButton {
+	id="nivInsUv";
+	list = controleur.niveau;
+	item = niveauInsUvItem;
+	selection = niveauInsUvSelect;
+	displayString = niveauInsUvItem.LIBELLE;
+}
+
+ExportInsUvAction : LoginButton {
+	action = imprimerExport_InsUv;
+	text = "Exporter";
+	type = "print";
+	//onclick = "Element.show('busy');";
+	
+}
+
+extract_decision : WOForm {
+	id = "extract_decision";
+	name = "extract_decision";
+	multipleSubmit = true;
+}
+
+pBornJery1 : WOPopUpButton {
+	id = "pBornJery1";
+	list = controleur.periodes;
+	item = periodeJury1Item;
+	selection = periodeJury1Select;
+	displayString = periodeJury1Item.LIBELLE;
+}
+
+pBornJery2 : WOPopUpButton {
+	id = "pBornJery2";
+	list = controleur.periodes;
+	item = periodeJury2Item;
+	selection = periodeJury2Select;
+	displayString = periodeJury2Item.LIBELLE;
+}
+
+ExportJuryAction : LoginButton {
+	action = imprimerExport_Decision;
+	text = "Exporter";
+	type = "print";
+	onclick = "Element.show('busy');";
+	
+}
+
+extract_decision2 : WOForm {
+	id = "extract_decision2";
+	name = "extract_decision2";
+	multipleSubmit = true;
+}
+
+periodeJuryAp : WOPopUpButton {
+	id = "periodeJuryAp";
+	list = controleur.periodes;
+	item = periodeJuryApItem;
+	selection = periodeJuryApSelect;
+	displayString = periodeJuryApItem.LIBELLE;
+}
+
+diplomeJuryAp : WOPopUpButton {
+	id ="diplomeJuryAp";
+	list = controleur.diplomes;
+	item = diplomeJuryApItem;
+	selection = diplomeJuryApSelect;
+	displayString = diplomeJuryApItem.LIBELLE;
+	noSelectionString = "Tous";
+}
+
+diplomeRespUV : WOPopUpButton {
+	id ="diplomeRespUV";
+	list = controleur.diplomesRespUv;
+	item = diplomeRespUvItem;
+	selection = diplomeRespUvSelect;
+	displayString = diplomeRespUvItem.DIPLOME;
+	noSelectionString = "Tous";
+}
+
+uvRespUV : WOPopUpButton {
+	id="uvRespUV";
+	list = controleur.uvs;
+	item = uvRespUvItem;
+	selection = uvRespUvSelect;
+	displayString = uvRespUvItem.MIROR_UV;
+	noSelectionString = "Tous";
+}
+
+ListNiveauObserveField : AjaxObserveField {
+	elementName = "span";
+	fullSubmit = true;
+}
+
+niveauRespUV : WOPopUpButton {
+	id="niveauRespUV";
+	list = controleur.niveauxRespUv;
+	item = niveauRespUvItem;
+	selection = niveauRespUvSelect;
+	displayString = niveauRespUvItem.NIVEAU;
+	noSelectionString = "Tous";
+}
+
+ExportJuryApAction : LoginButton {
+	action = imprimerExport_Decision2;
+	text = "Exporter";
+	type = "print";
+	//onclick = "Element.show('busy');";	
+}
+
+extract_respuv : WOForm {
+	id = "extract_respuv";
+	name = "extract_respuv";
+	multipleSubmit = true;
+}
+
+periodeRespUV : WOPopUpButton {
+	id = "periodeRespUV";
+	list = controleur.annees;
+	item = periodeRespUvItem;
+	selection = periodeRespUvSelect;
+	displayString = periodeRespUvItem.AN_LIBELLE;
+	noSelectionString = "Tous"
+}
+
+ExportRespUvAction : LoginButton {
+	action = imprimerExport_Respuv;
+	//onclick = "Element.show('busy');";
+	text = "Exporter";
+	type = "print";
+	//onComplete = "function (oC){exportResultsUpdate();Element.hide('busy');}";	
+}
+
+Link: UttAjaxButton {
+	updateContainerID = "exportResults";
+	action = imprimerExport_Respuv;
+	text = "Exporter";
+	type = "print";
+	onClick = "Element.show('busy')";
+	onComplete = "function(x){Element.hide('busy')}";
+}

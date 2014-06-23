@@ -1,0 +1,659 @@
+/*******************************************************************************
+ * DOSSIER-ETUDIANT
+ * Copyright UNIVERSITE DE TECHNOLOGIE DE TROYES - CEDRE (www.utt.fr), since 1993 
+ * This software is governed by the CeCILL license under French law and abiding by the
+ * rules of distribution of free software. You can use, modify and/or 
+ * redistribute the software under the terms of the CeCILL license as 
+ * circulated by CEA, CNRS and INRIA at the following URL 
+ * "http://www.cecill.info". 
+ * As a counterpart to the access to the source code and rights to copy, modify 
+ * and redistribute granted by the license, users are provided only with a 
+ * limited warranty and the software's author, the holder of the economic 
+ * rights, and the successive licensors have only limited liability. In this 
+ * respect, the user's attention is drawn to the risks associated with loading,
+ * using, modifying and/or developing or reproducing the software by the user 
+ * in light of its specific status of free software, that may mean that it
+ * is complicated to manipulate, and that also therefore means that it is 
+ * reserved for developers and experienced professionals having in-depth
+ * computer knowledge. Users are therefore encouraged to load and test the 
+ * software's suitability as regards their requirements in conditions enabling
+ * the security of their systems and/or data to be ensured and, more generally, 
+ * to use and operate it in the same conditions as regards security. The
+ * fact that you are presently reading this means that you have had knowledge 
+ * of the CeCILL license and that you accept its terms.
+ * 
+ * Do not remove this copyright message
+ ******************************************************************************/
+package etudiants.utt.fr.components;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Properties;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WORequest;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSLog;
+import com.webobjects.foundation.NSMutableDictionary;
+
+import etudiants.utt.fr.components.controlers.DossierAdmCtrl;
+import etudiants.utt.fr.eo.EOEtudiant;
+import etudiants.utt.fr.eo.EOIndividu;
+import etudiants.utt.fr.eo.EOVueDetailetudiant;
+import etudiants.utt.fr.server.MyAjaxComponent;
+import etudiants.utt.fr.server.ProfilHelpers;
+import gestionuv.utt.fr.eo.EOParamDoetu;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+@SuppressWarnings("all")
+public class DossierAdm extends MyAjaxComponent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -578438449422465615L;
+	private String onLoad = null;
+	public static String PBX_MODE;
+	public static String PBX_LANGUE;
+	public static String IMG_SERVER;
+	public static String IMG_DIR;
+	public static String PBX_OPT;
+	public static String PAYBOX_POST;
+	private DossierAdmCtrl admCtrl;
+	private EOVueDetailetudiant detailEtudiant;
+	EOEditingContext ed = edc();
+	private NSMutableDictionary localisation;
+	private NSArray listLocation;
+	private NSArray listFormation;
+	private NSMutableDictionary formation;
+	private NSMutableDictionary adresseInd;
+	private NSMutableDictionary adressePar;
+	private NSArray listInscription;
+	private NSMutableDictionary inscription;
+	private NSMutableDictionary adresses;
+	private NSMutableDictionary scoial;
+	private NSArray listPaiement;
+	private NSMutableDictionary paiement;
+	private NSMutableDictionary paiementTotal;
+	private NSArray<EOParamDoetu> listAnnoncePcb;
+	private EOParamDoetu annoncePcb;
+	private NSMutableDictionary boutonPCB;
+	private String indChez;
+	private String parChez;
+	private String indBp;
+	private String indCommune;
+	private String indPays;
+	private String parBp;
+	private String parCommune;
+	private String parPays;
+
+	public DossierAdm(WOContext context) {
+		super(context);
+		NSLog.out.appendln("Dossier Administratif");
+		IMG_SERVER = myApp().imgServer();
+		IMG_DIR = myApp().repPhoto();
+		PAYBOX_POST = myApp().payBoxPost();
+		PBX_OPT = myApp().payBoxOption();
+		PBX_MODE = myApp().payBoxMode();
+		PBX_LANGUE = myApp().payBoxLang();
+		boutonPCB = new NSMutableDictionary();
+		adresses = new NSMutableDictionary();
+		admCtrl = new DossierAdmCtrl(this);
+		admCtrl.letudiant();
+		admCtrl.leConseiller();
+		admCtrl.consLocalisation();
+		admCtrl.formation();
+		admCtrl.adressInd();
+		admCtrl.adressPar();
+		if(adresseInd != null){
+		adresses.put("ind", adresseInd);
+		}
+		if(adressePar != null){
+		adresses.put("par", adressePar);
+		}
+		admCtrl.inscription();
+		admCtrl.infoSocial();
+		admCtrl.paiement();
+		admCtrl.paiementTotal();
+		admCtrl.pcb();
+		funcAnoncePcb();
+	}
+	
+	/**
+	 * @return the onLoad
+	 */
+	public String getOnLoad() {
+		return onLoad;
+	}
+
+	/**
+	 * @param onLoad the onLoad to set
+	 */
+	public void setOnLoad(String onLoad) {
+		this.onLoad = onLoad;
+	}
+
+	public void appendToResponse(WOResponse res, WOContext ctx) {
+		super.appendToResponse(res, ctx);
+		if (onLoad != null)
+			onLoad = null;
+		ProfilHelpers.insertStylesSheet(ctx, res);
+		 String message = mySession().getAlertMessage();
+			if (message != null && message.equals("") == false) {
+				String str = "<script language=\"javascript\" type=\"text/javascript\">\n";
+				str += "alert(\"" + message + "\");\n";
+				str += "</script>";
+				res.appendContentString(str);
+				mySession().setAlertMessage(null);
+			}
+	}
+
+	/**
+	 * @return the admCtrl
+	 */
+	public DossierAdmCtrl getAdmCtrl() {
+		return admCtrl;
+	}
+
+	/**
+	 * @param admCtrl
+	 *            the admCtrl to set
+	 */
+	public void setAdmCtrl(DossierAdmCtrl admCtrl) {
+		this.admCtrl = admCtrl;
+	}
+
+	/**
+	 * @return the pBX_MODE
+	 */
+	public String PbxMode() {
+		return PBX_MODE;
+	}
+
+	/**
+	 * @return the pBX_LANGUE
+	 */
+	public String PbxLangue() {
+		return PBX_LANGUE;
+	}
+
+	/**
+	 * @return the pBX_OPT
+	 */
+	public String PbxOpt() {
+		return PBX_OPT;
+	}
+
+	/**
+	 * @return the fORM_POST
+	 */
+	public String FormPost() {
+		return PAYBOX_POST;
+	}
+
+	// Vérification droit à l'image avant affichage des photos des étudiants
+	public String droitImage() {
+		String imageURL = null;
+		EOEtudiant study = null;
+		// Récupération de l'id de l'étudiant afin d'afficher sa photo
+		EOIndividu etudiantsKey = mySession().getEtudiant();
+		String pkey = etudiantsKey.primaryKey();
+		Long pk = Long.parseLong(pkey);
+		NSArray<EOEtudiant> droitImages = etudiantsKey.etudiants1();
+		for (int i = 0; i < droitImages.count();) {
+			study = droitImages.objectAtIndex(i);
+/*			if (study.droitImageAccord$f() == null
+					|| study.droitImageAccord$f().toString().equals("o")
+					|| study.droitImageAccord$f().toString().equals("O")
+					|| study.droitImageAccord$f().toString().equals(" ")) {*/
+				imageURL = IMG_SERVER + IMG_DIR	+ pk + ".jpg";
+				// Test de l'URL si la photo existe sinon afficher l'image par
+				// défaut
+				if (!exists(imageURL)) {
+					imageURL = "image/default.jpg";
+				}
+				break;
+			/*} else {
+				imageURL = "image/default.jpg";
+				break;
+			}*/
+		}
+		return imageURL;
+	}
+
+	// Methode de test d'existance d'une URL
+	private static boolean exists(String URLName) {
+		try {
+			Properties systemSettings = System.getProperties();
+			systemSettings.put("proxySet", "true");
+			systemSettings.put("http.proxyHost", "proxy.mycompany.local");
+			systemSettings.put("http.proxyPort", "80");
+
+			URL u = new URL(URLName);
+			HttpURLConnection con = (HttpURLConnection) u.openConnection();
+			sun.misc.BASE64Encoder encoder = new sun.misc.BASE64Encoder();
+			String encodedUserPwd = encoder.encode("domain\\username:password"
+					.getBytes());
+			con.setRequestProperty("Proxy-Authorization", "Basic "
+					+ encodedUserPwd);
+			con.setRequestMethod("HEAD");
+			return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	/**
+	 * @return the detailEtudiant
+	 */
+	public EOVueDetailetudiant getDetailEtudiant() {
+		return detailEtudiant;
+	}
+
+	/**
+	 * @param detailEtudiant
+	 *            the detailEtudiant to set
+	 */
+	public void setDetailEtudiant(EOVueDetailetudiant detailEtudiant) {
+		this.detailEtudiant = detailEtudiant;
+	}
+
+	/**
+	 * @return the localisation
+	 */
+	public NSMutableDictionary getLocalisation() {
+		return localisation;
+	}
+
+	/**
+	 * @param localisation
+	 *            the localisation to set
+	 */
+	public void setLocalisation(NSMutableDictionary localisation) {
+		this.localisation = localisation;
+	}
+
+	/**
+	 * @return the listLocation
+	 */
+	public NSArray getListLocation() {
+		return listLocation;
+	}
+
+	/**
+	 * @param listLocation
+	 *            the listLocation to set
+	 */
+	public void setListLocation(NSArray listLocation) {
+		this.listLocation = listLocation;
+	}
+
+	/**
+	 * @return the listFormation
+	 */
+	public NSArray getListFormation() {
+		return listFormation;
+	}
+
+	/**
+	 * @param listFormation
+	 *            the listFormation to set
+	 */
+	public void setListFormation(NSArray listFormation) {
+		this.listFormation = listFormation;
+	}
+
+	/**
+	 * @return the formation
+	 */
+	public NSMutableDictionary getFormation() {
+		return formation;
+	}
+
+	/**
+	 * @param formation
+	 *            the formation to set
+	 */
+	public void setFormation(NSMutableDictionary formation) {
+		this.formation = formation;
+	}
+
+	/**
+	 * @return the adresses
+	 */
+	public NSMutableDictionary getAdresses() {
+		return adresses;
+	}
+
+	/**
+	 * @param adresses
+	 *            the adresses to set
+	 */
+	public void setAdresses(NSMutableDictionary adresses) {
+		this.adresses = adresses;
+	}
+
+	/**
+	 * @return the adresseInd
+	 */
+	public NSMutableDictionary getAdresseInd() {
+		return adresseInd;
+	}
+
+	/**
+	 * @param adresseInd
+	 *            the adresseInd to set
+	 */
+	public void setAdresseInd(NSMutableDictionary adresseInd) {
+		this.adresseInd = adresseInd;
+	}
+
+	/**
+	 * @return the adressePar
+	 */
+	public NSMutableDictionary getAdressePar() {
+		return adressePar;
+	}
+
+	/**
+	 * @param adressePar
+	 *            the adressePar to set
+	 */
+	public void setAdressePar(NSMutableDictionary adressePar) {
+		this.adressePar = adressePar;
+	}
+
+	/**
+	 * @return the listInscription
+	 */
+	public NSArray getListInscription() {
+		return listInscription;
+	}
+
+	/**
+	 * @param listInscription
+	 *            the listInscription to set
+	 */
+	public void setListInscription(NSArray listInscription) {
+		this.listInscription = listInscription;
+	}
+
+	/**
+	 * @return the inscription
+	 */
+	public NSMutableDictionary getInscription() {
+		return inscription;
+	}
+
+	/**
+	 * @param inscription
+	 *            the inscription to set
+	 */
+	public void setInscription(NSMutableDictionary inscription) {
+		this.inscription = inscription;
+	}
+
+	/**
+	 * @return the scoial
+	 */
+	public NSMutableDictionary getScoial() {
+		return scoial;
+	}
+
+	/**
+	 * @param scoial
+	 *            the scoial to set
+	 */
+	public void setScoial(NSMutableDictionary scoial) {
+		this.scoial = scoial;
+	}
+
+	/**
+	 * @return the listPaiement
+	 */
+	public NSArray getListPaiement() {
+		return listPaiement;
+	}
+
+	/**
+	 * @param listPaiement
+	 *            the listPaiement to set
+	 */
+	public void setListPaiement(NSArray listPaiement) {
+		this.listPaiement = listPaiement;
+	}
+
+	/**
+	 * @return the paiement
+	 */
+	public NSMutableDictionary getPaiement() {
+		return paiement;
+	}
+
+	/**
+	 * @param paiement
+	 *            the paiement to set
+	 */
+	public void setPaiement(NSMutableDictionary paiement) {
+		this.paiement = paiement;
+	}
+
+	/**
+	 * @return the paiementTotal
+	 */
+	public NSMutableDictionary getPaiementTotal() {
+		return paiementTotal;
+	}
+
+	/**
+	 * @param paiementTotal
+	 *            the paiementTotal to set
+	 */
+	public void setPaiementTotal(NSMutableDictionary paiementTotal) {
+		this.paiementTotal = paiementTotal;
+	}
+
+	/**
+	 * @return the listAnnoncePcb
+	 */
+	public NSArray<EOParamDoetu> getListAnnoncePcb() {
+		return listAnnoncePcb;
+	}
+
+	/**
+	 * @param listAnnoncePcb
+	 *            the listAnnoncePcb to set
+	 */
+	public void setListAnnoncePcb(NSArray<EOParamDoetu> listAnnoncePcb) {
+		this.listAnnoncePcb = listAnnoncePcb;
+	}
+
+	/**
+	 * @return the annoncePcb
+	 */
+	public EOParamDoetu getAnnoncePcb() {
+		return annoncePcb;
+	}
+
+	/**
+	 * @param annoncePcb
+	 *            the annoncePcb to set
+	 */
+	public void setAnnoncePcb(EOParamDoetu annoncePcb) {
+		this.annoncePcb = annoncePcb;
+	}
+
+	/**
+	 * @return the boutonPCB
+	 */
+	public NSMutableDictionary getBoutonPCB() {
+		return boutonPCB;
+	}
+
+	/**
+	 * @param boutonPCB the boutonPCB to set
+	 */
+	public void setBoutonPCB(NSMutableDictionary boutonPCB) {
+		this.boutonPCB = boutonPCB;
+	}
+
+	/**
+	 * @return the indChez
+	 */
+	public String getIndChez() {
+		String chez = (String) adresseInd.valueForKey("CHEZ_QUI");
+		if(chez != null && !chez.equals(""))
+			indChez = "Chez "+chez;
+		return indChez;
+	}
+
+	/**
+	 * @param indChez the indChez to set
+	 */
+	public void setIndChez(String indChez) {
+		this.indChez = indChez;
+	}
+
+	/**
+	 * @return the parChez
+	 */
+	public String getParChez() {
+		String chez = (String) adressePar.valueForKey("CHEZ_QUI");
+		if(chez != null && !chez.equals(""))
+			parChez = "Chez "+chez;
+		return parChez;
+	}
+
+	/**
+	 * @param parChez the parChez to set
+	 */
+	public void setParChez(String parChez) {
+		this.parChez = parChez;
+	}
+
+	/**
+	 * @return the indBp
+	 */
+	public String getIndBp() {
+		String bp = (String) adresseInd.valueForKey("BP");
+		if(bp != null && !bp.equals(""))
+			indBp = bp;
+		return indBp;
+	}
+
+	/**
+	 * @param indBp the indBp to set
+	 */
+	public void setIndBp(String indBp) {
+		this.indBp = indBp;
+	}
+
+	/**
+	 * @return the indCommune
+	 */
+	public String getIndCommune() {
+		String commune = (String) adresseInd.valueForKey("COMMUNE");
+		if(commune != null && !commune.equals(""))
+			indCommune = commune;
+		return indCommune;
+	}
+
+	/**
+	 * @param indCommune the indCommune to set
+	 */
+	public void setIndCommune(String indCommune) {
+		this.indCommune = indCommune;
+	}
+
+	/**
+	 * @return the indPays
+	 */
+	public String getIndPays() {
+		String pays = (String) adresseInd.valueForKey("PAYS");
+		if(pays != null && !pays.equals(""))
+			indPays = pays;
+		return indPays;
+	}
+
+	/**
+	 * @param indPays the indPays to set
+	 */
+	public void setIndPays(String indPays) {
+		this.indPays = indPays;
+	}
+
+	/**
+	 * @return the parBp
+	 */
+	public String getParBp() {
+		String bp = (String) adressePar.valueForKey("BP");
+		if(bp != null && !bp.equals(""))
+			parBp = bp;
+		return parBp;
+	}
+
+	/**
+	 * @param parBp the parBp to set
+	 */
+	public void setParBp(String parBp) {
+		this.parBp = parBp;
+	}
+
+	/**
+	 * @return the parCommune
+	 */
+	public String getParCommune() {
+		String commune = (String) adressePar.valueForKey("COMMUNE");
+		if(commune != null && !commune.equals(""))
+			parCommune = commune;
+		return parCommune;
+	}
+
+	/**
+	 * @param parCommune the parCommune to set
+	 */
+	public void setParCommune(String parCommune) {
+		this.parCommune = parCommune;
+	}
+
+	/**
+	 * @return the parPays
+	 */
+	public String getParPays() {
+		String pays = (String) adressePar.valueForKey("PAYS");
+		if(pays != null && !pays.equals(""))
+			parPays = pays;
+		return parPays;
+	}
+
+	/**
+	 * @param parPays the parPays to set
+	 */
+	public void setParPays(String parPays) {
+		this.parPays = parPays;
+	}
+
+	/**
+	 * @return the montant
+	 */
+	public void montant() {
+		Double tmp =  (Double) boutonPCB.valueForKey("MONTANT");
+		Integer montant = Integer.valueOf(tmp.intValue());
+		boutonPCB.takeValueForKey(montant,"MONTANT");
+	}
+
+	protected void funcAnoncePcb() {
+		listAnnoncePcb = EOParamDoetu.fetchAllEOParamDoetus(ed);
+		if (listAnnoncePcb != null && listAnnoncePcb.count() == 1) {
+			annoncePcb = listAnnoncePcb.lastObject();
+			//boutonPCB.put("VISIBLE", annoncePcb.visiblef());
+		}
+	}
+	
+}

@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="idiplome" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="style1"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#EFF7FF"/>
+		</conditionalStyle>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="iCategorie">
+		<parameter name="ID_DIPLOME" class="java.lang.String" isForPrompting="false">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+rc.categ_id as id,
+rc.categ_lib as libelle,
+rc.categ_abr as lib_abr,
+categ_ordre as ordre
+from
+  gest_uv.ref_categorie rc,
+  gerry.diplome d
+where
+rc.diplome_$c = d.diplome_$c
+and rc.diplome_$c=$P{ID_DIPLOME}
+and CATEG_ABR not in('NA','LB')
+and
+(select pp.an_univ||pp.prd_univ as prd from gerry.param_prd pp,gerry.diplome p
+ where p.diplome_$c = d.diplome_$c
+	and par_prd_type=decode(d.prd_type_$c,'S', 'DEF','U', 'DEF3C')
+)
+between nvl(rc.deb_an_univ||rc.deb_prd_univ,'19001A') and nvl(rc.fin_an_univ||rc.fin_prd_univ,'99992P')
+order by ordre]]>
+		</queryString>
+		<field name="ID" class="java.math.BigDecimal"/>
+		<field name="LIBELLE" class="java.lang.String"/>
+		<field name="LIB_ABR" class="java.lang.String"/>
+		<field name="ORDRE" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="iParcours">
+		<parameter name="ETUID" class="java.lang.Integer" isForPrompting="false">
+			<defaultValueExpression><![CDATA[11500]]></defaultValueExpression>
+		</parameter>
+		<parameter name="ID_DIPLOME" class="java.lang.String" isForPrompting="false">
+			<defaultValueExpression><![CDATA["MST"]]></defaultValueExpression>
+		</parameter>
+		<parameter name="DEBUT" class="java.lang.String" isForPrompting="false">
+			<defaultValueExpression><![CDATA["20081A"]]></defaultValueExpression>
+		</parameter>
+		<parameter name="FIN" class="java.lang.String" isForPrompting="false">
+			<defaultValueExpression><![CDATA["20091A"]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+eia.inscr_adm_id as id,
+eia.etu_id,
+eia.diplome_$c,
+eia.an_univ,
+eia.prd_univ,
+rp.libelle,
+vds.dipl_spec_abr ||' ' || eia.niveau_adm || ' ' || dop.dipl_opt_abr as formation,
+    case
+      when jury_nouv_$f='O' then
+        case when eia.diplome_$c ='ING2' then
+         case when gest_uv.fonc_stg_dipl(eia.etu_id,eia.an_univ||eia.prd_univ)='O'
+           then
+           ''
+         else
+          gest_uv.fonc_obs_stg(eia.etu_id,eia.an_univ||eia.prd_univ,1)
+         end
+        else
+         gest_uv.fonc_obs_stg(eia.etu_id,eia.an_univ||eia.prd_univ,1)
+
+       end
+
+  end as stage,
+
+case
+  when jury_publi_$f='O' then
+    case
+      when jury_nouv_$f='O' then
+        replace(replace(eia.obs_gen,chr(13),'<br/>'),chr(10),'<br/>')
+      else
+        replace(substr(eia.obs_pedag,1,
+        decode(instr(eia.obs_pedag,'-',1,3)-1,-1,length(eia.obs_pedag),
+        instr(eia.obs_pedag,'-',1,3)-1)),'-  -','-')
+    end
+   else ''
+  end as observation,
+(select
+   to_char(sout_date,'DD/MM/YYYY')
+ from gerry.these
+ where
+ doct_id = eia.etu_id
+ and  substr(eia.an_univ||eia.prd_univ,1,4)=to_char(sout_date,'YYYY')
+ ) as soutenance,
+eia.dipl_spec_$c,
+eia.dipl_opt_$c,
+(select libelle from gerry.ref_decision
+ where res_pedag_$c = eia.res_pedag_$c and diplome_$c = eia.diplome_$c) as decision,
+
+(select situation from gerry.ref_situation where situation_$c = eia.situation_$c) as situation,
+(select prd_session
+  from gerry.ref_periode
+ where an_univ||prd_univ = eia.an_univ||eia.prd_univ) as prd_session,
+(
+select diplome_num
+from gest_uv.etu_diplome
+where
+ an_univ||prd_univ = eia.an_univ||eia.prd_univ
+ and etu_id = eia.etu_id
+ and diplome_$c = eia.diplome_$c
+) as diplome_num
+
+
+from
+gerry.etu_inscr_adm eia,
+gerry.ref_periode rp,
+gerry.vue_dipl_spec vds, gerry.dipl_option dop
+where
+eia.an_univ||eia.prd_univ = rp.an_univ||rp.prd_univ
+and eia.an_univ || eia.prd_univ between vds.deb_prd and vds.fin_prd
+and vds.diplome_$c = eia.diplome_$c
+and vds.dipl_spec_$c = eia.dipl_spec_$c
+and dop.dipl_opt_$c(+) = eia.dipl_opt_$c
+and eia.etu_id=$P{ETUID}
+and eia.diplome_$c=$P{ID_DIPLOME}
+and eia.an_univ||eia.prd_univ between $P{DEBUT} and $P{FIN}
+order by eia.inscr_adm_id]]>
+		</queryString>
+		<field name="ID" class="java.lang.String"/>
+		<field name="ETU_ID" class="java.math.BigDecimal"/>
+		<field name="DIPLOME_$C" class="java.lang.String"/>
+		<field name="AN_UNIV" class="java.lang.String"/>
+		<field name="PRD_UNIV" class="java.lang.String"/>
+		<field name="LIBELLE" class="java.lang.String"/>
+		<field name="FORMATION" class="java.lang.String"/>
+		<field name="STAGE" class="java.lang.String"/>
+		<field name="OBSERVATION" class="java.lang.String"/>
+		<field name="SOUTENANCE" class="java.lang.String"/>
+		<field name="DIPL_SPEC_$C" class="java.lang.String"/>
+		<field name="DIPL_OPT_$C" class="java.lang.String"/>
+		<field name="DECISION" class="java.lang.String"/>
+		<field name="SITUATION" class="java.lang.String"/>
+		<field name="PRD_SESSION" class="java.lang.String"/>
+		<field name="DIPLOME_NUM" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="iInsUV">
+		<parameter name="ETUID" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[11500]]></defaultValueExpression>
+		</parameter>
+		<parameter name="ID_DIPLOME" class="java.lang.String">
+			<defaultValueExpression><![CDATA["MST"]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+etu_id,
+(select an_univ||prd_univ
+ from gest_uv.uv_ouv uo, gest_uv.uv_ouvertes uos
+ where
+   uos.uv_ouv_id = uo.uv_ouv_id
+   and uos.nle_uv_ouverte_id = eiu.nle_uv_ouverte_id) as periode,
+(select diplome_$c
+ from gest_uv.uv_ouvertes
+ where nle_uv_ouverte_id = eiu.nle_uv_ouverte_id) as diplome,
+(select uv_$c
+ from gest_uv.uv_ouv uo, gest_uv.uv_ouvertes uos
+ where uos.uv_ouv_id = uo.uv_ouv_id
+	and uos.nle_uv_ouverte_id = eiu.nle_uv_ouverte_id) as uv,
+(select categ_abr from gest_uv.ref_categorie where categ_id = eiu.categ_id_insuv) as categ_abr,
+(select categ_ordre from gest_uv.ref_categorie where categ_id = eiu.categ_id_insuv) as categ_ordre,
+
+decode(
+eiu.publie_$f,
+'O',resuv_$c,
+'N',decode(resuv_$c, 'ADM',resuv_$c,'EQU',resuv_$c,'DES',resuv_$c,'')) as resuv,
+
+
+decode(
+eiu.publie_$f,
+'O',
+to_char(gest_uv.fonc_resultat_valeurN('MST',
+(select uv_$c
+ from gest_uv.uv_ouv uo, gest_uv.uv_ouvertes uos
+ where uos.uv_ouv_id = uo.uv_ouv_id
+	and uos.nle_uv_ouverte_id = eiu.nle_uv_ouverte_id),
+resuv_$c, nb_credits_ects_insuv,nb_credits_ects_insuv)),
+'N',decode(resuv_$c, 'EQU',nb_credits_ects_insuv,'')) as credit,
+
+(select profil_abr
+ from gest_uv.ref_profil
+ where profil_id = eiu.profil_id
+ and diplome_$c='MST') as profil_abr,
+profil_$f as profilf,
+nvl(decode(profil_$f,
+'O', decode(resuv_$c,'DES','0032','F','0032','FX','0032',
+   (select legende
+     from gest_uv.ref_profil
+     where profil_id = eiu.profil_id
+     and diplome_$c='MST')),
+'N',
+    decode(resuv_$c,'F','0032','FX','0032','DES','0032',
+    (select legende
+     from gest_uv.ref_profil
+     where profil_id = eiu.profil_id
+     and diplome_$c='MST')),
+    ''),'0032') as legende  ,
+eiu.publie_$f
+from
+  gest_uv.etu_inscr_uv eiu
+where
+  etu_id= $P{ETUID}
+  and trim(substr(eiu.inscr_adm_id,7,5)) = $P{ID_DIPLOME}
+order by eiu.inscr_adm_id, categ_ordre,uv]]>
+		</queryString>
+		<field name="ETU_ID" class="java.math.BigDecimal"/>
+		<field name="PERIODE" class="java.lang.String"/>
+		<field name="DIPLOME" class="java.lang.String"/>
+		<field name="UV" class="java.lang.String"/>
+		<field name="CATEG_ABR" class="java.lang.String"/>
+		<field name="CATEG_ORDRE" class="java.lang.String"/>
+		<field name="RESUV" class="java.lang.String"/>
+		<field name="CREDIT" class="java.lang.String"/>
+		<field name="PROFIL_ABR" class="java.lang.String"/>
+		<field name="PROFILF" class="java.lang.String"/>
+		<field name="LEGENDE" class="java.lang.String"/>
+		<field name="PUBLIE_$F" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="iLegende">
+		<parameter name="ID_DIPLOME" class="java.lang.String" isForPrompting="false">
+			<defaultValueExpression><![CDATA["MST"]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[select
+	profil_abr,
+	profil_lib,
+	legende,
+	profil_ordre
+from
+  gest_uv.ref_profil
+where
+  diplome_$c=$P{ID_DIPLOME}
+  and legende is not null
+order by profil_ordre]]>
+		</queryString>
+		<field name="PROFIL_ABR" class="java.lang.String"/>
+		<field name="PROFIL_LIB" class="java.lang.String"/>
+		<field name="LEGENDE" class="java.lang.String"/>
+		<field name="PROFIL_ORDRE" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="ETUID" class="java.math.BigDecimal" isForPrompting="false">
+		<parameterDescription><![CDATA[numéro étudiant]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new BigDecimal(11500)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="REP_BASE_PATH" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+  vtp.etu_id,
+  vtp.diplome_$c as id,
+  decode(vtp.diplome_$c,'ING',d.diplome || ' ancien règlement',d.diplome) as libelle,
+  vtp.prd_debut,
+  vtp.prd_fin,
+  gerry.fonc_trad_prd_lib(vtp.prd_debut,'anprd') as debut,
+  gerry.fonc_trad_prd_lib(vtp.prd_fin,'anprd') as fin,
+  vtp.reorient_$f as reoriente,
+  vtp.niv_entree,
+  decode(vtp.dipl_spec_$c,'110',vtp.dipl_spec_$c,null) as dipl_spec_$c,
+  d.PROFIL_C_$F as profil_c
+from
+  gest_uv.PROFIL_PARCOURS vtp,
+  gerry.diplome d
+where
+  vtp.diplome_$c = d.diplome_$c
+  and vtp.etu_id = $P{ETUID}
+order by prd_debut,prd_fin]]>
+	</queryString>
+	<field name="ETU_ID" class="java.math.BigDecimal"/>
+	<field name="ID" class="java.lang.String"/>
+	<field name="LIBELLE" class="java.lang.String"/>
+	<field name="PRD_DEBUT" class="java.lang.String"/>
+	<field name="PRD_FIN" class="java.lang.String"/>
+	<field name="DEBUT" class="java.lang.String"/>
+	<field name="FIN" class="java.lang.String"/>
+	<field name="REORIENTE" class="java.lang.String"/>
+	<field name="NIV_ENTREE" class="java.lang.String"/>
+	<field name="DIPL_SPEC_$C" class="java.lang.String"/>
+	<field name="PROFIL_C" class="java.lang.String"/>
+	<group name="iDiplomes" isStartNewPage="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{PRD_DEBUT}]]></groupExpression>
+		<groupHeader>
+			<band height="55">
+				<textField>
+					<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="152" y="15" width="486" height="17" backcolor="#CCCCFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LIBELLE}+" de "+$F{DEBUT}+" à "+$F{FIN}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="38"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="99" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="39" width="802" height="60"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="iCategorie">
+						<datasetParameter name="ID_DIPLOME">
+							<datasetParameterExpression><![CDATA[$F{ID}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:columnGroup width="85">
+						<jr:column width="85">
+							<jr:columnHeader style="table_CH" height="17" rowSpan="1"/>
+							<jr:detailCell height="30" rowSpan="1">
+								<textField>
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="85" height="30"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{LIB_ABR}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table 1" style="table 1" mode="Transparent" x="225" y="0" width="316" height="17" forecolor="#FFFFFF"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="iLegende">
+						<datasetParameter name="ID_DIPLOME">
+							<datasetParameterExpression><![CDATA[$F{ID}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90">
+						<jr:detailCell style="table 1_TD" height="30" rowSpan="1">
+							<box>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.0"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA["&#"+$F{LEGENDE}+";"]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="99">
+						<jr:detailCell height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="99" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Profil minimu validé]]></text>
+							</staticText>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

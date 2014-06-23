@@ -1,0 +1,7 @@
+Les jars situés dans ce reprtoire ont pour but d'etre deployes avec 
+l'application en tant que ressource de l'application. 
+Si vous en rajouter ici, l'indiquer également dans les fichiers 
+pb.project, makefile, et makefile.preamble (parametre OTHER_CLASSPATH).
+
+Rodolphe Prin
+11/12/2004

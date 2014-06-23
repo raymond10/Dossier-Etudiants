@@ -1,0 +1,520 @@
+Wrapper : Wrapper {
+	bodyId = "dosAdm";
+	onload = onLoad;
+	pageTitle = "Dossier administratif";
+}
+
+//Utilisateur autorisé
+errors : WOConditional {
+	condition = admCtrl.isAutorizUser;
+	negate = true;
+}
+
+//Session utilisateur
+etudiant : WOConditional {
+	condition = admCtrl.isEtudiant;
+}
+
+profil : WOHyperlink {
+	action = admCtrl.leprofil;
+	onclick = "Element.show('busy10');";
+}
+
+resultatUv : WOHyperlink {
+	action = admCtrl.leResultatUv;
+	onclick = "Element.show('busy10');";
+}
+
+edt : WOHyperlink {
+	action = admCtrl.lEmploiDuTemps;
+	onclick = "Element.show('busy10');";
+}
+
+status : WOConditional {
+	condition = session.retourAlaListe;
+}
+
+retourList : WOHyperlink {
+	action = admCtrl.retourAlaListe;
+	onclick = "Element.show('busy10');";
+}
+
+iCone : WOImage {
+    name="Retour";
+	filename = "newImages/wb16.png";
+	border = "0";
+	alt = "Retour à la liste";
+}
+
+EtuPhoto : WOImage {
+	height = "75";
+	width = "60";
+	border = "0";
+	alt = "photo de l'étudiant";
+	id = "photo";
+	src = droitImage;
+}
+
+civEtu : WOString {
+	value = admCtrl.currentEtudiant.civilite;
+}
+
+nomEtu : WOString {
+	value = admCtrl.currentEtudiant.nom;
+}
+
+prenomEtu : WOString {
+	value = admCtrl.currentEtudiant.prenom;
+}
+
+etuEmail : WOString {
+	value = admCtrl.currentEtudiant.email;
+}
+
+etuId : WOString {
+	value = admCtrl.currentEtudiant.primaryKey;
+}
+
+etuDateNais : WOString {
+	value = admCtrl.currentEtudiant.dateNaiss;
+	//dateformat = "%d/%m/%Y";
+}
+
+etuComNais : WOString {
+	value = admCtrl.currentEtudiant.comNais;
+}
+
+depNais : WOConditional {
+	condition = admCtrl.currentEtudiant.deptNais;
+}
+
+dept_nais : WOString {
+	value = admCtrl.currentEtudiant.deptNais;
+}
+
+pays_nais : WOString {
+	value = admCtrl.currentEtudiant.paysNais;
+}
+
+haveConseiller : WOConditional {
+	condition = admCtrl.leConseiller;
+}
+
+conseiller_nom : WOString {
+	value = admCtrl.leConseiller.nom;
+}
+
+conseiller_prenom : WOString {
+	value = admCtrl.leConseiller.prenom;
+}
+
+existLocal : WOConditional {
+	condition = listLocation;
+}
+
+conslocalisations : WORepetition {
+	list = listLocation;
+	item = localisation;
+}
+
+salle_no : WOString {
+	value = localisation.SALLE_NO;
+}
+
+tel : WOString {
+	value = localisation.TEL;
+}
+
+etudiant_nni : WOString {
+	value = admCtrl.currentEtudiant.nni;
+}
+
+etudiant_pays_nat : WOString {
+	value = admCtrl.currentEtudiant.paysNat;
+}
+
+etudiant_langue_mat : WOString {
+	value = admCtrl.currentEtudiant.langueMat;
+}
+
+etudiant_bac_an : WOString {
+	value = admCtrl.currentEtudiant.bacAn;
+}
+
+etudiant_bac_serie : WOString {
+	value = admCtrl.currentEtudiant.bacSerie;
+}
+
+etudiant_bac_mention : WOString {
+	value = admCtrl.currentEtudiant.bacMention;
+}
+
+etudiant_dept_bac : WOString {
+	value = admCtrl.currentEtudiant.deptBac;
+}
+
+etudiant_academie_bac : WOString {
+	value = admCtrl.currentEtudiant.academieBac;
+}
+
+etudiant_pays_bac : WOString {
+	value = admCtrl.currentEtudiant.paysBac;
+}
+
+etudiant_ville_bac : WOString {
+	value = admCtrl.currentEtudiant.villeBac;
+}
+
+etudiant_etab_bac : WOString {
+	value = admCtrl.currentEtudiant.etabBac;
+}
+
+formations : WORepetition {
+	list = listFormation;
+	item = formation;
+}
+
+formation_dipl_obt : WOString {
+	value =formation.DIPLOBT;
+}
+
+formation_an_dipl : WOString {
+	value = formation.ANDIPL;
+}
+
+formation_lib_dipl : WOString {
+	value = formation.LIBDIPL;
+}
+
+formation_lieu_dipl : WOString {
+	value = formation.LIEUDIPL;
+}
+
+Busy10: AjaxBusyIndicator {
+	divID = "busy10";
+}
+
+Indicateur1 : WOImage {
+	border = 0;
+	filename = "newImages/indicator_arrows.gif";
+	style = "display:none;";
+	id = "busy10";
+}
+
+etudiant_adresses : WOConditional {
+	condition = adresses;
+}
+
+ind : WOConditional {
+	condition = adresseInd;
+}
+
+exists_chez_qui : WOConditional {
+	condition = indChez;
+}
+
+ind_chez_qui : WOString {
+	value =  indChez;
+}
+
+exists_adr1 : WOConditional {
+	condition = adresseInd.ADR1;
+}
+
+ind_adr1 : WOString {
+	value = adresseInd.ADR1;
+}
+
+exists_adr2 : WOConditional {
+	condition = adresseInd.ADR2;
+}
+
+ind_adr2 : WOString {
+	value = adresseInd.ADR2;
+}
+
+exists_bp : WOConditional {
+	condition = indBp;
+}
+
+ind_bp : WOString {
+	value = adresseInd.BP;
+}
+
+exists_commune : WOConditional {
+	condition = indCommune;
+}
+
+ind_commune : WOString {
+	value = adresseInd.COMMUNE;
+}
+
+exists_pays : WOConditional {
+	condition = indPays;
+}
+
+ind_pays : WOString {
+	value = adresseInd.PAYS;
+}
+
+exists_tel1 : WOConditional {
+	condition = adresseInd.TEL1;
+}
+
+ind_tel1 : WOString {
+	value = adresseInd.TEL1;
+}
+
+exists_tel2 : WOConditional {
+	condition = adresseInd.TEL2;
+}
+
+ind_tel2 : WOString {
+	value = adresseInd.TEL2;
+}
+
+par : WOConditional {
+	condition = adressePar;
+}
+
+exispar_chez_qui : WOConditional {
+	condition = parChez;
+}
+
+par_chez_qui : WOString {
+	value = parChez;
+}
+
+exispar_adr1 : WOConditional {
+	condition = adressePar.ADR1;
+}
+
+par_adr1 : WOString {
+	value = adressePar.ADR1;
+}
+
+exispar_adr2 : WOConditional {
+	condition = adressePar.ADR2;
+}
+
+par_adr2 : WOString {
+	value = adressePar.ADR2;
+}
+
+exispar_bp : WOConditional {
+	condition = parBp;
+}
+
+par_bp : WOString {
+	value = adressePar.BP;
+}
+
+exispar_commune : WOConditional {
+	condition = parCommune;
+}
+
+par_commune : WOString {
+	value = adressePar.COMMUNE;
+}
+
+exispar_pays : WOConditional {
+	condition = parPays;
+}
+
+par_pays : WOString {
+	value = adressePar.PAYS;
+}
+
+exispar_tel1 : WOConditional {
+	condition = adressePar.TEL1;
+}
+
+par_tel1 : WOString {
+	value = adressePar.TEL1;
+}
+
+exispar_tel2 : WOConditional {
+	condition = adressePar.TEL2;
+}
+
+par_tel2 : WOString {
+	value = adressePar.TEL2;
+}
+
+etudiant_inscriptions : WORepetition {
+	list = listInscription;
+	item = inscription;
+}
+
+ins_periode : WOString {
+	value = inscription.PERIODE;
+}
+
+ins_diplome : WOString {
+	value = inscription.DIPLOME;
+}
+
+ins_dipl_spec_abr : WOString {
+	value = inscription.DIPL_SPEC_ABR;
+}
+
+existDilplOpt : WOConditional {
+	condition = inscription.DIPL_OPT_ABR;
+}
+
+ins_dipl_opt_abr : WOString {
+	value = inscription.DIPL_OPT_ABR;
+}
+
+ins_niveau_adm : WOString {
+	value = inscription.NIVEAU_ADM;
+}
+
+existsFormule : WOConditional {
+	condition = inscription.FORMULE;
+}
+
+ins_formule : WOString {
+	value = inscription.FORMULE;
+}
+
+ins_lib_formule : WOString {
+	value = inscription.LIB_FORMULE;
+}
+
+existCodeDecision : WOConditional {
+	condition = inscription.CODE_DECISION;
+}
+
+ins_code_decision : WOString {
+	value = inscription.CODE_DECISION;
+}
+
+ins_lib_decision : WOString {
+	value = inscription.LIB_DECISION;
+}
+
+existsEchange : WOConditional {
+	condition = inscription.ECHANGE;
+}
+
+ins_echange : WOString {
+	value = inscription.ECHANGE;
+}
+
+voirInfos : WOConditional {
+	condition = admCtrl.leRole;
+}
+
+etudiant_nfosociales : WOConditional {
+	condition = scoial;
+}
+infos_an : WOString {
+	value = scoial.AN;
+}
+
+infos_bourse : WOString {
+	value = scoial.BOURSE;
+}
+
+infos_regime_secu : WOString {
+	value = scoial.REGIME_SECU;
+}
+
+infos_centre_secu : WOString {
+	value = scoial.CENTRE_SECU;
+}
+
+infos_sport : WOString {
+	value = scoial.SPORT;
+}
+
+infos_bde : WOString {
+	value = scoial.BDE;
+}
+
+paiement_ann : WOString {
+	value = scoial.AN;
+}
+
+etudiant_paiement : WOConditional {
+	condition = listPaiement.count;
+}
+
+paiement_details : WORepetition {
+	list = listPaiement;
+	item = paiement;
+}
+
+detail_paie_lib : WOString {
+	value = paiement.PAIE_LIB;
+}
+
+detail_paie_mnt : WOString {
+	value = paiement.PAIE_MNT;
+}
+
+paiement_total : WOString {
+	value = paiementTotal.MNT_TOT;
+}
+
+opts_pcb : WOConditional {
+	condition = admCtrl.boolPcb;
+}
+
+post_cond : WOConditional {
+	condition = admCtrl.canPost;
+}
+
+montant : WOString {
+	value = montant;
+	class="hide";
+}
+
+payBoxForm : WOForm {
+	name = "paybox";
+	id = "paybox";
+	//action = admCtrl.payementPost;
+	href = formPost;
+	target = "_blank";
+	method = "post";
+	multipleSubmit = true;
+}
+
+pbxMode : WOHiddenField {
+	name = "PBX_MODE";
+	value = pbxMode;
+}
+
+pbxCmd : WOHiddenField {
+	name = "PBX_CMD";
+	value = boutonPCB.CLE_MYSQL;
+}
+
+pbxTotal : WOHiddenField {
+	name = "PBX_TOTAL";
+	value = boutonPCB.MONTANT;
+}
+
+pbxPorteur : WOHiddenField {
+	name = "PBX_PORTEUR";
+	value = boutonPCB.EMAIL;
+}
+
+pbxLangue : WOHiddenField {
+	name = "PBX_LANGUE";
+	value = pbxLangue;
+}
+
+pbxOpt : WOHiddenField {
+	name = "PBX_OPT";
+	value = pbxOpt;
+}
+
+browser : WOConditional {
+	condition = browser;
+}
+
+nav : WOHyperlink {
+	pageName = "Navigation";
+}

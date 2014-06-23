@@ -1,0 +1,24 @@
+package etudiants.utt.fr.roles;
+
+import org.apache.log4j.Logger;
+
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSArray;
+
+import etudiants.utt.fr.eo.EOIndividu;
+
+public class VPersonnel extends _VPersonnel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7214436378222697228L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(VPersonnel.class);
+	
+	@SuppressWarnings("rawtypes")
+	public static Boolean isPersonnel(EOEditingContext myContext, EOIndividu id) {
+		NSArray personnel = null;
+		personnel = VPersonnel.fetchPersonnel(myContext, Long.valueOf(id.primaryKey()));
+		return !personnel.isEmpty();
+	}
+}

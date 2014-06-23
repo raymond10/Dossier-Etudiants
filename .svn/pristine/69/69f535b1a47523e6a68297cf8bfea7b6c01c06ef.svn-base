@@ -1,0 +1,120 @@
+#*******************************************************************
+
+#      FICHIER DE CONFIGURATION DE L'APPLICATION PROFIL ETUDIANTS
+
+#
+
+#Les valeurs definis dans ce fichier prennent le pas sur les valeurs
+
+#          définies dans la vue GERRY.VUE_PARAM_KEY
+
+#*******************************************************************
+
+APP_USE_MAIL = OUI
+GERRY_HOST_MAIL = smtp.utt.fr
+ADMIN_MAIL=raymond.naneon@utt.fr
+#APP_ADMIN_MAIL=raymond.naneon@utt.fr
+DOMAIN_NAME=utt.fr
+
+APP_ID=PROFIL
+APP_ALIAS=Dossier-Etudiants
+APP_TITLE=DOSSIER-ETUDIANT
+APP_USE_GEDFS = NON
+APP_URL=http://imac-cedre.utt.fr:1242/cgi-bin/WebObjects/Dossier-Etudiants.woa
+
+#Config SAUT + Modeles
+#SAUT_URL = Adresse de votre serveur SAUT si vous en avez un 
+#La connexion principale à utiliser, peut être redéfinie par SAUT_ID_TRANSLATION
+
+SAUT_URL=https://agecanonix.utt.fr/cgi-bin/WebObjects/ServAut.woa/wa/
+SAUT_ID_TRANSLATION=ULOGIN:GERRY,GERRY:GERRY,GEST_UV:GEST_UV
+
+NET_NO_PROXY_HOSTS=*.utt.fr
+
+#* Le URL de site Web principale de l'etablissement
+
+MAIN_WEB_SITE_URL=http://imac-cedre.utt.fr:1242/cgi-bin/WebObjects/Dossier-Etudiants.woa
+
+
+
+#* Le URL de l'image "logo" de l'etablissement. Elle est affichee sur la page
+
+#* d'acceuil de l'application et dans la bare de menu
+
+#MAIN_LOGO_URL=https://agecanonix-form.utt.fr/WebObjects/Images/logoUTTgaucheLittle.png
+
+
+#* Le raccourci d'acces a l'application Dossier-Etudiants. Si ce raccourci n'est pas
+
+#* defini, alors le parametre APP_URL est utilise.
+
+#* Ce parametre est utilise pour ajouter un lien dans les messages email.
+
+APP_URL_ALIAS=http://www.dossier-etudiants.utt.fr
+
+
+
+# === Les parametres relatifs aux differents services/bases de donnees  ===
+
+
+#Autorisation logging CAS
+
+APP_USE_CAS = OUI
+
+#CAS_SERVICE_URL = https://cas.utt.fr
+
+CAS_LOGOUT_URL = https://cas.utt.fr/cas/logout?service=http://imac-cedre.utt.fr:1242/cgi-bin/WebObjects/Dossier-Etudiants
+
+#Paiement PayBox
+PAYBOX_POST = https://eboutique.utt.fr/cgi-bin/modulev3.cgi
+PBX_OPT = /usr/local/paybox/paybox.txt
+PBX_LANGUE = FRA
+PBX_MODE = 13
+
+#SERVEUR PHOTOS (Serveur hébergeant les photos)
+PHOTO_SERVER = https://local-sig.utt.fr
+REP_PHOTO = /Pub/trombi/individu/mini/
+
+#Connection au serveur d'impression pdf
+
+REPORT_URL = http://gestion-dev.utt.fr/PrintPDFServer/report.do
+#REPORT_URL = https://gestion.utt.fr/PrintPDFServer/report.do
+
+EXPORT_URL = http://gestion-dev.utt.fr/PrintPDFServer/export/
+#EXPORT_URL = https://gestion.utt.fr/PrintPDFServer/export/
+
+REPORT_EXPORT_PATH = /home/tomcat7/webapps/Suivi-PP/export/
+
+#Mot de passe Crypter par la commande 
+#http://XXX.utt.fr/cgi-bin/WebObjects/Dossier-Etudiants.woa/wa/encryption?Passwd=mot_de_passe_non_crypter 
+#dans les logs Dossier-Etudiants sur le serveur
+REPORT_SERVER = gestion-dev.utt.fr
+SERVER_PWD = beHBJTr8KnM=
+#REPORT_SERVER = gestion.utt.fr
+#SERVER_PWD = L/MfygQF7A4=
+#Fin connection
+
+DIRECT_ACTION = http://imac-cedre.utt.fr:1242/cgi-bin/WebObjects/Dossier-Etudiants.woa/wa/DAConsultProfil?etuId=36476
+
+GCTC_URL = https://alambix.utt.fr/GCTC/fr/gest/ctcdtl/id/
+
+#Personnel inscrit à UV
+NOT_PERS_INS_UV = ETU_INSCR_ADMS.dot(EOEtudiantInscrAdm.DIPL_SPECC).isNot("03")
+NOT_PERS_UV = OUI
+#Fin
+
+#TimeZone à utiliser pour gérer les dates de l'application
+
+DEFAULT_NS_TIMEZONE = Europe/Paris
+
+#repertoire qui contient les.jasper livres avec l'application (celui de l'application)
+REP_BASE_JASPER_PATH=/Users/naneon/Developpements/workspace-juno/Dossier-Etudiants/Resources/reports/
+
+#repertoire qui contient les.jasper VOTRE BASE LOCALE
+REP_BASE_JASPER_PATH_LOCAL=/Users/naneon/Developpements/workspace-juno/Dossier-Etudiants/Resources/reports/
+
+MODE_DEBUG = OUI
+TEST = OUI
+
+SHOWSQLLOGS = 0
+

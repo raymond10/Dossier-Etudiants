@@ -1,0 +1,958 @@
+/*******************************************************************************
+ * DOSSIER-ETUDIANT
+ * Copyright UNIVERSITE DE TECHNOLOGIE DE TROYES - CEDRE (www.utt.fr), since 1993 
+ * This software is governed by the CeCILL license under French law and abiding by the
+ * rules of distribution of free software. You can use, modify and/or 
+ * redistribute the software under the terms of the CeCILL license as 
+ * circulated by CEA, CNRS and INRIA at the following URL 
+ * "http://www.cecill.info". 
+ * As a counterpart to the access to the source code and rights to copy, modify 
+ * and redistribute granted by the license, users are provided only with a 
+ * limited warranty and the software's author, the holder of the economic 
+ * rights, and the successive licensors have only limited liability. In this 
+ * respect, the user's attention is drawn to the risks associated with loading,
+ * using, modifying and/or developing or reproducing the software by the user 
+ * in light of its specific status of free software, that may mean that it
+ * is complicated to manipulate, and that also therefore means that it is 
+ * reserved for developers and experienced professionals having in-depth
+ * computer knowledge. Users are therefore encouraged to load and test the 
+ * software's suitability as regards their requirements in conditions enabling
+ * the security of their systems and/or data to be ensured and, more generally, 
+ * to use and operate it in the same conditions as regards security. The
+ * fact that you are presently reading this means that you have had knowledge 
+ * of the CeCILL license and that you accept its terms.
+ * 
+ * Do not remove this copyright message
+ ******************************************************************************/
+package etudiants.utt.fr.components.controlers;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.login.fwkloginwebapp.common.util.StringCtrl;
+
+import com.sshtools.j2ssh.sftp.SftpFile;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOApplication;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WODisplayGroup;
+import com.webobjects.appserver.WORequest;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSData;
+import com.webobjects.foundation.NSKeyValueCoding;
+import com.webobjects.foundation.NSLog;
+import com.webobjects.foundation.NSMutableArray;
+import com.webobjects.foundation.NSMutableDictionary;
+import com.webobjects.foundation.NSTimestamp;
+
+import er.extensions.appserver.ERXDisplayGroup;
+import etudiants.utt.fr.EOControls.AComponentCtrl;
+import etudiants.utt.fr.components.DossierAdm;
+import etudiants.utt.fr.components.EmploiDuTemps;
+import etudiants.utt.fr.components.MyPDFPage;
+import etudiants.utt.fr.components.ProfilEtudiants;
+import etudiants.utt.fr.components.Recherche;
+import etudiants.utt.fr.components.ResultatsUV;
+import etudiants.utt.fr.components.profilPrint;
+import etudiants.utt.fr.eo.EOIndividu;
+import etudiants.utt.fr.roles.LeUser;
+import etudiants.utt.fr.server.Session;
+import etudiants.utt.fr.server.process.ProcessRechercheEtudiants;
+import etudiants.utt.fr.server.reports.ReportFactory;
+import etudiants.utt.fr.sql.RechercheSQL;
+import etudiants.utt.fr.util.LesURLs;
+import etudiants.utt.fr.util.SshConnexion;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+@SuppressWarnings("all")
+public class RechercheCtrl extends AComponentCtrl {
+
+	private String message;
+	public Recherche wocomponent;
+	public EOEditingContext edc;
+	public Session sess;
+	public WODisplayGroup dgEtudiants = null;
+	public static final Integer DEFAULT_fetchLimit = Integer.valueOf(30);
+	public static final Integer DEFAULT_DISPLAY = Integer.valueOf(10);
+	private Boolean isAutorizUser;
+	private Boolean isUser;
+	private Boolean isConseille;
+	private Boolean conseilleIs = Boolean.FALSE;
+	private Boolean conseilleSelect = Boolean.TRUE;
+	private LeUser user;
+	public NSMutableDictionary unUser;
+	public static RechercheSQL sql;
+	private NSMutableDictionary dicoEtudiant;
+	private ReportFactory factory;
+	private SftpFile lePdf;
+	private LesURLs url;
+	private String searchMsg;
+
+	public RechercheCtrl(Recherche aComponent) {
+		url = new LesURLs();
+		user = new LeUser();
+		unUser = new NSMutableDictionary();
+		dicoEtudiant = new NSMutableDictionary();
+		sql = new RechercheSQL();
+		factory = new ReportFactory();
+		wocomponent = aComponent;
+		edc = wocomponent.ed;
+		sess = wocomponent.session;
+/*		if(wocomponent.etudiant() != null){
+			ETUDIANT = wocomponent.etudiant();
+			NUMERO_ETU = Integer.valueOf(wocomponent.etudiant().primaryKey());
+		}*/
+		user = sess.getNewUser();
+		unUser = user.leUser();
+	}
+
+	public RechercheCtrl() {
+		super();
+		dgEtudiants = new WODisplayGroup();
+	}
+
+	/**
+	 * @return the isUser
+	 */
+	public Boolean getIsUser() {
+		isUser = isAutorizUser;
+		return isUser;
+	}
+
+	/**
+	 * @param isUser
+	 *            the isUser to set
+	 */
+	public void setIsUser(Boolean isUser) {
+		this.isUser = isUser;
+	}
+
+	/**
+	 * @return the isAutorizUser
+	 */
+	public Boolean getIsAutorizUser() {
+		isAutorizUser = (Boolean) unUser.valueForKey("isAutorized");
+		return isAutorizUser;
+	}
+
+	/**
+	 * @param isAutorizUser
+	 *            the isAutorizUser to set
+	 */
+	public void setIsAutorizUser(Boolean isAutorizUser) {
+		this.isAutorizUser = isAutorizUser;
+	}
+
+	/**
+	 * @return the isConseille
+	 */
+	public Boolean getIsConseille() {
+		isConseille = (Boolean) unUser.valueForKey("isconseiller");
+		return isConseille;
+	}
+
+	/**
+	 * @param isConseille
+	 *            the isConseille to set
+	 */
+	public void setIsConseille(Boolean isConseille) {
+		this.isConseille = isConseille;
+	}
+
+	/**
+	 * @return the conseilleIs
+	 */
+	public Boolean getConseilleIs() {
+		return conseilleIs;
+	}
+
+	/**
+	 * @param conseilleIs
+	 *            the conseilleIs to set
+	 */
+	public void setConseilleIs(Boolean conseilleIs) {
+		this.conseilleIs = conseilleIs;
+	}
+
+	/**
+	 * @return the conseilleSelect
+	 */
+	public Boolean getConseilleSelect() {
+		return conseilleSelect;
+	}
+
+	/**
+	 * @param conseilleSelect
+	 *            the conseilleSelect to set
+	 */
+	public void setConseilleSelect(Boolean conseilleSelect) {
+		this.conseilleSelect = conseilleSelect;
+	}
+
+	/**
+	 * @return the dicoEtudiant
+	 */
+	public NSMutableDictionary getDicoEtudiant() {
+		return dicoEtudiant;
+	}
+
+	/**
+	 * @param dicoEtudiant
+	 *            the dicoEtudiant to set
+	 */
+	public void setDicoEtudiant(NSMutableDictionary dicoEtudiant) {
+		this.dicoEtudiant = dicoEtudiant;
+	}
+
+	/**
+	 * @return the searchMsg
+	 */
+	public String getSearchMsg() {
+		return searchMsg;
+	}
+
+	/**
+	 * @param searchMsg
+	 *            the searchMsg to set
+	 */
+	public void setSearchMsg(String searchMsg) {
+		this.searchMsg = searchMsg;
+	}
+
+	public void reset() {
+		dgEtudiants.clearSelection();
+		dgEtudiants.setObjectArray(null);
+	}
+
+	public void resetDgArray() {
+		dgEtudiants.clearSelection();
+		dgEtudiants.setObjectArray(null);
+	}
+
+	public static RechercheCtrl createInstanceAndInitialize(
+			EOIndividu utilisateur, String sessionId) {
+		RechercheCtrl rechercheCtrl = null;
+		if (utilisateur != null) {
+			rechercheCtrl = new RechercheCtrl();
+			EOEditingContext edc = utilisateur.editingContext();
+		}
+		return rechercheCtrl;
+	}
+
+	public WOActionResults rechercher() throws Exception {
+		NSMutableDictionary bindings = new NSMutableDictionary();
+		message = null;
+		String periode = null;
+		String diplome = null;
+		String niveau = null;
+		String idConseiller = null;
+		String uv = null;
+		String nom = null;
+		String prenom = null;
+		String numero = null;
+		if (wocomponent.getSelectedPeriode() != null) {
+			periode = wocomponent.getSelectedPeriode().primaryKey();
+			bindings.put("periode", periode);
+		}
+		if (wocomponent.getSelectedDiplome() != null) {
+			diplome = wocomponent.getSelectedDiplome().primaryKey();
+			bindings.put("diplome", diplome);
+		} else if (wocomponent.getSelectedPrdDiplome() != null) {
+			diplome = wocomponent.getSelectedPrdDiplome().primaryKey();
+			bindings.put("diplome", diplome);
+		}
+		if (wocomponent.getSelectedNiveaux() != null) {
+			niveau = wocomponent.getSelectedNiveaux().primaryKey();
+			bindings.put("niveau", niveau);
+		} else if (wocomponent.getSelectedNiveauMst() != null) {
+			niveau = wocomponent.getSelectedNiveauMst().primaryKey();
+			bindings.put("niveau", niveau);
+		}
+		if (wocomponent.getSelectedUvOuverte() != null) {
+			uv = wocomponent.getSelectedUvOuverte().uvc();
+			bindings.put("uv", uv);
+		}
+		if (wocomponent.getNom() != null) {
+			nom = wocomponent.getNom();
+			bindings.put("nom", nom);
+		}
+		if (wocomponent.getPrenom() != null) {
+			prenom = wocomponent.getPrenom();
+			bindings.put("prenom", prenom);
+		}
+		if (wocomponent.getNumero() != null) {
+			numero = wocomponent.getNumero();
+			bindings.put("numero", numero);
+		}
+		if (isConseille) {
+			idConseiller = sess.getUtilisateur().primaryKey();
+			bindings.put("idConseiller", idConseiller);
+		}
+		// Réinitialise le querryBindings
+		wocomponent.setVoirEtudiantsDg(new WODisplayGroup());
+		// Initialisation du batchIndex à 1 à chaque nouvelle recherche
+		if (wocomponent.getVoirEtudiantsDg().currentBatchIndex() != 1
+				|| wocomponent.getVoirEtudiantsDg().batchCount() != 0) {
+			wocomponent.getVoirEtudiantsDg().setCurrentBatchIndex(1);
+			wocomponent.getVoirEtudiantsDg().setNumberOfObjectsPerBatch(0);
+		}
+		// Fetch sur les etudiants
+		if (wocomponent.getNumero() != null) {
+			isNumeric(wocomponent.getNumero());
+		}
+		if (message == null) {
+			querries();
+			dicoEtudiant = ProcessRechercheEtudiants.rechercher(
+					sess.dataBus(), bindings);
+			wocomponent.getVoirEtudiantsDg().setNumberOfObjectsPerBatch(
+					DEFAULT_DISPLAY);
+			testResults(wocomponent.getVoirEtudiantsDg());
+		}
+		sess.setDgActif(wocomponent.getVoirEtudiantsDg());
+		return null;
+	}
+
+	public void checkSaisie() throws Exception {
+
+	}
+
+	public WOActionResults searchFonc() {
+		NSMutableDictionary bindings = new NSMutableDictionary();
+		message = null;
+		String periode = null;
+		String diplome = null;
+		String niveau = null;
+		String idConseiller = null;
+		String uv = null;
+		String nom = null;
+		String prenom = null;
+		String numero = null;
+		if (wocomponent.getSelectedPeriode() != null) {
+			periode = wocomponent.getSelectedPeriode().primaryKey();
+			bindings.put("periode", periode);
+		}
+		if (wocomponent.getSelectedDiplome() != null) {
+			diplome = wocomponent.getSelectedDiplome().primaryKey();
+			bindings.put("diplome", diplome);
+		} else if (wocomponent.getSelectedPrdDiplome() != null) {
+			diplome = wocomponent.getSelectedPrdDiplome().primaryKey();
+			bindings.put("diplome", diplome);
+		}
+		if (wocomponent.getSelectedNiveaux() != null) {
+			niveau = wocomponent.getSelectedNiveaux().primaryKey();
+			bindings.put("niveau", niveau);
+		} else if (wocomponent.getSelectedNiveauMst() != null) {
+			niveau = wocomponent.getSelectedNiveauMst().primaryKey();
+			bindings.put("niveau", niveau);
+		}
+		if (wocomponent.getSelectedUvOuverte() != null) {
+			uv = wocomponent.getSelectedUvOuverte().primaryKey();
+			bindings.put("uv", uv);
+		}
+		if (wocomponent.getNom() != null) {
+			nom = wocomponent.getNom();
+			if (!StringCtrl.isEmpty(nom)) {
+				nom = StringCtrl.replace(nom, " ", "*");
+			}
+			bindings.put("nom", nom);
+		}
+		if (wocomponent.getPrenom() != null) {
+			prenom = wocomponent.getPrenom();
+			if (!StringCtrl.isEmpty(prenom)) {
+				prenom = StringCtrl.replace(prenom, " ", "*");
+			}
+			bindings.put("prenom", prenom);
+		}
+		if (wocomponent.getNumero() != null) {
+			numero = wocomponent.getNumero();
+			bindings.put("numero", numero);
+		}
+		if (isConseille) {
+			idConseiller = wocomponent.utilisateur().primaryKey();
+			bindings.put("idConseiller", idConseiller);
+		}
+		// Réinitialise le querryBindings
+		wocomponent.setVoirEtudiantsDg(new WODisplayGroup());
+		// Initialisation du batchIndex à 1 à chaque nouvelle recherche
+		if (wocomponent.getVoirEtudiantsDg().currentBatchIndex() != 1
+				|| wocomponent.getVoirEtudiantsDg().batchCount() != 0) {
+			wocomponent.getVoirEtudiantsDg().setCurrentBatchIndex(1);
+			wocomponent.getVoirEtudiantsDg().setNumberOfObjectsPerBatch(0);
+		}
+		// Fetch sur les etudiants
+		if (wocomponent.getNumero() != null) {
+			isNumeric(wocomponent.getNumero());
+		}
+		if (message == null) {
+			NSArray lesEtudiants = reWriteListDico(sql
+					.getRawRowSearchEtudiants(edc, bindings));
+			wocomponent.getVoirEtudiantsDg().setObjectArray(lesEtudiants);
+			if (wocomponent.getVoirEtudiantsDg().allObjects().count() == 0) {
+				wocomponent.setNoResult(true);
+				wocomponent.setFoundResults(false);
+			} else {
+				wocomponent.setNoResult(false);
+				wocomponent.setFoundResults(true);
+			}
+		}
+		sess.setDgActif(wocomponent.getVoirEtudiantsDg());
+		return null;
+	}
+
+	public NSArray foncParcEtu(EOEditingContext ed, String id) {
+		return sql.getRawRowParcoursEtudiants(ed, id);
+	}
+
+	public WOActionResults doMySearch() {
+		NSMutableDictionary bindings = new NSMutableDictionary();
+		message = null;
+		String periode = null;
+		String diplome = null;
+		String niveau = null;
+		String idConseiller = null;
+		String uv = null;
+		String nom = null;
+		String prenom = null;
+		String numero = null;
+		if (wocomponent.getNom() != null || wocomponent.getPrenom() != null
+				|| wocomponent.getNumero() != null) {
+			nom = wocomponent.getNom();
+			if (nom != null) {
+				bindings.put("nom", nom.trim());
+			}
+			prenom = wocomponent.getPrenom();
+			if (prenom != null) {
+				bindings.put("prenom", prenom.trim());
+			}
+			numero = wocomponent.getNumero();
+			if (numero != null) {
+				bindings.put("numero", numero.trim());
+			}
+		} else {
+			if (wocomponent.getSelectedPeriode() != null) {
+				periode = wocomponent.getSelectedPeriode().primaryKey();
+				bindings.put("periode", periode);
+			}
+			if (wocomponent.getSelectedDiplome() != null) {
+				diplome = wocomponent.getSelectedDiplome().primaryKey();
+				bindings.put("diplome", diplome);
+			} else if (wocomponent.getSelectedPrdDiplome() != null) {
+				diplome = wocomponent.getSelectedPrdDiplome().primaryKey();
+				bindings.put("prdDiplome", diplome);
+			}
+			if (wocomponent.getSelectedNiveaux() != null) {
+				niveau = wocomponent.getSelectedNiveaux().primaryKey();
+				bindings.put("niveau", niveau);
+			} else if (wocomponent.getSelectedNiveauMst() != null) {
+				niveau = wocomponent.getSelectedNiveauMst().primaryKey();
+				bindings.put("niveau", niveau);
+			}
+			if (wocomponent.getSelectedUvOuverte() != null) {
+				uv = wocomponent.getSelectedUvOuverte().uvc();
+				bindings.put("uv", uv);
+			}
+			if (conseilleIs) {
+				idConseiller = wocomponent.utilisateur().primaryKey();
+				bindings.put("idConseiller", idConseiller);
+			}
+		}
+		// Réinitialise le querryBindings
+		wocomponent.setVoirEtudiantsDg(new WODisplayGroup());
+		// Initialisation du batchIndex à 1 à chaque nouvelle recherche
+		if (wocomponent.getVoirEtudiantsDg().currentBatchIndex() != 1
+				|| wocomponent.getVoirEtudiantsDg().batchCount() != 0) {
+			wocomponent.getVoirEtudiantsDg().setCurrentBatchIndex(1);
+			wocomponent.getVoirEtudiantsDg().setNumberOfObjectsPerBatch(0);
+		}
+		// Fetch sur les etudiants
+		if (wocomponent.getNumero() != null) {
+			isNumeric(wocomponent.getNumero());
+		}
+		if (message == null) {
+			wocomponent.setSearchMsg(null);
+			if (wocomponent.getSelectedPeriode() == null
+					&& wocomponent.getSelectedDiplome() != null
+					&& !wocomponent.getSelectedDiplome().primaryKey()
+							.equals("MST")) {
+				querries();
+				wocomponent.getVoirEtudiantsDg().setObjectArray(
+						EOIndividu.EtudiantsNonMST(edc, bindings, wocomponent));
+			} else if (wocomponent.getSelectedPeriode() != null
+					&& wocomponent.getSelectedPrdDiplome() != null
+					&& !wocomponent.getSelectedPrdDiplome().primaryKey()
+							.equals("MST")
+					|| wocomponent.getSelectedNiveaux() != null) {
+				querries();
+				wocomponent.getVoirEtudiantsDg().setObjectArray(
+						EOIndividu.EtudiantsNonMST(edc, bindings, wocomponent));
+			} else {
+				querries();
+				wocomponent.getVoirEtudiantsDg().setObjectArray(
+						EOIndividu.EtudiantsMST(edc, bindings, wocomponent));
+			}
+			wocomponent.getVoirEtudiantsDg().setNumberOfObjectsPerBatch(
+					DEFAULT_DISPLAY);
+			testResults(wocomponent.getVoirEtudiantsDg());
+		}
+		sess.setDgActif(wocomponent.getVoirEtudiantsDg());
+		NSLog.out.appendln(wocomponent.getSearchMsg());
+		return null;
+	}
+
+	protected boolean isNumeric(String input) {
+		try {
+			Integer.parseInt(input);
+			return true;
+		} catch (NumberFormatException e) {
+			message = "Veuillez indiquer un numéro valide.";
+			return false;
+		}
+	}
+
+	protected void querries() {
+		if (wocomponent.getSelectedPeriode() != null) {
+			wocomponent
+					.getVoirEtudiantsDg()
+					.queryBindings()
+					.setObjectForKey(
+							wocomponent.getSelectedPeriode().primaryKey(),
+							"periode");
+		}
+		if (wocomponent.getSelectedDiplome() != null) {
+			wocomponent
+					.getVoirEtudiantsDg()
+					.queryBindings()
+					.setObjectForKey(
+							wocomponent.getSelectedDiplome().primaryKey(),
+							"diplome");
+		}
+		if (wocomponent.getSelectedPrdDiplome() != null) {
+			wocomponent
+					.getVoirEtudiantsDg()
+					.queryBindings()
+					.setObjectForKey(
+							wocomponent.getSelectedPrdDiplome().primaryKey(),
+							"prdDiplome");
+		}
+		if (wocomponent.getSelectedNiveaux() != null) {
+			wocomponent
+					.getVoirEtudiantsDg()
+					.queryBindings()
+					.setObjectForKey(
+							wocomponent.getSelectedNiveaux().primaryKey(),
+							"niveau");
+		}
+		if (wocomponent.getSelectedNiveauMst() != null) {
+			wocomponent
+					.getVoirEtudiantsDg()
+					.queryBindings()
+					.setObjectForKey(
+							wocomponent.getSelectedNiveauMst().primaryKey(),
+							"niveau");
+		}
+		if (wocomponent.getSelectedUvOuverte() != null) {
+			wocomponent
+					.getVoirEtudiantsDg()
+					.queryBindings()
+					.setObjectForKey(
+							wocomponent.getSelectedUvOuverte().primaryKey(),
+							"uv");
+		}
+		if (wocomponent.getNom() != null) {
+			wocomponent.getVoirEtudiantsDg().queryBindings()
+					.setObjectForKey(wocomponent.getNom(), "nom");
+		}
+		if (wocomponent.getPrenom() != null) {
+			wocomponent.getVoirEtudiantsDg().queryBindings()
+					.setObjectForKey(wocomponent.getPrenom(), "prenom");
+		}
+		if (wocomponent.getNumero() != null) {
+			wocomponent.getVoirEtudiantsDg().queryBindings()
+					.setObjectForKey(wocomponent.getNumero(), "numero");
+		}
+	}
+
+	// Begin Links
+	public WOActionResults selectProfil() {
+		NSMutableArray study = new NSMutableArray();
+		EOIndividu tiny = new EOIndividu();
+		sess.setRetourAlaListe(true);
+		wocomponent.getVoirEtudiantsDg().setSelectedObject(
+				wocomponent.getEtudiants());
+		sess.setCurrentBatchIndex(wocomponent.getVoirEtudiantsDg().currentBatchIndex());
+		sess.setEtudiant(((EOIndividu) wocomponent.getVoirEtudiantsDg()
+				.selectedObject()).localInstanceIn(wocomponent.edc()));
+		study.addObject(((EOIndividu) wocomponent.getVoirEtudiantsDg()
+				.selectedObject()).localInstanceIn(wocomponent.edc()));
+		if (wocomponent.getEtudiantActif() != null) {
+			wocomponent.getEtudiantActif().setObjectArray(study);
+			tiny = (EOIndividu) study.lastObject();
+			wocomponent.getEtudiantActif().queryBindings()
+					.setObjectForKey(tiny.primaryKey(), "numero");
+		} else {
+			wocomponent.setEtudiantActif(new WODisplayGroup());
+			wocomponent.getEtudiantActif().setObjectArray(study);
+			tiny = (EOIndividu) study.lastObject();
+			wocomponent.getEtudiantActif().queryBindings()
+					.setObjectForKey(tiny.primaryKey(), "numero");
+		}
+		ProfilEtudiants profilPage = (ProfilEtudiants) wocomponent
+				.pageWithName(ProfilEtudiants.class.getName());
+		return profilPage;
+	}
+
+	public WOActionResults selectDossier() {
+		sess.setRetourAlaListe(true);
+		NSMutableArray study = new NSMutableArray();
+		EOIndividu tiny = new EOIndividu();
+		wocomponent.getVoirEtudiantsDg().setSelectedObject(
+				wocomponent.getEtudiants());
+		sess.setCurrentBatchIndex(wocomponent.getVoirEtudiantsDg().currentBatchIndex());
+		sess.setEtudiant(((EOIndividu) wocomponent.getVoirEtudiantsDg()
+				.selectedObject()).localInstanceIn(wocomponent.edc()));
+		study.addObject(((EOIndividu) wocomponent.getVoirEtudiantsDg()
+				.selectedObject()).localInstanceIn(wocomponent.edc()));
+		if (wocomponent.getEtudiantActif() != null) {
+			wocomponent.getEtudiantActif().setObjectArray(study);
+			tiny = (EOIndividu) study.lastObject();
+			wocomponent.getEtudiantActif().queryBindings()
+					.setObjectForKey(tiny.primaryKey(), "numero");
+		} else {
+			wocomponent.setEtudiantActif(new WODisplayGroup());
+			wocomponent.getEtudiantActif().setObjectArray(study);
+			tiny = (EOIndividu) study.lastObject();
+			wocomponent.getEtudiantActif().queryBindings()
+					.setObjectForKey(tiny.primaryKey(), "numero");
+		}
+		DossierAdm dossierPage = (DossierAdm) wocomponent
+				.pageWithName(DossierAdm.class.getName());
+		return dossierPage;
+	}
+
+	public WOActionResults selectResUv() {
+		sess.setRetourAlaListe(true);
+		NSMutableArray study = new NSMutableArray();
+		EOIndividu tiny = new EOIndividu();
+		wocomponent.getVoirEtudiantsDg().setSelectedObject(
+				wocomponent.getEtudiants());
+		sess.setCurrentBatchIndex(wocomponent.getVoirEtudiantsDg().currentBatchIndex());
+		sess.setEtudiant(((EOIndividu) wocomponent.getVoirEtudiantsDg()
+				.selectedObject()).localInstanceIn(wocomponent.edc()));
+		study.addObject(((EOIndividu) wocomponent.getVoirEtudiantsDg()
+				.selectedObject()).localInstanceIn(wocomponent.edc()));
+		if (wocomponent.getEtudiantActif() != null) {
+			wocomponent.getEtudiantActif().setObjectArray(study);
+			tiny = (EOIndividu) study.lastObject();
+			wocomponent.getEtudiantActif().queryBindings()
+					.setObjectForKey(tiny.primaryKey(), "numero");
+		} else {
+			wocomponent.setEtudiantActif(new WODisplayGroup());
+			wocomponent.getEtudiantActif().setObjectArray(study);
+			tiny = (EOIndividu) study.lastObject();
+			wocomponent.getEtudiantActif().queryBindings()
+					.setObjectForKey(tiny.primaryKey(), "numero");
+		}
+		ResultatsUV resUvPage = (ResultatsUV) wocomponent
+				.pageWithName(ResultatsUV.class.getName());
+		return resUvPage;
+	}
+
+	public WOActionResults selectEmploiDuTemps() {
+		sess.setRetourAlaListe(true);
+		EOIndividu tiny = new EOIndividu();
+		NSMutableArray study = new NSMutableArray();
+		wocomponent.getVoirEtudiantsDg().setSelectedObject(
+				wocomponent.getEtudiants());
+		sess.setCurrentBatchIndex(wocomponent.getVoirEtudiantsDg().currentBatchIndex());
+		sess.setEtudiant(((EOIndividu) wocomponent.getVoirEtudiantsDg()
+				.selectedObject()).localInstanceIn(wocomponent.edc()));
+		study.addObject(((EOIndividu) wocomponent.getVoirEtudiantsDg()
+				.selectedObject()).localInstanceIn(wocomponent.edc()));
+		if (wocomponent.getEtudiantActif() != null) {
+			wocomponent.getEtudiantActif().setObjectArray(study);
+			tiny = (EOIndividu) study.lastObject();
+			wocomponent.getEtudiantActif().queryBindings()
+					.setObjectForKey(tiny.primaryKey(), "numero");
+		} else {
+			wocomponent.setEtudiantActif(new WODisplayGroup());
+			wocomponent.getEtudiantActif().setObjectArray(study);
+			tiny = (EOIndividu) study.lastObject();
+			wocomponent.getEtudiantActif().queryBindings()
+					.setObjectForKey(tiny.primaryKey(), "numero");
+		}
+		EmploiDuTemps edtPage = (EmploiDuTemps) wocomponent
+				.pageWithName(EmploiDuTemps.class.getName());
+		return edtPage;
+	}
+
+	public WOActionResults ImprimerProfil() throws IOException {
+		try {
+			sess.setRetourAlaListe(true);
+			EOIndividu tiny = new EOIndividu();
+			NSMutableArray study = new NSMutableArray();
+			wocomponent.getVoirEtudiantsDg().setSelectedObject(
+					wocomponent.getEtudiants());
+			sess.setCurrentBatchIndex(wocomponent.getVoirEtudiantsDg().currentBatchIndex());
+			sess.setEtudiant(((EOIndividu) wocomponent.getVoirEtudiantsDg()
+					.selectedObject()).localInstanceIn(wocomponent.edc()));
+			study.addObject(((EOIndividu) wocomponent.getVoirEtudiantsDg()
+					.selectedObject()).localInstanceIn(wocomponent.edc()));
+			if (wocomponent.getEtudiantActif() != null) {
+				wocomponent.getEtudiantActif().setObjectArray(study);
+				tiny = (EOIndividu) study.lastObject();
+				wocomponent.getEtudiantActif().queryBindings()
+						.setObjectForKey(tiny.primaryKey(), "numero");
+			} else {
+				wocomponent.setEtudiantActif(new WODisplayGroup());
+				wocomponent.getEtudiantActif().setObjectArray(study);
+				tiny = (EOIndividu) study.lastObject();
+				wocomponent.getEtudiantActif().queryBindings()
+						.setObjectForKey(tiny.primaryKey(), "numero");
+			}
+			// Param && printFile
+			String login = (String) unUser.valueForKey("login");
+			String login_Etudiant = sess.getEtudiant().login();
+			String etudiant = sess.getEtudiant().primaryKey();
+			String mail = (String) unUser.valueForKey("mail");
+			String hostname = url.getHostname();
+			String pwd = url.getReportPwd();
+			String exportpath = url.getReportExportPath();
+			String username = "root";
+			String exporturl = url.getExportURL();
+			if (!wocomponent.exists(wocomponent.IMG_SERVER+wocomponent.IMG_DIR+ etudiant + ".jpg"))
+				throw new Exception("Serveur d'image indisponible");
+			factory.imprimerLeProfil(login, etudiant, mail);
+			SshConnexion ssh = new SshConnexion();
+			while (lePdf == null) {
+				try {
+					lePdf = ssh.renvoieLePv(hostname, username, pwd,
+							exportpath, login, exporturl, etudiant);
+					ssh.getSsh().disconnect();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					ssh.getSsh().disconnect();
+					sess.addSimpleErrorMessage("PROBLEME SERVEUR DISTANT", e.getMessage());
+					e.printStackTrace();
+					return null;
+				}
+			}
+			//
+			WOContext context = (WOContext) wocomponent.context().clone();
+			profilPrint ImprimerProfilPage = (profilPrint) WOApplication
+					.application().pageWithName(profilPrint.class.getName(),
+							context);
+			WOResponse pdfReport = new WOResponse();
+			URL uri = null;
+			try {
+				if (lePdf != null) {
+					//NSLog.out.appendln("URL :" + exporturl+ lePdf.getFilename());
+					try {
+						uri = new URL(exporturl + lePdf.getFilename());
+
+						NSData stream = new NSData(uri);
+						pdfReport.setHeader("maxage=1", "Cache-Control");
+						pdfReport.setHeader("public", "Pragma");
+						pdfReport.setHeader("pv.pdf", "Content-Title");
+						pdfReport.setHeader("attachement; filename=\""
+								+ "pv-"+login_Etudiant+".pdf" + "\"", "Content-Disposition");
+						pdfReport.setHeader("application/pdf", "Content-Type");
+						pdfReport.setContent(stream);
+						// pdfReport.contentAsDOMDocument();
+						// pdfReport._redirectionResponseForAbsoluteURL(exporturl+lePdf.getFilename(),
+						// true);
+					} finally {
+						// Libération de ressources URL
+						uri.openStream().close();
+					}
+				}
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				sess.addSimpleErrorMessage("PROBLEME URL", e.getMessage());
+				e.printStackTrace();
+				return null;
+			}
+			return pdfReport.generateResponse();
+		} catch (Exception e) {
+			sess.addSimpleErrorMessage("PROBLEME SERVEUR", e.getMessage());
+			return null;
+		}
+	}
+
+	/*
+	 * public WOActionResults downloadAsPDF() { EOIndividu tiny = new
+	 * EOIndividu(); NSMutableArray study = new NSMutableArray();
+	 * wocomponent.getVoirEtudiantsDg().setSelectedObject(
+	 * wocomponent.getEtudiants()); sess.setEtudiant(((EOIndividu)
+	 * wocomponent.getVoirEtudiantsDg()
+	 * .selectedObject()).localInstanceIn(sess.editingContext()));
+	 * study.addObject(((EOIndividu) wocomponent.getVoirEtudiantsDg()
+	 * .selectedObject()).localInstanceIn(sess.editingContext()));
+	 * NSMutableDictionary<String, Object> configuration = new
+	 * NSMutableDictionary<String, Object>(); WOContext context = (WOContext)
+	 * wocomponent.context().clone(); MyPDFPage pdfPage = (MyPDFPage)
+	 * WOApplication.application().pageWithName(MyPDFPage.class.getName(),
+	 * context); // pdfPage.setMyObject(myObject()); String baseFileName = "pv-"
+	 * + wocomponent.session.getUtilisateur().login() + "-" + new
+	 * NSTimestamp().getDay() + "-" + new NSTimestamp().getMonth() + "-" + new
+	 * NSTimestamp().getYear() + "-" + new NSTimestamp().getTime() + "-" +
+	 * wocomponent.session.getEtudiant().primaryKey(); String filename =
+	 * baseFileName + ".pdf"; configuration.takeValueForKey(filename,
+	 * "filename"); WOResponse pdfReport = ERPDFUtilities.pageAsPdf(pdfPage,
+	 * configuration) .generateResponse(); return pdfReport; }
+	 */
+
+	// End links
+
+	public void isRetouraLaListe() {
+		if (sess.getRetourAlaListe()) {
+			sess.setRetourAlaListe(false);
+			if (wocomponent.getDgActif() != null
+					&& wocomponent.getDgActif().allObjects().count() != 0) {
+				/*
+				 * NSMutableArray casting = new NSMutableArray();
+				 * NSMutableArray<EOIndividu> indivCast = new
+				 * NSMutableArray<EOIndividu>(); for (int i = 0; i <
+				 * sess.dgActif().allObjects().count(); i++) {
+				 * NSMutableDictionary dico = (NSMutableDictionary) sess
+				 * .dgActif().allObjects().objectAtIndex(i);
+				 * indivCast.addObject(createOne(dico)); }
+				 */
+				wocomponent.getVoirEtudiantsDg().setObjectArray(
+						sess.dgActif().allObjects());
+				wocomponent.getVoirEtudiantsDg().setNumberOfObjectsPerBatch(
+						DEFAULT_DISPLAY);
+				wocomponent.getVoirEtudiantsDg().setCurrentBatchIndex(sess.getCurrentBatchIndex());
+				wocomponent.setDgActif(wocomponent.getVoirEtudiantsDg());
+				testResults(wocomponent.getVoirEtudiantsDg());
+			}
+		}
+	}
+
+	protected void testResults(WODisplayGroup dg) {
+		if (dg.allObjects().count() == 0) {
+			wocomponent.setFoundResults(false);
+			wocomponent.setNoResult(true);
+		} else {
+			wocomponent.setNoResult(false);
+			wocomponent.setFoundResults(true);
+		}
+	}
+
+	/**
+	 * @return the message
+	 */
+	public String getMessage() {
+		return this.message;
+	}
+
+	/**
+	 * @param message
+	 *            the message to set
+	 */
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	/**
+	 * @return the factory
+	 */
+	public ReportFactory getFactory() {
+		return factory;
+	}
+
+	/**
+	 * @param factory
+	 *            the factory to set
+	 */
+	public void setFactory(ReportFactory factory) {
+		this.factory = factory;
+	}
+
+	/**
+	 * @return the lePdf
+	 */
+	public SftpFile getLePdf() {
+		return lePdf;
+	}
+
+	/**
+	 * @param lePdf
+	 *            the lePdf to set
+	 */
+	public void setLePdf(SftpFile lePdf) {
+		this.lePdf = lePdf;
+	}
+
+	protected EOIndividu createOne(NSMutableDictionary dico) {
+		EOIndividu createEtudiant = new EOIndividu();
+		/*
+		 * String pk = (String) dico.objectForKey("INDIV_ID");
+		 * NSArray<EOIndividu> createEtudiants =
+		 * EOIndividu.fetchStudentsOnly(edc, Long.valueOf(pk)); for (int i = 0;
+		 * i < createEtudiants.count(); i++) { createEtudiant = (EOIndividu)
+		 * createEtudiants.objectAtIndex(0); }
+		 */
+		return createEtudiant;
+	}
+
+	public static boolean stringContains(String str, String searchStr) {
+		if (str == null || searchStr == null) {
+			return false;
+		}
+		return str.indexOf(searchStr) >= 0;
+	}
+
+	// Dictionnary Null value decoder
+	protected NSMutableArray reWriteListDico(NSArray dicoList) {
+		NSMutableArray listDico = new NSMutableArray();
+		for (int j = 0; j < dicoList.count(); j++) {
+			NSMutableDictionary tinyDico = new NSMutableDictionary();
+			tinyDico = (NSMutableDictionary) dicoList.objectAtIndex(j);
+			reWriteDico(tinyDico);
+			listDico.addObject(tinyDico);
+		}
+		return listDico;
+	}
+
+	protected void reWriteDico(NSMutableDictionary dico) {
+		for (int i = 0; i < dico.size(); i++) {
+			Object value = dico.allValues().objectAtIndex(i);
+			if (value.equals(NSKeyValueCoding.NullValue)) {
+				String key = (String) dico.allKeys().objectAtIndex(i);
+				dico.setObjectForKey("", key);
+				// NSLog.out.appendln(dico);
+			}
+		}
+	}
+
+	protected String decode(Object obj) {
+		String key = obj.toString().substring(1);
+		String key2 = key.substring(0, key.length() - 1);
+		String decodedValue = key2.substring(key2.length() - 4);
+		if (decodedValue.equals("Null")) {
+			return null;
+		} else {
+			return obj.toString();
+		}
+	}
+
+	// End Decoder
+
+	public void clickBox() {
+		WORequest request = wocomponent.context().request();
+		String value = (String) request.formValueForKey("conseilles");
+		if (value.equals("false")) {
+			conseilleIs = true;
+		} else {
+			conseilleIs = false;
+		}
+	}
+
+}

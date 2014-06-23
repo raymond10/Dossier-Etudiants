@@ -1,0 +1,15 @@
+{
+    enseignant = {
+        class = EOFetchSpecification; 
+        entityName = VEnseignant; 
+        isDeep = YES; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOKeyValueQualifier; 
+            key = id; 
+            selectorName = "isEqualTo:"; 
+            value = {"_key" = id; class = EOQualifierVariable; }; 
+        }; 
+        usesDistinct = YES; 
+    }; 
+}

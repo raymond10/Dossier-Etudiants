@@ -1,0 +1,102 @@
+package etudiants.utt.fr.server;
+
+import org.login.fwkloginwebapp.common.util.DateCtrl;
+import org.login.fwkloginwebapp.server.version.A_LoginVersion;
+import org.login.fwkloginwebapp.server.version.LoginVersionJava;
+import org.login.fwkloginwebapp.server.version.LoginVersionWebObjects;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public final class Version extends A_LoginVersion {
+	// Nom de l'appli
+	public static final String APPLICATIONFINALNAME = VersionMe.APPLICATIONFINALNAME;
+	public static final String APPLICATIONINTERNALNAME = VersionMe.APPLICATIONINTERNALNAME;
+	public static final String APPLICATION_STRID = VersionMe.APPLICATION_STRID;
+
+	// Version appli
+	public static final long SERIALVERSIONUID = VersionMe.SERIALVERSIONUID;
+
+	public static final int VERSIONNUMMAJ = VersionMe.VERSIONNUMMAJ;
+	public static final int VERSIONNUMMIN = VersionMe.VERSIONNUMMIN;
+	public static final int VERSIONNUMPATCH = VersionMe.VERSIONNUMPATCH;
+	public static final int VERSIONNUMBUILD = VersionMe.VERSIONNUMBUILD;
+
+	public static final String VERSIONDATE = VersionMe.VERSIONDATE;
+	public static final String COMMENT = VersionMe.COMMENT;
+
+	/** Version du frmk FwkloginWebApp */
+
+	private static final String CKTLWEBAPP_VERSION_MIN = "3.0.3";
+	private static final String CKTLWEBAPP_VERSION_MAX = null;
+
+	/** Version de WebObjects */
+	private static final String WO_VERSION_MIN = "5.4.3.0";
+	private static final String WO_VERSION_MAX = null;
+
+	/** Version du JRE */
+	private static final String JRE_VERSION_MIN = "1.5";
+	private static final String JRE_VERSION_MAX = null;
+
+	/** Version d'ORACLE */
+	@SuppressWarnings("unused")
+	private static final String ORACLE_VERSION_MIN = "10.0";
+	@SuppressWarnings("unused")
+	private static final String ORACLE_VERSION_MAX = null;
+	
+	public String name() {
+		return APPLICATIONFINALNAME;
+	}
+
+	public String internalName() {
+		return APPLICATIONINTERNALNAME;
+	}
+
+	public int versionNumBuild() {
+		return VERSIONNUMBUILD;
+	}
+
+	public int versionNumMaj() {
+		return VERSIONNUMMAJ;
+	}
+
+	public int versionNumMin() {
+		return VERSIONNUMMIN;
+	}
+
+	public int versionNumPatch() {
+		return VERSIONNUMPATCH;
+	}
+
+	public String date() {
+		return VERSIONDATE;
+	}
+
+	public String comment() {
+		return COMMENT;
+	}
+
+	public String copyright() {
+		String strDateNow = DateCtrl.dateToString(DateCtrl.now());
+		return "(c) " + strDateNow.substring(strDateNow.length() - 4)
+				+ " Université de Technologie de Troyes";
+	}
+
+	/**
+	 * Liste des d√©pendances
+	 * 
+	 * @see org.cocktail.fwkloginwebapp.server.version.A_LoginVersion#dependencies()
+	 */
+	public LoginVersionRequirements[] dependencies() {
+		return new LoginVersionRequirements[] {
+				new LoginVersionRequirements(new LoginVersionWebObjects(),
+						WO_VERSION_MIN, WO_VERSION_MAX, true),
+				new LoginVersionRequirements(new LoginVersionJava(),
+						JRE_VERSION_MIN, JRE_VERSION_MAX, true),
+				new LoginVersionRequirements(
+						new org.login.fwkloginwebapp.server.version.Version(),
+						CKTLWEBAPP_VERSION_MIN, CKTLWEBAPP_VERSION_MAX, true) };
+	}
+}

@@ -1,0 +1,49 @@
+package etudiants.utt.fr.components;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.foundation.NSLog;
+
+import etudiants.utt.fr.server.MyAjaxComponent;
+import etudiants.utt.fr.server.ProfilHelpers;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public class MyPDFPage extends MyAjaxComponent {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6102159565518228265L;
+	private String onLoadJS = null;
+
+	public MyPDFPage(WOContext context) {
+        super(context);
+        NSLog.out.appendln("MyPDFPage");
+    }
+	
+	public String getOnLoadJS() {
+		return onLoadJS;
+	}
+
+	public void setOnLoadJS(String onloadJS) {
+		this.onLoadJS = onloadJS;
+	}
+	
+	public void appendToResponse(WOResponse res, WOContext ctx) {
+		super.appendToResponse(res, ctx);
+		if (onLoadJS != null)
+			onLoadJS = null;
+		ProfilHelpers.insertStylesSheet(ctx, res);
+		 String message = mySession().getAlertMessage();
+			if (message != null && message.equals("") == false) {
+				String str = "<script language=\"javascript\" type=\"text/javascript\">\n";
+				str += "alert(\"" + message + "\");\n";
+				str += "</script>";
+				res.appendContentString(str);
+				mySession().setAlertMessage(null);
+			}
+	}
+}

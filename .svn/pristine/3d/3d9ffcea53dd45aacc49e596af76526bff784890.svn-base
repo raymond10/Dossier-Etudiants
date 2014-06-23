@@ -1,0 +1,12 @@
+package gestionuv.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+public class EORefProfil extends _EORefProfil {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2187993461785120271L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EORefProfil.class);
+}

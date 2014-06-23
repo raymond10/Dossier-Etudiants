@@ -1,0 +1,390 @@
+Wrap : Wrapper {
+	bodyId = "edtition";
+	onload = onLoade;
+	pageTitle = "Editions";
+}
+
+edtionContain : AjaxUpdateContainer {
+	id ="edtionContain";
+}
+
+//Utilisateur autorisé
+errors : WOConditional {
+	condition = controleur.isAutorizUser;
+	negate = true;
+}
+
+//Session utilisateur
+user : WOConditional {
+	condition = controleur.isUser;
+	negate = false;
+}
+
+//debut formulaire recherche
+EditionPV : ERXWOForm {
+	name = "editionpv";
+	multipleSubmit = true;
+	//onKeyPress="if (event.keyCode == 13) {performeSearch();return false;}";
+}
+
+action : WOTextField {
+	name = "acte";
+	value = action;
+	class = "hide";
+}
+
+libniv : WOTextField {
+	name = "libniv";
+	value = libniv;
+	class = "hide";
+}
+
+periode : WOPopUpButton {
+	id = "periodeID";
+	name = "periode";
+	list = periodes;
+	item = currentPeriode;
+	displayString = currentPeriode.libelle;
+	//noSelectionString = "Toutes";
+	selection = selectedPeriode;
+	size = "1";
+	class = "periode";
+	//onchange = "javascript:this.form.elements['change'].click()";
+}
+
+prdDiplAOF : AjaxObserveField {
+	observeFieldID = "periodeID";
+	updateContainerID = "diplID";
+	action = changeDiplome;
+	fullSubmit = true;
+} 
+
+prdNivoAOF : AjaxObserveField {
+	observeFieldID = "periodeID";
+	updateContainerID = "niveauID";
+	action = changeNiveau;
+	fullSubmit = true;
+}
+
+diplomeAUC : AjaxUpdateContainer {
+	id = "diplID";
+}
+
+niveauAUC : AjaxUpdateContainer {
+	id = "niveauID";
+}
+
+diplNivoAOF : AjaxObserveField {
+	observeFieldID = "diplomeID";
+	updateContainerID = "niveauID";
+	action = changeNiveau;
+	fullSubmit = true;
+}
+
+con1 : WOConditional {
+	condition = false;
+	negate = diplomeVisible;
+} 
+
+diplome1 : WOPopUpButton {
+	id = "diplomeID";
+	name ="diplome";
+	list = diplomes;
+	item = currentDiplome;
+	noSelectionString = "Tous";
+	displayString = currentDiplome.libelle;
+	selection = selectedDiplome;
+	size = "1";
+	class = "diplome";
+	//onchange = "javascript:this.form.elements['change'].click()";
+}
+
+con2 : WOConditional {
+	condition = true;
+	negate = diplomeVisible;
+}
+
+diplome2 : WOPopUpButton {
+	id = "diplomeID";
+	name ="diplome";
+	list = prdDiplome;
+	item = currentPrdDiplome;
+	noSelectionString = "Tous";
+	displayString = currentPrdDiplome.libelle;
+	selection = selectedPrdDiplome;
+	size = "1";
+	class = "diplome";
+	//onchange = "javascript:this.form.elements['change'].click()";
+}
+
+cond1 : WOConditional {
+	condition = false;
+	negate = nivoVisible;
+}
+niveau_1 : WOPopUpButton {
+	id = "niveauID";
+	name = "niveau";
+	list = niveaux;
+	item = currentNiveaux;
+	displayString =currentNiveaux.libelle;
+	noSelectionString = "Tous";
+	selection = selectedNiveaux;
+	size = "1";
+	class = "niveau";
+}
+cond2 : WOConditional {
+	condition = true;
+	negate = nivoVisible;
+}
+niveau_2 : WOPopUpButton {
+	id = "niveauID";
+	name = "niveau";
+	list = niveauxMast;
+	item = currentNiveauMst;
+	displayString =currentNiveauMst.libelle;
+	noSelectionString = "Tous";
+	selection = selectedNiveauMst;
+	size = "1";
+	class = "niveau";
+}
+
+nom : WOTextField {
+	name = "nom";
+	value = nom;
+	class="text";
+	size="25";
+}
+
+num : WOTextField {
+	name = "numero";
+	value = numero;
+	size = "5";
+	class = "text";
+	style = "text-align:right";
+}
+
+ErrorMsg : AjaxUpdateContainer {
+	id="msgError";
+}
+
+isError : WOConditional {
+	condition = controleur.message;
+}
+
+MessageErreur : WOString {
+	value = controleur.message;
+}
+
+Observe1 : AjaxObserveField {
+	elementName = "span";
+	action = controleur.clickCheck;
+	fullSubmit = true;
+}
+
+checkBx : WOCheckBox {
+	id = "reoriente";
+	name = "reoriente";
+	selection = controleur.reorienteChck;
+	value = "N";
+}
+
+suivi : WORadioButton {
+	name = "type";
+	id = "type";
+	selection = controleur.suivi;
+	value = "0";
+}
+
+convoqués : WORadioButton {
+	name = "type";
+	id = "type";
+	selection = controleur.convoques;
+	value = "1";
+}
+
+diplome : WORadioButton {
+	name = "type";
+	id = "type";
+	selection = controleur.diplome;
+	value = "2";
+}
+
+etudiant : WORadioButton {
+	name = "type";
+	id = "type";
+	selection = controleur.etudiant;
+	value = "3";
+}
+
+diplomes : WORadioButton {
+	name = "type";
+	id = "type";
+	selection = controleur.diplomes;
+	value = "4";
+}
+
+onEditions : AjaxUpdateContainer {
+	id = "onEditions";
+}
+
+onEdtio : WOConditional {
+	condition = controleur.print;
+}
+
+printEdtio : WOString {
+	value = controleur.print;
+}
+
+searchPv : UttAjaxSubmitButton {
+	//onClickBefore="confirm('Les éditions sont en cours... elles seront disponibles d'ici quelques instants.')";
+	id="Rechercher";
+	name ="Editions";
+	class="rechercher";
+	formName = "editionpv";
+	value="rechercher";
+	action = controleur.mySearchPv;
+	onSuccess = "function (oS){edtionContainerUpdate();}";
+	onFailure = "function (oS){edtionContainerUpdate();}";
+	updateContainerID = "edtionContain";
+	text = "lancer les éditions";
+	type = "print";
+}
+
+//debut formulaire Master
+EditionMST : WOForm {
+	name = "editionMST";
+	multipleSubmit = true;
+	//onKeyPress="if (event.keyCode == 13) {performeSearch();return false;}";
+}
+
+actionM : WOTextField {
+	name = "acte";
+	value = action;
+	class = "hide";
+}
+
+libnivM : WOTextField {
+	name="libniv";
+	value = libniv;
+	class = "hide";
+}
+
+mentions : WOPopUpButton {
+	name = "mention";
+	list = mentions;
+	item = currentMention;
+	displayString = currentMention.libelle;
+	noSelectionString = "Tous";
+	selection = selectedMention;
+	size = "1";
+	class = "mention";
+	
+	
+}
+
+suiviM : WORadioButton {
+	name = "type";
+	id = "type";
+	selection = controleur.suiviM;
+	value = "5";
+}
+
+convoquésM : WORadioButton {
+	name = "type";
+	id = "type";
+	selection = controleur.convoques;
+	value = "6";
+}
+
+diplomeM : WORadioButton {
+	name = "type";
+	id = "type";
+	selection = controleur.diplome;
+	value = "2";
+}
+
+etudiantM : WORadioButton {
+	name = "type";
+	id = "type";
+	selection = controleur.etudiant;
+	value = "3";
+}
+
+diplomesM : WORadioButton {
+	name = "type";
+	id = "type";
+	selection = controleur.diplomes;
+	value = "4";
+}
+
+onEdtion : WOConditional {
+	condition = controleur.printMst;
+}
+
+printEdtion : WOString {
+	value = controleur.printMst;
+}
+
+searchMST : UttAjaxSubmitButton {
+	//onClickBefore="confirm('Les éditions sont en cours... elles seront disponibles d'ici quelques instants.')";
+	id="Rechercher";
+	name ="Master";
+	class="rechercher";
+	formName = "editionMST";
+	value="rechercher";
+	action = controleur.mySearchMst;
+	onSuccess = "function (oS){edtionContainerUpdate();}";
+	onFailure = "function (oS){edtionContainerUpdate();}";
+	updateContainerID = "edtionContain";
+	text = "lancer les éditions";
+	type = "print";
+}
+
+editionContainer : AjaxUpdateContainer {
+	id = "editionContainer";
+}
+
+errorCond : WOConditional {
+	condition = controleur.printError;
+}
+
+printError : WOString {
+	value = controleur.printError;
+}
+
+searchCond : WOConditional {
+	condition = controleur.searchError;
+}
+
+searchError : WOString {
+	value = controleur.searchError;
+}
+
+listCond : WOConditional {
+	condition = controleur.grpList.allObjects.count;
+}
+
+listRepeat : WORepetition {
+	list = controleur.grpList.allObjects;
+	item = controleur.fichier;
+}
+
+liens : WOHyperlink {
+	action = controleur.editionAsPDF;
+	target = "_blank";
+}
+
+fichier : WOString {
+	value = controleur.fichier.getFilename;
+}
+
+Busy10: AjaxBusyIndicator {
+	divID = "busy10";
+}
+
+Indicateur1 : WOImage {
+	border = 0;
+	filename = "newImages/indicator_arrows.gif";
+	style = "display:none;";
+	id = "busy10";
+}

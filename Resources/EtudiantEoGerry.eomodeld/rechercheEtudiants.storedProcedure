@@ -1,0 +1,83 @@
+{
+    arguments = (
+        {
+            allowsNull = Y; 
+            columnName = "010_pperiode"; 
+            externalType = VARCHAR2; 
+            name = "010_pperiode"; 
+            parameterDirection = 1; 
+            valueClassName = NSString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "020_pdiplome"; 
+            externalType = VARCHAR2; 
+            name = "020_pdiplome"; 
+            parameterDirection = 1; 
+            valueClassName = NSString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "030_pniveau"; 
+            externalType = VARCHAR2; 
+            name = "030_pniveau"; 
+            parameterDirection = 1; 
+            valueClassName = NSString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "040_puv"; 
+            externalType = VARCHAR2; 
+            name = "040_puv"; 
+            parameterDirection = 1; 
+            valueClassName = NSString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "050_pnom"; 
+            externalType = VARCHAR2; 
+            name = "050_pnom"; 
+            parameterDirection = 1; 
+            valueClassName = NSString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "060_pprenom"; 
+            externalType = VARCHAR2; 
+            name = "060_pprenom"; 
+            parameterDirection = 1; 
+            valueClassName = NSString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "070_pnum"; 
+            externalType = NUMBER; 
+            name = "070_pnum"; 
+            parameterDirection = 1; 
+            valueClassName = NSNumber; 
+            valueType = i; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "080_pconseiller"; 
+            externalType = NUMBER; 
+            name = "080_pconseiller"; 
+            parameterDirection = 1; 
+            valueClassName = NSNumber; 
+            valueType = i; 
+        }, 
+        {
+            adaptorValueConversionMethodName = ConvMethod; 
+            allowsNull = Y; 
+            columnName = "090_etu_cur"; 
+            externalType = "REF CURSOR"; 
+            factoryMethodArgumentType = EOFactoryMethodArgumentIsBytes; 
+            name = "090_etu_cur"; 
+            parameterDirection = 2; 
+            valueClassName = "java.sql.ResultSet"; 
+            valueFactoryMethodName = factoryMethod; 
+        }
+    ); 
+    externalName = "GERRY.PKG_ETU_DOSSIER.RECHERCHE_ETUDIANTS"; 
+    name = rechercheEtudiants; 
+}

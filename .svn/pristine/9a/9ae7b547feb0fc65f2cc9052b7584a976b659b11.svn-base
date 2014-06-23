@@ -1,0 +1,136 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "LIB_ABR"; 
+            externalType = VARCHAR2; 
+            name = libAbr; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 10; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = LIBELLE; 
+            externalType = VARCHAR2; 
+            name = libelle; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 100; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = LIGNE; 
+            externalType = NUMBER; 
+            name = ligne; 
+            valueType = d; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = LONGUEUR; 
+            externalType = NUMBER; 
+            name = longueur; 
+            valueType = d; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = MIN; 
+            externalType = NUMBER; 
+            name = min; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PRD_DEBUT"; 
+            externalType = VARCHAR2; 
+            name = prdDebut; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PRD_FIN"; 
+            externalType = VARCHAR2; 
+            name = prdFin; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "PROFIL_PARAM_ID"; 
+            externalType = NUMBER; 
+            name = profilParamId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "PROFIL_TOTAL_ID"; 
+            externalType = NUMBER; 
+            name = profilTotalId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            columnName = "REGLE_$C"; 
+            externalType = VARCHAR2; 
+            name = "regle$c"; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 10; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        libAbr, 
+        libelle, 
+        ligne, 
+        longueur, 
+        min, 
+        prdDebut, 
+        prdFin, 
+        profilParamId, 
+        profilTotalId, 
+        "regle$c"
+    ); 
+    className = "gestionuv.utt.fr.eo.EOProfilParam"; 
+    classProperties = (
+        libAbr, 
+        libelle, 
+        ligne, 
+        longueur, 
+        min, 
+        prdDebut, 
+        prdFin, 
+        profilTotalId, 
+        profilTotauxs, 
+        refProfilTotal, 
+        "regle$c"
+    ); 
+    externalName = "GEST_UV.PROFIL_PARAM"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOProfilParam; 
+    primaryKeyAttributes = (profilParamId); 
+    relationships = (
+        {
+            destination = EOProfilTotaux; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = profilParamId; sourceAttribute = profilParamId; }); 
+            name = profilTotauxs; 
+        }, 
+        {
+            destination = EORefProfilTotal; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = profilTotalId; sourceAttribute = profilTotalId; }); 
+            name = refProfilTotal; 
+        }
+    ); 
+}

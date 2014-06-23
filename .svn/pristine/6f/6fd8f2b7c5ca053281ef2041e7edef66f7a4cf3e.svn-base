@@ -1,0 +1,20 @@
+DefaultStyles : WOString {
+	value = getDefaultStyles;
+	escapeHTML = false;
+}
+
+imgOffLine: WOImage {
+	border = 0;
+	filename = "img/offline.gif";
+	framework = "FwkLoginWebApp";
+}
+
+imgItem: WOImage {
+	filename = "img/item-closed.gif";
+	framework = "FwkLoginWebApp";
+}
+
+linkAppURL : WOHyperlink {
+	action = retourAcceuil;
+	target = "_top";
+}

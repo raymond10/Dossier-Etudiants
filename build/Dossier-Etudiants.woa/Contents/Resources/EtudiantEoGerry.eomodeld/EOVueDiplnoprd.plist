@@ -1,0 +1,54 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "DIPL_DEBUT"; 
+            externalType = VARCHAR2; 
+            name = diplDebut; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPL_FERM"; 
+            externalType = VARCHAR2; 
+            name = diplFerm; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            columnName = ID; 
+            externalType = VARCHAR2; 
+            name = id; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = LIBELLE; 
+            externalType = VARCHAR2; 
+            name = libelle; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 67; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = ORDRE; 
+            externalType = NUMBER; 
+            name = ordre; 
+            valueType = d; 
+        }
+    ); 
+    attributesUsedForLocking = (diplDebut, diplFerm, id, libelle, ordre); 
+    className = "etudiants.utt.fr.eo.EOVueDiplnoprd"; 
+    classProperties = (diplDebut, diplFerm, id, libelle, ordre); 
+    externalName = "GERRY.VUE_DIPLNOPRD"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOVueDiplnoprd; 
+    primaryKeyAttributes = (id); 
+}

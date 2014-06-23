@@ -1,0 +1,12 @@
+package gestionuv.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+public class EOEtuDiplome extends _EOEtuDiplome {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8474673186871709583L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EOEtuDiplome.class);
+}

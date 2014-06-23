@@ -1,0 +1,48 @@
+{
+    arguments = (
+        {
+            allowsNull = Y; 
+            columnName = 000; 
+            externalType = RECORD; 
+            factoryMethodArgumentType = EOFactoryMethodArgumentIsData; 
+            name = "10_returnValue"; 
+            parameterDirection = 2; 
+            valueClassName = "com.webobjects.foundation.NSMutableDictionary"; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "20_etuId"; 
+            externalType = NUMBER; 
+            name = "20_etuId"; 
+            parameterDirection = 1; 
+            valueClassName = NSNumber; 
+            valueType = i; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "30_pdiplome"; 
+            externalType = VARCHAR2; 
+            name = "30_pdiplome"; 
+            parameterDirection = 1; 
+            valueClassName = NSString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "40_pspecialite"; 
+            externalType = VARCHAR2; 
+            name = "40_pspecialite"; 
+            parameterDirection = 1; 
+            valueClassName = NSString; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "50_pniveau"; 
+            externalType = VARCHAR2; 
+            name = "50_pniveau"; 
+            parameterDirection = 1; 
+            valueClassName = NSString; 
+        }
+    ); 
+    externalName = "GERRY.PKG_ETU_DOSSIER.PROFIL_TOTAL"; 
+    name = ProfilTotal; 
+}

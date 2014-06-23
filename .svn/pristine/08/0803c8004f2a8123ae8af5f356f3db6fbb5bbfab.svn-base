@@ -1,0 +1,12 @@
+package gestionuv.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+public class EOParamDoetu extends _EOParamDoetu {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7529443406877072904L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EOParamDoetu.class);
+}

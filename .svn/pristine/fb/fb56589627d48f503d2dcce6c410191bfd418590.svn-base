@@ -1,0 +1,840 @@
+/**
+ * 
+ */
+package etudiants.utt.fr.components.controlers;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.security.InvalidKeyException;
+import java.util.Properties;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+
+import org.login.fwkloginwebapp.server.LoginDataResponse;
+
+import com.sshtools.j2ssh.sftp.SftpFile;
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WODisplayGroup;
+import com.webobjects.appserver.WORequest;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.eoaccess.EOUtilities;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.eocontrol.EOSortOrdering;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSComparator;
+import com.webobjects.foundation.NSData;
+import com.webobjects.foundation.NSDictionary;
+import com.webobjects.foundation.NSLog;
+import com.webobjects.foundation.NSMutableArray;
+import com.webobjects.foundation.NSMutableDictionary;
+import com.webobjects.foundation.NSSelector;
+import com.webobjects.foundation.NSTimestamp;
+
+import er.extensions.appserver.ERXRedirect;
+import etudiants.utt.fr.components.Editions;
+import etudiants.utt.fr.components.Recherche;
+import etudiants.utt.fr.eo.EOVueDiplnoprd;
+import etudiants.utt.fr.eo.EOVueDiplwithprd;
+import etudiants.utt.fr.eo.EOVueNivAdm;
+import etudiants.utt.fr.eo.EOVuePeriodeParam;
+import etudiants.utt.fr.roles.LeUser;
+import etudiants.utt.fr.server.Application;
+import etudiants.utt.fr.server.Session;
+import etudiants.utt.fr.sql.EditionSQL;
+import etudiants.utt.fr.util.CreateServlet;
+import etudiants.utt.fr.util.LesURLs;
+import etudiants.utt.fr.util.SshConnexion;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+@SuppressWarnings("all")
+public class EditionCtrl extends AComponentCtrl {
+	public static final Integer DEFAULT_DISPLAY = Integer.valueOf(4);
+	public static int timer = 200;
+	public static String IMG_SERVER;
+	public static String IMG_DIR;
+	public static EditionSQL sql = new EditionSQL();
+	public EOEditingContext edc;
+	public Session sess;
+	public Editions wocomponent;
+	private Boolean isAutorizUser;
+	private Boolean isUser;
+	private LeUser user = new LeUser();
+	public NSMutableDictionary unUser = new NSMutableDictionary();
+	private String suivi;
+	private String suiviM;
+	private String convoques;
+	private String diplome;
+	private String etudiant;
+	private String diplomes;
+	public String reorienteChck = null;
+	private String message;
+	private String print;
+	private String printMst;
+	private String printError;
+	private String searchError;
+	private String links;
+	public WODisplayGroup grpList;
+	public String exporturl;
+	private SftpFile fichier;
+	private CreateServlet servlet;
+	private LesURLs url;
+
+	public EditionCtrl(Editions aComponent) throws Throwable {
+		// TODO Auto-generated constructor stub
+		grpList = new WODisplayGroup();
+		servlet = new CreateServlet();
+		url = new LesURLs();
+		IMG_SERVER = url.getLocalSig();
+		IMG_DIR = url.getRepPhoto();
+		suivi = "0";
+		suiviM = "5";
+		wocomponent = aComponent;
+		exporturl = url.getExportURL();
+		edc = wocomponent.edc();
+		sess = wocomponent.mySession();
+		user = wocomponent.user();
+		unUser = user.getLeUser();
+		lastEditions();
+	}
+
+	/**
+	 * @return the isUser
+	 */
+	public Boolean getIsUser() {
+		isUser = isAutorizUser;
+		return isUser;
+	}
+
+	/**
+	 * @param isUser
+	 *            the isUser to set
+	 */
+	public void setIsUser(Boolean isUser) {
+		this.isUser = isUser;
+	}
+
+	/**
+	 * @return the isAutorizUser
+	 */
+	public Boolean getIsAutorizUser() {
+		isAutorizUser = (Boolean) unUser.valueForKey("isAutorized");
+		return isAutorizUser;
+	}
+
+	/**
+	 * @param isAutorizUser
+	 *            the isAutorizUser to set
+	 */
+	public void setIsAutorizUser(Boolean isAutorizUser) {
+		this.isAutorizUser = isAutorizUser;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public LeUser getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user
+	 *            the user to set
+	 */
+	public void setUser(LeUser user) {
+		this.user = user;
+	}
+
+	/**
+	 * @return the suivi
+	 */
+	public String getSuivi() {
+		return suivi;
+	}
+
+	/**
+	 * @param suivi
+	 *            the suivi to set
+	 */
+	public void setSuivi(String suivi) {
+		this.suivi = suivi;
+	}
+
+	/**
+	 * @return the convoques
+	 */
+	public String getConvoques() {
+		return convoques;
+	}
+
+	/**
+	 * @param convoques
+	 *            the convoques to set
+	 */
+	public void setConvoques(String convoques) {
+		this.convoques = convoques;
+	}
+
+	/**
+	 * @return the diplome
+	 */
+	public String getDiplome() {
+		return diplome;
+	}
+
+	/**
+	 * @param diplome
+	 *            the diplome to set
+	 */
+	public void setDiplome(String diplome) {
+		this.diplome = diplome;
+	}
+
+	/**
+	 * @return the etudiant
+	 */
+	public String getEtudiant() {
+		return etudiant;
+	}
+
+	/**
+	 * @param etudiant
+	 *            the etudiant to set
+	 */
+	public void setEtudiant(String etudiant) {
+		this.etudiant = etudiant;
+	}
+
+	/**
+	 * @return the diplomes
+	 */
+	public String getDiplomes() {
+		return diplomes;
+	}
+
+	/**
+	 * @param diplomes
+	 *            the diplomes to set
+	 */
+	public void setDiplomes(String diplomes) {
+		this.diplomes = diplomes;
+	}
+
+	/**
+	 * @return the suiviM
+	 */
+	public String getSuiviM() {
+		return suiviM;
+	}
+
+	/**
+	 * @param suiviM
+	 *            the suiviM to set
+	 */
+	public void setSuiviM(String suiviM) {
+		this.suiviM = suiviM;
+	}
+
+	/**
+	 * @return the message
+	 */
+	public String getMessage() {
+		return message;
+	}
+
+	/**
+	 * @param message
+	 *            the message to set
+	 */
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	/**
+	 * @return the print
+	 */
+	public String getPrint() {
+		return print;
+	}
+
+	/**
+	 * @param print
+	 *            the print to set
+	 */
+	public void setPrint(String print) {
+		this.print = print;
+	}
+
+	/**
+	 * @return the printMst
+	 */
+	public String getPrintMst() {
+		return printMst;
+	}
+
+	/**
+	 * @param printMst
+	 *            the printMst to set
+	 */
+	public void setPrintMst(String printMst) {
+		this.printMst = printMst;
+	}
+
+	/**
+	 * @return the printError
+	 */
+	public String getPrintError() {
+		return printError;
+	}
+
+	/**
+	 * @param printError
+	 *            the printError to set
+	 */
+	public void setPrintError(String printError) {
+		this.printError = printError;
+	}
+
+	/**
+	 * @return the searchError
+	 */
+	public String getSearchError() {
+		return searchError;
+	}
+
+	/**
+	 * @param searchError
+	 *            the searchError to set
+	 */
+	public void setSearchError(String searchError) {
+		this.searchError = searchError;
+	}
+
+	/**
+	 * @return the links
+	 */
+	public String getLinks() {
+		links = exporturl + fichier.getFilename();
+		return links;
+	}
+
+	/**
+	 * @param links
+	 *            the links to set
+	 */
+	public void setLinks(String links) {
+		this.links = links;
+	}
+
+	/**
+	 * @return the fichier
+	 */
+	public SftpFile getFichier() {
+		return fichier;
+	}
+
+	/**
+	 * @param fichier
+	 *            the fichier to set
+	 */
+	public void setFichier(SftpFile fichier) {
+		this.fichier = fichier;
+	}
+
+	/**
+	 * @return the servlet
+	 */
+	public CreateServlet getServlet() {
+		return servlet;
+	}
+
+	/**
+	 * @param servlet
+	 *            the servlet to set
+	 */
+	public void setServlet(CreateServlet servlet) {
+		this.servlet = servlet;
+	}
+
+	/**
+	 * @return the url
+	 */
+	public LesURLs getUrl() {
+		return url;
+	}
+
+	/**
+	 * @param url
+	 *            the url to set
+	 */
+	public void setUrl(LesURLs url) {
+		this.url = url;
+	}
+
+	public void clickCheck() {
+		WORequest request = wocomponent.context().request();
+		String value = (String) request.formValueForKey("reoriente");
+		if (value != null && value.equals("N")) {
+			reorienteChck = "N";
+		} else {
+			reorienteChck = "O";
+		}
+	}
+
+	public WOActionResults mySearchPv() throws Throwable {
+		printMst = null;
+		printError = null;
+		searchError = null;
+		String periode = null;
+		String diplome = null;
+		String niveau = null;
+		String uv = null;
+		String nom = null;
+		String numero = null;
+		WORequest request = wocomponent.context().request();
+		String type = (String) request.formValueForKey("type");
+		String libniv = (String) request.formValueForKey("libniv");
+		String reoriente = (String) request.formValueForKey("reoriente");
+		if (reoriente == null) {
+			reoriente = "O";
+		}
+		String mention = (String) request.formValueForKey("mention");
+		String login = (String) unUser.valueForKey("login");
+		String mail = (String) unUser.valueForKey("mail");
+		NSMutableArray<String> types = new NSMutableArray<String>();
+		types.addObject("0");
+		types.addObject("1");
+		types.addObject("2");
+		types.addObject("3");
+		types.addObject("4");
+		if (wocomponent.getNom() != null) {
+			nom = wocomponent.getNom();
+		}
+		if (wocomponent.getNumero() != null) {
+			numero = wocomponent.getNumero();
+		}
+		if (wocomponent.getSelectedPeriode() != null) {
+			periode = wocomponent.getSelectedPeriode().primaryKey();
+		} else {
+			NSMutableDictionary tmpper = (NSMutableDictionary) reWriteListDico(
+					selectRawRowcourant(edc)).lastObject();
+			periode = (String) tmpper.valueForKey("PERIODE");
+		}
+		if (wocomponent.getSelectedDiplome() != null) {
+			diplome = wocomponent.getSelectedDiplome().primaryKey();
+		} else if (wocomponent.getSelectedPrdDiplome() != null) {
+			diplome = wocomponent.getSelectedPrdDiplome().primaryKey();
+		} else {
+			diplome = "ING2";
+		}
+		if (wocomponent.getSelectedNiveaux() != null) {
+			niveau = wocomponent.getSelectedNiveaux().primaryKey();
+			libniv = wocomponent.getSelectedNiveaux().libelle();
+		} else if (wocomponent.getSelectedNiveauMst() != null) {
+			niveau = wocomponent.getSelectedNiveauMst().primaryKey();
+			libniv = wocomponent.getSelectedNiveauMst().libelle();
+		}
+
+		try {
+			if (!exists(IMG_SERVER))
+				throw new Exception("Serveur d'image indisponible");
+			if (!type.equals("4") && (diplome == null || diplome.equals("")))
+				throw new Exception(
+						"Le nombre de données à remonter est important, merci d'affiner vos options d'impression (inclure un diplôme par exemple)");
+			if (!type.equals("4") && (niveau == null || niveau.equals("")))
+				throw new Exception(
+						"Le nombre de données à remonter est important, merci d'affiner vos options d'impression (inclure un niveau par exemple)");
+
+			print = "Les éditions sont en cours... elles seront disponibles d'ici quelques instants dans votre boîte mail.";
+			char c = '-';
+			int x = libniv.indexOf(c);
+			libniv = libniv.substring(x + 1, libniv.length()).trim();
+			String uri = null;
+			String urlResponseView = null;
+			String donnees = null;
+			String libpv = " ";
+			String ll = " ";
+			if (numero != null) {
+				message = null;
+				isNumeric(numero);
+			}
+			if (message == null) {
+				if (types.contains(type)) {
+					NSMutableDictionary courante = new NSMutableDictionary();
+					courante = (NSMutableDictionary) reWriteListDico(
+							selectRawRowcourante(edc, periode)).lastObject();
+					String cour = (String) courante.valueForKey("PRD_SESSION");
+					libpv = libniv.replace(" ", "-").trim();
+					libpv += "-" + cour;
+					if (((periode != null && periode.contains("U")) && (diplome != null && diplome
+							.contains("ING")))
+							|| ((periode != null && periode.contains("U")) && (diplome != null && diplome
+									.contains("MST")))) {
+						searchError = "Il n'y a pas d'étudiant correspondant à ces critères de recherche. ";
+						printMst = null;
+						print = null;
+						printError = null;
+					} else {
+						// libniv = null;
+						String tmp = leNiveau(libpv, niveau, diplome);
+						if (tmp != null) {
+							if (!tmp.equals(" ")) {
+								ll = tmp;
+								libpv = ll + "-" + libpv;
+								libniv = libpv;
+							}
+						}
+						try {
+							uri = url.getReportUrl();
+							donnees = servlet.data(type, login, periode,
+									diplome, niveau, libniv, nom, numero,
+									libpv, mail, reoriente, mention);
+							urlResponseView = servlet.excutePost(uri, donnees);
+							if (urlResponseView.contains("Exception")) {
+								printError = " Les éditions ne peuvent pas être lancées. Essayer de sélectionner un niveau sinon contacter le support.";
+								sess.addSimpleErrorMessage(
+										"Editions",
+										"Les éditions ne peuvent pas être lancées. Essayer de sélectionner un niveau sinon contacter le support.");
+								searchError = null;
+								printMst = null;
+								print = null;
+							}
+							NSLog.out.appendln("URL_RESPONSE : "
+									+ urlResponseView);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							printError = "Les éditions ne peuvent pas être lancées. Essayer de sélectionner un niveau sinon contacter le support.";
+							sess.addSimpleErrorMessage(
+									"Editions",
+									"Les éditions ne peuvent pas être lancées. Essayer de sélectionner un niveau sinon contacter le support.");
+							searchError = null;
+							printMst = null;
+							print = null;
+						}
+					}
+				}
+			}
+			lastEditions();
+		} catch (Exception e) {
+			// message = "ATTENTION"+"\n"+e.getMessage();
+			sess.addSimpleInfoMessage("ATTENTION", e.getMessage());
+			sess.setAlertMessage(e.getMessage());
+			return null;
+		}
+		return null;
+	}
+
+	public WOActionResults mySearchMst() throws Throwable {
+		print = null;
+		printError = null;
+		searchError = null;
+		wocomponent.action = "MST";
+		String nom = null;
+		String numero = null;
+		String periode = null;
+		String mention = null;
+		String uri = null;
+		String urlResponseView = null;
+		String donnees = null;
+		NSMutableDictionary specialite = new NSMutableDictionary();
+		NSMutableDictionary courante = new NSMutableDictionary();
+		WORequest request = wocomponent.context().request();
+		String type = (String) request.formValueForKey("type");
+		String libniv = (String) request.formValueForKey("libniv");
+		String action = (String) request.formValueForKey("acte");
+		String reoriente = (String) request.formValueForKey("reoriente");
+		String diplome = (String) request.formValueForKey("diplome");
+		String niveau = (String) request.formValueForKey("niveau");
+		String login = (String) unUser.valueForKey("login");
+		String mail = (String) unUser.valueForKey("mail");
+		String libpv = " ";
+		String ll = " ";
+		try {
+			if (!exists(IMG_SERVER))
+				throw new Exception("Serveur d'image indisponible");
+			if (!type.equals("4") && (diplome == null || diplome.equals("")))
+				throw new Exception(
+						"Le nombre de données à remonter est important, merci d'affiner vos options d'impression (inclure un diplôme par exemple)");
+			if (!type.equals("4") && (niveau == null || niveau.equals("")))
+				throw new Exception(
+						"Le nombre de données à remonter est important, merci d'affiner vos options d'impression (inclure un niveau par exemple)");
+
+			printMst = "Les éditions sont en cours... elles seront disponibles d'ici quelques instants dans votre boîte mail.";
+			if (reoriente == null) {
+				reoriente = "O";
+			}
+			if (action == null || action.equals(" ")) {
+				action = wocomponent.action;
+			}
+			if (libniv.equals(" ")) {
+				libniv = null;
+			}
+			if (wocomponent.getSelectedPeriode() != null) {
+				periode = wocomponent.getSelectedPeriode().primaryKey();
+			} else {
+				periode = "20111A";
+			}
+			if (wocomponent.getSelectedMention() != null) {
+				mention = wocomponent.getSelectedMention().primaryKey();
+			}
+			if (wocomponent.getNom() != null) {
+				nom = wocomponent.getNom();
+			}
+			if (wocomponent.getNumero() != null) {
+				numero = wocomponent.getNumero();
+			}
+			if (numero != null) {
+				isNumeric(numero);
+			}
+			if (message == null) {
+				courante = (NSMutableDictionary) reWriteListDico(
+						selectRawRowcourante(edc, periode)).lastObject();
+				if (action.equals(wocomponent.action)) {
+					if (mention != null) {
+						specialite = (NSMutableDictionary) reWriteListDico(
+								selectRawRowSpecialite(edc, mention))
+								.lastObject();
+						ll = (String) specialite.valueForKey("DIPL_SPEC_ABR");
+						libpv = courante.valueForKey("PRD_SESSION") + "-" + ll;
+					} else {
+						libpv = (String) courante.valueForKey("PRD_SESSION");
+					}
+					if ((periode != null && periode.contains("U"))
+							&& (diplome != null && diplome.contains("MST"))) {
+						searchError = "Il n'y a pas d'étudiant correspondant à ces critères de recherche. ";
+						printMst = null;
+						print = null;
+						printError = null;
+					} else {
+						try {
+							uri = url.getReportUrl();
+							donnees = servlet.data(type, login, periode,
+									diplome, niveau, libniv, nom, numero,
+									libpv, mail, reoriente, mention);
+							urlResponseView = servlet.excutePost(uri, donnees);
+							NSLog.out.appendln("URL_RESPONSE : "
+									+ urlResponseView);
+						} catch (UnsupportedEncodingException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							printError = "Les éditions ne peuvent pas être lancées. Contactez le support.";
+							sess.addSimpleErrorMessage("Editions",
+									"Les éditions ne peuvent pas être lancées. Contactez le support.");
+							searchError = null;
+							printMst = null;
+							print = null;
+						}
+					}
+				}
+			}
+			lastEditions();
+		} catch (Exception e) {
+			// message = "ATTENTION"+"\n"+e.getMessage();
+			sess.addSimpleInfoMessage("ATTENTION", e.getMessage());
+			sess.setAlertMessage(e.getMessage());
+		}
+		return null;
+	}
+
+	private boolean isNumeric(String input) {
+		try {
+			Integer.parseInt(input);
+			return true;
+		} catch (NumberFormatException e) {
+			message = "Veuillez indiquer un numéro valide.";
+			return false;
+		}
+	}
+
+	private String leNiveau(String libpv, String niveau, String diplome) {
+		String nivo = null;
+		WORequest request = wocomponent.context().request();
+		NSMutableDictionary specialite = new NSMutableDictionary();
+		String action = (String) request.formValueForKey("acte");
+		NSMutableArray<String> niveaux = new NSMutableArray<String>();
+		niveaux.addObject("-M1");
+		niveaux.addObject("-M2");
+		if (!action.equals("MST") && (diplome != null && diplome.equals("MST"))) {
+			if (niveau != null) {
+				String niv = niveau.substring(niveau.length() - 3);
+				if (niveaux.contains(niv)) {
+					String nn = niveau.substring(0, 4).trim();
+					specialite = (NSMutableDictionary) reWriteListDico(
+							selectRawRowSpecialite(edc, nn)).lastObject();
+					nivo = (String) specialite.valueForKey("DIPL_SPEC_ABR");
+				}
+			}
+		}
+		return nivo;
+	}
+
+	// Dictionnary Null value decoder
+	protected NSMutableArray reWriteListDico(NSArray dicoList) {
+		NSMutableArray listDico = new NSMutableArray();
+		for (int j = 0; j < dicoList.count(); j++) {
+			NSMutableDictionary tinyDico = new NSMutableDictionary();
+			tinyDico = (NSMutableDictionary) dicoList.objectAtIndex(j);
+			reWriteDico(tinyDico);
+			listDico.addObject(tinyDico);
+		}
+		return listDico;
+	}
+
+	protected void reWriteDico(NSMutableDictionary dico) {
+		for (int i = 0; i < dico.size(); i++) {
+			Object value = dico.allValues().objectAtIndex(i);
+			if (value.toString().equals(
+					"<com.webobjects.foundation.NSKeyValueCoding$Null>")) {
+				String key = (String) dico.allKeys().objectAtIndex(i);
+				dico.setObjectForKey(" ", key);
+				// NSLog.out.appendln(dico);
+			}
+		}
+	}
+
+	protected static NSArray selectRawRowSpecialite(EOEditingContext ed,
+			String bindings) {
+		NSArray result = null;
+		try {
+			result = EOUtilities.rawRowsForSQL(ed, "EtudiantEoGerry",
+					sql.specialite(bindings), null);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	protected static NSArray selectRawRowcourante(EOEditingContext ed,
+			String periode) {
+		NSArray result = null;
+		try {
+			result = EOUtilities.rawRowsForSQL(ed, "EtudiantEoGerry",
+					sql.periodeSelectionnee(periode), null);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	protected static NSArray selectRawRowcourant(EOEditingContext ed) {
+		NSArray result = null;
+		try {
+			result = EOUtilities.rawRowsForSQL(ed, "EtudiantEoGerry",
+					sql.periodeCourante(), null);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	// Methode d'affichage des 5 derniers editions du user connecté
+	public void lastEditions() throws Throwable {
+		NSArray<String> last = new NSArray<String>();
+		NSMutableArray tmpLast = new NSMutableArray();
+		String hostname = url.getHostname();
+		String pwd = url.getReportPwd();
+		String exportpath = url.getReportExportPath();
+		String username = "root";
+		String login = (String) unUser.valueForKey("login");
+		SshConnexion sftp = new SshConnexion();
+		tmpLast = sftp.connection(hostname, username, pwd, exportpath, login,
+				exporturl);
+		sftp.getSsh().disconnect();
+		if (tmpLast.count() != 0)
+			grpList.setObjectArray(tmpLast);
+	}
+
+	private void setTriList(String name) {
+		NSArray<EOSortOrdering> oldArray = grpList.sortOrderings();
+		EOSortOrdering oldOrdering = null;
+		EOSortOrdering newOrdering = null;
+		if (oldArray != null) {
+			oldOrdering = oldArray.lastObject();
+		}
+		if (oldOrdering != null && oldOrdering.key().equals(name)) {
+			newOrdering = EOSortOrdering
+					.sortOrderingWithKey(
+							name,
+							oldOrdering.selector() == EOSortOrdering.CompareDescending ? EOSortOrdering.CompareAscending
+									: EOSortOrdering.CompareDescending);
+		} else {
+			newOrdering = EOSortOrdering.sortOrderingWithKey(name,
+					EOSortOrdering.CompareAscending);
+		}
+		grpList.setSortOrderings(new NSArray<EOSortOrdering>(newOrdering));
+		grpList.qualifyDisplayGroup();
+	}
+
+	// Verification de l'url
+	protected static boolean exists(String URLName) {
+		if (timer != 200)
+			timer = 200;
+		try {
+			do {
+				timer--;
+				Properties systemSettings = System.getProperties();
+				systemSettings.put("proxySet", "true");
+				systemSettings.put("http.proxyHost", "proxy.mycompany.local");
+				systemSettings.put("http.proxyPort", "80");
+
+				URL u = new URL(URLName);
+				HttpURLConnection con = (HttpURLConnection) u.openConnection();
+				//
+				// it's not the greatest idea to use a sun.misc.* class
+				// Sun strongly advises not to use them since they can
+				// change or go away in a future release so beware.
+				//
+				sun.misc.BASE64Encoder encoder = new sun.misc.BASE64Encoder();
+				String encodedUserPwd = encoder
+						.encode("domain\\username:password".getBytes());
+				con.setRequestProperty("Proxy-Authorization", "Basic "
+						+ encodedUserPwd);
+				con.setRequestMethod("HEAD");
+				System.out.println(con.getResponseCode() + " : "
+						+ con.getResponseMessage() + " "
+						+ con.getConnectTimeout());
+				if (con.getResponseCode() == HttpURLConnection.HTTP_OK)
+					return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
+			} while (timer != 0);
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public WOActionResults editionAsPDF() throws IOException {
+		LoginDataResponse resp = new LoginDataResponse();
+		links = exporturl + fichier.getFilename();
+		URL uri = null;
+		try {
+			uri = new URL(links);
+			NSData stream = new NSData(uri);
+			resp.setHeader("maxage=1", "Cache-Control");
+			resp.setHeader("public", "Pragma");
+			resp.setHeader(fichier.getFilename(), "Content-Title");
+			resp.setHeader("attachement; filename=\""
+					+ fichier.getFilename() + "\"", "Content-Disposition");
+			resp.setHeader("application/pdf", "Content-Type");
+			resp.setContent(stream);
+		} finally {
+			// Libération de ressources URL
+			uri.openStream().close();
+		}
+		return resp.generateResponse();
+	}
+
+}

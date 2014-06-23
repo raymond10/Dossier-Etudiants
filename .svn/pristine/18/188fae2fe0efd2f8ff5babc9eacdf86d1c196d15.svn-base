@@ -1,0 +1,13 @@
+RetourAccueil : LoginButton {
+	action = retourAccueil;
+	text = "Fermer";
+	title = "Fermer";
+	type = "validate";
+	target = "_top";
+}
+ExceptionInfos : ERXWOText {
+	value = mySession.generalErrorMessage;
+	//style = "width:99%;height:150px;";
+	style = "width:100%;";
+	rows = "8";
+}

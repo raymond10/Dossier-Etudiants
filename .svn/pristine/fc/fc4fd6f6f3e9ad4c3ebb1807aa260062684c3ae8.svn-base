@@ -1,0 +1,183 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "AN_UNIV"; 
+            externalType = VARCHAR2; 
+            name = anUniv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "CRE_DATE"; 
+            externalType = DATE; 
+            name = creDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "ED_$C"; 
+            externalType = VARCHAR2; 
+            name = edc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = EFFECTIF; 
+            externalType = NUMBER; 
+            name = effectif; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "ENS_$F"; 
+            externalType = VARCHAR2; 
+            name = ensf; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "LIMITE_MOY"; 
+            externalType = NUMBER; 
+            name = limiteMoy; 
+            precision = 7; 
+            scale = 2; 
+            valueClassName = NSDecimalNumber; 
+            valueType = B; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "MAJ_AUTEUR"; 
+            externalType = VARCHAR2; 
+            name = majAuteur; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 20; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "MAJ_DATE"; 
+            externalType = DATE; 
+            name = majDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PRD_UNIV"; 
+            externalType = VARCHAR2; 
+            name = prdUniv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "PROGRAMME_ID"; 
+            externalType = NUMBER; 
+            name = programmeId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PUBLIQ_$F"; 
+            externalType = VARCHAR2; 
+            name = publiqf; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "UV_$C"; 
+            externalType = VARCHAR2; 
+            name = uvc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 8; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "UV_OUV_ID"; 
+            externalType = NUMBER; 
+            isReadOnly = Y; 
+            name = uvOuvId; 
+            precision = 7; 
+            valueType = l; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        anUniv, 
+        creDate, 
+        edc, 
+        effectif, 
+        ensf, 
+        limiteMoy, 
+        majAuteur, 
+        majDate, 
+        prdUniv, 
+        programmeId, 
+        publiqf, 
+        uvc, 
+        uvOuvId
+    ); 
+    className = "gestionuv.utt.fr.eo.EOUvOuv"; 
+    classProperties = (
+        anUniv, 
+        creDate, 
+        edc, 
+        effectif, 
+        ensf, 
+        eoRefPeriodes, 
+        limiteMoy, 
+        majAuteur, 
+        majDate, 
+        prdUniv, 
+        programmeId, 
+        publiqf, 
+        uv, 
+        uvc, 
+        uvOuvertess, 
+        uvOuvId
+    ); 
+    externalName = "GEST_UV.UV_OUV"; 
+    name = EOUvOuv; 
+    primaryKeyAttributes = (uvOuvId); 
+    relationships = (
+        {
+            destination = EORefPeriode; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = (
+                {destinationAttribute = anUniv; sourceAttribute = anUniv; }, 
+                {destinationAttribute = prdUniv; sourceAttribute = prdUniv; }
+            ); 
+            name = eoRefPeriodes; 
+        }, 
+        {
+            destination = EOUv; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = uvc; sourceAttribute = uvc; }); 
+            name = uv; 
+        }, 
+        {
+            destination = EOUvOuvertes; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = uvOuvId; sourceAttribute = uvOuvId; }); 
+            name = uvOuvertess; 
+        }
+    ); 
+}

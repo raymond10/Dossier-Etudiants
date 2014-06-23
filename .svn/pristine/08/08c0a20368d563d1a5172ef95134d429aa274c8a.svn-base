@@ -1,0 +1,60 @@
+lesAgents : WOConditional {
+	condition = ctrl.allAgent;
+}
+
+
+recherche : WOHyperlink {
+	action = ctrl.selectRecherche;
+}
+
+lAdmin : WOConditional {
+	condition = ctrl.admin;
+}
+
+
+
+editions : WOHyperlink {
+	action = ctrl.selectEtdition;
+}
+
+
+
+admin : WOHyperlink {
+	action = ctrl.selectAnnonce;
+}
+
+
+
+extractions : WOHyperlink {
+	action = ctrl.selectExtraction;
+}
+
+lesEtudiants : WOConditional {
+	condition = ctrl.etudiant;
+}
+
+profil : WOHyperlink {
+	action = ctrl.selectProfil;
+	onclick = "Element.show('busy10');";
+}
+
+resultatUv : WOHyperlink {
+	action = ctrl.selectResUv;
+	onclick = "Element.show('busy10');";
+}
+
+dossierAdm : WOHyperlink {
+	action = ctrl.selectDossier;
+	onclick = "Element.show('busy10');";
+}
+
+edt : WOHyperlink {
+	action = ctrl.selectEmploiDuTemps;
+	onclick = "Element.show('busy10');";
+}
+
+
+
+edtExams : WOHyperlink {
+	action = ctrl.selectEdtExam;
+}

@@ -1,0 +1,9 @@
+<webobject name = "Wrapper">
+  <div metal:fill-slot = "contenu">
+    <div>
+      <iframe src = "http://gestion.utt.fr/applis/service1/edt_examen/RECAP_EDT_ENT.php" frameborder = "no" style = "border:0;width: 100%; height: 900px; padding-bottom: 25px;"> </iframe>
+    </div>
+    <div class = "br"></div>
+  </div>
+  <webobject name = "Busy10" />
+</webobject>

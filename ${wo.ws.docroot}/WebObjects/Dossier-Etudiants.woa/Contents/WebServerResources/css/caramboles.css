@@ -1,0 +1,681 @@
+
+html {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	color: #000;
+	background-color: #FFFFFF;
+	text-align: center;
+/*	font-family: "Trebuchet MS", Verdana, "Lucida Grande", Tahoma, Helvetica, Sans-Serif;*/
+	font-size: 85%;
+}
+form {
+	margin-bottom: 0;	
+}
+input {
+	border: 1px solid #80C65A;	
+}
+select {
+	border: 1px solid #80C65A;	
+}
+.page {
+	position: absolute;
+	width: 960px;
+	height: 600px;
+	left: 50%;
+	top: 50%;
+	margin-left: -480px;
+	margin-top: -300px;
+	padding: 0;
+	text-align: left;
+}
+.titre {
+	position: relative;
+    padding-top: 4px;
+	height: 4%;
+	background-color: #80C65A;
+    -moz-border-radius: 7px 7px 0 0;
+    text-align: center;
+    /*font-family: cursive;*/
+    font-weight: bold;
+}
+.menu {
+	height: 10%;
+}
+.menu ul
+{
+ margin: 0;
+ padding: 0;
+ height: 100%;
+ border: 1px solid #80C65A;
+ background-color: #FFF;
+ white-space: nowrap;
+}
+
+.menu ul li
+{
+ display: block;
+ float: left;
+ margin: 4px 2px 4px 2px;
+ height: 85%;
+ width: 90px;
+ text-align: center;
+ color: red;
+ background: url(images/bg.png);
+ white-space: nowrap;
+ font-size: smaller;
+}
+.menu ul li.p
+{
+ text-align: center;
+}
+.menu ul li.recherche
+{
+ width: 390px;
+}
+.menu ul li.recherche a
+{
+ font-size: smaller;
+ display: inline;
+ }
+.menu ul li.last
+{
+ float: right;
+}
+
+input.sbox {
+	border: 0px solid #76797C;
+	background: white url(images/searchfield_bg.gif) repeat-x scroll left top;
+	color: #76797C;
+	width: 90%;
+	-moz-background-clip: -moz-initial;
+	-moz-background-origin: -moz-initial;
+	-moz-background-inline-policy: -moz-initial;
+	margin: 0px;
+}
+
+.contenu {
+	height: 80%;
+	background: url(images/bg.png);
+ 	border: 1px solid #80C65A;
+ 	padding: 4px 4px 4px 4px;
+ 	overflow: auto;
+}
+.copyright {
+	height: 4%;
+	background-color: #80C65A;
+	-moz-border-radius: 0 0 7px 7px;
+    /*font-family: cursive;*/
+    font-size: smaller;
+    font-weight: bold;
+    padding-top: 3px;
+}
+a {
+	text-decoration: none;
+	color: #006600;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+.artDetailInfo {
+	background: url(images/help.gif) no-repeat;
+	padding-left : 20px;
+}
+
+a.info{
+    position:relative; 
+    color:#000;
+    text-decoration:none}
+
+a.info:hover{z-index:99;}
+
+a.info span{display: none}
+
+a.info:hover span{ 
+/*le contenu de la balise span ne 
+sera visible que pour l'etat a:hover */
+ display:block; 
+ position:absolute;
+ top:0; left:2em; width:auto;
+ border:1px solid #80C65A;
+ background-color:#FFFFFF; color:#000000;
+ text-align: justify;
+ font-weight:normal;
+ padding:1px;
+}
+
+fieldset {
+	height: auto;
+	width: auto;
+	border: 1px solid #d3d7cf;
+    -moz-border-radius: 7px;
+    font-size: small;
+ 	background-color: #E6F8DD;
+ 	padding: 0;
+ 	margin: 0;
+}
+
+legend {
+	font-weight: bold;
+    padding-left: .5em;
+    padding-right: .5em;
+}
+
+th {
+	text-align: center;
+}
+
+.precommande {
+	background-color: #FF3300;	
+}
+.part_engagee {
+	background-color: #FF6600;	
+}
+.engagee,.engage {
+	background-color: #FF9900;	
+}
+.part_soldee,.part_solde {
+	background-color: #FFCC00;	
+}
+.soldee,.solde {
+	background-color: #FFFF00;	
+}
+.annulee {
+	background-color: grey;	
+}
+
+.navigation {
+ 	text-align: center;
+ 	height: 20px;
+	width: auto;
+	margin: 5px;
+}
+.navigation .invisible {
+	visibility: hidden; 
+}
+.navigation a, .navigation input {
+	border: 1px solid #80C65A;
+ 	background-color: #CDE2A7;
+ 	color: #000000;
+ 	width: 100px;
+}
+
+.qbe {
+	background: silver;
+	border: 1px solid gray;
+	width: 90%;
+}
+
+.filtre, .legende {
+	width: auto;
+	height: 30px;
+}
+
+.listeAvecFiltre {
+	height: 427px;
+}
+
+.listeSansFiltre {
+	height: 455px;
+}
+
+.listeCommandes {
+	padding-top:1.0em;	
+	width: auto;
+	text-align: center;	
+	border: 1px solid #74ae0b;
+	border-top: none;	
+}
+
+
+.listeCommandesTable {
+	height: auto;
+	width: auto;
+	margin: 0px 5px 0px 5px;
+}
+
+.informer {
+	/*font-family: "Trebuchet MS", Verdana, "Lucida Grande", Tahoma, Helvetica, Sans-Serif;*/
+	font-size: small;
+}
+.informer table {
+	font-size: small;
+}
+.informer td input, .informer td textarea {
+	font-size: small;
+	margin: 0px;
+}
+
+
+.liquidation {
+	overflow: auto;
+	white-space: nowrap;
+	overflow-x: auto;
+	height: 455px;
+	/*font-family: "Trebuchet MS", Verdana, "Lucida Grande", Tahoma, Helvetica, Sans-Serif;*/
+}
+.filtre table {
+	width: 100%;
+	border: 1px solid #CFCFCF;
+    font-size: small;
+ 	background-color: #FFF;
+}
+
+.avertissement {
+	color: red;
+	font-weight: bolder;
+ 	text-decoration: blink;
+ 	text-align: center;
+ 	height: 20px;
+}
+.creationArticle {
+	height: 420px;
+	width: auto;
+	margin: 5px 5px 5px 5px;
+	position: relative;
+	text-align: center;		
+}
+
+.listeBonDeCommande {
+	overflow: auto;
+	white-space: nowrap;
+	overflow-x: hidden;
+	height: 417px;
+	width: auto;
+	margin: 0px 5px 5px 5px;
+	position: relative;
+}
+.listeFournisseurs {
+	overflow: auto;
+	white-space: nowrap;
+	overflow-x: hidden;
+	margin: 5px;
+	height: 433px;
+	width: auto;
+	border: 1px solid #80C65A;
+}
+.detailFournisseur {
+	overflow: auto;
+	white-space: nowrap;
+	overflow-x: hidden;
+	margin: 5px;
+	height: 200px;
+	width: 200px;
+	background-color: white;
+	text-align: left;
+}
+.listeRepartition {
+	overflow: auto;
+	white-space: nowrap;
+	overflow-x: hidden;
+	height: 426px;
+}
+.listeChoixSelection {
+	display: none;	
+}
+.alignToCenter {
+	text-align: center;		
+}
+.alignToLeft {
+	text-align: left;		
+}
+.alignToRight {
+	text-align: right;		
+}
+.useMaxWidth {
+	width: 100%;		
+}
+.useMediaWidth {
+	width: 50%;		
+}
+.useMinWidth {
+	width: 1%;		
+}
+.nowrap {
+	white-space:nowrap;	
+}
+.wrap {
+	width: 1%;	
+}
+.autoscroll {
+	overflow: auto;	
+}
+.liste table, .listeCommandes table, .detailCommande table, .listeBonDeCommande table, .liquidation table, .creationArticle table, .listeRepartition table, .informer table {
+	width: 100%;
+    font-size: small;
+}
+.liste table thead, .listeCommandes table thead, .detailCommande table thead, .listeBonDeCommande table thead, .liquidation table thead, .creationArticle table thead, .listeRepartition table thead  {
+	background-color: #CDE2A7;
+}
+.liste table tfoot, .listeCommandes table tfoot, .detailCommande table tfoot, .listeBonDeCommande table tfoot, .liquidation table tfoot, .creationArticle table tfoot, .listeRepartition table tfoot  {
+	background-color: #CDE2A7;
+}
+.liste table tbody, .listeCommandes table tbody, .detailCommande table tbody, .listeBonDeCommande table tbody, .liquidation table tbody, .creationArticle table tbody, .listeRepartition table tbody {
+	white-space: nowrap;		
+	background-color: #ffffff;
+}
+
+.selection table tbody tr td, .listeSelection table tbody tr td {
+	border-style: solid none;
+	border-width: 1px;
+	border-color: white;
+	font-weight: bold;
+}
+.selection table tbody tr td, .listeSelection table tbody tr td.option {
+	border-style: solid none;
+	border-width: 1px;
+	border-color: white;
+	font-weight: normal;
+	padding-left: 20px;
+	
+}
+.selection table tbody tr:hover td, .listeSelection table tbody tr:hover td {
+	border-style: solid none;
+	border-width: 1px;
+	border-color: red;
+}
+
+.detailCommande {
+	height: 400px;
+	width: 100%;
+	position: relative;
+	text-align: center;		
+}
+
+.accordionTab {
+	border: 1px solid #FFF;
+	border-bottom: none;
+}
+.accordionTabTitleBar {
+	padding-left: 5px;
+	text-align: left;
+}
+.accordionTabContentBox {
+	background-color: #FFF;
+}
+.bonDeCommande {
+	width: auto;
+	height: 100%;
+}
+
+/* Form tabs */
+.tabbertabhide {
+ display:none;
+}
+
+/*--------------------------------------------------
+  ul.tabbernav = the tab navigation list
+  li.tabberactive = the active tab
+  --------------------------------------------------*/
+ul.tabbernav
+{
+	width: auto;
+	border-bottom: 1px solid #74ae0b;
+	margin: 0;
+ 	padding: 0;
+ 	text-align: center;
+ 	height: 5%;
+}
+
+ul.tabbernav li
+{
+ display: inline;
+ margin-left: -0.50em;
+ list-style: none;
+ list-style-image: none;
+ list-style-position: inside;
+ list-style-type: none;
+}
+
+ul.tabbernav li a
+{
+ padding: 3px 0.5em;
+ margin-left: 0;
+ border: 1px solid #74ae0b;
+ border-style: solid dotted solid dotted;
+ text-decoration: none;
+ color: #5d8811;
+ position: relative;
+ top: 0.5em;
+ background-color: White;
+}
+ul.tabbernav li a:hover
+{
+ background-color: #cde2a7;
+ text-decoration: blink;
+}
+
+ul.tabbernav li a:active {
+ color: #5d8811;
+}
+
+
+ul.tabbernav li.tabberactive a
+{
+ background-color: #cde2a7;
+ color: #5d8811;
+}
+
+ul.tabbernav li.tabberactive a:hover
+{
+ background-color: #cde2a7;
+}
+
+/*--------------------------------------------------
+  .tabbertab = the tab content
+  Add style only after the tabber interface is set up (.tabberlive)
+  --------------------------------------------------*/
+.tabbertab {
+ margin: 0 4px 4px 4px;
+ width: auto;
+ height: 430px;
+ padding: 1em 0 0 0;
+ border: 1px solid #74ae0b;
+ border-top:0;
+}
+
+/* If desired, hide the heading since a heading is provided by the tab */
+.tabberlive .tabbertab h2 {
+ display:none;
+}
+
+/* End form tabs */
+
+#undefinednav1 { border-left: 1px solid #74ae0b;}
+#undefinednav6 { border-right: 1px solid #74ae0b;}
+
+.tabbertab { min-height: 24em;}
+
+* html .tabbertab {height: 1%} /* IE fix */
+
+
+.wizard, .infos, .sources, .articles, .repartitions {
+	position: absolute;
+	height: 367px;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	visibility: hidden;
+}
+
+#actif {
+	overflow: auto;
+	white-space: nowrap;
+	overflow-x :hidden ;
+	visibility: visible;
+	z-index: 999;
+}
+
+/*
+#global {
+     position:absolute;
+     left: 50%; 
+     top: 50%;
+     width: 700px;
+     margin-left: -350px; 
+     height: 340px;
+     margin-top: -170px;
+     border: 1px solid #80C65A;
+     -moz-border-radius: 7px;
+     background-color: white;
+}
+*/
+#ListeCommandes {
+	border: 1px solid #80C65A;
+	background-color: white;
+}
+
+.mac_os_x_message {
+	font-size:16px;
+	text-align:center;
+	width:100%;
+	color:#F00;
+	padding-bottom:10px;
+}
+
+.mac_os_x_buttons {
+	text-align:center;
+	width:100%;
+}
+
+.submit {
+ display: inline;
+ margin: 4px;
+ height: 15px;
+ width: 100px;
+ color: white;
+ background: url(images/smallSubmit.gif);
+ font-size: smaller;
+}
+#qbe,#accueil,#ArticleModification,#body
+{
+	text-align: center;
+	background: url(images/bg.png);
+}
+#qbe table tr,#accueil table tr 
+{
+	margin: 5px;
+	height: 100%;
+}
+#qbe table tr td,#accueil table tr td
+{
+	padding: 0px 2px;
+	height: 100%;
+}
+#qbe table tr th, #qbe table tr td h3,#accueil table tr td h3
+{
+	background: transparent url(images/h3.gif) repeat-x scroll 0pt 100%;
+	color: #000000;
+	text-align: left;
+}
+#accueil table tr td h3 {
+	color: #80C65A;
+}
+#qbe table tr td table ,#accueil table tr td table
+{
+	border: 1px solid #80C65A;
+	background-color: white;
+	margin: 5px;
+	color: #006600;
+}
+#qbe table tr td ul li,#accueil table tr td ul li
+{
+	padding: 3px 0;
+	letter-spacing: 1px;
+}
+
+
+.expansion {
+	 background-image: url(images/ico_node_collapsed_gris_16.png);
+	 background-repeat:no-repeat;
+	 padding-left: 16px;
+	 
+}
+.expanded {
+	 background-image: url(images/ico_node_expanded_gris_16.png);
+	 background-repeat:no-repeat;
+	 padding-left: 16px;
+}
+
+
+
+.accordion {
+	
+}
+
+div.accordion-toggle{
+	border-color:#FFFFFF #FFFFFF -moz-use-text-color;
+	border-style:solid solid none;
+	border-width:1px 1px medium;
+	background-color : #CDE2A7;
+	text-align: left;
+	paddding-left: 5px;
+	line-height: 20px;
+	z-index: 1;
+}
+
+div.accordion-content{
+	border-width: 0px 1px; 
+	border-style: solid; 
+	border-color: rgb(207, 207, 207); 
+	margin: 0px; 
+	height: auto; 
+	overflow: auto;
+	
+}
+
+div.accordion-toggle-active {
+	background-color: rgb(128, 198, 90); 
+	color: rgb(0, 0, 0); 
+	font-weight: bold;
+}
+
+/*
+#global {
+    position:absolute;
+     left: 50%; 
+     top: 50%;
+     width: 600px;
+     margin-left: -300px; 
+     height: 300px;
+     margin-top: -150px;
+     border: 1px solid #80C65A;
+     background-color: #E6F8DD;
+     -moz-border-radius: 7px;
+}
+*/
+
+#global {
+     width: 700px;
+     margin: auto;
+     border: 1px solid #80C65A;
+     background-color: #E6F8DD;
+     -moz-border-radius: 7px;
+}
+
+
+.listeLiquidationSelection {
+	height: 350px;
+	margin-bottom: 15px;
+}
+.titreZone {
+	//position: relative;
+    padding: 4px;
+	background-color: #80C65A;
+    //-moz-border-radius: 7px 7px 0 0;
+    text-align: left;
+    font-weight: bold;
+    width: 100%;
+    
+}
+
+.pageTitle {
+	font-size: 12px;
+	font-style: italic;
+
+}

@@ -1,0 +1,61 @@
+package etudiants.utt.fr.components;
+
+import com.webobjects.appserver.WOComponent;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.foundation.NSLog;
+
+import er.ajax.AjaxUtils;
+import er.extensions.foundation.ERXStringUtilities;
+import etudiants.utt.fr.server.MyAjaxComponent;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public class OnTimeOut extends MyAjaxComponent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 957510431257716251L;
+
+	public OnTimeOut(WOContext context) {
+		super(context);
+		NSLog.out.appendln("TimeOut");
+	}
+	
+	@Override
+	public void appendToResponse(WOResponse response, WOContext context) {
+	    super.appendToResponse(response, context);
+	    AjaxUtils.addScriptResourceInHead(context, response, "prototype.js");
+	    AjaxUtils.addScriptResourceInHead(context, response, "effects.js");
+	    AjaxUtils.addScriptResourceInHead(context, response, "wonder.js");
+	    AjaxUtils.addScriptResourceInHead(context, response, "FwkCktlThemes.framework", "scripts/window.js");
+	    AjaxUtils.addStylesheetResourceInHead(context, response, "FwkCktlThemes.framework", "themes/default.css");
+	    AjaxUtils.addStylesheetResourceInHead(context, response, "FwkCktlThemes.framework", "themes/alert.css");
+	    AjaxUtils.addStylesheetResourceInHead(context, response, "FwkCktlThemes.framework", "themes/lighting.css");
+	    AjaxUtils.addStylesheetResourceInHead(context, response, "FwkCktlThemes.framework", "css/CktlCommon.css");
+	    AjaxUtils.addStylesheetResourceInHead(context, response, "FwkCktlThemes.framework", "css/CktlCommonBleu.css");
+	    AjaxUtils.addStylesheetResourceInHead(context, response, "app", "css/etudiant.css");
+	}
+	
+	public boolean isStateless() {
+		return true;
+	}
+	
+	/**
+	 * Retourne la definition des styles par defaut. Les balises de style CSS 
+	 * doivent etre donnees dans la configuration de l'application, le parametre
+	 * <code>HTML_CSS_STYLES</code>.
+	 */
+	public String getDefaultStyles() {
+		return ERXStringUtilities.toString(myApp().config().valuesForKey("HTML_CSS_STYLES").objects(), "\n");
+	}
+
+	public WOComponent retourAcceuil() {
+		Main accueil = (Main) this.pageWithName(Main.class.getName());
+		mySession().reset();
+		return accueil;
+	}
+}

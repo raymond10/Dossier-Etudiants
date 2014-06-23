@@ -1,0 +1,242 @@
+<webobject name = "Wrap">
+  <webobject name = "edtionContain">
+    <div metal:fill-slot = "contenu">
+      <webobject name = "errors">
+        <div class = "warn"> Vous n'&ecirc;tes pas autoris&eacute; &agrave; consulter ces informations. </div>
+      </webobject>
+      <webobject name = "user">
+        <div class = "br"></div>
+        <webobject name = "browser">
+          <webobject name = "nav">Navigation</webobject>
+        </webobject>
+        <h3>Editions des PV <webobject name = "Indicateur1" /></h3>
+        <div class = "info">
+          La recherche peut s'effectuer : 
+          <ul>
+            <li>par dipl&ocirc;me, p&eacute;riode, niveau</li>
+          </ul>
+        </div>
+        <div class = "br"></div>
+        <div class = "form">
+          <webobject name = "EditionPV">
+            <div class = "divTable">
+              <div class = "divRow">
+                <div class = "divCell"><webobject name = "action" /></div>
+                <div class = "divCell"><webobject name = "libniv" /></div>
+              </div>
+              <div class = "divRow">
+                <div class = "divCell">
+                  <label for = "periode" class = "prem">P&eacute;riode</label>
+                </div>
+                <div class = "divCell">
+                  <webobject name = "periode" />&nbsp;&nbsp; 
+                  <wo name = "prdDiplAOF" />
+                  <wo name = "prdNivoAOF" />
+                  &nbsp;&nbsp; 
+                </div>
+                <div class = "divCell">
+                  <label for = "diplome" class = "premDipl">Dipl&ocirc;me</label>
+                </div>
+                <div class = "divCell">
+                  <wo name = "diplomeAUC">
+                    <webobject name = "con1"><webobject name = "diplome1" /></webobject>&nbsp;&nbsp; 
+                    <webobject name = "con2"><webobject name = "diplome2" /></webobject>&nbsp;&nbsp; 
+                    <wo name = "diplNivoAOF" />
+                  </wo>
+                  &nbsp;&nbsp; 
+                </div>
+                <div class = "divCell">
+                  <label for = "niveau" class = "prem">Niveau</label>
+                </div>
+                <div class = "divCell">
+                  <webobject name = "niveauAUC">
+                    <webobject name = "cond1"><webobject name = "niveau_1" /></webobject>&nbsp;&nbsp; 
+                    <webobject name = "cond2"><webobject name = "niveau_2" /></webobject>&nbsp;&nbsp; 
+                  </webobject>
+                  &nbsp;&nbsp; 
+                </div>
+              </div>
+            </div>
+            <hr class = "hr" />
+            <div class = "divTable">
+              <div class = "divRow">
+                <div class = "divCell">
+                  <label for = "nom" class = "prem">Nom</label>&nbsp; 
+                </div>
+                <div class = "divCell"><webobject name = "nom" /></div>
+                <div class = "divCell">
+                  <span class = "aide aide-champ">nom exact ou d&eacute;but du nom suivi de '*' (ex: Martin ou Mart*)</span>
+                </div>
+              </div>
+            </div>
+            <hr class = "hr" />
+            <div class = "divTable">
+              <div class = "divRow">
+                <div class = "divCell">
+                  <label for = "prenom" class = "prem">Num&eacute;ro</label>&nbsp; 
+                </div>
+                <div class = "divCell"><webobject name = "num" /></div>
+                <div class = "divCell">
+                  <span class = "aide aide-champ">num&eacute;ro d'&eacute;tudiant (identifiant du syst&egrave;me)</span>
+                </div>
+              </div>
+            </div>
+            <span class = "erreur">
+              <wo name = "ErrorMsg">
+                <wo name = "isError">
+                  <script type = "text/javascript" language = "javascript">
+                    Element.hide('busy');
+                    alert('<webobject name = "MessageErreur" />');
+                    onClick=Element.hide('busy');
+                  </script>
+                </wo>
+              </wo>
+            </span>
+            <hr class = "hr" />
+            <div class = "divTable">
+              <div class = "divRow">
+                <div class = "divCell">
+                  <label for = "reoriente" class = "prem1">Ne pas inclure le parcours de &laquo;r&eacute;orientation&raquo;&nbsp;</label>
+                </div>
+                <div class = "divCell">
+                  <wo name = "Observe1"><wo name = "checkBx" /></wo>
+                </div>
+              </div>
+            </div>
+            <hr class = "hr" />
+            <div class = "divTable">
+              <div class = "divRow">
+                <div class = "divCell"><webobject name = "suivi" />&nbsp;</div>
+                <div class = "divCell">
+                  <label for = "type">PV de jury de suivi</label>&nbsp;&nbsp;</div>
+                <div class = "divCell"><webobject name = "convoques" />&nbsp;</div>
+                <div class = "divCell">
+                  <label for = "type">PV de jury des convoqu&eacute;s</label>&nbsp;&nbsp;</div>
+                <div class = "divCell"><webobject name = "diplome" />&nbsp;</div>
+                <div class = "divCell">
+                  <label for = "type">PV de jury de dipl&ocirc;me</label>&nbsp;&nbsp;</div>
+                <div class = "divCell"> <webobject name = "etudiant" />&nbsp;</div>
+                <div class = "divCell">
+                  <label for = "type">Cursus &eacute;tudiant</label>&nbsp;&nbsp;</div>
+                <div class = "divCell"> <webobject name = "diplomes" />&nbsp;</div>
+                <div class = "divCell">
+                  <label for = "type">Doubles dipl&ocirc;mes&nbsp;&nbsp;</label>
+                </div>
+              </div>
+            </div>
+            <div class = "action">
+              <webobject name = "onEditions">
+                <webobject name = "onEdtio">
+                  <div class = "info ainfo1"><webobject name = "printEdtio" /></div>
+                </webobject>
+              </webobject>
+              <webobject name = "searchPv" />&nbsp;&nbsp; 
+            </div>
+          </webobject>
+          <br />
+          <h3>Editions Master <webobject name = "Indicateur1" /></h3>
+          <webobject name = "EditionMST">
+            <div class = "divTable">
+              <div class = "divRow">
+                <div class = "divCell"><webobject name = "actionM" /></div>
+                <div class = "divCell"><webobject name = "libnivM" /></div>
+              </div>
+              <div class = "divRow">
+                <div class = "divCell">
+                  <label for = "periode" class = "master">P&eacute;riode</label>
+                </div>
+                <div class = "divCell"><webobject name = "periode" />&nbsp;&nbsp; &nbsp;&nbsp; </div>
+                <div class = "divCell">
+                  <label for = "diplome" class = "master">Dipl&ocirc;me</label>
+                </div>
+                <div class = "divCell">
+                  <select name = "diplome" style = "width:auto;" class = "diplome2">
+                    <option value = "MST">Master</option>
+                  </select>
+                  &nbsp;&nbsp; &nbsp;&nbsp; 
+                </div>
+                <div class = "divCell">
+                  <label for = "mention" class = "master">Mention</label>
+                </div>
+                <div class = "divCell"><webobject name = "mentions" />&nbsp;&nbsp; &nbsp;&nbsp; </div>
+                <div class = "divCell">
+                  <label for = "niveau" class = "master">Niveau</label>
+                </div>
+                <div class = "divCell">
+                  <select name = "niveau" style = "width:auto;" class = "niveau">
+                    <option value = "">Tous</option>
+                    <option value = "M1">M1</option>
+                    <option value = "M2">M2</option>
+                  </select>
+                  &nbsp;&nbsp; &nbsp;&nbsp; 
+                </div>
+              </div>
+            </div>
+            <hr class = "hr" />
+            <div class = "divTable">
+              <div class = "divRow">
+                <div class = "divCell">
+                  <label for = "reoriente" class = "prem1">Ne pas inclure le parcours de &laquo;r&eacute;orientation&raquo;&nbsp;</label>
+                </div>
+                <div class = "divCell">
+                  <wo name = "Observe1"><wo name = "checkBx" /></wo>
+                </div>
+              </div>
+            </div>
+            <hr class = "hr" />
+            <div class = "divTable">
+              <div class = "divRow">
+                <div class = "divCell"><webobject name = "suiviM" />&nbsp;</div>
+                <div class = "divCell">
+                  <label for = "type">PV de jury de suivi</label>&nbsp;&nbsp;</div>
+                <div class = "divCell"><webobject name = "convoquesM" />&nbsp;</div>
+                <div class = "divCell">
+                  <label for = "type">PV de jury des convoqu&eacute;s</label>&nbsp;&nbsp;</div>
+                <div class = "divCell"><webobject name = "diplomeM" />&nbsp;</div>
+                <div class = "divCell">
+                  <label for = "type">PV de jury de dipl&ocirc;me</label>&nbsp;&nbsp;</div>
+                <div class = "divCell"> <webobject name = "etudiantM" />&nbsp;</div>
+                <div class = "divCell">
+                  <label for = "type">Cursus &eacute;tudiant</label>&nbsp;&nbsp;</div>
+                <div class = "divCell"> <webobject name = "diplomesM" />&nbsp;</div>
+                <div class = "divCell">
+                  <label for = "type">Doubles dipl&ocirc;mes&nbsp;&nbsp;</label>
+                </div>
+              </div>
+            </div>
+            <div class = "action">
+              <webobject name = "onEditions">
+                <webobject name = "onEdtion">
+                  <div class = "info ainfo1"><webobject name = "printEdtion" /></div>
+                </webobject>
+              </webobject>
+              <webobject name = "searchMST" />&nbsp;&nbsp; 
+            </div>
+          </webobject>
+        </div>
+        <webobject name = "editionContainer">
+          <webobject name = "errorCond">
+            <div class = "warn"><webobject name = "printError" /></div>
+          </webobject>
+          <webobject name = "searchCond">
+            <div class = "warn"><webobject name = "searchError" /></div>
+          </webobject>
+        </webobject>
+        <webobject name = "listCond">
+          <div class = "br"></div>
+          <div>
+            <h4>Les cinq derni&egrave;res &eacute;ditions :</h4>
+            <ul class = "ledit">
+              <webobject name = "listRepeat">
+                <li>
+                  <webobject name = "liens"><webobject name = "fichier" /></webobject>
+                </li>
+              </webobject>
+            </ul>
+          </div>
+        </webobject>
+      </webobject>
+    </div>
+    <webobject name = "Busy10" />
+  </webobject>
+</webobject>

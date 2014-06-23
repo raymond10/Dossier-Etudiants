@@ -1,0 +1,135 @@
+Wrapper : Wrapper {
+	bodyId = "resUv";
+	onload = onLoad;
+	pageTitle = "Résultats aux UV";	
+}
+
+//Utilisateur autorisé
+errors : WOConditional {
+	condition = ctrl.isAutorizUser;
+	negate = true;
+}
+
+//Session utilisateur
+etudiant : WOConditional {
+	condition = ctrl.isEtudiant;
+}
+
+annee : WOString {
+	value = ctrl.anUniv.LIBELLE;
+}
+
+annonce : WOConditional {
+	condition = hasAnnonce;
+}
+
+optAnonce : WOString {
+	value = annoncePcb.annonce;
+	escapeHTML = false;
+}
+
+insUv : WOConditional {
+	condition = hasUv;
+	negate = true;
+}
+
+insUv1 : WOConditional {
+	condition = hasUv;
+} 
+
+profil : WOHyperlink {
+	action = ctrl.leprofil;
+}
+
+dossier : WOHyperlink {
+	action = ctrl.dossier;
+}
+
+loopMod : WORepetition {
+	list = ctrl.modaliteUv; 
+	item = ctrl.dicModalite;
+}
+
+edt : WOHyperlink {
+	action = ctrl.emploiDuTemps;
+}
+
+status : WOConditional {
+	condition = session.retourAlaListe;
+}
+
+retourList : WOHyperlink {
+	action = ctrl.retourAlaListe;
+	onclick = "Element.show('busy10');";
+}
+
+iCone : WOImage {
+    name="Retour";
+	filename = "newImages/wb16.png";
+	border = "0";
+	alt = "Retour à la liste";
+}
+
+modaliteUV : WOConditional {
+	condition = ctrl.modaliteUv;
+}
+
+diplome : WOString {
+	value = ctrl.dicModalite.diplome;
+	escapeHTML = false;
+}
+
+uv : WOString {
+	value = ctrl.dicModalite.uv;
+	escapeHTML = false;
+}
+
+resuv : WOString {
+	value = ctrl.dicModalite.resuv;
+	escapeHTML = false;
+}
+
+credit : WOString {
+	value = ctrl.dicModalite.credit;
+	escapeHTML = false;
+}
+
+modLoop : WORepetition {
+	list = ctrl.dicModalite.modalites;
+	item = ctrl.dicMod;
+}
+
+libelle : WOString {
+	value = ctrl.dicMod.libelle;
+	escapeHTML = false;
+}
+
+valeur : WOString {
+	value = ctrl.dicMod.valeur;
+	escapeHTML = false;
+}
+
+elimNote : WOConditional {
+	condition = ctrl.noteEliminatoire;
+}
+
+noteElim : WOString {
+	value = ctrl.noteEliminatoire; 
+	escapeHTML = false;
+}
+
+observation : WOString {
+	value = ctrl.dicModalite.observation;
+	escapeHTML = false;
+}
+
+Busy10: AjaxBusyIndicator {
+	divID = "busy10";
+}
+
+Indicateur1 : WOImage {
+	border = 0;
+	filename = "newImages/indicator_arrows.gif";
+	style = "display:none;";
+	id = "busy10";
+}

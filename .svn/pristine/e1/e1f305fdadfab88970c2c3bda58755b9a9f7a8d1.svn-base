@@ -1,0 +1,111 @@
+Wrap : Wrapper {
+	bodyId = "edt";
+	onload = onLoad;
+	pageTitle = "Emploi du temps";
+}
+
+//Utilisateur autorisé
+errors : WOConditional {
+	condition = edtCtrl.isAutorizUser;
+	negate = true;
+}
+
+//Session utilisateur
+etudiant : WOConditional {
+	condition = edtCtrl.isEtudiant;
+}
+
+nom : WOString {
+	value = edtCtrl.nom;
+	escapeHTML = true;
+}
+
+periodeCourante : WOString {
+	value = edtCtrl.courante;
+	escapeHTML = true;
+}
+
+dossierAdm : WOHyperlink {
+	action = edtCtrl.dossier;
+	onclick = "Element.show('busy10');";
+}
+
+profil : WOHyperlink {
+	action = edtCtrl.leprofil;
+	onclick = "Element.show('busy10');";
+}
+
+resultatUv : WOHyperlink {
+	action = edtCtrl.leResultatUv;
+	onclick = "Element.show('busy10');";
+}
+
+accessGctc : WOConditional {
+	condition = edtCtrl.accessLinkGctc;
+}
+
+versGestionContact : WOHyperlink {
+	href = edtCtrl.LinkGcTc;
+	id = "GCTCfiche";
+	target = "_blank";
+}
+
+status : WOConditional {
+	condition = mySession.retourAlaListe;
+}
+
+retourList : WOHyperlink {
+	action = edtCtrl.retourAlaListe;
+	onclick = "Element.show('busy10');";
+}
+
+iCone : WOImage {
+    name="Retour";
+	filename = "newImages/wb16.png";
+	border = "0";
+	alt = "Retour à la liste";
+}
+
+notEdt : WOConditional {
+	condition = edtCtrl.publique;
+	negate = true;
+}
+
+edt : WOConditional {
+	condition = edtCtrl.publique;
+}
+
+time : WORepetition {
+	list = edtCtrl.horaire;
+	item = edtCtrl.horaireLoop;
+}
+
+horaireItem : WOString {
+	value = edtCtrl.horaireLoop;
+	escapeHTML = false;
+}
+
+html : WOString {
+	value = edtCtrl.leHTML;
+	escapeHTML = false;
+}
+
+Busy10 : AjaxBusyIndicator {
+	divID = "busy";
+}
+
+Indicateur1 : WOImage {
+	border = 0;
+	filename = "newImages/indicator_arrows.gif";
+	style = "display:none;";
+	id = "busy10";
+}
+
+browser : WOConditional {
+	condition = browser;
+}
+
+nav : WOHyperlink {
+    id = "Navigation";
+	pageName = "Navigation";
+}

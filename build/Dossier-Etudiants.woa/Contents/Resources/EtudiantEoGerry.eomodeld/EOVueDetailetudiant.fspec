@@ -1,0 +1,19 @@
+{
+    detailEtudiant = {
+        class = EOFetchSpecification; 
+        entityName = EOVueDetailetudiant; 
+        prefetchingRelationshipKeyPaths = (
+            eoVueAfficherdiplomes, 
+            "eoVueAfficherdiplomes.eoRefProfils", 
+            "eoVueAfficherdiplomes.eoVueDetailparcourses", 
+            "eoVueAfficherdiplomes.eoVueLescategorieses", 
+            "eoVueAfficherdiplomes.eoVueSelectinsuvs"
+        ); 
+        qualifier = {
+            class = EOKeyValueQualifier; 
+            key = id; 
+            selectorName = "isEqualTo:"; 
+            value = {"_key" = id; class = EOQualifierVariable; }; 
+        }; 
+    }; 
+}

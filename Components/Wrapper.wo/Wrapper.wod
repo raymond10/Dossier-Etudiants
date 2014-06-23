@@ -1,0 +1,206 @@
+connectedUser : WOConditional {
+	condition = mySession.utilisateurAvecDroit;
+}
+
+
+
+Body : WOBody {
+	id = bodyId;
+	onload = onload;
+
+}
+
+//<webobject name = "Notifs" />
+//<script type = "text/javascript">UIMessageContainerUpdate();</script>
+
+Notifs : UttAjaxUiMessageContainer {
+	//id = "UIMessageContainer";
+	id = myApp.messageContainerID;
+}
+
+
+
+LinkQuitter : WOHyperlink {
+	//action = casLogOut;
+	directActionName = "quitter";
+	//href = "https://cas.utt.fr/cas/logout?service=http://imac-cedre.utt.fr:1242/cgi-bin/WebObjects/Dossier-Etudiants.woa";
+	onClick = "if (confirm('Voulez-vous vraiment quitter cette application ?')) {return true;} else {return false;}";
+	title = "Quitter l'application";
+
+}
+
+Quitter : WOImage {
+	filename = "image/icon_logout.gif";
+	style = "border-style: none;";
+	escapeHTML = false;
+	title = "Quitter l'application";
+
+}
+
+
+tinyMCE : ERXJavaScript {
+	filename = "tinymce/tinymce.min.js";
+}
+
+tinyMCEInit : ERXJavaScript {
+	filename = "tinymce/init.js";
+}
+
+tinyMCETheme : ERXJavaScript {
+	filename = "tinymce/themes/modern/theme.min.js";
+}
+
+
+//icon
+
+shortcut_icon : WOGenericElement {
+	elementName = "link";
+	href = icon;
+	type = "image/x-icon";
+	rel = "shortcut icon";
+}
+
+
+
+icon : WOGenericElement {
+	elementName = "link";
+	href = icon;
+	type = "image/x-icon";
+	rel = "icon";
+}
+
+
+
+
+
+//Style CSS
+
+
+
+//Corps du wrapper
+
+lesAgents : WOConditional {
+	condition = ctrl.allAgent;
+}
+
+
+recherche : WOHyperlink {
+	action = ctrl.selectRecherche;
+}
+
+lAdmin : WOConditional {
+	condition = ctrl.admin;
+}
+
+
+
+editions : WOHyperlink {
+	action = ctrl.selectEtdition;
+}
+
+
+
+admin : WOHyperlink {
+	action = ctrl.selectAnnonce;
+}
+
+
+
+extractions : WOHyperlink {
+	action = ctrl.selectExtraction;
+}
+
+lesEtudiants : WOConditional {
+	condition = ctrl.etudiant;
+}
+
+profil : WOHyperlink {
+	action = ctrl.selectProfil;
+	onclick = "Element.show('busy10');";
+}
+
+resultatUv : WOHyperlink {
+	action = ctrl.selectResUv;
+	onclick = "Element.show('busy10');";
+}
+
+dossierAdm : WOHyperlink {
+	action = ctrl.selectDossier;
+	onclick = "Element.show('busy10');";
+}
+
+edt : WOHyperlink {
+	action = ctrl.selectEmploiDuTemps;
+	onclick = "Element.show('busy10');";
+}
+
+
+
+edtExams : WOHyperlink {
+	action = ctrl.selectEdtExam;
+}
+
+
+
+Contenu : WOComponentContent {
+	
+}
+
+Copyrights : WOString {
+
+	value = copyright;
+
+	escapeHTML = false;
+
+}
+
+
+
+UserName : WOString {
+
+	value = userName;
+	escapeHTML = false;
+
+}
+
+ServerId : WOString {
+
+	value = bdServerId;
+
+	escapeHTML = false;
+
+}
+
+Version : WOString {
+
+	value = version;
+
+	escapeHTML = false;
+
+}
+Message : WOString {
+	value = mySession.alertMessage;
+	escapeHTML = true;
+}
+FermerMessage : AjaxHyperlink {
+	action = fermerMessage;
+	onComplete = "function(oc){Windows.closeAll();}";
+}
+
+
+Indicateur : WOImage {
+	border = 0;
+	filename = "newImages/indicator_big.gif";
+	id="busy1";
+	// style="display:none";
+}
+
+Busy: AjaxBusyIndicator {
+	// divID defaults to "busy"
+}
+
+PageTitle : WOString {
+	value = pageTitle;
+	valueWhenEmpty = "";
+	escapeHTML = false;
+}

@@ -1,0 +1,175 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "CATEG_ABR"; 
+            externalType = VARCHAR2; 
+            name = categAbr; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "CATEG_ORDRE"; 
+            externalType = VARCHAR2; 
+            name = categOrdre; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = CREDIT; 
+            externalType = VARCHAR2; 
+            name = credit; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 40; 
+        }, 
+        {
+            columnName = DIPLOME; 
+            externalType = VARCHAR2; 
+            name = diplome; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = EIUDIPLM; 
+            externalType = VARCHAR2; 
+            name = eiudiplm; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "ETU_ID"; 
+            externalType = NUMBER; 
+            name = etuId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = ID; 
+            externalType = NUMBER; 
+            name = id; 
+            valueType = d; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = LEGENDE; 
+            externalType = VARCHAR2; 
+            name = legende; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 10; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = PERIODE; 
+            externalType = VARCHAR2; 
+            name = periode; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PROFIL_ABR"; 
+            externalType = VARCHAR2; 
+            name = profilAbr; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 10; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = PROFILF; 
+            externalType = VARCHAR2; 
+            name = profilf; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PUBLIE_F"; 
+            externalType = VARCHAR2; 
+            name = publieF; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = RESUV; 
+            externalType = VARCHAR2; 
+            name = resuv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 3; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = UV; 
+            externalType = VARCHAR2; 
+            name = uv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 8; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        categAbr, 
+        categOrdre, 
+        credit, 
+        diplome, 
+        eiudiplm, 
+        etuId, 
+        id, 
+        legende, 
+        periode, 
+        profilAbr, 
+        profilf, 
+        publieF, 
+        resuv, 
+        uv
+    ); 
+    className = "gestionuv.utt.fr.eo.EOVueSelectinsuv"; 
+    classProperties = (
+        categAbr, 
+        categOrdre, 
+        credit, 
+        diplome, 
+        eiudiplm, 
+        eoVueAfficherdiplome, 
+        etuId, 
+        legende, 
+        periode, 
+        profilAbr, 
+        profilf, 
+        publieF, 
+        resuv, 
+        uv
+    ); 
+    externalName = "GEST_UV.VUE_SELECTINSUV"; 
+    name = EOVueSelectinsuv; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = EOVueAfficherdiplome; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = (
+                {destinationAttribute = codeDiplome; sourceAttribute = diplome; }, 
+                {destinationAttribute = numeroEtu; sourceAttribute = etuId; }
+            ); 
+            name = eoVueAfficherdiplome; 
+        }
+    ); 
+}

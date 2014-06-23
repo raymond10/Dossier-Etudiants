@@ -1,0 +1,12 @@
+.casblue {  height: 467px; width: 506px}
+.textcas {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; color: #333399}
+.textcastitre { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 18px; color: #0066CC}
+.textcaslittle { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 9px; color: #333333; text-align: justify}
+.castab {  background-image: url(fondcas.gif); background-repeat: no-repeat}
+
+.alerte {
+	font-family:Arial,Helvetica,Verdana,Tahoma,Times;
+	font-size:11px;
+}
+
+form {margin:0;padding:0}

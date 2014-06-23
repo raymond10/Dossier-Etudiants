@@ -1,0 +1,28 @@
+{
+    listUV = {
+        class = EOFetchSpecification; 
+        entityName = EOVueSelectinsuv; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOAndQualifier; 
+            qualifiers = (
+                {
+                    class = EOKeyValueQualifier; 
+                    key = etuId; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = etuId; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = diplome; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = codeDiplome; class = EOQualifierVariable; }; 
+                }
+            ); 
+        }; 
+        sortOrderings = (
+            {class = EOSortOrdering; key = categOrdre; selectorName = compareAscending; }, 
+            {class = EOSortOrdering; key = uv; selectorName = compareAscending; }
+        ); 
+    }; 
+}

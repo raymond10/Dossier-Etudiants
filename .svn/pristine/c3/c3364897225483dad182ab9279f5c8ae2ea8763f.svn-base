@@ -1,0 +1,484 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "AN_PREC_SITU_$C"; 
+            externalType = VARCHAR2; 
+            name = anPrecSituc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "AUTEUR_MAJ"; 
+            externalType = VARCHAR2; 
+            name = auteurMaj; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 12; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "BAC_ACADEMIE_$C"; 
+            externalType = VARCHAR2; 
+            name = bacAcademiec; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "BAC_AN"; 
+            externalType = VARCHAR2; 
+            name = bacAn; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "BAC_DEPT_$C"; 
+            externalType = VARCHAR2; 
+            name = bacDeptc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 3; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "BAC_ETAB"; 
+            externalType = VARCHAR2; 
+            name = bacEtab; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "BAC_MENTION"; 
+            externalType = VARCHAR2; 
+            name = bacMention; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "BAC_PAYS_$C"; 
+            externalType = VARCHAR2; 
+            name = bacPaysc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 3; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "BAC_SERIE_$C"; 
+            externalType = VARCHAR2; 
+            name = bacSeriec; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "BAC_VILLE"; 
+            externalType = VARCHAR2; 
+            name = bacVille; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "BDE_$F"; 
+            externalType = VARCHAR2; 
+            name = bdef; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "CHARTE_INFO_DATE"; 
+            externalType = DATE; 
+            name = charteInfoDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "CONSEILLER_ID"; 
+            externalType = NUMBER; 
+            name = conseillerId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "CRE_DATE"; 
+            externalType = DATE; 
+            name = creDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPL_OBT_AN"; 
+            externalType = VARCHAR2; 
+            name = diplObtAn; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPL_OBT_$C"; 
+            externalType = VARCHAR2; 
+            name = diplObtc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPL_OBT_ETAB"; 
+            externalType = VARCHAR2; 
+            name = diplObtEtab; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 30; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPL_OBT_LIB"; 
+            externalType = VARCHAR2; 
+            name = diplObtLib; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 30; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DROIT_IMAGE_ACCORD_$F"; 
+            externalType = VARCHAR2; 
+            name = "droitImageAccord$f"; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DROIT_IMAGE_ACCORD_DATE"; 
+            externalType = DATE; 
+            name = droitImageAccordDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "ENS_SUP_PREM_AN"; 
+            externalType = VARCHAR2; 
+            name = ensSupPremAn; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "IMPORT_DATE"; 
+            externalType = DATE; 
+            name = importDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "INDIV_ID"; 
+            externalType = NUMBER; 
+            isReadOnly = Y; 
+            name = indivId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = INE; 
+            externalType = VARCHAR2; 
+            name = ine; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 11; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "INE_PROVIS_$F"; 
+            externalType = VARCHAR2; 
+            name = ineProvisf; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "INE_RE_IMMAT_$F"; 
+            externalType = VARCHAR2; 
+            name = ineReImmatf; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "LANGUE_MAT"; 
+            externalType = VARCHAR2; 
+            name = langueMat; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 30; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "MODIF_DATE"; 
+            externalType = DATE; 
+            name = modifDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PCS_PARENT2_$C"; 
+            externalType = VARCHAR2; 
+            name = pcsParent2c; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PCS_PARENT_$C"; 
+            externalType = VARCHAR2; 
+            name = pcsParentc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "RESP_C_DATE_DEBUT"; 
+            externalType = DATE; 
+            name = respCDateDebut; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "RESP_C_DATE_FIN"; 
+            externalType = DATE; 
+            name = respCDateFin; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "RESP_CIV_$C"; 
+            externalType = VARCHAR2; 
+            name = respCivc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "RESP_CIV_FIN_DATE"; 
+            externalType = DATE; 
+            name = respCivFinDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "RESP_CIV_STG_$I"; 
+            externalType = VARCHAR2; 
+            name = respCivStgi; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "SPORT_$C"; 
+            externalType = VARCHAR2; 
+            name = sportc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "TITRE_SEJ_$C"; 
+            externalType = VARCHAR2; 
+            name = titreSejc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "TITRE_SEJ_COMMENT"; 
+            externalType = VARCHAR2; 
+            name = titreSejComment; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 200; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "TITRE_SEJ_FIN_DATE"; 
+            externalType = DATE; 
+            name = titreSejFinDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "TRANS_DOSSIER_DATE"; 
+            externalType = DATE; 
+            name = transDossierDate; 
+            valueClassName = NSCalendarDate; 
+            valueType = D; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "TRANS_DOSSIER_LIEU"; 
+            externalType = VARCHAR2; 
+            name = transDossierLieu; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 100; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "UNIV_INS_PREM_AN"; 
+            externalType = VARCHAR2; 
+            name = univInsPremAn; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        anPrecSituc, 
+        auteurMaj, 
+        bacAcademiec, 
+        bacAn, 
+        bacDeptc, 
+        bacEtab, 
+        bacMention, 
+        bacPaysc, 
+        bacSeriec, 
+        bacVille, 
+        bdef, 
+        charteInfoDate, 
+        conseillerId, 
+        creDate, 
+        diplObtAn, 
+        diplObtc, 
+        diplObtEtab, 
+        diplObtLib, 
+        "droitImageAccord$f", 
+        droitImageAccordDate, 
+        ensSupPremAn, 
+        importDate, 
+        indivId, 
+        ine, 
+        ineProvisf, 
+        ineReImmatf, 
+        langueMat, 
+        modifDate, 
+        pcsParent2c, 
+        pcsParentc, 
+        respCDateDebut, 
+        respCDateFin, 
+        respCivc, 
+        respCivFinDate, 
+        respCivStgi, 
+        sportc, 
+        titreSejc, 
+        titreSejComment, 
+        titreSejFinDate, 
+        transDossierDate, 
+        transDossierLieu, 
+        univInsPremAn
+    ); 
+    className = "etudiants.utt.fr.eo.EOEtudiant"; 
+    classProperties = (
+        anPrecSituc, 
+        auteurMaj, 
+        bacAcademiec, 
+        bacAn, 
+        bacDeptc, 
+        bacEtab, 
+        bacMention, 
+        bacPaysc, 
+        bacSeriec, 
+        bacVille, 
+        bdef, 
+        charteInfoDate, 
+        conseillerId, 
+        creDate, 
+        diplObtAn, 
+        diplObtc, 
+        diplObtEtab, 
+        diplObtLib, 
+        "droitImageAccord$f", 
+        droitImageAccordDate, 
+        ensSupPremAn, 
+        etuInscrAdms, 
+        importDate, 
+        indivId, 
+        individu0, 
+        ine, 
+        ineProvisf, 
+        ineReImmatf, 
+        langueMat, 
+        modifDate, 
+        pcsParent2c, 
+        pcsParentc, 
+        respCDateDebut, 
+        respCDateFin, 
+        respCivc, 
+        respCivFinDate, 
+        respCivStgi, 
+        sportc, 
+        titreSejc, 
+        titreSejComment, 
+        titreSejFinDate, 
+        transDossierDate, 
+        transDossierLieu, 
+        univInsPremAn
+    ); 
+    externalName = "GERRY.ETUDIANT"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOEtudiant; 
+    primaryKeyAttributes = (indivId); 
+    relationships = (
+        {
+            destination = EOEtudiantInscrAdm; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = etuId; sourceAttribute = indivId; }); 
+            name = etuInscrAdms; 
+        }, 
+        {
+            destination = EOIndividu; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = indivId; sourceAttribute = indivId; }); 
+            name = individu0; 
+        }
+    ); 
+}

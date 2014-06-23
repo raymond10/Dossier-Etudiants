@@ -1,0 +1,14 @@
+{
+    listCategory = {
+        class = EOFetchSpecification; 
+        entityName = EOVueLescategories; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOKeyValueQualifier; 
+            key = codeDiplome; 
+            selectorName = "isEqualTo:"; 
+            value = {"_key" = codeDiplome; class = EOQualifierVariable; }; 
+        }; 
+        sortOrderings = ({class = EOSortOrdering; key = ordre; selectorName = compareAscending; }); 
+    }; 
+}

@@ -1,0 +1,13 @@
+RetourAccueil : LoginButton {
+	action = retourAccueil;
+	text = "Fermer";
+	//type = "delete";
+	// onClick = "parent.Windows.closeAll();";
+	target = "_top";
+}
+ExceptionInfos : ERXWOText {
+	value = session.generalErrorMessage;
+	//style = "width:99%;height:150px;";
+	style = "width:100%;";
+	rows = "8";
+}

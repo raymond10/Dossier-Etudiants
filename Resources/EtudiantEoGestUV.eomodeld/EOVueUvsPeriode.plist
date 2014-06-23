@@ -1,0 +1,47 @@
+{
+    attributes = (
+        {
+            className = "java.lang.Number"; 
+            columnName = ID; 
+            externalType = NUMBER; 
+            isReadOnly = Y; 
+            name = id; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = LIBELLE; 
+            externalType = VARCHAR2; 
+            name = libelle; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 8; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = ORDRE; 
+            externalType = VARCHAR2; 
+            name = ordre; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 8; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = UVPERIODE; 
+            externalType = VARCHAR2; 
+            name = uvperiode; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }
+    ); 
+    attributesUsedForLocking = (id, libelle, ordre, uvperiode); 
+    className = "gestionuv.utt.fr.eo.EOVueUvsPeriode"; 
+    classProperties = (id, libelle, ordre, uvperiode); 
+    externalName = "GEST_UV.VUE_UVS_PERIODE"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOVueUvsPeriode; 
+    primaryKeyAttributes = (id); 
+}

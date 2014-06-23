@@ -1,0 +1,35 @@
+/**
+ * 
+ */
+package etudiants.utt.fr.components.controlers;
+
+import com.webobjects.eocontrol.EOEditingContext;
+
+import etudiants.utt.fr.server.MyAjaxComponent;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public class ModuleCtrl {
+
+	public MyAjaxComponent wocomponent;
+	public EOEditingContext edc;
+
+	public ModuleCtrl(MyAjaxComponent component) {
+		this(component, null);
+	}
+
+	public ModuleCtrl(MyAjaxComponent component, EOEditingContext ed) {
+		wocomponent = component;
+		if (wocomponent != null) {
+			if (ed != null) {
+				edc = ed;
+			} else {
+				edc = wocomponent.edc();
+			}
+		}
+	}
+
+}

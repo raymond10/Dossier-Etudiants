@@ -1,0 +1,112 @@
+/**
+ * 
+ */
+package etudiants.utt.fr.roles;
+
+import com.webobjects.foundation.NSMutableDictionary;
+
+import etudiants.utt.fr.eo.EOIndividu;
+import etudiants.utt.fr.server.Session;
+
+/**
+ * @author naneon
+ * 
+ */
+@SuppressWarnings("all")
+public class LeUser {
+
+	private NSMutableDictionary leUser = new NSMutableDictionary();
+	public Boolean isconseiller = false;
+	public boolean isAutorized = false;
+
+	public LeUser() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Boolean Autorization(Session session, EOIndividu id) {
+		isconseiller = !EOIndividu.lesConseillers(session.editingContext(), id.primaryKey()).isEmpty();
+		//Enseignants
+		if (VEnseignant.isEnseignant(session.editingContext(),id)) {
+			isAutorized = true;
+			leUser.put("role", "enseignant");
+			leUser.put("isconseiller", isconseiller);
+			leUser.put("isAutorized", isAutorized);
+			leUser.put("indiv_id", session.getUtilisateur().primaryKey());
+			leUser.put("login", session.getUtilisateur().login());
+			leUser.put("mail", session.getUtilisateur().indEmails()
+					.objectAtIndex(0).indEmail());
+			return true;
+		}
+		//Administrateurs
+		if (VIadmin.isAdmin(session.editingContext(), id)) {
+			isAutorized = true;
+			leUser.put("role", "administrateur");
+			leUser.put("isconseiller", isconseiller);
+			leUser.put("isAutorized", isAutorized);
+			leUser.put("indiv_id", session.getUtilisateur().primaryKey());
+			leUser.put("login", session.getUtilisateur().login());
+			leUser.put("mail", session.getUtilisateur().indEmails()
+					.objectAtIndex(0).indEmail());
+			return true;
+		}
+		//Personnels
+		if (VPersonnel.isPersonnel(session.editingContext(),id)) {
+			isAutorized = true;
+			leUser.put("role", "personnel");
+			leUser.put("isconseiller", isconseiller);
+			leUser.put("isAutorized", isAutorized);
+			leUser.put("indiv_id", session.getUtilisateur().primaryKey());
+			leUser.put("login", session.getUtilisateur().login());
+			leUser.put("mail", session.getUtilisateur().indEmails()
+					.objectAtIndex(0).indEmail());
+			return true;
+		}
+		//Etudiants
+		if (EOIndividu.isEtudiant(session.editingContext(), id)) {
+			isAutorized = true;
+			leUser.put("role", "etudiant");
+			leUser.put("isconseiller", isconseiller);
+			leUser.put("isAutorized", isAutorized);
+			leUser.put("indiv_id", session.getUtilisateur().primaryKey());
+			leUser.put("login", session.getUtilisateur().login());
+			leUser.put("mail", session.getUtilisateur().indEmails()
+					.objectAtIndex(0).indEmail());
+			return true;
+		}
+		//Non autorisé
+		if (!leUser.containsKey("role")) {
+			leUser.put("role", "pasautorise");
+			leUser.put("isconseiller", isconseiller);
+			leUser.put("isAutorized", isAutorized);
+			leUser.put("indiv_id", session.getUtilisateur().primaryKey());
+			leUser.put("login", session.getUtilisateur().login());
+		}
+		return false;
+	}
+
+	/**
+	 * @return the leUser
+	 */
+	public NSMutableDictionary getLeUser() {
+		return leUser;
+	}
+
+	/**
+	 * @param leUser
+	 *            the leUser to set
+	 */
+	public void setLeUser(NSMutableDictionary leUser) {
+		this.leUser = leUser;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "LeUser [leUser=" + leUser + "]";
+	}
+
+}

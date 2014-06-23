@@ -1,0 +1,154 @@
+@media print {
+
+@page { size: 29.7cm 21cm; margin: 2cm }
+
+TABLE {page-break-inside: avoid}
+
+/* debut style UTT -------------------------------------------------------------------------------------------------------*/
+body {
+  margin:0;
+  padding:0;
+}
+
+  
+.titre { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; 
+         font-style: normal; line-height: 15px; text-align: justify; color: #993366; 
+         text-decoration: none; font-variant: normal ; font-weight: bold}
+
+.soustitre { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; 
+             font-style: normal; line-height: 15px; text-align: justify; color: #993366; 
+             text-decoration: none; font-variant: normal ; font-weight: bold}
+
+.texte { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; 
+         font-style: normal; line-height: 15px; text-align: justify; color: #000000; 
+         text-decoration: none; font-variant: normal ; font-weight: normal}
+
+.textecentre { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; 
+               font-style: normal; line-height: 15px; text-align: center; color: #000000; 
+               text-decoration: none; font-variant: normal ; font-weight: normal}
+
+.textevaleur { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; 
+               font-style: normal; line-height: 15px; text-align: justify; color: #FF9900; 
+               text-decoration: none; font-variant: normal ; font-weight: bold}
+
+.menu { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; 
+        font-style: normal; line-height: 15px; text-align: justify; color: #FFFFFF; 
+        font-variant: normal}
+
+.lien { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; 
+        font-style: normal; line-height: 15px; text-align: justify; color: #993366!important; 
+        text-decoration: underline; font-variant: normal ; font-weight: normal}
+
+.couleur { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; 
+           font-style: normal; line-height: 15px; text-align: justify; color: #993366; 
+           text-decoration: none; font-variant: normal ; font-weight: normal}
+
+:link { color:#000; }
+A:link {text-decoration:none; color: #FFFFFF}
+A:visited {text-decoration:none; color: #FFFFFF}
+A:hover  {text-decoration: underline; color: #FFFFFF}
+A:active  {text-decoration: underline; color: #FFFFFF}
+
+.mail {
+ color: #7BA7FE;
+}
+
+#principal {
+	margin:0;
+	padding:0;
+	
+}
+
+#bandeau {
+	height:0;
+	width:0;
+	top:0;
+	left:0;
+}
+/*
+#principal>#bandeau {
+	position:fixed;
+}
+*/
+#bandeau-contenu {
+	top:0;
+	left:0;
+	margin-left:0;
+	color:#FFF;
+}
+
+#r-11 {
+	background:none;
+	height:0;
+	width:0;
+	top:0;
+	left:0;
+}
+
+#r-12 {
+	background:none;
+	height:0;
+	top:0;
+	left:0;
+}
+
+#r-21 {
+	background:none;
+	height:0;	
+	width:0;
+	top:0;
+	left:0;
+}
+
+#r-22 {
+        background:none;
+	height:0;	
+	width:0;
+	top:0;
+	left:0;
+}
+
+#contenu-page {
+	/*width:615px;*/
+	margin-left: 0;
+	margin-top:0;
+	color:#000;
+}
+
+#colonne-droite {
+	float:left;
+	width:0;
+}
+
+#colonne-gauche{
+  float:left;
+}
+
+
+
+.erreur {
+	color:#F00;
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 11px; 
+	font-style: normal; 
+	line-height:  15px; 
+	text-align: justify; 
+	text-decoration: none; 
+	font-variant: normal ; 
+	font-weight: bold	;
+}
+
+.textevaleur { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; font-style: normal; line-height: 
+ 15px; text-align: justify; color: #FF9900; text-decoration: none; font-variant: normal ; font-weight: bold}
+
+body {
+	font-family:tahoma,verdana,arial;
+	font-size:10pt;
+}
+
+#menu {
+  display:none;
+}
+
+
+}

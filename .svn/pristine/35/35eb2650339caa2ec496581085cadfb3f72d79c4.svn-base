@@ -1,0 +1,48 @@
+TopLeft : WOResourceURL {
+	filename = "themes/default/top_left.gif";
+	framework = "app";
+}
+TopMid : WOResourceURL {
+	filename = "themes/default/top_mid.gif";
+	framework = "app";
+}
+TopRight : WOResourceURL {
+	filename = "themes/default/top_right.gif";
+	framework = "app";
+}
+CenterRight : WOResourceURL {
+	filename = "themes/default/center_right.gif";
+	framework = "app";
+}
+CenterLeft : WOResourceURL {
+	filename = "themes/default/center_left.gif";
+	framework = "app";
+}
+BottomRight : WOResourceURL {
+	filename = "themes/default/bottom_right.gif";
+	framework = "app";
+}
+BottomMid : WOResourceURL {
+	filename = "themes/default/bottom_mid.gif";
+	framework = "app";
+}
+BottomLeft : WOResourceURL {
+	filename = "themes/default/bottom_left.gif";
+	framework = "app";
+}
+Sizer : WOResourceURL {
+	filename = "themes/default/sizer.gif";
+	framework = "app";
+}
+Close : WOResourceURL {
+	filename = "themes/default/close.gif";
+	framework = "app";
+}
+Minimize : WOResourceURL {
+	filename = "themes/default/minimize.gif";
+	framework = "app";
+}
+Maximize : WOResourceURL {
+	filename = "themes/default/maximize.gif";
+	framework = "app";
+}

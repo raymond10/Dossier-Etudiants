@@ -1,0 +1,71 @@
+package etudiants.utt.fr.server;
+
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOComponent;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.eocontrol.EOEditingContext;
+
+import etudiants.utt.fr.eo.EOIndividu;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public class MyComponent extends WOComponent {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5048450550882218378L;
+	public final Session session = (Session) session();
+
+	public MyComponent(WOContext context) {
+		super(context);
+	}
+
+	public Application myApp() {
+		return (Application) application();
+	}
+
+	public Session mySession() {
+		return (Session) session();
+	}
+
+	public EOIndividu utilisateur() {
+		return session.getUtilisateur();
+	}
+
+	public EOIndividu utilisateurInContext(EOEditingContext ed) {
+		EOIndividu user = session.getUtilisateur();
+		if (user.editingContext().equals(ed) == false) {
+			try {
+				ed.lock();
+			user = (EOIndividu) ed.faultForGlobalID(
+					edc().globalIDForObject(user), ed);
+			} finally {
+				ed.unlock();
+			}
+		}
+		return user;
+	}
+
+	public EOEditingContext edc() {
+		return session.editingContext();
+	}
+
+	public boolean synchronizesVariablesWithBindings() {
+		return false;
+	}
+
+	public WOActionResults doNothing() {
+		return null;
+	}
+
+	@Override
+	public void appendToResponse(WOResponse response, WOContext context) {
+		super.appendToResponse(response, context);
+	}
+
+}

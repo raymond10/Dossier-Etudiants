@@ -1,0 +1,50 @@
+btnConnect: WOSubmitButton {
+  directActionName = "validateLogin";
+  value = buttonLabel;
+  class = "bouton";
+  title = buttonTip;
+}
+
+erreurAdresse:WOConditional{
+  condition= erreurBD;
+}
+
+erreurDroits:WOConditional{
+  condition=erreurDroits;
+}
+
+erreurLogin:WOConditional{
+  condition=erreurLogin;
+}
+
+erreurPassword:WOConditional{
+  condition=erreurPassword;
+}
+
+formLogin:WOForm {
+  directActionName = "validateLogin";
+}
+
+strLoginLabel: WOString {
+	escapeHTML = false;
+	value = loginLabel;
+	valueWhenEmpty = "Nom d'utilisateur";
+}
+
+strPassLabel: WOString {
+	escapeHTML = false;
+	value = passLabel;
+	valueWhenEmpty = "Mot de passe";
+}
+
+txtLogin:WOTextField {
+  value = login;
+  title = loginTip;
+  name = "login";
+}
+
+txtPassw: WOPasswordField {
+  value = password;
+  title = passTip;
+  name = "pwd";
+}

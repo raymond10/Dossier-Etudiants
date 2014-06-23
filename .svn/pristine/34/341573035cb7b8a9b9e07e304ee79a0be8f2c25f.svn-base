@@ -1,0 +1,22 @@
+{
+    arguments = (
+        {
+            allowsNull = Y; 
+            columnName = "010_etuId"; 
+            externalType = NUMBER; 
+            name = "010_etuId"; 
+            parameterDirection = 1; 
+            valueClassName = NSNumber; 
+            valueType = i; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = 000; 
+            name = "020_returnValue"; 
+            parameterDirection = 2; 
+            valueClassName = "com.webobjects.foundation.NSMutableDictionary"; 
+        }
+    ); 
+    externalName = "GERRY.PKG_ETU_DOSSIER.PROFIL_DIPLOME"; 
+    name = ProfilDiplome; 
+}

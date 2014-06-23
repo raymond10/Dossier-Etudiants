@@ -1,0 +1,9 @@
+Wrapper : Wrapper {
+	bodyId = "edtEx";
+	onload = onLoad;
+	pageTitle = "Editions";
+}
+
+Busy10: AjaxBusyIndicator {
+	divID = "busy";
+}

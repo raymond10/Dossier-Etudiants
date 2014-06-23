@@ -1,0 +1,12 @@
+package gestionuv.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+public class EOVueSelectumdalites extends _EOVueSelectumdalites {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -626725702729684925L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EOVueSelectumdalites.class);
+}

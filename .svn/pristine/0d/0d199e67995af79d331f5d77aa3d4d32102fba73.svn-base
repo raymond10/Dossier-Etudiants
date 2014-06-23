@@ -1,0 +1,70 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = EMAIL; 
+            externalType = VARCHAR2; 
+            name = email; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 100; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = ID; 
+            externalType = NUMBER; 
+            name = id; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = LOGIN; 
+            externalType = VARCHAR2; 
+            name = login; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 8; 
+        }, 
+        {
+            columnName = NOM; 
+            externalType = VARCHAR2; 
+            name = nom; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 40; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = PERMANENT; 
+            externalType = VARCHAR2; 
+            name = permanent; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = POSTE; 
+            externalType = VARCHAR2; 
+            name = poste; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 80; 
+        }, 
+        {
+            columnName = PRENOM; 
+            externalType = VARCHAR2; 
+            name = prenom; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 30; 
+        }
+    ); 
+    attributesUsedForLocking = (email, id, login, nom, permanent, poste, prenom); 
+    className = "etudiants.utt.fr.roles.VEnseignant"; 
+    classProperties = (email, login, nom, permanent, poste, prenom); 
+    externalName = "GERRY.V_ENSEIGNANT"; 
+    name = VEnseignant; 
+    primaryKeyAttributes = (id); 
+}

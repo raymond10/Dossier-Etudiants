@@ -1,0 +1,60 @@
+#######################################################
+#Ne pas supprimer ce fichier, ni commenter les lignes
+#######################################################
+
+er.component.clickToOpen=true
+er.extensions.ERXResponseRewriter.javascriptTypeAttribute=true
+
+er.extensions.ERXLocalizer.availableLanguages=French
+er.extensions.ERXLocalizer.defaultLanguage=French
+er.extensions.ERXLocalizer.fileNamesToWatch=("Messages.strings", "ValidationTemplate.strings", "Localizable.strings")
+
+er.extensions.ERXApplication.traceOpenEditingContextLocks=true
+er.extensions.ERXApplication.useEditingContextUnlocker=true
+er.extensions.ERXApplication.DefaultEncoding=UTF-8
+
+#ERXEC
+er.extensions.ERXEC.safeLocking=true
+er.extensions.ERXEC.traceOpenLocks=true
+er.extensions.ERXEC.useUnlocker=true
+#er.extensions.ERXEC.markOpenLocks=true
+#er.extensions.ERXEC.defaultAutomaticLockUnlock=true
+#er.extensions.ERXEC.useSharedEditingContext=false
+#er.extensions.ERXEC.defaultCoalesceAutoLocks=false
+
+er.extensions.ERXFileNotificationCenter.CheckFilesPeriod=10
+
+er.extensions.ERXSharedEOLoader.PatchSharedEOLoading=true
+
+er.extensions.ERXJDBCAdaptor.className=er.extensions.jdbc.ERXJDBCAdaptor
+
+# Utilisation de ERXDatabaseContext
+#er.extensions.ERXDatabaseContextDelegate.autoBatchFetchSize=50
+er.extensions.ERXDatabaseContext.className = er.extensions.eof.ERXDatabaseContext
+er.extensions.ERXDatabaseContext.activate = true
+
+
+# Log4j Configuration
+log4j.loggerFactory=er.extensions.logging.ERXLogger$Factory
+log4j.rootCategory=INFO,A1
+log4j.appender.A1=er.extensions.logging.ERXConsoleAppender
+log4j.appender.A1.layout=er.extensions.logging.ERXPatternLayout
+log4j.appender.A1.layout.ConversionPattern=%d{MMM dd HH:mm:ss} %$[%#] %-5p %c %x - %m%n
+
+
+
+er.extensions.ERXRaiseOnMissingEditingContextDelegate = false
+er.extensions.ERXDatabaseContext.className = er.extensions.eof.ERXDatabaseContext
+er.extensions.ERXDatabaseContext.activate = true
+
+# Logger jasper
+log4j.logger.net.sf.jasperreports=INFO
+#log4j.logger.er.transaction.adaptor.EOAdaptorDebugEnabled=DEBUG
+# CSV exporter settings
+net.sf.jasperreports.export.character.encoding=UTF-8
+net.sf.jasperreports.print.keep.full.text=true
+net.sf.jasperreports.export.csv.field.delimiter=;
+net.sf.jasperreports.export.csv.record.delimiter=\n
+
+#Formulaire
+org.utt.global.formulaires.miseenformeautomatique = false

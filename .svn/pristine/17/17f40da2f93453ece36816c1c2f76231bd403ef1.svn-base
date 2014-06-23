@@ -1,0 +1,24 @@
+package etudiants.utt.fr.roles;
+
+import org.apache.log4j.Logger;
+
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSArray;
+
+import etudiants.utt.fr.eo.EOIndividu;
+
+public class VIadmin extends _VIadmin {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3051805011993830986L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(VIadmin.class);
+	
+	@SuppressWarnings("rawtypes")
+	public static Boolean isAdmin(EOEditingContext myContext, EOIndividu id) {
+		NSArray admin = null;
+		admin = VIadmin.fetchAdmin(myContext, Long.valueOf(id.primaryKey()));
+		return !admin.isEmpty();
+	}
+}

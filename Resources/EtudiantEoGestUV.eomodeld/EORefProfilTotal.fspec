@@ -1,0 +1,48 @@
+{
+    selectTotal = {
+        class = EOFetchSpecification; 
+        entityName = EORefProfilTotal; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOAndQualifier; 
+            qualifiers = (
+                {
+                    class = EOKeyValueQualifier; 
+                    key = diplomec; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = diplomec; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = diplSpecc; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = diplSpecc; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = nivEntree; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = nivEntree; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOOrQualifier; 
+                    qualifiers = (
+                        {
+                            class = EOKeyValueQualifier; 
+                            key = prdDebut; 
+                            selectorName = "isLessThanOrEqualTo:"; 
+                            value = {"_key" = prdDebut; class = EOQualifierVariable; }; 
+                        }, 
+                        {
+                            class = EOKeyValueQualifier; 
+                            key = prdFin; 
+                            selectorName = "isGreaterThanOrEqualTo:"; 
+                            value = {"_key" = prdDebut; class = EOQualifierVariable; }; 
+                        }
+                    ); 
+                }
+            ); 
+        }; 
+        sortOrderings = ({class = EOSortOrdering; key = ordre; selectorName = compareAscending; }); 
+    }; 
+}

@@ -1,0 +1,39 @@
+{
+    EOModelVersion = "2.1"; 
+    adaptorName = JDBC; 
+    entities = (
+        {className = "gestionuv.utt.fr.eo.EOEtuDiplome"; name = EOEtuDiplome; }, 
+        {className = "gestionuv.utt.fr.eo.EOEtuMineur"; name = EOEtuMineur; }, 
+        {className = "gestionuv.utt.fr.eo.EOParamDoetu"; name = EOParamDoetu; }, 
+        {className = "gestionuv.utt.fr.eo.EOProfilParam"; name = EOProfilParam; }, 
+        {className = "gestionuv.utt.fr.eo.EOProfilParcours"; name = EOProfilParcours; }, 
+        {className = "gestionuv.utt.fr.eo.EOProfilTotaux"; name = EOProfilTotaux; }, 
+        {className = "gestionuv.utt.fr.eo.EORefProfil"; name = EORefProfil; }, 
+        {className = "gestionuv.utt.fr.eo.EORefProfilTotal"; name = EORefProfilTotal; }, 
+        {className = "gestionuv.utt.fr.eo.EOUv"; name = EOUv; }, 
+        {className = "gestionuv.utt.fr.eo.EOUvOuv"; name = EOUvOuv; }, 
+        {className = "gestionuv.utt.fr.eo.EOUvOuvertes"; name = EOUvOuvertes; }, 
+        {className = "gestionuv.utt.fr.eo.EOVueInsuv"; name = EOVueInsuv; }, 
+        {
+            className = "gestionuv.utt.fr.eo.EOVueLescategories"; 
+            name = EOVueLescategories; 
+        }, 
+        {
+            className = "gestionuv.utt.fr.eo.EOVueProfilParcours"; 
+            name = EOVueProfilParcours; 
+        }, 
+        {className = "gestionuv.utt.fr.eo.EOVueSelectinsuv"; name = EOVueSelectinsuv; }, 
+        {
+            className = "gestionuv.utt.fr.eo.EOVueSelectmodalites"; 
+            name = EOVueSelectmodalites; 
+        }, 
+        {
+            className = "gestionuv.utt.fr.eo.EOVueSelectumdalites"; 
+            name = EOVueSelectumdalites; 
+        }, 
+        {className = "gestionuv.utt.fr.eo.EOVueUvsPeriode"; name = EOVueUvsPeriode; }, 
+        {className = "gestionuv.utt.fr.eo.EOVueVerInsUv"; name = EOVueVerInsUv; }, 
+        {className = "gestionuv.utt.fr.eo.UvOuvResp"; name = UvOuvResp; }
+    ); 
+    userInfo = {modelId = "GEST_UV"; }; 
+}

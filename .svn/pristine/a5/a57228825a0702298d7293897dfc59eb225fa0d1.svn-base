@@ -1,0 +1,309 @@
+// DO NOT EDIT.  Make changes to EORefSituation.java instead.
+package etudiants.utt.fr.eo;
+
+import com.webobjects.eoaccess.*;
+import com.webobjects.eocontrol.*;
+import com.webobjects.foundation.*;
+import java.math.*;
+import java.util.*;
+import org.apache.log4j.Logger;
+
+import er.extensions.eof.*;
+import er.extensions.foundation.*;
+
+@SuppressWarnings("all")
+public abstract class _EORefSituation extends  ERXGenericRecord {
+  public static final String ENTITY_NAME = "EORefSituation";
+
+  // Attribute Keys
+  public static final ERXKey<String> SITUATION = new ERXKey<String>("situation");
+  public static final ERXKey<String> SITUATIONC = new ERXKey<String>("situationc");
+  public static final ERXKey<Long> SITUATION_TYPE = new ERXKey<Long>("situationType");
+  // Relationship Keys
+  public static final ERXKey<etudiants.utt.fr.eo.EOEtudiantInscrAdm> ETU_INSCR_ADMS = new ERXKey<etudiants.utt.fr.eo.EOEtudiantInscrAdm>("etuInscrAdms");
+  public static final ERXKey<etudiants.utt.fr.eo.EOIndividu> INDIVIDUS = new ERXKey<etudiants.utt.fr.eo.EOIndividu>("individus");
+
+  // Attributes
+  public static final String SITUATION_KEY = SITUATION.key();
+  public static final String SITUATIONC_KEY = SITUATIONC.key();
+  public static final String SITUATION_TYPE_KEY = SITUATION_TYPE.key();
+  // Relationships
+  public static final String ETU_INSCR_ADMS_KEY = ETU_INSCR_ADMS.key();
+  public static final String INDIVIDUS_KEY = INDIVIDUS.key();
+
+  private static Logger LOG = Logger.getLogger(_EORefSituation.class);
+
+  public EORefSituation localInstanceIn(EOEditingContext editingContext) {
+    EORefSituation localInstance = (EORefSituation)EOUtilities.localInstanceOfObject(editingContext, this);
+    if (localInstance == null) {
+      throw new IllegalStateException("You attempted to localInstance " + this + ", which has not yet committed.");
+    }
+    return localInstance;
+  }
+
+  public String situation() {
+    return (String) storedValueForKey(_EORefSituation.SITUATION_KEY);
+  }
+
+  public void setSituation(String value) {
+    if (_EORefSituation.LOG.isDebugEnabled()) {
+    	_EORefSituation.LOG.debug( "updating situation from " + situation() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EORefSituation.SITUATION_KEY);
+  }
+
+  public String situationc() {
+    return (String) storedValueForKey(_EORefSituation.SITUATIONC_KEY);
+  }
+
+  public void setSituationc(String value) {
+    if (_EORefSituation.LOG.isDebugEnabled()) {
+    	_EORefSituation.LOG.debug( "updating situationc from " + situationc() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EORefSituation.SITUATIONC_KEY);
+  }
+
+  public Long situationType() {
+    return (Long) storedValueForKey(_EORefSituation.SITUATION_TYPE_KEY);
+  }
+
+  public void setSituationType(Long value) {
+    if (_EORefSituation.LOG.isDebugEnabled()) {
+    	_EORefSituation.LOG.debug( "updating situationType from " + situationType() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EORefSituation.SITUATION_TYPE_KEY);
+  }
+
+  public NSArray<etudiants.utt.fr.eo.EOEtudiantInscrAdm> etuInscrAdms() {
+    return (NSArray<etudiants.utt.fr.eo.EOEtudiantInscrAdm>)storedValueForKey(_EORefSituation.ETU_INSCR_ADMS_KEY);
+  }
+
+  public NSArray<etudiants.utt.fr.eo.EOEtudiantInscrAdm> etuInscrAdms(EOQualifier qualifier) {
+    return etuInscrAdms(qualifier, null, false);
+  }
+
+  public NSArray<etudiants.utt.fr.eo.EOEtudiantInscrAdm> etuInscrAdms(EOQualifier qualifier, boolean fetch) {
+    return etuInscrAdms(qualifier, null, fetch);
+  }
+
+  public NSArray<etudiants.utt.fr.eo.EOEtudiantInscrAdm> etuInscrAdms(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings, boolean fetch) {
+    NSArray<etudiants.utt.fr.eo.EOEtudiantInscrAdm> results;
+    if (fetch) {
+      EOQualifier fullQualifier;
+      EOQualifier inverseQualifier = new EOKeyValueQualifier(etudiants.utt.fr.eo.EOEtudiantInscrAdm.REF_SITUATION_KEY, EOQualifier.QualifierOperatorEqual, this);
+    	
+      if (qualifier == null) {
+        fullQualifier = inverseQualifier;
+      }
+      else {
+        NSMutableArray<EOQualifier> qualifiers = new NSMutableArray<EOQualifier>();
+        qualifiers.addObject(qualifier);
+        qualifiers.addObject(inverseQualifier);
+        fullQualifier = new EOAndQualifier(qualifiers);
+      }
+
+      results = etudiants.utt.fr.eo.EOEtudiantInscrAdm.fetchEOEtudiantInscrAdms(editingContext(), fullQualifier, sortOrderings);
+    }
+    else {
+      results = etuInscrAdms();
+      if (qualifier != null) {
+        results = (NSArray<etudiants.utt.fr.eo.EOEtudiantInscrAdm>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
+      }
+      if (sortOrderings != null) {
+        results = (NSArray<etudiants.utt.fr.eo.EOEtudiantInscrAdm>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
+      }
+    }
+    return results;
+  }
+  
+  public void addToEtuInscrAdms(etudiants.utt.fr.eo.EOEtudiantInscrAdm object) {
+    includeObjectIntoPropertyWithKey(object, _EORefSituation.ETU_INSCR_ADMS_KEY);
+  }
+
+  public void removeFromEtuInscrAdms(etudiants.utt.fr.eo.EOEtudiantInscrAdm object) {
+    excludeObjectFromPropertyWithKey(object, _EORefSituation.ETU_INSCR_ADMS_KEY);
+  }
+
+  public void addToEtuInscrAdmsRelationship(etudiants.utt.fr.eo.EOEtudiantInscrAdm object) {
+    if (_EORefSituation.LOG.isDebugEnabled()) {
+      _EORefSituation.LOG.debug("adding " + object + " to etuInscrAdms relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	addToEtuInscrAdms(object);
+    }
+    else {
+    	addObjectToBothSidesOfRelationshipWithKey(object, _EORefSituation.ETU_INSCR_ADMS_KEY);
+    }
+  }
+
+  public void removeFromEtuInscrAdmsRelationship(etudiants.utt.fr.eo.EOEtudiantInscrAdm object) {
+    if (_EORefSituation.LOG.isDebugEnabled()) {
+      _EORefSituation.LOG.debug("removing " + object + " from etuInscrAdms relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	removeFromEtuInscrAdms(object);
+    }
+    else {
+    	removeObjectFromBothSidesOfRelationshipWithKey(object, _EORefSituation.ETU_INSCR_ADMS_KEY);
+    }
+  }
+
+  public etudiants.utt.fr.eo.EOEtudiantInscrAdm createEtuInscrAdmsRelationship() {
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( etudiants.utt.fr.eo.EOEtudiantInscrAdm.ENTITY_NAME );
+    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+    editingContext().insertObject(eo);
+    addObjectToBothSidesOfRelationshipWithKey(eo, _EORefSituation.ETU_INSCR_ADMS_KEY);
+    return (etudiants.utt.fr.eo.EOEtudiantInscrAdm) eo;
+  }
+
+  public void deleteEtuInscrAdmsRelationship(etudiants.utt.fr.eo.EOEtudiantInscrAdm object) {
+    removeObjectFromBothSidesOfRelationshipWithKey(object, _EORefSituation.ETU_INSCR_ADMS_KEY);
+    editingContext().deleteObject(object);
+  }
+
+  public void deleteAllEtuInscrAdmsRelationships() {
+    Enumeration<etudiants.utt.fr.eo.EOEtudiantInscrAdm> objects = etuInscrAdms().immutableClone().objectEnumerator();
+    while (objects.hasMoreElements()) {
+      deleteEtuInscrAdmsRelationship(objects.nextElement());
+    }
+  }
+
+  public NSArray<etudiants.utt.fr.eo.EOIndividu> individus() {
+    return (NSArray<etudiants.utt.fr.eo.EOIndividu>)storedValueForKey(_EORefSituation.INDIVIDUS_KEY);
+  }
+
+  public NSArray<etudiants.utt.fr.eo.EOIndividu> individus(EOQualifier qualifier) {
+    return individus(qualifier, null);
+  }
+
+  public NSArray<etudiants.utt.fr.eo.EOIndividu> individus(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings) {
+    NSArray<etudiants.utt.fr.eo.EOIndividu> results;
+      results = individus();
+      if (qualifier != null) {
+        results = (NSArray<etudiants.utt.fr.eo.EOIndividu>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
+      }
+      if (sortOrderings != null) {
+        results = (NSArray<etudiants.utt.fr.eo.EOIndividu>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
+      }
+    return results;
+  }
+  
+  public void addToIndividus(etudiants.utt.fr.eo.EOIndividu object) {
+    includeObjectIntoPropertyWithKey(object, _EORefSituation.INDIVIDUS_KEY);
+  }
+
+  public void removeFromIndividus(etudiants.utt.fr.eo.EOIndividu object) {
+    excludeObjectFromPropertyWithKey(object, _EORefSituation.INDIVIDUS_KEY);
+  }
+
+  public void addToIndividusRelationship(etudiants.utt.fr.eo.EOIndividu object) {
+    if (_EORefSituation.LOG.isDebugEnabled()) {
+      _EORefSituation.LOG.debug("adding " + object + " to individus relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	addToIndividus(object);
+    }
+    else {
+    	addObjectToBothSidesOfRelationshipWithKey(object, _EORefSituation.INDIVIDUS_KEY);
+    }
+  }
+
+  public void removeFromIndividusRelationship(etudiants.utt.fr.eo.EOIndividu object) {
+    if (_EORefSituation.LOG.isDebugEnabled()) {
+      _EORefSituation.LOG.debug("removing " + object + " from individus relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	removeFromIndividus(object);
+    }
+    else {
+    	removeObjectFromBothSidesOfRelationshipWithKey(object, _EORefSituation.INDIVIDUS_KEY);
+    }
+  }
+
+  public etudiants.utt.fr.eo.EOIndividu createIndividusRelationship() {
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( etudiants.utt.fr.eo.EOIndividu.ENTITY_NAME );
+    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+    editingContext().insertObject(eo);
+    addObjectToBothSidesOfRelationshipWithKey(eo, _EORefSituation.INDIVIDUS_KEY);
+    return (etudiants.utt.fr.eo.EOIndividu) eo;
+  }
+
+  public void deleteIndividusRelationship(etudiants.utt.fr.eo.EOIndividu object) {
+    removeObjectFromBothSidesOfRelationshipWithKey(object, _EORefSituation.INDIVIDUS_KEY);
+    editingContext().deleteObject(object);
+  }
+
+  public void deleteAllIndividusRelationships() {
+    Enumeration<etudiants.utt.fr.eo.EOIndividu> objects = individus().immutableClone().objectEnumerator();
+    while (objects.hasMoreElements()) {
+      deleteIndividusRelationship(objects.nextElement());
+    }
+  }
+
+
+  public static EORefSituation createEORefSituation(EOEditingContext editingContext, String situationc
+) {
+    EORefSituation eo = (EORefSituation) EOUtilities.createAndInsertInstance(editingContext, _EORefSituation.ENTITY_NAME);    
+		eo.setSituationc(situationc);
+    return eo;
+  }
+
+  public static ERXFetchSpecification<EORefSituation> fetchSpec() {
+    return new ERXFetchSpecification<EORefSituation>(_EORefSituation.ENTITY_NAME, null, null, false, true, null);
+  }
+
+  public static NSArray<EORefSituation> fetchAllEORefSituations(EOEditingContext editingContext) {
+    return _EORefSituation.fetchAllEORefSituations(editingContext, null);
+  }
+
+  public static NSArray<EORefSituation> fetchAllEORefSituations(EOEditingContext editingContext, NSArray<EOSortOrdering> sortOrderings) {
+    return _EORefSituation.fetchEORefSituations(editingContext, null, sortOrderings);
+  }
+
+  public static NSArray<EORefSituation> fetchEORefSituations(EOEditingContext editingContext, EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings) {
+    ERXFetchSpecification<EORefSituation> fetchSpec = new ERXFetchSpecification<EORefSituation>(_EORefSituation.ENTITY_NAME, qualifier, sortOrderings);
+    fetchSpec.setIsDeep(true);
+    NSArray<EORefSituation> eoObjects = fetchSpec.fetchObjects(editingContext);
+    return eoObjects;
+  }
+
+  public static EORefSituation fetchEORefSituation(EOEditingContext editingContext, String keyName, Object value) {
+    return _EORefSituation.fetchEORefSituation(editingContext, new EOKeyValueQualifier(keyName, EOQualifier.QualifierOperatorEqual, value));
+  }
+
+  public static EORefSituation fetchEORefSituation(EOEditingContext editingContext, EOQualifier qualifier) {
+    NSArray<EORefSituation> eoObjects = _EORefSituation.fetchEORefSituations(editingContext, qualifier, null);
+    EORefSituation eoObject;
+    int count = eoObjects.count();
+    if (count == 0) {
+      eoObject = null;
+    }
+    else if (count == 1) {
+      eoObject = eoObjects.objectAtIndex(0);
+    }
+    else {
+      throw new IllegalStateException("There was more than one EORefSituation that matched the qualifier '" + qualifier + "'.");
+    }
+    return eoObject;
+  }
+
+  public static EORefSituation fetchRequiredEORefSituation(EOEditingContext editingContext, String keyName, Object value) {
+    return _EORefSituation.fetchRequiredEORefSituation(editingContext, new EOKeyValueQualifier(keyName, EOQualifier.QualifierOperatorEqual, value));
+  }
+
+  public static EORefSituation fetchRequiredEORefSituation(EOEditingContext editingContext, EOQualifier qualifier) {
+    EORefSituation eoObject = _EORefSituation.fetchEORefSituation(editingContext, qualifier);
+    if (eoObject == null) {
+      throw new NoSuchElementException("There was no EORefSituation that matched the qualifier '" + qualifier + "'.");
+    }
+    return eoObject;
+  }
+
+  public static EORefSituation localInstanceIn(EOEditingContext editingContext, EORefSituation eo) {
+    EORefSituation localInstance = (eo == null) ? null : ERXEOControlUtilities.localInstanceOfObject(editingContext, eo);
+    if (localInstance == null && eo != null) {
+      throw new IllegalStateException("You attempted to localInstance " + eo + ", which has not yet committed.");
+    }
+    return localInstance;
+  }
+}

@@ -1,0 +1,30 @@
+{
+    periodeCourante = {
+        class = EOFetchSpecification; 
+        entityName = EOParamPeriode; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOAndQualifier; 
+            qualifiers = (
+                {
+                    class = EOKeyComparisonQualifier; 
+                    leftKey = anUniv; 
+                    rightKey = "eoRefPeriode.anUniv"; 
+                    selectorName = "isEqualTo:"; 
+                }, 
+                {
+                    class = EOKeyComparisonQualifier; 
+                    leftKey = prdUniv; 
+                    rightKey = "eoRefPeriode.prdUniv"; 
+                    selectorName = "isEqualTo:"; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = parPrdType; 
+                    selectorName = "isEqualTo:"; 
+                    value = DEF; 
+                }
+            ); 
+        }; 
+    }; 
+}

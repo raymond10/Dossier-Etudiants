@@ -1,0 +1,166 @@
+package etudiants.utt.fr.components;
+import org.login.fwkloginwebapp.common.LoginUserInfo;
+
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WORedirect;
+import com.webobjects.appserver.WOResponse;
+
+import etudiants.utt.fr.components.controlers.WrapperCtrl;
+import etudiants.utt.fr.server.Application;
+import etudiants.utt.fr.server.MyAjaxComponent;
+import etudiants.utt.fr.server.ProfilHelpers;
+import etudiants.utt.fr.server.Session;
+import etudiants.utt.fr.server.VersionMe;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public class Wrapper extends MyAjaxComponent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1709892188921393667L;
+	private String userName = null;
+	private String onload = "";
+	private String bodyId = "";
+	private Boolean connectUser = true;
+	private WrapperCtrl ctrl;
+	public Session sess;
+
+	public Wrapper(WOContext context) {
+		super(context);
+		sess = mySession();
+		ctrl = new WrapperCtrl(this);
+		LoginUserInfo userInfo = sess.connectedUserInfo();
+		if (userInfo != null) {
+			setConnectUser(false);
+		}
+		if(ctrl.etudiant()){
+			sess.setEtudiant(utilisateur());
+		}
+	}	
+	
+	@Override
+	public void appendToResponse(WOResponse response, WOContext context) {
+		super.appendToResponse(response, context);
+		ProfilHelpers.insertStylesSheet(context, response);
+		addScriptResource(response, "jscript/wz_tooltip.js", null, "FwkLoginWebApp.framework", 
+		                            RESOURCE_TYPE_JSCRIPT, RESOURCE_DEST_END_BODY, RESOURCE_FROM_WEB_SERVER_RESOURCES);
+	}
+
+	/**
+	 * @return the ctrl
+	 */
+	public WrapperCtrl ctrl() {
+		return ctrl;
+	}
+
+	/**
+	 * @param ctrl
+	 *            the ctrl to set
+	 */
+	public void setCtrl(WrapperCtrl ctrl) {
+		this.ctrl = ctrl;
+	}
+
+	/**
+	 * @return the connectUser
+	 */
+	public Boolean getConnectUser() {
+		return connectUser;
+	}
+
+	/**
+	 * @param connectUser
+	 *            the connectUser to set
+	 */
+	public void setConnectUser(Boolean connectUser) {
+		this.connectUser = connectUser;
+	}
+
+	public String icon() {
+		return application().resourceManager().urlForResourceNamed(
+				"image/favicon.ico", null, null, context().request());
+	}
+
+	public String copyright() {
+		return myApp().copyright();
+		// return VersionMe.copyright();
+	}
+	
+	public WOActionResults casLogOut(){
+		WORedirect nextPage = (WORedirect) lgnApp.pageWithName(WORedirect.class.getName(), context());
+		String url = myApp().casLogOutURL();
+		nextPage.setUrl(url);
+		mySession().terminate();
+		return nextPage;
+	}
+
+	public String bdServerId() {
+		return Application.bdServerId;
+	}
+
+	public String version() {
+		return VersionMe.htmlAppliVersion();
+	}
+
+	public String getOnload() {
+		onload = (String) valueForBinding("onload");
+		return onload;
+	}
+
+	public void setOnload(String onload) {
+		this.onload = onload;
+	}
+
+	/**
+	 * @return the bodyId
+	 */
+	public String getBodyId() {
+		bodyId = (String) valueForBinding("bodyId");
+		return bodyId;
+	}
+
+	/**
+	 * @param bodyId the bodyId to set
+	 */
+	public void setBodyId(String bodyId) {
+		this.bodyId = bodyId;
+	}
+
+	public String userName() {
+		if (userName == null) {
+			LoginUserInfo userInfo = mySession().connectedUserInfo();
+			if (userInfo != null) {
+				userName = userInfo.nomEtPrenom();
+			}
+		}
+		return userName;
+	}
+
+	public String pageTitle() {
+		if (hasBinding("pageTitle")) {
+			return "- " + (String) valueForBinding("pageTitle");
+		} else {
+			return null;
+		}
+	}
+
+	public void fermerMessage() {
+		mySession().setAlertMessage(null);
+		setOnload("");
+		return;
+	}
+
+	public boolean isAfficherAlerte() {
+		boolean isAfficherAlerte = false;
+		String alertMsg = mySession().getAlertMessage();
+		if (alertMsg != null && alertMsg.equals("") == false) {
+			isAfficherAlerte = true;
+		}
+		return isAfficherAlerte;
+	}
+}

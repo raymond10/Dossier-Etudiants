@@ -1,0 +1,23 @@
+package etudiants.utt.fr.roles;
+
+import org.apache.log4j.Logger;
+
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSArray;
+
+import etudiants.utt.fr.eo.EOIndividu;
+
+@SuppressWarnings("all")
+public class VEnseignant extends _VEnseignant {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -536031046202443367L;
+	private static Logger log = Logger.getLogger(VEnseignant.class);
+	
+	public static Boolean isEnseignant(EOEditingContext myContext, EOIndividu id) {
+		NSArray enseignant = null;
+		enseignant = VEnseignant.fetchEnseignant(myContext, Long.valueOf(id.primaryKey()));
+		return !enseignant.isEmpty();
+	}
+}

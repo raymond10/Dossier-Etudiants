@@ -1,0 +1,12 @@
+package gestionuv.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+public class EOVueLescategories extends _EOVueLescategories {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 647719066072674567L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EOVueLescategories.class);
+}

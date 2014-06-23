@@ -1,0 +1,14 @@
+RetourAccueil : LoginButton {
+	action = retourAccueil;
+	text = "Fermer";
+	title = "Fermer";
+	type = "accueil";
+	target = "_top";
+}
+ExceptionInfos : ERXWOText {
+	value = mySession.generalErrorMessage;
+	style = "width:99%;height:150px;";
+	//style = "width:100%;";
+	class = "warn";
+	rows = "8";
+}

@@ -1,0 +1,25 @@
+{
+    arguments = (
+        {
+            allowsNull = Y; 
+            columnName = "010_etuId"; 
+            externalType = NUMBER; 
+            internalInfo = {"_nameInObjectStore" = 001; }; 
+            name = "010_etuId"; 
+            parameterDirection = 1; 
+            valueClassName = NSNumber; 
+            valueType = i; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = 000; 
+            externalType = RECORD; 
+            internalInfo = {"_nameInObjectStore" = 000; }; 
+            name = "020_returnValue"; 
+            parameterDirection = 2; 
+            valueClassName = "com.webobjects.foundation.NSMutableDictionary"; 
+        }
+    ); 
+    externalName = "GERRY.PKG_ETU_DOSSIER.PROFIL_ETUDIANT"; 
+    name = ProfilEtudiant; 
+}

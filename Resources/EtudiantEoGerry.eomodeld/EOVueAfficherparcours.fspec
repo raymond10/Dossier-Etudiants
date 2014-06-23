@@ -1,0 +1,16 @@
+{
+    voirParcours = {
+        class = EOFetchSpecification; 
+        entityName = EOVueAfficherparcours; 
+        hints = {
+            EOCustomQueryExpressionHintKey = "SELECT * FROM TABLE(SELECT PROFIL_ETU.FONC_PARCETU($numeroEtu) FROM DUAL )"; 
+        }; 
+        isDeep = YES; 
+        prefetchingRelationshipKeyPaths = (); 
+        sortOrderings = (
+            {class = EOSortOrdering; key = prdDebut; selectorName = compareAscending; }, 
+            {class = EOSortOrdering; key = prdFin; selectorName = compareAscending; }
+        ); 
+        usesDistinct = YES; 
+    }; 
+}

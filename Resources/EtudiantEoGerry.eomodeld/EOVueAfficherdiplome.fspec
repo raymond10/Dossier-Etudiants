@@ -1,0 +1,19 @@
+{
+    ListDiplome = {
+        class = EOFetchSpecification; 
+        entityName = EOVueAfficherdiplome; 
+        isDeep = YES; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOKeyValueQualifier; 
+            key = numeroEtu; 
+            selectorName = "isEqualTo:"; 
+            value = {"_key" = numeroEtu; class = EOQualifierVariable; }; 
+        }; 
+        sortOrderings = (
+            {class = EOSortOrdering; key = prdDebut; selectorName = compareAscending; }, 
+            {class = EOSortOrdering; key = prdFin; selectorName = compareAscending; }
+        ); 
+        usesDistinct = YES; 
+    }; 
+}

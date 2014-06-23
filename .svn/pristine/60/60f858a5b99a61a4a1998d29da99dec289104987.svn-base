@@ -1,0 +1,12 @@
+package gestionuv.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+public class UvOuvResp extends _UvOuvResp {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 87465652041125162L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(UvOuvResp.class);
+}

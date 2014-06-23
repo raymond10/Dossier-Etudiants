@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="Sources"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/JavaEOAccess"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/JavaEOControl"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/JavaFoundation"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/JavaWebObjects"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/JavaXML"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/ERExtensions"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/ERJars"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/Ajax"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/JavaWOExtensions"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/JavaMemoryAdaptor"/>
+	<classpathentry exported="true" kind="lib" path="/Library/WebObjects/Extensions/j2ssh-core-0.2.9.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/naneon/Developpements/workspace-juno/Dossier-Etudiants/Libraries/commons-io-2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Library/WebObjects/Extensions/activation.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Library/WebObjects/Extensions/mail.jar"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/WOOgnl"/>
+	<classpathentry kind="con" path="WOFramework/JavaJDBCAdaptor"/>
+	<classpathentry kind="con" path="WOFramework/FwkCktlThemes"/>
+	<classpathentry kind="lib" path="/Library/WebObjects/Extensions/ojdbc14.jar"/>
+	<classpathentry kind="lib" path="/Users/naneon/Developpements/workspace-juno/Dossier-Etudiants/Libraries/commons-collections-2.1.jar"/>
+	<classpathentry kind="con" path="WOFramework/ERPrototypes"/>
+	<classpathentry kind="lib" path="/Library/WebObjects/Extensions/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="/Users/naneon/Developpements/workspace-juno/Suivi-PP/WebContent/WEB-INF/lib/spring.jar"/>
+	<classpathentry kind="con" path="WOFramework/FwkCktlReportingUTT"/>
+	<classpathentry kind="con" path="WOFramework/FwkLoginWebApp"/>
+	<classpathentry kind="con" path="WOFramework/FwkUTTAjaxWebExt"/>
+	<classpathentry kind="con" path="WOFramework/FwkCktlReportingUTTGuiAjax"/>
+	<classpathentry kind="lib" path="/Library/WebObjects/Extensions/xalan.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

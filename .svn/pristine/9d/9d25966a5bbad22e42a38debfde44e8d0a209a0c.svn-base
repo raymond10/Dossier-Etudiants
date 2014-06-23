@@ -1,0 +1,194 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "ACT_FORMATION"; 
+            externalType = VARCHAR2; 
+            name = actFormation; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 18; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "AN_BAC"; 
+            externalType = VARCHAR2; 
+            name = anBac; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = BAC; 
+            externalType = VARCHAR2; 
+            name = bac; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 20; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "CIV_NOM"; 
+            externalType = VARCHAR2; 
+            name = civNom; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 77; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "COM_NAIS"; 
+            externalType = VARCHAR2; 
+            name = comNais; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 93; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = CONSEILLER; 
+            externalType = VARCHAR2; 
+            name = conseiller; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 77; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "CONSEILLER_ID"; 
+            externalType = NUMBER; 
+            name = conseillerId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DATE_NAIS"; 
+            externalType = VARCHAR2; 
+            name = dateNais; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 10; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DER_DIPLOME"; 
+            externalType = VARCHAR2; 
+            name = derDiplome; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 100; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DER_INSCRIPTION"; 
+            externalType = VARCHAR2; 
+            name = derInscription; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DER_PERIODE"; 
+            externalType = VARCHAR2; 
+            name = derPeriode; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = EMAIL; 
+            externalType = VARCHAR2; 
+            name = email; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 100; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "ETAB_DER_DIPLOME"; 
+            externalType = VARCHAR2; 
+            name = etabDerDiplome; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 30; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = ID; 
+            externalType = NUMBER; 
+            name = id; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            columnName = NOM; 
+            externalType = VARCHAR2; 
+            name = nom; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 40; 
+        }, 
+        {
+            columnName = PRENOM; 
+            externalType = VARCHAR2; 
+            name = prenom; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 30; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        actFormation, 
+        anBac, 
+        bac, 
+        civNom, 
+        comNais, 
+        conseiller, 
+        conseillerId, 
+        dateNais, 
+        derDiplome, 
+        derInscription, 
+        derPeriode, 
+        email, 
+        etabDerDiplome, 
+        id, 
+        nom, 
+        prenom
+    ); 
+    className = "etudiants.utt.fr.eo.EOVueDetailetudiant"; 
+    classProperties = (
+        actFormation, 
+        anBac, 
+        bac, 
+        civNom, 
+        comNais, 
+        conseiller, 
+        conseillerId, 
+        dateNais, 
+        derDiplome, 
+        derInscription, 
+        derPeriode, 
+        email, 
+        eoVueAfficherdiplomes, 
+        etabDerDiplome, 
+        nom, 
+        prenom
+    ); 
+    externalName = "GERRY.VUE_DETAILETUDIANT"; 
+    name = EOVueDetailetudiant; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = EOVueAfficherdiplome; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = numeroEtu; sourceAttribute = id; }); 
+            name = eoVueAfficherdiplomes; 
+        }
+    ); 
+}

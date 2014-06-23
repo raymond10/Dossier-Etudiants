@@ -1,0 +1,252 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "ACADEMIE_BAC"; 
+            externalType = VARCHAR2; 
+            name = academieBac; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 40; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "BAC_AN"; 
+            externalType = VARCHAR2; 
+            name = bacAn; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "BAC_MENTION"; 
+            externalType = VARCHAR2; 
+            name = bacMention; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 10; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "BAC_SERIE"; 
+            externalType = VARCHAR2; 
+            name = bacSerie; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 60; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = CIVILITE; 
+            externalType = VARCHAR2; 
+            name = civilite; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 15; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "COM_NAIS"; 
+            externalType = VARCHAR2; 
+            name = comNais; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 40; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DATE_NAISS"; 
+            externalType = VARCHAR2; 
+            name = dateNaiss; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 10; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DEPT_BAC"; 
+            externalType = VARCHAR2; 
+            name = deptBac; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 36; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DEPT_NAIS"; 
+            externalType = VARCHAR2; 
+            name = deptNais; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 3; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = EMAIL; 
+            externalType = VARCHAR2; 
+            name = email; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 100; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "ETAB_BAC"; 
+            externalType = VARCHAR2; 
+            name = etabBac; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = ID; 
+            externalType = NUMBER; 
+            name = id; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = INE; 
+            externalType = VARCHAR2; 
+            name = ine; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 11; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "LANGUE_MAT"; 
+            externalType = VARCHAR2; 
+            name = langueMat; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 30; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = NNI; 
+            externalType = VARCHAR2; 
+            name = nni; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 16; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = NOM; 
+            externalType = VARCHAR2; 
+            name = nom; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 91; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PAYS_BAC"; 
+            externalType = VARCHAR2; 
+            name = paysBac; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PAYS_NAIS"; 
+            externalType = VARCHAR2; 
+            name = paysNais; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PAYS_NAT"; 
+            externalType = VARCHAR2; 
+            name = paysNat; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = PRENOM; 
+            externalType = VARCHAR2; 
+            name = prenom; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 138; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "RESP_CIV"; 
+            externalType = VARCHAR2; 
+            name = respCiv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 10; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "VILLE_BAC"; 
+            externalType = VARCHAR2; 
+            name = villeBac; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        academieBac, 
+        bacAn, 
+        bacMention, 
+        bacSerie, 
+        civilite, 
+        comNais, 
+        dateNaiss, 
+        deptBac, 
+        deptNais, 
+        email, 
+        etabBac, 
+        id, 
+        ine, 
+        langueMat, 
+        nni, 
+        nom, 
+        paysBac, 
+        paysNais, 
+        paysNat, 
+        prenom, 
+        respCiv, 
+        villeBac
+    ); 
+    className = "etudiants.utt.fr.eo.EOVDossetudiants"; 
+    classProperties = (
+        academieBac, 
+        bacAn, 
+        bacMention, 
+        bacSerie, 
+        civilite, 
+        comNais, 
+        dateNaiss, 
+        deptBac, 
+        deptNais, 
+        email, 
+        etabBac, 
+        ine, 
+        langueMat, 
+        nni, 
+        nom, 
+        paysBac, 
+        paysNais, 
+        paysNat, 
+        prenom, 
+        respCiv, 
+        villeBac
+    ); 
+    externalName = "GERRY.V_DOSSETUDIANTS"; 
+    name = EOVDossetudiants; 
+    primaryKeyAttributes = (id); 
+}

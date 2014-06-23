@@ -1,0 +1,44 @@
+TLMain : WOResourceURL {
+	filename = "themes/mac_os_x/TL_Main.png";
+	framework = "app";
+}
+TMain : WOResourceURL {
+	filename = "themes/mac_os_x/T_Main.png";
+	framework = "app";
+}
+TRMain : WOResourceURL {
+	filename = "themes/mac_os_x/TR_Main.png";
+	framework = "app";
+}
+LMain : WOResourceURL {
+	filename = "themes/mac_os_x/L_Main.png";
+	framework = "app";
+}
+RMain : WOResourceURL {
+	filename = "themes/mac_os_x/R_Main.png";
+	framework = "app";
+}
+BLMain : WOResourceURL {
+	filename = "themes/mac_os_x/BL_Main.png";
+	framework = "app";
+}
+BMain : WOResourceURL {
+	filename = "themes/mac_os_x/B_Main.png";
+	framework = "app";
+}
+BRMain : WOResourceURL {
+	filename = "themes/mac_os_x/BR_Main.png";
+	framework = "app";
+}
+Close : WOResourceURL {
+	filename = "themes/mac_os_x/close.gif";
+	framework = "app";
+}
+Minimize : WOResourceURL {
+	filename = "themes/mac_os_x/minimize.gif";
+	framework = "app";
+}
+Maximize : WOResourceURL {
+	filename = "themes/mac_os_x/maximize.gif";
+	framework = "app";
+}

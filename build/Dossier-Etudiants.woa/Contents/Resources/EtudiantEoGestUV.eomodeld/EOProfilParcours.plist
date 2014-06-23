@@ -1,0 +1,82 @@
+{
+    attributes = (
+        {
+            columnName = "DIPLOME_$C"; 
+            externalType = VARCHAR2; 
+            name = diplomec; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPL_SPEC_$C"; 
+            externalType = VARCHAR2; 
+            name = "diplSpec$c"; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "ETU_ID"; 
+            externalType = NUMBER; 
+            name = etuId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "NIV_ENTREE"; 
+            externalType = VARCHAR2; 
+            name = nivEntree; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 10; 
+        }, 
+        {
+            columnName = "PRD_DEBUT"; 
+            externalType = VARCHAR2; 
+            name = prdDebut; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            columnName = "PRD_FIN"; 
+            externalType = VARCHAR2; 
+            name = prdFin; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            columnName = "REORIENT_$F"; 
+            externalType = VARCHAR2; 
+            name = "reorient$f"; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1; 
+        }
+    ); 
+    attributesUsedForLocking = (diplomec, "diplSpec$c", etuId, nivEntree, prdDebut, prdFin, "reorient$f"); 
+    className = "gestionuv.utt.fr.eo.EOProfilParcours"; 
+    classProperties = ("diplSpec$c", nivEntree, prdFin, profilTotauxs, "reorient$f"); 
+    externalName = "GEST_UV.PROFIL_PARCOURS"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOProfilParcours; 
+    primaryKeyAttributes = (diplomec, etuId, prdDebut); 
+    relationships = (
+        {
+            destination = EOProfilTotaux; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = (
+                {destinationAttribute = diplomec; sourceAttribute = diplomec; }, 
+                {destinationAttribute = etuId; sourceAttribute = etuId; }, 
+                {destinationAttribute = prdDebut; sourceAttribute = prdDebut; }
+            ); 
+            name = profilTotauxs; 
+        }
+    ); 
+}

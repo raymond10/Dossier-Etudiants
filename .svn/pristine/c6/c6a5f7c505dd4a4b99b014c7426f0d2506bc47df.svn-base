@@ -1,0 +1,47 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "CIV_FR_ABR"; 
+            externalType = VARCHAR2; 
+            name = civFrAbr; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = CIVILITE; 
+            externalType = VARCHAR2; 
+            name = civilite; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 15; 
+        }, 
+        {
+            columnName = "CIVILITE_$C"; 
+            externalType = VARCHAR2; 
+            isReadOnly = Y; 
+            name = civilitec; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 3; 
+        }
+    ); 
+    attributesUsedForLocking = (civFrAbr, civilite, civilitec); 
+    className = "etudiants.utt.fr.eo.EORefCivilite"; 
+    classProperties = (civFrAbr, civilite, civilitec, individus); 
+    externalName = "GERRY.REF_CIVILITE"; 
+    fetchSpecificationDictionary = {}; 
+    name = EORefCivilite; 
+    primaryKeyAttributes = (civilitec); 
+    relationships = (
+        {
+            destination = EOIndividu; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = civilitec; sourceAttribute = civilitec; }); 
+            name = individus; 
+        }
+    ); 
+}

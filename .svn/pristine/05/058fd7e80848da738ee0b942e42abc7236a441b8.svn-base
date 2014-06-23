@@ -1,0 +1,12 @@
+package etudiants.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+public class EOVuePeriodeParam extends _EOVuePeriodeParam {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5973759778400121533L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EOVuePeriodeParam.class);
+}

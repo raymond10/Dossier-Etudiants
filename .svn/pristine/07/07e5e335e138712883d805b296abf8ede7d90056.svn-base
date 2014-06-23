@@ -1,0 +1,18 @@
+Wrapper : Wrapper {
+	bodyId = "edtEx";
+	onload = onLoad;
+	pageTitle = "Editions";
+}
+
+browser : WOConditional {
+	condition = browser;
+}
+
+nav : WOHyperlink {
+    id = "Navigation";
+	pageName = "Navigation";
+}
+
+Busy10: AjaxBusyIndicator {
+	divID = "busy";
+}

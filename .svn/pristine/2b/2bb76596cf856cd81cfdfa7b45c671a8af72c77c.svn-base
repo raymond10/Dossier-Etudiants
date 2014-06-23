@@ -1,0 +1,12 @@
+package etudiants.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+public class EOParametre extends _EOParametre {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8575657173688519582L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EOParametre.class);
+}

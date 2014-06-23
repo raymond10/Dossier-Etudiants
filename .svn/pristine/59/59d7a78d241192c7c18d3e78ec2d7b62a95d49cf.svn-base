@@ -1,0 +1,146 @@
+package etudiants.utt.fr.components;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResponse;
+
+import etudiants.utt.fr.components.controlers.AnnoncesCtrl;
+import etudiants.utt.fr.server.MyAjaxComponent;
+import etudiants.utt.fr.server.ProfilHelpers;
+import gestionuv.utt.fr.eo.EOParamDoetu;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSLog;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public class Annonces extends MyAjaxComponent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6507795251582270594L;
+	private String onLoad = null;
+	EOEditingContext ed = edc();
+	private NSArray<EOParamDoetu> listAnnoncePcb;
+	private EOParamDoetu annoncePcb;
+	public boolean check1 = false, check2 = false, check3, check4;
+	private AnnoncesCtrl annoCtrl;
+
+	public Annonces(WOContext context) {
+		super(context);
+		NSLog.out.appendln("Annonces");
+		annoCtrl = new AnnoncesCtrl(this);
+		funcAnoncePcb();
+	}
+	
+	/**
+	 * @return the onLoad
+	 */
+	public String getOnLoad() {
+		return onLoad;
+	}
+
+	/**
+	 * @param onLoad the onLoad to set
+	 */
+	public void setOnLoad(String onLoad) {
+		this.onLoad = onLoad;
+	}
+
+	public void appendToResponse(WOResponse res, WOContext ctx) {
+		super.appendToResponse(res, ctx);
+		if (onLoad != null)
+			onLoad = null;
+		ProfilHelpers.insertStylesSheet(ctx, res);
+		 String message = mySession().getAlertMessage();
+			if (message != null && message.equals("") == false) {
+				String str = "<script language=\"javascript\" type=\"text/javascript\">\n";
+				str += "alert(\"" + message + "\");\n";
+				str += "</script>";
+				res.appendContentString(str);
+				mySession().setAlertMessage(null);
+			}
+	}
+
+	/**
+	 * @return the listAnnoncePcb
+	 */
+	public NSArray<EOParamDoetu> getListAnnoncePcb() {
+		return listAnnoncePcb;
+	}
+
+	/**
+	 * @param listAnnoncePcb
+	 *            the listAnnoncePcb to set
+	 */
+	public void setListAnnoncePcb(NSArray<EOParamDoetu> listAnnoncePcb) {
+		this.listAnnoncePcb = listAnnoncePcb;
+	}
+
+	/**
+	 * @return the annoncePcb
+	 */
+	public EOParamDoetu getAnnoncePcb() {
+		return annoncePcb;
+	}
+
+	/**
+	 * @param annoncePcb
+	 *            the annoncePcb to set
+	 */
+	public void setAnnoncePcb(EOParamDoetu annoncePcb) {
+		this.annoncePcb = annoncePcb;
+	}
+
+	public void funcAnoncePcb() {
+		listAnnoncePcb = EOParamDoetu.fetchAllEOParamDoetus(ed);
+		annoncePcb = new EOParamDoetu();
+		if (listAnnoncePcb != null && listAnnoncePcb.count() != 0) {
+			annoncePcb = listAnnoncePcb.lastObject();
+		}
+		if (annoncePcb.annonce() != null && !annoncePcb.annonce().contains("null")) {
+			annoCtrl.setMessage(annoncePcb.annonce());
+			NSLog.out.appendln(annoncePcb.annonce());
+		}
+		testChecked();
+	}
+
+	protected void testChecked() {
+		if (annoncePcb.visiblef().equals("O")) {
+			check1 = true;
+			check2 = false;
+			annoCtrl.selectVisible1 = "O";
+		}
+		if (annoncePcb.visiblef().equals("N")) {
+			check2 = true;
+			check1 = false;
+			annoCtrl.selectVisible2= "N";
+		}
+		if (annoncePcb.pcbf().equals("O")) {
+			check3 = true;
+			check4 = false;
+			annoCtrl.selectPCB1 = "O";
+		}
+		if (annoncePcb.pcbf().equals("N")) {
+			check4 = true;
+			check3 = false;
+			annoCtrl.selectPCB2= "N";
+		}
+	}
+
+	/**
+	 * @return the annoCtrl
+	 */
+	public AnnoncesCtrl getAnnoCtrl() {
+		return annoCtrl;
+	}
+
+	/**
+	 * @param annoCtrl the annoCtrl to set
+	 */
+	public void setAnnoCtrl(AnnoncesCtrl annoCtrl) {
+		this.annoCtrl = annoCtrl;
+	}
+}

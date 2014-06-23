@@ -1,0 +1,439 @@
+wrapper : Wrapper {
+	bodyId = "search";
+	onload = onload;
+	pageTitle = "Rechercher";
+}
+
+//Utilisateur autorisé
+errors : WOConditional {
+	condition = controleur.isAutorizUser;
+	negate = true;
+}
+
+//Session utilisateur
+user : WOConditional {
+	condition = controleur.isUser;
+	negate = false;
+}
+
+browser : WOConditional {
+	condition = browser;
+}
+
+nav : WOHyperlink {
+    id = "Navigation";
+	pageName = "Navigation";
+}
+
+//debut formulaire recherche
+recherche : WOForm {
+	name = "searchForm";
+	multipleSubmit = true;
+	onKeyPress="if (event.keyCode == 13) {performeSearch();return false;}";
+}
+
+rechercher : UttAjaxSubmitButton {
+	id="Rechercher";
+	class="rechercher";
+	formName = "searchForm";
+	value="Rechercher";
+	action = controleur.doMySearch;
+	onSuccess = "function (oS){msgErrorUpdate();listResultsUpdate();}";
+	text = "Rechercher";
+	type = "find";
+}
+
+AsbRechercherFunc : AjaxSubmitButton {
+	updateContainerID = "listResults";
+	formName = "searchForm";
+	action = controleur.doMySearch;
+	functionName = "performeSearch";
+}
+
+listResult : AjaxUpdateContainer {
+	id="listResults";
+}
+
+ErrorMsg : AjaxUpdateContainer {
+	id="msgError";
+} 
+
+diplomeAUC : AjaxUpdateContainer {
+	id = "diplID";
+}
+
+niveauAUC : AjaxUpdateContainer {
+	id = "niveauID";
+}
+
+periode : WOPopUpButton {
+	id = "periodeID";
+	list = periodes;
+	item = currentPeriode;
+	displayString = currentPeriode.libelle;
+	//noSelectionString = "Toutes";
+	selection = selectedPeriode;
+	//size="25";
+	style = "width:auto;";
+	class = "periode";
+	//onchange = "javascript:this.form.elements['change'].click()";
+}
+
+prdDiplAOF : AjaxObserveField {
+	observeFieldID = "periodeID";
+	updateContainerID = "diplID";
+	action = changeDiplome;
+	fullSubmit = false;
+} 
+
+prdNivoAOF : AjaxObserveField {
+	observeFieldID = "periodeID";
+	updateContainerID = "niveauID";
+	action = changeNiveau;
+	fullSubmit = false;
+}
+
+prduvAOF : AjaxObserveField {
+	observeFieldID = "periodeID";
+	updateContainerID = "uvID";
+	action = changeUv;
+	fullSubmit = false;
+}
+
+diplNivoAOF : AjaxObserveField {
+	observeFieldID = "diplomeID";
+	updateContainerID = "niveauID";
+	action = changeNiveau;
+	fullSubmit = false;
+}
+
+con1 : WOConditional {
+	condition = false;
+	negate = diplomeVisible;
+} 
+
+diplome1 : WOPopUpButton {
+	id = "diplomeID";
+	list = diplomes;
+	item = currentDiplome;
+	noSelectionString = "Tous";
+	displayString = currentDiplome.libelle;
+	selection = selectedDiplome;
+	//size = "1";
+	style = "width:auto;";
+	class = "diplome";
+	//onchange = "javascript:this.form.elements['change'].click()";
+}
+
+con2 : WOConditional {
+	condition = true;
+	negate = diplomeVisible;
+}
+
+diplome2 : WOPopUpButton {
+	id = "diplomeID";
+	list = prdDiplome;
+	item = currentPrdDiplome;
+	noSelectionString = "Tous";
+	displayString = currentPrdDiplome.libelle;
+	selection = selectedPrdDiplome;
+	//size = "1";
+	style = "width:auto;";
+	class = "diplome";
+	//onchange = "javascript:this.form.elements['change'].click()";
+}
+
+cond1 : WOConditional {
+	condition = false;
+	negate = nivoVisible;
+}
+niveau_1 : WOPopUpButton {
+	id = "niveauID1";
+	list = niveaux;
+	item = currentNiveaux;
+	displayString =currentNiveaux.libelle;
+	noSelectionString = "Tous";
+	selection = selectedNiveaux;
+	//size = "1";
+	style = "width:auto;";
+	class = "niveau";
+}
+cond2 : WOConditional {
+	condition = true;
+	negate = nivoVisible;
+}
+niveau_2 : WOPopUpButton {
+	id = "niveauID2";
+	list = niveauxMast;
+	item = currentNiveauMst;
+	displayString =currentNiveauMst.libelle;
+	noSelectionString = "Tous";
+	selection = selectedNiveauMst;
+	//size = "1";
+	style = "width:auto;";
+	class = "niveau";
+}
+
+uvAUC : AjaxUpdateContainer {
+	id = "uvID";
+}
+
+uv : WOPopUpButton {
+	id = "uvOuvID";
+	list = uvOuvertes;
+	item = currentUvouverte;
+	displayString = currentUvouverte.uvc;
+	noSelectionString = "Toutes";
+	selection = selectedUvOuverte; 
+	//size = "1";
+	style = "width:auto;";
+}
+
+nom : WOTextField {
+    id = "nomId";
+	name = "nom";
+	value = nom;
+	class="text";
+	size="20";
+}
+
+prenom : WOTextField {  
+    id = "prenomId";
+	name = "prenom";
+	value = prenom;
+	class="text";
+	size="20";
+}
+
+num : WOTextField {
+    id = "numeroId";
+	name = "numero";
+	value = numero;
+	size = "5";
+	class = "text";
+	style = "text-align:right";
+}
+
+isError : WOConditional {
+	condition = controleur.message;
+}
+
+MessageErreur : WOString {
+	value = controleur.message;
+}
+
+conseil : WOConditional {
+	condition = controleur.isConseille;
+}
+
+Observe1 : AjaxObserveField {
+	elementName = "span";
+	action = controleur.clickBox;
+	fullSubmit = false;
+}
+
+conseille : WOCheckBox {
+	name = "conseilles";
+	value = controleur.conseilleIs;
+	selection = controleur.conseilleSelect;
+	
+}
+
+//Affichage resultat
+noResult : WOConditional {
+	condition = noResult;
+}
+
+tooMuch : WOConditional {
+	condition = searchMsg;
+}
+
+tooData : WOString {
+	value = searchMsg;
+}
+
+empty : WOConditional {
+	condition = searchMsg;
+	negate = true;
+}
+
+foundResults : WOConditional {
+	condition = foundResults;
+}
+
+barDeNavigation : NavigateurBatchBar {
+	displayGroup = voirEtudiantsDg;
+	objectName = "étudiant";
+}
+
+dataEtudiants : WORepetition {
+	list = voirEtudiantsDg.displayedObjects;
+	item = etudiants;
+	//item = etudiantList;
+}
+
+EtuPhoto : WOImage {
+	height = "75";
+	width = "60";
+	border = "0";
+	alt = "photo de l'étudiant";
+	id = "photo";
+	src = droitImage;
+	//~""+"http://local-sig.utt.fr/Pub/trombi/individu/mini/"+etudiants.primaryKey+".jpg";
+}
+
+civilite : WOString {
+	value = etudiants.refCivilite.civFrAbr;
+	//value = etudiantList.INDIV_CIV;
+	escapeHTML = false;
+}
+
+nomEtu : WOString {
+	value = etudiants.nom;
+	//value = etudiantList.INDIV_NOM;
+	escapeHTML = false;
+}
+
+prenomEtu : WOString {
+	value = etudiants.prenom;
+	//value = etudiantList.INDIV_PRENOM;
+	escapeHTML = false;
+}
+
+etuDatenais : WOString {
+	value = etudiants.naisDate;
+ 	dateformat = "%d/%m/%Y";
+ 	escapeHTML = false;
+}
+
+emailLink : WOHyperlink {
+	href =~""+"mailto:"+mailEtudiants+"";
+	escapeHTML = false;
+}
+
+Email : WOString {
+	value = mailEtudiants;
+	escapeHTML = false;
+}
+
+etuId : WOString {
+	//value = etudiantList.INDIV_ID;
+	value = etudiants.primaryKey;
+	escapeHTML = false;
+}
+
+lParcours : WORepetition {
+	//list = etudiants.eoVueAfficherparcourses;
+	list = parcoursList;
+	item = parcours;
+}
+
+hasParcours : WOConditional {
+	condition = hasParcours;
+}
+libelle : WOString {
+	value = parcours.libelleDiplome;
+}
+
+debut : WOString {
+	value = parcours.debut;
+}
+
+fin : WOString {
+	value = parcours.fin;
+}
+
+dipl_spec : WOString {
+	value = parcours.diplomeSpec;
+}
+
+lblNum : WOString {
+ 	value = "- diplomé - N°";
+}
+
+num_diplome : WOString {
+	id = "numDiplID";
+	value = parcours.numDiplome;
+}
+
+hasDiplome : WOConditional {
+	condition = diplomeInParcours;
+}
+
+situation : WOString {
+	value = parcours.situation;
+}
+
+hasSituation : WOConditional {
+	condition = situationInParcours;
+}
+
+hasMineur : WOConditional {
+	condition = hasmineur;
+}
+
+mineurs : WOString {
+	value = mineurs;
+}
+
+profil : WOHyperlink {
+	action = controleur.selectProfil;
+	onclick = "Element.show('busy10');";
+}
+
+resultatUv : WOHyperlink {
+	action = controleur.selectResUv;
+	onclick = "Element.show('busy10');";
+}
+
+dossierAdm : WOHyperlink {
+	action = controleur.selectDossier;
+	onclick = "Element.show('busy10');";
+}
+
+edt : WOHyperlink {
+	action = controleur.selectEmploiDuTemps;
+	onclick = "Element.show('busy10');";
+}
+
+imprimProfil : WOHyperlink {
+	action = controleur.ImprimerProfil;
+	//onclick = "Element.show('busy10');";
+	target = "_blank";
+}
+
+accessGctc : WOConditional {
+	condition = controleur.accessLinkGctc;
+}
+
+versGestionContact : WOHyperlink {
+	href = controleur.LinkGcTc;
+	id = "GCTCfiche";
+	target = "_blank";
+}
+
+Busy10: AjaxBusyIndicator {
+	divID = "busy10";
+}
+
+Indicateur1 : WOImage {
+	border = 0;
+	filename = "newImages/indicator_arrows.gif";
+	style = "display:none;";
+	id = "busy10";
+}
+
+ExceptionModalDialog: UttAjaxModalDialog {
+	id = "ExceptionModalDialog";
+	pageName = "Erreur";
+	title = "Une erreur inattendue est survenue";
+	minWidth = 700;
+	resizable = false;
+	minimizable = false;
+	closable = false;
+	maximizable = false;
+	draggable = true;
+	centerVertically = true;
+	open = isOpenFenetreException;
+	showOpener = false;
+}

@@ -1,0 +1,80 @@
+{
+    ListUvPeriode = {
+        class = EOFetchSpecification; 
+        entityName = EOUvOuv; 
+        isDeep = YES; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOAndQualifier; 
+            qualifiers = (
+                {
+                    class = EOKeyValueQualifier; 
+                    key = anUniv; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = anUniv; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = prdUniv; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = prdUniv; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = "uv.fictivef"; 
+                    selectorName = "isEqualTo:"; 
+                    value = N; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = ensf; 
+                    selectorName = "isEqualTo:"; 
+                    value = O; 
+                }, 
+                {
+                    class = EOKeyComparisonQualifier; 
+                    leftKey = uvc; 
+                    rightKey = "uv.uvc"; 
+                    selectorName = "isEqualTo:"; 
+                }
+            ); 
+        }; 
+        sortOrderings = ({class = EOSortOrdering; key = uvc; selectorName = compareAscending; }); 
+        usesDistinct = YES; 
+    }; 
+    lesUvs = {
+        class = EOFetchSpecification; 
+        entityName = EOUvOuv; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOAndQualifier; 
+            qualifiers = (
+                {
+                    class = EOKeyValueQualifier; 
+                    key = "uv.fictivef"; 
+                    selectorName = "isEqualTo:"; 
+                    value = N; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = "uv.modalitef"; 
+                    selectorName = "isEqualTo:"; 
+                    value = O; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = ensf; 
+                    selectorName = "isEqualTo:"; 
+                    value = O; 
+                }, 
+                {
+                    class = EOKeyComparisonQualifier; 
+                    leftKey = uvc; 
+                    rightKey = "uv.uvc"; 
+                    selectorName = "isEqualTo:"; 
+                }
+            ); 
+        }; 
+        sortOrderings = ({class = EOSortOrdering; key = uvc; selectorName = compareAscending; }); 
+    }; 
+}

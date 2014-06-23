@@ -1,0 +1,172 @@
+{
+    leConseiller = {
+        class = EOFetchSpecification; 
+        entityName = EOIndividu; 
+        isDeep = YES; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOAndQualifier; 
+            qualifiers = (
+                {
+                    class = EOKeyComparisonQualifier; 
+                    leftKey = "eoEtudiantInscrAdms.conseillerId"; 
+                    rightKey = indivId; 
+                    selectorName = "isEqualTo:"; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = "eoEtudiantInscrAdms.etuId"; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = etuid; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = "eoEtudiantInscrAdms.anUniv"; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = anUniv; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = "eoEtudiantInscrAdms.prdUniv"; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = prdUniv; class = EOQualifierVariable; }; 
+                }
+            ); 
+        }; 
+    }; 
+    lesConseillers = {
+        class = EOFetchSpecification; 
+        entityName = EOIndividu; 
+        isDeep = YES; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOKeyComparisonQualifier; 
+            leftKey = "etuInscrAdms.conseillerId"; 
+            rightKey = indivId; 
+            selectorName = "isEqualTo:"; 
+        }; 
+        usesDistinct = YES; 
+    }; 
+    lesResponsables = {
+        class = EOFetchSpecification; 
+        entityName = EOIndividu; 
+        isDeep = YES; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOAndQualifier; 
+            qualifiers = (
+                {
+                    class = EOKeyValueQualifier; 
+                    key = "uvOuvResps.eoUvOuvs.anUniv"; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = anUniv; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = "uvOuvResps.eoUvOuvs.prdUniv"; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = prdUniv; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOKeyComparisonQualifier; 
+                    leftKey = "uvOuvResps.eoUvOuvs.uvOuvId"; 
+                    rightKey = "uvOuvResps.uvOuvId"; 
+                    selectorName = "isEqualTo:"; 
+                }, 
+                {
+                    class = EOKeyComparisonQualifier; 
+                    leftKey = "uvOuvResps.indivId"; 
+                    rightKey = indivId; 
+                    selectorName = "isEqualTo:"; 
+                }, 
+                {
+                    class = EOKeyComparisonQualifier; 
+                    leftKey = "uvOuvResps.eoUvOuvs.uv.uvc"; 
+                    rightKey = "uvOuvResps.eoUvOuvs.uvc"; 
+                    selectorName = "isEqualTo:"; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = "uvOuvResps.eoUvOuvs.uv.fictivef"; 
+                    selectorName = "isEqualTo:"; 
+                    value = N; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = "uvOuvResps.eoUvOuvs.uv.modalitef"; 
+                    selectorName = "isEqualTo:"; 
+                    value = O; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = "uvOuvResps.eoUvOuvs.ensf"; 
+                    selectorName = "isEqualTo:"; 
+                    value = O; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = indivId; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = indivId; class = EOQualifierVariable; }; 
+                }
+            ); 
+        }; 
+        sortOrderings = (
+            {class = EOSortOrdering; key = nom; selectorName = compareAscending; }, 
+            {class = EOSortOrdering; key = prenom; selectorName = compareAscending; }
+        ); 
+        usesDistinct = YES; 
+    }; 
+    studentsOnly = {
+        class = EOFetchSpecification; 
+        entityName = EOIndividu; 
+        isDeep = YES; 
+        prefetchingRelationshipKeyPaths = (eoVueAfficherparcourses, "etuInscrAdms.eoEtuMineurs"); 
+        qualifier = {
+            class = EOAndQualifier; 
+            qualifiers = (
+                {
+                    class = EOKeyValueQualifier; 
+                    key = indivId; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = indivId; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOKeyComparisonQualifier; 
+                    leftKey = indivId; 
+                    rightKey = "etuInscrAdms.etuId"; 
+                    selectorName = "isEqualTo:"; 
+                }, 
+                {
+                    class = EOKeyComparisonQualifier; 
+                    leftKey = "indEmails.indivId"; 
+                    rightKey = indivId; 
+                    selectorName = "isEqualTo:"; 
+                }, 
+                {
+                    class = EOKeyComparisonQualifier; 
+                    leftKey = civilitec; 
+                    rightKey = "refCivilite.civilitec"; 
+                    selectorName = "isEqualTo:"; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = "indEmails.emailTypec"; 
+                    selectorName = "isEqualTo:"; 
+                    value = UTT; 
+                }, 
+                {
+                    class = EOKeyComparisonQualifier; 
+                    leftKey = "etuInscrAdms.etuId"; 
+                    rightKey = "indEmails.indivId"; 
+                    selectorName = "isEqualTo:"; 
+                }
+            ); 
+        }; 
+        sortOrderings = (
+            {class = EOSortOrdering; key = nom; selectorName = compareAscending; }, 
+            {class = EOSortOrdering; key = prenom; selectorName = compareAscending; }
+        ); 
+        usesDistinct = YES; 
+    }; 
+}

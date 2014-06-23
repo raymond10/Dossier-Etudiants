@@ -1,0 +1,1093 @@
+package etudiants.utt.fr.components;
+
+import org.cocktail.fwkcktlreportingguiajax.serveur.CktlAbstractReporterAjaxProgress;
+
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WORequest;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.foundation.NSData;
+import com.webobjects.foundation.NSLog;
+import com.webobjects.foundation.NSMutableDictionary;
+
+import etudiants.utt.fr.components.controlers.ExtractionCtrl;
+import etudiants.utt.fr.server.MyAjaxComponent;
+import etudiants.utt.fr.server.ProfilHelpers;
+import etudiants.utt.fr.server.reports.ReportFactory;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+@SuppressWarnings("all")
+public class Extractions extends MyAjaxComponent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6119142164754815371L;
+	private ExtractionCtrl controleur;
+	private static final String LOADING_HIDE = "Element.hide('busy')";
+	private String onLoad = null;
+	// Liste des étudiants par période, diplôme ou branche ou niveau ou uv
+		private NSMutableDictionary periodeItem;
+		private NSMutableDictionary periodeSelect;
+		private NSMutableDictionary diplomeItem;
+		private NSMutableDictionary diplomeSelect;
+		private NSMutableDictionary niveauItem;
+		private NSMutableDictionary niveauSelect;
+		private NSMutableDictionary uvItem;
+		private NSMutableDictionary uvSelect;
+		// Liste des étudiants inscrits à une UV par période
+		private NSMutableDictionary periodeUvpItem;
+		private NSMutableDictionary periodeUvpSelect;
+		private NSMutableDictionary uvUvpItem;
+		private NSMutableDictionary uvUvpSelect;
+		// Liste des étudiants inscrits pendant une période
+		private NSMutableDictionary anneeInsp1Item;
+		private NSMutableDictionary anneeInsp1Select;
+		private NSMutableDictionary anneeInsp2Item;
+		private NSMutableDictionary anneeInsp2Select;
+		// Liste des résultats des étudiants pour une période
+		private NSMutableDictionary periodeEtup1Item;
+		private NSMutableDictionary periodeEtup1Select;
+		private NSMutableDictionary periodeEtup2Item;
+		private NSMutableDictionary periodeEtup2Select;
+		private NSMutableDictionary diplomeEtupItem;
+		private NSMutableDictionary diplomeEtupSelect;
+		private NSMutableDictionary uvEtupItem;
+		private NSMutableDictionary uvEtupSelect;
+		// Liste des inscriptions aux UV
+		private NSMutableDictionary periodeInsUvItem;
+		private NSMutableDictionary periodeInsUvSelect;
+		private NSMutableDictionary diplomeInsUvItem;
+		private NSMutableDictionary diplomeInsUvSelect;
+		private NSMutableDictionary niveauInsUvItem;
+		private NSMutableDictionary niveauInsUvSelect;
+		// Liste des décisions de jury pour des périodes
+		private NSMutableDictionary periodeJury1Item;
+		private NSMutableDictionary periodeJury1Select;
+		private NSMutableDictionary periodeJury2Item;
+		private NSMutableDictionary periodeJury2Select;
+		// Liste des décisions de jury avec codes des appréciations
+		private NSMutableDictionary periodeJuryApItem;
+		private NSMutableDictionary periodeJuryApSelect;
+		private NSMutableDictionary diplomeJuryApItem;
+		private NSMutableDictionary diplomeJuryApSelect;
+		// Liste des UV par semestre avec le nom du responsable de l'UV, la cat&eacute;gorie de l'UV, les effectifs par UV avec 
+		//la r&eacute;partition ing&eacute;nieur et master et le total
+		private NSMutableDictionary periodeRespUvItem;
+		private NSMutableDictionary periodeRespUvSelect;
+		private NSMutableDictionary diplomeRespUvItem;
+		private NSMutableDictionary diplomeRespUvSelect;
+		private NSMutableDictionary uvRespUvItem;
+		private NSMutableDictionary uvRespUvSelect;
+		
+		private String simpleFilename;
+
+	public Extractions(WOContext context) {
+		super(context);
+		NSLog.out.appendln("Extractions");
+		periodeItem = new NSMutableDictionary();
+		periodeSelect = new NSMutableDictionary();
+		diplomeItem = new NSMutableDictionary();
+		diplomeSelect = new NSMutableDictionary();
+		niveauItem = new NSMutableDictionary();
+		niveauSelect = new NSMutableDictionary();
+		uvItem = new NSMutableDictionary();
+		uvSelect = new NSMutableDictionary();
+		periodeUvpItem = new NSMutableDictionary();
+		periodeUvpSelect = new NSMutableDictionary();
+		uvUvpItem = new NSMutableDictionary();
+		uvUvpSelect = new NSMutableDictionary();
+		anneeInsp1Item = new NSMutableDictionary();
+		anneeInsp1Select = new NSMutableDictionary();
+		anneeInsp2Item = new NSMutableDictionary();
+		anneeInsp2Select = new NSMutableDictionary();
+		periodeEtup1Item = new NSMutableDictionary();
+		periodeEtup1Select = new NSMutableDictionary();
+		periodeEtup2Item = new NSMutableDictionary();
+		periodeEtup2Select = new NSMutableDictionary();
+		diplomeEtupItem = new NSMutableDictionary();
+		diplomeEtupSelect = new NSMutableDictionary();
+		uvEtupItem = new NSMutableDictionary();
+		uvEtupSelect = new NSMutableDictionary();
+		periodeInsUvItem = new NSMutableDictionary();
+		periodeInsUvSelect = new NSMutableDictionary();
+		diplomeInsUvItem = new NSMutableDictionary();
+		diplomeInsUvSelect = new NSMutableDictionary();
+		niveauInsUvItem = new NSMutableDictionary();
+		niveauInsUvSelect = new NSMutableDictionary();
+		periodeJury1Item = new NSMutableDictionary();
+		periodeJury1Select = new NSMutableDictionary();
+		periodeJury2Item = new NSMutableDictionary();
+		periodeJury2Select = new NSMutableDictionary();
+		periodeJuryApItem = new NSMutableDictionary();
+		periodeJuryApSelect = new NSMutableDictionary();
+		diplomeJuryApItem = new NSMutableDictionary();
+		diplomeJuryApSelect = new NSMutableDictionary();
+		controleur = new ExtractionCtrl(this);
+	}
+	
+	/**
+	 * @return the onLoad
+	 */
+	public String getOnLoad() {
+		return onLoad;
+	}
+
+	/**
+	 * @param onLoad the onLoad to set
+	 */
+	public void setOnLoad(String onLoad) {
+		this.onLoad = onLoad;
+	}
+
+	public void appendToResponse(WOResponse res, WOContext ctx) {
+		super.appendToResponse(res, ctx);
+		if (onLoad != null)
+			onLoad = null;
+		ProfilHelpers.insertStylesSheet(ctx, res);
+		 String message = mySession().getAlertMessage();
+			if (message != null && message.equals("") == false) {
+				String str = "<script language=\"javascript\" type=\"text/javascript\">\n";
+				str += "alert(\"" + message + "\");\n";
+				str += "</script>";
+				res.appendContentString(str);
+				mySession().setAlertMessage(null);
+			}
+	}
+	
+	public String hideLoading(){
+		String str = "<script language=\"javascript\" type=\"text/javascript\">\n";
+		str += LOADING_HIDE+";\n";
+		str += "</script>";
+		return str;
+	}
+
+	/**
+	 * @return the controleur
+	 */
+	public ExtractionCtrl getControleur() {
+		return controleur;
+	}
+
+	/**
+	 * @param controleur the controleur to set
+	 */
+	public void setControleur(ExtractionCtrl controleur) {
+		this.controleur = controleur;
+	}
+
+	/**
+	 * @return the periodeItem
+	 */
+	public NSMutableDictionary getPeriodeItem() {
+		return periodeItem;
+	}
+
+	/**
+	 * @param periodeItem the periodeItem to set
+	 */
+	public void setPeriodeItem(NSMutableDictionary periodeItem) {
+		this.periodeItem = periodeItem;
+	}
+
+	/**
+	 * @return the periodeSelect
+	 */
+	public NSMutableDictionary getPeriodeSelect() {
+		return periodeSelect;
+	}
+
+	/**
+	 * @param periodeSelect the periodeSelect to set
+	 */
+	public void setPeriodeSelect(NSMutableDictionary periodeSelect) {
+		this.periodeSelect = periodeSelect;
+	}
+
+	/**
+	 * @return the diplomeItem
+	 */
+	public NSMutableDictionary getDiplomeItem() {
+		return diplomeItem;
+	}
+
+	/**
+	 * @param diplomeItem the diplomeItem to set
+	 */
+	public void setDiplomeItem(NSMutableDictionary diplomeItem) {
+		this.diplomeItem = diplomeItem;
+	}
+
+	/**
+	 * @return the diplomeSelect
+	 */
+	public NSMutableDictionary getDiplomeSelect() {
+		return diplomeSelect;
+	}
+
+	/**
+	 * @param diplomeSelect the diplomeSelect to set
+	 */
+	public void setDiplomeSelect(NSMutableDictionary diplomeSelect) {
+		this.diplomeSelect = diplomeSelect;
+	}
+
+	/**
+	 * @return the niveauItem
+	 */
+	public NSMutableDictionary getNiveauItem() {
+		return niveauItem;
+	}
+
+	/**
+	 * @param niveauItem the niveauItem to set
+	 */
+	public void setNiveauItem(NSMutableDictionary niveauItem) {
+		this.niveauItem = niveauItem;
+	}
+
+	/**
+	 * @return the niveauSelect
+	 */
+	public NSMutableDictionary getNiveauSelect() {
+		return niveauSelect;
+	}
+
+	/**
+	 * @param niveauSelect the niveauSelect to set
+	 */
+	public void setNiveauSelect(NSMutableDictionary niveauSelect) {
+		this.niveauSelect = niveauSelect;
+	}
+
+	/**
+	 * @return the uvItem
+	 */
+	public NSMutableDictionary getUvItem() {
+		return uvItem;
+	}
+
+	/**
+	 * @param uvItem the uvItem to set
+	 */
+	public void setUvItem(NSMutableDictionary uvItem) {
+		this.uvItem = uvItem;
+	}
+
+	/**
+	 * @return the uvSelect
+	 */
+	public NSMutableDictionary getUvSelect() {
+		return uvSelect;
+	}
+
+	/**
+	 * @param uvSelect the uvSelect to set
+	 */
+	public void setUvSelect(NSMutableDictionary uvSelect) {
+		this.uvSelect = uvSelect;
+	}
+
+	/**
+	 * @return the periodeUvpItem
+	 */
+	public NSMutableDictionary getPeriodeUvpItem() {
+		return periodeUvpItem;
+	}
+
+	/**
+	 * @param periodeUvpItem the periodeUvpItem to set
+	 */
+	public void setPeriodeUvpItem(NSMutableDictionary periodeUvpItem) {
+		this.periodeUvpItem = periodeUvpItem;
+	}
+
+	/**
+	 * @return the periodeUvpSelect
+	 */
+	public NSMutableDictionary getPeriodeUvpSelect() {
+		return periodeUvpSelect;
+	}
+
+	/**
+	 * @param periodeUvpSelect the periodeUvpSelect to set
+	 */
+	public void setPeriodeUvpSelect(NSMutableDictionary periodeUvpSelect) {
+		this.periodeUvpSelect = periodeUvpSelect;
+	}
+
+	/**
+	 * @return the uvUvpItem
+	 */
+	public NSMutableDictionary getUvUvpItem() {
+		return uvUvpItem;
+	}
+
+	/**
+	 * @param uvUvpItem the uvUvpItem to set
+	 */
+	public void setUvUvpItem(NSMutableDictionary uvUvpItem) {
+		this.uvUvpItem = uvUvpItem;
+	}
+
+	/**
+	 * @return the uvUvpSelect
+	 */
+	public NSMutableDictionary getUvUvpSelect() {
+		return uvUvpSelect;
+	}
+
+	/**
+	 * @param uvUvpSelect the uvUvpSelect to set
+	 */
+	public void setUvUvpSelect(NSMutableDictionary uvUvpSelect) {
+		this.uvUvpSelect = uvUvpSelect;
+	}
+
+	/**
+	 * @return the anneeInsp1Item
+	 */
+	public NSMutableDictionary getAnneeInsp1Item() {
+		return anneeInsp1Item;
+	}
+
+	/**
+	 * @param anneeInsp1Item the anneeInsp1Item to set
+	 */
+	public void setAnneeInsp1Item(NSMutableDictionary anneeInsp1Item) {
+		this.anneeInsp1Item = anneeInsp1Item;
+	}
+
+	/**
+	 * @return the anneeInsp1Select
+	 */
+	public NSMutableDictionary getAnneeInsp1Select() {
+		return anneeInsp1Select;
+	}
+
+	/**
+	 * @param anneeInsp1Select the anneeInsp1Select to set
+	 */
+	public void setAnneeInsp1Select(NSMutableDictionary anneeInsp1Select) {
+		this.anneeInsp1Select = anneeInsp1Select;
+	}
+
+	/**
+	 * @return the anneeInsp2Item
+	 */
+	public NSMutableDictionary getAnneeInsp2Item() {
+		return anneeInsp2Item;
+	}
+
+	/**
+	 * @param anneeInsp2Item the anneeInsp2Item to set
+	 */
+	public void setAnneeInsp2Item(NSMutableDictionary anneeInsp2Item) {
+		this.anneeInsp2Item = anneeInsp2Item;
+	}
+
+	/**
+	 * @return the anneeInsp2Select
+	 */
+	public NSMutableDictionary getAnneeInsp2Select() {
+		return anneeInsp2Select;
+	}
+
+	/**
+	 * @param anneeInsp2Select the anneeInsp2Select to set
+	 */
+	public void setAnneeInsp2Select(NSMutableDictionary anneeInsp2Select) {
+		this.anneeInsp2Select = anneeInsp2Select;
+	}
+
+	/**
+	 * @return the periodeEtup1Item
+	 */
+	public NSMutableDictionary getPeriodeEtup1Item() {
+		return periodeEtup1Item;
+	}
+
+	/**
+	 * @param periodeEtup1Item the periodeEtup1Item to set
+	 */
+	public void setPeriodeEtup1Item(NSMutableDictionary periodeEtup1Item) {
+		this.periodeEtup1Item = periodeEtup1Item;
+	}
+
+	/**
+	 * @return the periodeEtup1Select
+	 */
+	public NSMutableDictionary getPeriodeEtup1Select() {
+		return periodeEtup1Select;
+	}
+
+	/**
+	 * @param periodeEtup1Select the periodeEtup1Select to set
+	 */
+	public void setPeriodeEtup1Select(NSMutableDictionary periodeEtup1Select) {
+		this.periodeEtup1Select = periodeEtup1Select;
+	}
+
+	/**
+	 * @return the periodeEtup2Item
+	 */
+	public NSMutableDictionary getPeriodeEtup2Item() {
+		return periodeEtup2Item;
+	}
+
+	/**
+	 * @param periodeEtup2Item the periodeEtup2Item to set
+	 */
+	public void setPeriodeEtup2Item(NSMutableDictionary periodeEtup2Item) {
+		this.periodeEtup2Item = periodeEtup2Item;
+	}
+
+	/**
+	 * @return the periodeEtup2Select
+	 */
+	public NSMutableDictionary getPeriodeEtup2Select() {
+		return periodeEtup2Select;
+	}
+
+	/**
+	 * @param periodeEtup2Select the periodeEtup2Select to set
+	 */
+	public void setPeriodeEtup2Select(NSMutableDictionary periodeEtup2Select) {
+		this.periodeEtup2Select = periodeEtup2Select;
+	}
+
+	/**
+	 * @return the diplomeEtupItem
+	 */
+	public NSMutableDictionary getDiplomeEtupItem() {
+		return diplomeEtupItem;
+	}
+
+	/**
+	 * @param diplomeEtupItem the diplomeEtupItem to set
+	 */
+	public void setDiplomeEtupItem(NSMutableDictionary diplomeEtupItem) {
+		this.diplomeEtupItem = diplomeEtupItem;
+	}
+
+	/**
+	 * @return the diplomeEtupSelect
+	 */
+	public NSMutableDictionary getDiplomeEtupSelect() {
+		return diplomeEtupSelect;
+	}
+
+	/**
+	 * @param diplomeEtupSelect the diplomeEtupSelect to set
+	 */
+	public void setDiplomeEtupSelect(NSMutableDictionary diplomeEtupSelect) {
+		this.diplomeEtupSelect = diplomeEtupSelect;
+	}
+
+	/**
+	 * @return the uvEtupItem
+	 */
+	public NSMutableDictionary getUvEtupItem() {
+		return uvEtupItem;
+	}
+
+	/**
+	 * @param uvEtupItem the uvEtupItem to set
+	 */
+	public void setUvEtupItem(NSMutableDictionary uvEtupItem) {
+		this.uvEtupItem = uvEtupItem;
+	}
+
+	/**
+	 * @return the uvEtupSelect
+	 */
+	public NSMutableDictionary getUvEtupSelect() {
+		return uvEtupSelect;
+	}
+
+	/**
+	 * @param uvEtupSelect the uvEtupSelect to set
+	 */
+	public void setUvEtupSelect(NSMutableDictionary uvEtupSelect) {
+		this.uvEtupSelect = uvEtupSelect;
+	}
+
+	/**
+	 * @return the periodeInsUvItem
+	 */
+	public NSMutableDictionary getPeriodeInsUvItem() {
+		return periodeInsUvItem;
+	}
+
+	/**
+	 * @param periodeInsUvItem the periodeInsUvItem to set
+	 */
+	public void setPeriodeInsUvItem(NSMutableDictionary periodeInsUvItem) {
+		this.periodeInsUvItem = periodeInsUvItem;
+	}
+
+	/**
+	 * @return the periodeInsUvSelect
+	 */
+	public NSMutableDictionary getPeriodeInsUvSelect() {
+		return periodeInsUvSelect;
+	}
+
+	/**
+	 * @param periodeInsUvSelect the periodeInsUvSelect to set
+	 */
+	public void setPeriodeInsUvSelect(NSMutableDictionary periodeInsUvSelect) {
+		this.periodeInsUvSelect = periodeInsUvSelect;
+	}
+
+	/**
+	 * @return the diplomeInsUvItem
+	 */
+	public NSMutableDictionary getDiplomeInsUvItem() {
+		return diplomeInsUvItem;
+	}
+
+	/**
+	 * @param diplomeInsUvItem the diplomeInsUvItem to set
+	 */
+	public void setDiplomeInsUvItem(NSMutableDictionary diplomeInsUvItem) {
+		this.diplomeInsUvItem = diplomeInsUvItem;
+	}
+
+	/**
+	 * @return the diplomeInsUvSelect
+	 */
+	public NSMutableDictionary getDiplomeInsUvSelect() {
+		return diplomeInsUvSelect;
+	}
+
+	/**
+	 * @param diplomeInsUvSelect the diplomeInsUvSelect to set
+	 */
+	public void setDiplomeInsUvSelect(NSMutableDictionary diplomeInsUvSelect) {
+		this.diplomeInsUvSelect = diplomeInsUvSelect;
+	}
+
+	/**
+	 * @return the niveauInsUvItem
+	 */
+	public NSMutableDictionary getNiveauInsUvItem() {
+		return niveauInsUvItem;
+	}
+
+	/**
+	 * @param niveauInsUvItem the niveauInsUvItem to set
+	 */
+	public void setNiveauInsUvItem(NSMutableDictionary niveauInsUvItem) {
+		this.niveauInsUvItem = niveauInsUvItem;
+	}
+
+	/**
+	 * @return the niveauInsUvSelect
+	 */
+	public NSMutableDictionary getNiveauInsUvSelect() {
+		return niveauInsUvSelect;
+	}
+
+	/**
+	 * @param niveauInsUvSelect the niveauInsUvSelect to set
+	 */
+	public void setNiveauInsUvSelect(NSMutableDictionary niveauInsUvSelect) {
+		this.niveauInsUvSelect = niveauInsUvSelect;
+	}
+
+	/**
+	 * @return the periodeJury1Item
+	 */
+	public NSMutableDictionary getPeriodeJury1Item() {
+		return periodeJury1Item;
+	}
+
+	/**
+	 * @param periodeJury1Item the periodeJury1Item to set
+	 */
+	public void setPeriodeJury1Item(NSMutableDictionary periodeJury1Item) {
+		this.periodeJury1Item = periodeJury1Item;
+	}
+
+	/**
+	 * @return the periodeJury1Select
+	 */
+	public NSMutableDictionary getPeriodeJury1Select() {
+		return periodeJury1Select;
+	}
+
+	/**
+	 * @param periodeJury1Select the periodeJury1Select to set
+	 */
+	public void setPeriodeJury1Select(NSMutableDictionary periodeJury1Select) {
+		this.periodeJury1Select = periodeJury1Select;
+	}
+
+	/**
+	 * @return the periodeJury2Item
+	 */
+	public NSMutableDictionary getPeriodeJury2Item() {
+		return periodeJury2Item;
+	}
+
+	/**
+	 * @param periodeJury2Item the periodeJury2Item to set
+	 */
+	public void setPeriodeJury2Item(NSMutableDictionary periodeJury2Item) {
+		this.periodeJury2Item = periodeJury2Item;
+	}
+
+	/**
+	 * @return the periodeJury2Select
+	 */
+	public NSMutableDictionary getPeriodeJury2Select() {
+		return periodeJury2Select;
+	}
+
+	/**
+	 * @param periodeJury2Select the periodeJury2Select to set
+	 */
+	public void setPeriodeJury2Select(NSMutableDictionary periodeJury2Select) {
+		this.periodeJury2Select = periodeJury2Select;
+	}
+
+	/**
+	 * @return the periodeJuryApItem
+	 */
+	public NSMutableDictionary getPeriodeJuryApItem() {
+		return periodeJuryApItem;
+	}
+
+	/**
+	 * @param periodeJuryApItem the periodeJuryApItem to set
+	 */
+	public void setPeriodeJuryApItem(NSMutableDictionary periodeJuryApItem) {
+		this.periodeJuryApItem = periodeJuryApItem;
+	}
+
+	/**
+	 * @return the periodeJuryApSelect
+	 */
+	public NSMutableDictionary getPeriodeJuryApSelect() {
+		return periodeJuryApSelect;
+	}
+
+	/**
+	 * @param periodeJuryApSelect the periodeJuryApSelect to set
+	 */
+	public void setPeriodeJuryApSelect(NSMutableDictionary periodeJuryApSelect) {
+		this.periodeJuryApSelect = periodeJuryApSelect;
+	}
+
+	/**
+	 * @return the diplomeJuryApItem
+	 */
+	public NSMutableDictionary getDiplomeJuryApItem() {
+		return diplomeJuryApItem;
+	}
+
+	/**
+	 * @param diplomeJuryApItem the diplomeJuryApItem to set
+	 */
+	public void setDiplomeJuryApItem(NSMutableDictionary diplomeJuryApItem) {
+		this.diplomeJuryApItem = diplomeJuryApItem;
+	}
+
+	/**
+	 * @return the diplomeJuryApSelect
+	 */
+	public NSMutableDictionary getDiplomeJuryApSelect() {
+		return diplomeJuryApSelect;
+	}
+
+	/**
+	 * @param diplomeJuryApSelect the diplomeJuryApSelect to set
+	 */
+	public void setDiplomeJuryApSelect(NSMutableDictionary diplomeJuryApSelect) {
+		this.diplomeJuryApSelect = diplomeJuryApSelect;
+	}
+
+	/**
+	 * @return the periodeRespUvItem
+	 */
+	public NSMutableDictionary getPeriodeRespUvItem() {
+		return periodeRespUvItem;
+	}
+
+	/**
+	 * @param periodeRespUvItem the periodeRespUvItem to set
+	 */
+	public void setPeriodeRespUvItem(NSMutableDictionary periodeRespUvItem) {
+		this.periodeRespUvItem = periodeRespUvItem;
+	}
+
+	/**
+	 * @return the periodeRespUvSelect
+	 */
+	public NSMutableDictionary getPeriodeRespUvSelect() {
+		return periodeRespUvSelect;
+	}
+
+	/**
+	 * @param periodeRespUvSelect the periodeRespUvSelect to set
+	 */
+	public void setPeriodeRespUvSelect(NSMutableDictionary periodeRespUvSelect) {
+		this.periodeRespUvSelect = periodeRespUvSelect;
+	}
+
+	/**
+	 * @return the diplomeRespUvItem
+	 */
+	public NSMutableDictionary getDiplomeRespUvItem() {
+		return diplomeRespUvItem;
+	}
+
+	/**
+	 * @param diplomeRespUvItem the diplomeRespUvItem to set
+	 */
+	public void setDiplomeRespUvItem(NSMutableDictionary diplomeRespUvItem) {
+		this.diplomeRespUvItem = diplomeRespUvItem;
+	}
+
+	/**
+	 * @return the diplomeRespUvSelect
+	 */
+	public NSMutableDictionary getDiplomeRespUvSelect() {
+		return diplomeRespUvSelect;
+	}
+
+	/**
+	 * @param diplomeRespUvSelect the diplomeRespUvSelect to set
+	 */
+	public void setDiplomeRespUvSelect(NSMutableDictionary diplomeRespUvSelect) {
+		this.diplomeRespUvSelect = diplomeRespUvSelect;
+	}
+
+	/**
+	 * @return the uvRespUvItem
+	 */
+	public NSMutableDictionary getUvRespUvItem() {
+		return uvRespUvItem;
+	}
+
+	/**
+	 * @param uvRespUvItem the uvRespUvItem to set
+	 */
+	public void setUvRespUvItem(NSMutableDictionary uvRespUvItem) {
+		this.uvRespUvItem = uvRespUvItem;
+	}
+
+	/**
+	 * @return the uvRespUvSelect
+	 */
+	public NSMutableDictionary getUvRespUvSelect() {
+		return uvRespUvSelect;
+	}
+
+	/**
+	 * @param uvRespUvSelect the uvRespUvSelect to set
+	 */
+	public void setUvRespUvSelect(NSMutableDictionary uvRespUvSelect) {
+		this.uvRespUvSelect = uvRespUvSelect;
+	}
+
+	/**
+	 * @return the simpleFilename
+	 */
+	public String getSimpleFilename() {
+		return simpleFilename;
+	}
+
+	/**
+	 * @param simpleFilename the simpleFilename to set
+	 */
+	public void setSimpleFilename(String simpleFilename) {
+		this.simpleFilename = simpleFilename;
+	}
+	
+	/** Les methodes des exports XLS **/
+
+	/** Liste des étudiants par période, diplôme ou branche ou niveau ou uv **/
+	public WOActionResults imprimerExportUV() {
+		try {
+			NSMutableDictionary bindings = new NSMutableDictionary();
+			if (diplomeSelect != null && !diplomeSelect.isEmpty())
+				bindings.takeValueForKey(
+						diplomeSelect.valueForKey("DIPL_CODE"), "DIPL_CODE");
+			if (periodeSelect != null && !periodeSelect.isEmpty())
+				bindings.takeValueForKey(
+						periodeSelect.valueForKey("ANPRD_UNIV"), "ANPRD_UNIV");
+			if (niveauSelect != null && !niveauSelect.isEmpty())
+				bindings.takeValueForKey(niveauSelect.valueForKey("VALEUR"),
+						"NIVEAU");
+			if (uvSelect != null && !uvSelect.isEmpty())
+				bindings.takeValueForKey(uvSelect.valueForKey("UV"), "UV");
+			NSData data = ReportFactory.printExport_Uv2(mySession(), bindings);
+			simpleFilename = "Export_uv.csv";
+			if (data == null) {
+				throw new Exception("Impossible d'exporter le fichier "
+						+ simpleFilename +", Vérifier vos critères");
+			}
+			return ReportFactory.afficherXls(data, simpleFilename);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			mySession().setAlertMessage(e.getMessage());
+			mySession().setMessageErreur(e.getMessage());
+			return null;
+		}
+	}
+
+	/** Liste des étudiants inscrits à une UV par période **/
+	public WOActionResults imprimerExport_List_Uv1() {
+		try {
+			NSMutableDictionary bindings = new NSMutableDictionary();
+			if (periodeUvpSelect != null && !periodeUvpSelect.isEmpty())
+				bindings.takeValueForKey(
+						periodeUvpSelect.valueForKey("ANPRD_UNIV"),
+						"ANPRD_UNIV");
+			if (uvUvpSelect != null && !uvUvpSelect.isEmpty())
+				bindings.takeValueForKey(uvUvpSelect.valueForKey("UV"), "UV");
+			NSData data = ReportFactory.printExport_List_Uv1(mySession(), bindings);
+			simpleFilename = "Export_List_Uv.csv";
+			if (data == null) {
+				throw new Exception("Impossible d'exporter le fichier "
+						+ simpleFilename +", Vérifier vos critères");
+			}
+			return ReportFactory.afficherXls(data, simpleFilename);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			mySession().setAlertMessage(e.getMessage());
+			mySession().setMessageErreur(e.getMessage());
+			return null;
+		}
+	}
+
+	/** Liste des étudiants inscrits pendant une période **/
+	public WOActionResults imprimerExport_Effectif() {
+		try {
+			NSMutableDictionary bindings = new NSMutableDictionary();
+			Integer borne1 = 0;
+			Integer borne2 = 0;
+			if (anneeInsp1Select != null && !anneeInsp1Select.isEmpty())
+				borne1 = Integer.valueOf(((String) anneeInsp1Select.valueForKey("AN_VALEUR")));
+			if (anneeInsp2Select != null && !anneeInsp2Select.isEmpty())
+				borne2 = Integer.valueOf(((String)anneeInsp2Select.valueForKey("AN_VALEUR")));
+			Integer diff_an = Math.abs(borne1 - borne2);
+			if(diff_an > 3)
+				throw new Exception ("L'intervale ne doit pas excéder 3 ans ou 6 semestres...");
+			if(borne1 > borne2){
+				Integer intermed = borne1;
+				borne1 = borne2;
+				borne2 = intermed;
+			}
+			bindings.takeValueForKey(borne1.toString(),"AN_VALEUR_1");
+			bindings.takeValueForKey(borne2.toString(),"AN_VALEUR_2");
+			NSData data = null;
+			if(borne1 != null)
+				if(borne2 != null)
+					data = ReportFactory.printExport_Effectif(mySession(), bindings);
+			simpleFilename = "Export_Effectif.csv";
+			if (data == null) {
+				throw new Exception("Impossible d'exporter le fichier "
+						+ simpleFilename +", Vérifier vos critères");
+			}
+			return ReportFactory.afficherXls(data, simpleFilename);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			mySession().setAlertMessage(e.getMessage());
+			mySession().setMessageErreur(e.getMessage());
+			return null;
+		}
+	}
+
+	/** Liste des résultats des étudiants pour une période **/
+	public WOActionResults imprimerExport_Resultat() {
+		try {
+			NSMutableDictionary bindings = new NSMutableDictionary();
+			String borne1 = null;
+			String borne2 = null;
+			if (periodeEtup1Select != null && !periodeEtup1Select.isEmpty())
+				borne1 = (String)periodeEtup1Select.valueForKey("ANPRD_UNIV");
+			if (periodeEtup2Select != null && !periodeEtup2Select.isEmpty())
+				borne2 = (String)periodeEtup2Select.valueForKey("ANPRD_UNIV");
+			Integer diff_an = Math.abs(Integer.valueOf(borne1.substring(0, 4)) - Integer.valueOf(borne2.substring(0, 4)));
+			if(diff_an > 3)
+				throw new Exception ("L'intervale ne doit pas excéder 3 ans ou 6 semestres...");
+			if(Integer.valueOf(borne1.substring(0, 4)) > Integer.valueOf(borne2.substring(0, 4))){
+				String intermed = borne1;
+				borne1 = borne2;
+				borne2 = intermed;
+			}
+			bindings.takeValueForKey(borne1,"ANPRD_UNIV_1");
+			bindings.takeValueForKey(borne2,"ANPRD_UNIV_2");
+			if (diplomeEtupSelect != null && !diplomeEtupSelect.isEmpty())
+				bindings.takeValueForKey(
+						diplomeEtupSelect.valueForKey("DIPL_CODE"), "DIPL_CODE");
+			if (uvEtupSelect != null && !uvEtupSelect.isEmpty())
+				bindings.takeValueForKey(uvEtupSelect.valueForKey("UV"), "UV");
+			NSData data = null;
+			if(borne1 != null)
+				if(borne2 != null)
+					data = ReportFactory.printExport_Resultat(mySession(), bindings);
+			simpleFilename = "Export_Resultat.csv";
+			if (data == null) {
+				throw new Exception("Impossible d'exporter le fichier "
+						+ simpleFilename +", Vérifier vos critères");
+			}
+			return ReportFactory.afficherXls(data, simpleFilename);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			mySession().setAlertMessage(e.getMessage());
+			mySession().setMessageErreur(e.getMessage());
+			return null;
+		}
+	}
+
+	/** Liste des inscriptions aux UV **/
+	public WOActionResults imprimerExport_InsUv() {
+		try {
+			NSMutableDictionary bindings = new NSMutableDictionary();
+			if (diplomeInsUvSelect != null && !diplomeInsUvSelect.isEmpty())
+				bindings.takeValueForKey(
+						diplomeInsUvSelect.valueForKey("DIPL_CODE"),
+						"DIPL_CODE");
+			if (periodeInsUvSelect != null && !periodeInsUvSelect.isEmpty())
+				bindings.takeValueForKey(
+						periodeInsUvSelect.valueForKey("ANPRD_UNIV"),
+						"ANPRD_UNIV");
+			if (niveauInsUvSelect != null && !niveauInsUvSelect.isEmpty())
+				bindings.takeValueForKey(
+						niveauInsUvSelect.valueForKey("VALEUR"), "NIVEAU");
+			NSData data = ReportFactory.printExport_InsUv(mySession(), bindings);
+			simpleFilename = "Export_InsUv.csv";
+			if (data == null) {
+				throw new Exception("Impossible d'exporter le fichier "
+						+ simpleFilename +", Vérifier vos critères");
+			}
+			return ReportFactory.afficherXls(data, simpleFilename);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			mySession().setAlertMessage(e.getMessage());
+			mySession().setMessageErreur(e.getMessage());
+			return null;
+		}
+	}
+	
+	/** Liste des décisions de jury pour des périodes **/
+	public WOActionResults imprimerExport_Decision() {
+		try {
+			NSMutableDictionary bindings = new NSMutableDictionary();
+			String borne1 = null;
+			String borne2 = null;
+			if (periodeJury1Select != null && !periodeJury1Select.isEmpty())
+				borne1 = (String)periodeJury1Select.valueForKey("ANPRD_UNIV");
+			if (periodeJury2Select != null && !periodeJury2Select.isEmpty())
+				borne2 = (String)periodeJury2Select.valueForKey("ANPRD_UNIV");
+			Integer diff_an = Math.abs(Integer.valueOf(borne1.substring(0, 4)) - Integer.valueOf(borne2.substring(0, 4)));
+			if(diff_an > 3)
+					throw new Exception ("L'intervale ne doit pas excéder 3 ans ou 6 semestres...");
+			if(Integer.valueOf(borne1.substring(0, 4)) > Integer.valueOf(borne2.substring(0, 4))){
+				String intermed = borne1;
+				borne1 = borne2;
+				borne2 = intermed;
+			}
+			bindings.takeValueForKey(borne1, "ANPRD_UNIV_1");
+			bindings.takeValueForKey(borne2, "ANPRD_UNIV_2");
+			NSData data = null;
+			if(borne1 != null)
+				if(borne2 != null)
+					data = ReportFactory.printExport_Decision(mySession(), bindings);
+			simpleFilename = "Export_Decision.csv";
+			if (data == null) {
+				throw new Exception("Impossible d'exporter le fichier "
+						+ simpleFilename +", Vérifier vos critères");
+			}
+			return ReportFactory.afficherXls(data, simpleFilename);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			mySession().setAlertMessage(e.getMessage());
+			mySession().setMessageErreur(e.getMessage());
+			return null;
+		}
+	}
+	
+	/** Liste des décisions de jury avec codes des appréciations **/
+	public WOActionResults imprimerExport_Decision2() {
+		try {
+			NSMutableDictionary bindings = new NSMutableDictionary();
+			String per = null;
+			String dip = null;
+			if (diplomeJuryApSelect != null && !diplomeJuryApSelect.isEmpty())
+				dip = (String) diplomeJuryApSelect.valueForKey("DIPL_CODE");
+				bindings.takeValueForKey(dip, "DIPL_CODE");
+			if (periodeJuryApSelect != null && !periodeJuryApSelect.isEmpty())
+				per = (String) periodeJuryApSelect.valueForKey("ANPRD_UNIV");
+				bindings.takeValueForKey(per, "ANPRD_UNIV");
+			NSData data = null;
+			if((per != null && !per.isEmpty()) && (dip != null && !dip.isEmpty()))
+					data = ReportFactory.printExport_Decision2(mySession(), bindings);
+			simpleFilename = "Export_Decision2.csv";
+			if (data == null) {
+				throw new Exception("Impossible d'exporter le fichier "
+						+ simpleFilename +", Vérifier vos critères");
+			}
+			return ReportFactory.afficherXls(data, simpleFilename);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			mySession().setAlertMessage(e.getMessage());
+			mySession().setMessageErreur(e.getMessage());
+			return null;
+		}
+	}
+	
+	/** Liste des UV par semestre avec le nom du responsable de l'UV, 
+	 * la cat&eacute;gorie de l'UV, les effectifs par UV avec la 
+	 * r&eacute;partition ing&eacute;nieur et master et le total 
+	 * **/
+	public WOActionResults imprimerExport_Respuv() {
+		try {
+			NSMutableDictionary bindings = new NSMutableDictionary();
+			String per = null;
+			String dip = null;
+			String uv = null;
+			if (periodeRespUvSelect != null && !periodeRespUvSelect.isEmpty())
+				per = (String) periodeRespUvSelect.valueForKey("AN_VALEUR");
+				bindings.takeValueForKey(per, "AN_VALEUR");
+			if (diplomeRespUvSelect != null && !diplomeRespUvSelect.isEmpty())
+				dip = (String) diplomeRespUvSelect.valueForKey("DIPLOME");
+				bindings.takeValueForKey(dip, "DIPLOME");
+			if (uvRespUvSelect != null && !uvRespUvSelect.isEmpty())
+				uv = (String) uvRespUvSelect.valueForKey("UV");
+				bindings.takeValueForKey(uv, "UV");
+			NSData data = null;
+			data = ReportFactory.printExport_RespUv(mySession(), bindings);
+			simpleFilename = "Export_RespUv.csv";
+			if (data == null) {
+				throw new Exception("Impossible d'exporter le fichier "
+						+ simpleFilename +", Vérifier vos critères");
+			}
+			return ReportFactory.afficherXls(data, simpleFilename);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			mySession().setAlertMessage(e.getMessage());
+			mySession().setMessageErreur(e.getMessage());
+			return null;
+		}
+	}
+
+	/** Fin exports **/
+
+	public static class ReporterAjaxProgress extends
+			CktlAbstractReporterAjaxProgress implements
+			org.cocktail.reporting.jrxml.IJrxmlReportListener {
+
+		public ReporterAjaxProgress(int maximum) {
+			super(maximum);
+		}
+
+	}
+}

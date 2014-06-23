@@ -1,0 +1,34 @@
+{
+    selectTotaux = {
+        class = EOFetchSpecification; 
+        entityName = EOProfilTotaux; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOAndQualifier; 
+            qualifiers = (
+                {
+                    class = EOKeyValueQualifier; 
+                    key = etuId; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = numeroEtu; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = diplomec; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = codeDiplome; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOKeyValueQualifier; 
+                    key = prdDebut; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = debut; class = EOQualifierVariable; }; 
+                }
+            ); 
+        }; 
+        sortOrderings = (
+            {class = EOSortOrdering; key = ordreLg; selectorName = compareAscending; }, 
+            {class = EOSortOrdering; key = ordreCol; selectorName = compareAscending; }
+        ); 
+    }; 
+}

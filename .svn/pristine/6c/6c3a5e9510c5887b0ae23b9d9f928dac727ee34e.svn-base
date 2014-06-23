@@ -1,0 +1,620 @@
+/*******************************************************************************
+ * DOSSIER-ETUDIANT
+ * Copyright UNIVERSITE DE TECHNOLOGIE DE TROYES - CEDRE (www.utt.fr), since 1993 
+ * This software is governed by the CeCILL license under French law and abiding by the
+ * rules of distribution of free software. You can use, modify and/or 
+ * redistribute the software under the terms of the CeCILL license as 
+ * circulated by CEA, CNRS and INRIA at the following URL 
+ * "http://www.cecill.info". 
+ * As a counterpart to the access to the source code and rights to copy, modify 
+ * and redistribute granted by the license, users are provided only with a 
+ * limited warranty and the software's author, the holder of the economic 
+ * rights, and the successive licensors have only limited liability. In this 
+ * respect, the user's attention is drawn to the risks associated with loading,
+ * using, modifying and/or developing or reproducing the software by the user 
+ * in light of its specific status of free software, that may mean that it
+ * is complicated to manipulate, and that also therefore means that it is 
+ * reserved for developers and experienced professionals having in-depth
+ * computer knowledge. Users are therefore encouraged to load and test the 
+ * software's suitability as regards their requirements in conditions enabling
+ * the security of their systems and/or data to be ensured and, more generally, 
+ * to use and operate it in the same conditions as regards security. The
+ * fact that you are presently reading this means that you have had knowledge 
+ * of the CeCILL license and that you accept its terms.
+ * 
+ * Do not remove this copyright message
+ ******************************************************************************/
+package etudiants.utt.fr.components;
+
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WORequest;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.eocontrol.EOAndQualifier;
+import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.eocontrol.EOQualifier;
+import com.webobjects.eocontrol.EOSortOrdering;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSLog;
+import com.webobjects.foundation.NSMutableArray;
+import com.webobjects.foundation.NSMutableDictionary;
+
+import etudiants.utt.fr.components.controlers.EditionCtrl;
+import etudiants.utt.fr.eo.EOParamPeriode;
+import etudiants.utt.fr.eo.EOVueDiplnoprd;
+import etudiants.utt.fr.eo.EOVueDiplwithprd;
+import etudiants.utt.fr.eo.EOVueMention;
+import etudiants.utt.fr.eo.EOVueNivAdm;
+import etudiants.utt.fr.eo.EOVuePeriodeParam;
+import etudiants.utt.fr.eo.EOVueSpecMast;
+import etudiants.utt.fr.server.MyAjaxComponent;
+import etudiants.utt.fr.server.ProfilHelpers;
+import etudiants.utt.fr.server.Session;
+import etudiants.utt.fr.server.process.ProcessGestionRechercheEtudiants;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+@SuppressWarnings("all")
+public class Editions extends MyAjaxComponent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2692029947749216894L;
+	private String onLoade = null;
+	public Session session = mySession();
+	public EOEditingContext ed = edc();
+	private EditionCtrl controleur;
+	private String printMessage;
+	// Info combobox
+		//periode
+		private NSArray<EOVuePeriodeParam> periodes;
+		private EOVuePeriodeParam currentPeriode;
+		private EOVuePeriodeParam selectedPeriode;
+		private EOParamPeriode paramPrd;
+		//mention
+		private NSArray<EOVueMention> mentions;
+		private EOVueMention currentMention;
+		private EOVueMention selectedMention;
+		//Diplomes
+		private NSArray<EOVueDiplnoprd> diplomes;
+		private EOVueDiplnoprd currentDiplome;
+		private EOVueDiplnoprd selectedDiplome;
+
+		private NSArray<EOVueDiplwithprd> prdDiplome;
+		private EOVueDiplwithprd currentPrdDiplome;
+		private EOVueDiplwithprd selectedPrdDiplome;
+		//Niveaux
+		private NSArray<EOVueNivAdm> niveaux;
+		private EOVueNivAdm currentNiveaux;
+		private EOVueNivAdm selectedNiveaux;
+
+		private NSArray<EOVueSpecMast> niveauxMast;
+		private EOVueSpecMast currentNiveauMst;
+		private EOVueSpecMast selectedNiveauMst;
+		
+		//Affichage comboX diplome et niveau
+		public Boolean nivoVisible = true;
+		public Boolean diplomeVisible = true;
+		
+		// champs nom prenom numero
+		private String nom;
+		private String numero;
+		//champs cache
+		public String action = " ";
+		public String libniv = "";
+
+	public Editions(WOContext context) throws Throwable {
+		super(context);
+		NSLog.out.appendln("Edition");
+		controleur = new EditionCtrl(this);
+		comboBoxPeriode();
+		comboxDiplome(selectedPeriode);
+		comboxNiveau(selectedPrdDiplome, selectedDiplome, selectedPeriode);
+		comboBoxMention();
+		controleur.lastEditions();
+	}
+
+	/**
+	 * @return the onLoade
+	 */
+	public String getOnLoade() {
+		return onLoade;
+	}
+
+	/**
+	 * @param onLoade the onLoade to set
+	 */
+	public void setOnLoade(String onLoade) {
+		this.onLoade = onLoade;
+	}
+
+	public void appendToResponse(WOResponse res, WOContext ctx) {
+		super.appendToResponse(res, ctx);
+		if (onLoade != null)
+			onLoade = null;
+		ProfilHelpers.insertStylesSheet(ctx, res);
+		 String message = mySession().getAlertMessage();
+			if (message != null && message.equals("") == false) {
+				String str = "<script language=\"javascript\" type=\"text/javascript\">\n";
+				str += "alert(\"" + message + "\");\n";
+				str += "</script>";
+				res.appendContentString(str);
+				mySession().setAlertMessage(null);
+			}
+	}
+
+	/**
+	 * @return the controleur
+	 */
+	public EditionCtrl getControleur() {
+		return controleur;
+	}
+
+	/**
+	 * @param controleur the controleur to set
+	 */
+	public void setControleur(EditionCtrl controleur) {
+		this.controleur = controleur;
+	}
+
+	/**
+	 * @return the periodes
+	 */
+	public NSArray<EOVuePeriodeParam> getPeriodes() {
+		return periodes;
+	}
+
+	/**
+	 * @param periodes the periodes to set
+	 */
+	public void setPeriodes(NSArray<EOVuePeriodeParam> periodes) {
+		this.periodes = periodes;
+	}
+
+	/**
+	 * @return the currentPeriode
+	 */
+	public EOVuePeriodeParam getCurrentPeriode() {
+		return currentPeriode;
+	}
+
+	/**
+	 * @param currentPeriode the currentPeriode to set
+	 */
+	public void setCurrentPeriode(EOVuePeriodeParam currentPeriode) {
+		this.currentPeriode = currentPeriode;
+	}
+
+	/**
+	 * @return the selectedPeriode
+	 */
+	public EOVuePeriodeParam getSelectedPeriode() {
+		return selectedPeriode;
+	}
+
+	/**
+	 * @param selectedPeriode the selectedPeriode to set
+	 */
+	public void setSelectedPeriode(EOVuePeriodeParam selectedPeriode) {
+		this.selectedPeriode = selectedPeriode;
+	}
+
+	/**
+	 * @return the paramPrd
+	 */
+	public EOParamPeriode getParamPrd() {
+		return paramPrd;
+	}
+
+	/**
+	 * @param paramPrd the paramPrd to set
+	 */
+	public void setParamPrd(EOParamPeriode paramPrd) {
+		this.paramPrd = paramPrd;
+	}
+
+	/**
+	 * @return the diplomes
+	 */
+	public NSArray<EOVueDiplnoprd> getDiplomes() {
+		return diplomes;
+	}
+
+	/**
+	 * @param diplomes the diplomes to set
+	 */
+	public void setDiplomes(NSArray<EOVueDiplnoprd> diplomes) {
+		this.diplomes = diplomes;
+	}
+
+	/**
+	 * @return the currentDiplome
+	 */
+	public EOVueDiplnoprd getCurrentDiplome() {
+		return currentDiplome;
+	}
+
+	/**
+	 * @param currentDiplome the currentDiplome to set
+	 */
+	public void setCurrentDiplome(EOVueDiplnoprd currentDiplome) {
+		this.currentDiplome = currentDiplome;
+	}
+
+	/**
+	 * @return the selectedDiplome
+	 */
+	public EOVueDiplnoprd getSelectedDiplome() {
+		return selectedDiplome;
+	}
+
+	/**
+	 * @param selectedDiplome the selectedDiplome to set
+	 */
+	public void setSelectedDiplome(EOVueDiplnoprd selectedDiplome) {
+		this.selectedDiplome = selectedDiplome;
+	}
+
+	/**
+	 * @return the prdDiplome
+	 */
+	public NSArray<EOVueDiplwithprd> getPrdDiplome() {
+		return prdDiplome;
+	}
+
+	/**
+	 * @param prdDiplome the prdDiplome to set
+	 */
+	public void setPrdDiplome(NSArray<EOVueDiplwithprd> prdDiplome) {
+		this.prdDiplome = prdDiplome;
+	}
+
+	/**
+	 * @return the currentPrdDiplome
+	 */
+	public EOVueDiplwithprd getCurrentPrdDiplome() {
+		return currentPrdDiplome;
+	}
+
+	/**
+	 * @param currentPrdDiplome the currentPrdDiplome to set
+	 */
+	public void setCurrentPrdDiplome(EOVueDiplwithprd currentPrdDiplome) {
+		this.currentPrdDiplome = currentPrdDiplome;
+	}
+
+	/**
+	 * @return the selectedPrdDiplome
+	 */
+	public EOVueDiplwithprd getSelectedPrdDiplome() {
+		return selectedPrdDiplome;
+	}
+
+	/**
+	 * @param selectedPrdDiplome the selectedPrdDiplome to set
+	 */
+	public void setSelectedPrdDiplome(EOVueDiplwithprd selectedPrdDiplome) {
+		this.selectedPrdDiplome = selectedPrdDiplome;
+	}
+
+	/**
+	 * @return the niveaux
+	 */
+	public NSArray<EOVueNivAdm> getNiveaux() {
+		return niveaux;
+	}
+
+	/**
+	 * @param niveaux the niveaux to set
+	 */
+	public void setNiveaux(NSArray<EOVueNivAdm> niveaux) {
+		this.niveaux = niveaux;
+	}
+
+	/**
+	 * @return the currentNiveaux
+	 */
+	public EOVueNivAdm getCurrentNiveaux() {
+		return currentNiveaux;
+	}
+
+	/**
+	 * @param currentNiveaux the currentNiveaux to set
+	 */
+	public void setCurrentNiveaux(EOVueNivAdm currentNiveaux) {
+		this.currentNiveaux = currentNiveaux;
+	}
+
+	/**
+	 * @return the selectedNiveaux
+	 */
+	public EOVueNivAdm getSelectedNiveaux() {
+		return selectedNiveaux;
+	}
+
+	/**
+	 * @param selectedNiveaux the selectedNiveaux to set
+	 */
+	public void setSelectedNiveaux(EOVueNivAdm selectedNiveaux) {
+		this.selectedNiveaux = selectedNiveaux;
+	}
+
+	/**
+	 * @return the niveauxMast
+	 */
+	public NSArray<EOVueSpecMast> getNiveauxMast() {
+		return niveauxMast;
+	}
+
+	/**
+	 * @param niveauxMast the niveauxMast to set
+	 */
+	public void setNiveauxMast(NSArray<EOVueSpecMast> niveauxMast) {
+		this.niveauxMast = niveauxMast;
+	}
+
+	/**
+	 * @return the currentNiveauMst
+	 */
+	public EOVueSpecMast getCurrentNiveauMst() {
+		return currentNiveauMst;
+	}
+
+	/**
+	 * @param currentNiveauMst the currentNiveauMst to set
+	 */
+	public void setCurrentNiveauMst(EOVueSpecMast currentNiveauMst) {
+		this.currentNiveauMst = currentNiveauMst;
+	}
+
+	/**
+	 * @return the selectedNiveauMst
+	 */
+	public EOVueSpecMast getSelectedNiveauMst() {
+		return selectedNiveauMst;
+	}
+
+	/**
+	 * @param selectedNiveauMst the selectedNiveauMst to set
+	 */
+	public void setSelectedNiveauMst(EOVueSpecMast selectedNiveauMst) {
+		this.selectedNiveauMst = selectedNiveauMst;
+	}
+	
+	/**
+	 * @return the nom
+	 */
+	public String getNom() {
+		return nom;
+	}
+
+	/**
+	 * @param nom the nom to set
+	 */
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	/**
+	 * @return the numero
+	 */
+	public String getNumero() {
+		return numero;
+	}
+
+	/**
+	 * @param numero the numero to set
+	 */
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	/**
+	 * @return the printMessage
+	 */
+	public String getPrintMessage() {
+		return printMessage;
+	}
+
+	/**
+	 * @param printMessage the printMessage to set
+	 */
+	public void setPrintMessage(String printMessage) {
+		this.printMessage = printMessage;
+	}
+
+	/**
+	 * @return the mentions
+	 */
+	public NSArray<EOVueMention> getMentions() {
+		return mentions;
+	}
+
+	/**
+	 * @param mentions the mentions to set
+	 */
+	public void setMentions(NSArray<EOVueMention> mentions) {
+		this.mentions = mentions;
+	}
+
+	/**
+	 * @return the currentMention
+	 */
+	public EOVueMention getCurrentMention() {
+		return currentMention;
+	}
+
+	/**
+	 * @param currentMention the currentMention to set
+	 */
+	public void setCurrentMention(EOVueMention currentMention) {
+		this.currentMention = currentMention;
+	}
+
+	/**
+	 * @return the selectedMention
+	 */
+	public EOVueMention getSelectedMention() {
+		return selectedMention;
+	}
+
+	/**
+	 * @param selectedMention the selectedMention to set
+	 */
+	public void setSelectedMention(EOVueMention selectedMention) {
+		this.selectedMention = selectedMention;
+	}
+
+	/**
+	 * Using by WOPopUpButton to refresh data dilpome, niveau and Uv OnChange
+	 * 
+	 * 
+	 */
+	public WOActionResults changeNiveau() {
+		// NSLog.out.appendln(selectedDiplome);
+		setNom(null);
+		setNumero(null);
+		comboxNiveau(selectedPrdDiplome, selectedDiplome, selectedPeriode);
+		return null;
+	}
+
+	public WOActionResults changeDiplome() {
+		// NSLog.out.appendln(selectedDiplome);
+		setNom(null);
+		setNumero(null);
+		selectedPrdDiplome = null;
+		selectedDiplome = null;
+		comboxDiplome(selectedPeriode);
+		return null;
+	}
+	
+	/** Remplissage du combox periode à l'aide de la vue VUE_PERIODE_PARAM */
+	@SuppressWarnings("unchecked")
+	protected NSArray<EOVuePeriodeParam> comboBoxPeriode() {
+		selectedPeriode = null;
+		selectedDiplome = null;
+		selectedPrdDiplome = null;
+		selectedNiveauMst = null;
+		selectedNiveaux = null;
+		selectedMention = null;
+		@SuppressWarnings("rawtypes")
+		NSArray OrdreSort = new NSArray(new Object[] {
+				EOSortOrdering.sortOrderingWithKey(EOVuePeriodeParam.ORDRE_KEY,
+						EOSortOrdering.CompareAscending),
+				EOSortOrdering.sortOrderingWithKey(EOVuePeriodeParam.ID_KEY,
+						EOSortOrdering.CompareDescending) });
+		String annUnivPrdUniv = (String) session.getPeriodeCourante().valueForKey("PERIODE");
+		periodes = EOVuePeriodeParam.fetchAllEOVuePeriodeParams(ed, OrdreSort);
+		for(int i=0; periodes.count() > i; i++) {
+			if(periodes.objectAtIndex(i).primaryKey().equals(annUnivPrdUniv)){
+				selectedPeriode = periodes.objectAtIndex(i);
+			    break;
+			}
+		}
+		return periodes;
+	}
+
+	/** Remplissage des comboxes diplome à l'aide de la vue VUE_DIPLOME_PRDPARAM */
+	protected NSArray comboxDiplome(EOVuePeriodeParam periode) {
+		selectedDiplome = null;
+		selectedPrdDiplome = null;
+		selectedNiveauMst = null;
+		selectedNiveaux = null;
+		if (periode == null) {
+			diplomes = EOVueDiplnoprd.fetchAllEOVueDiplnoprds(ed);
+			diplomeVisible = true;
+			prdDiplome = null;
+		} else {
+			prdDiplome = EOVueDiplwithprd.fetchListDiplome(ed,
+					periode.primaryKey());
+			diplomeVisible = false;
+			diplomes = null;
+			return prdDiplome;
+		}
+		return diplomes;
+	}
+
+	/**
+	 * Remplissage du comboxbox niveau depuis la VUE_NIV_ADM, VUE_SPEC_MST
+	 * influencée par VUE_DIPLOME_PRDPARAM et VUE_PERIODE_PARAM
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected NSArray comboxNiveau(EOVueDiplwithprd diplome,
+			EOVueDiplnoprd diploma, EOVuePeriodeParam periode) {
+		NSArray titeList = new NSArray();
+		NSMutableArray listKey = new NSMutableArray();
+		NSMutableArray listAdd = new NSMutableArray();
+		NSArray<EOSortOrdering> niveauOrderings = new NSArray<EOSortOrdering>(
+				new EOSortOrdering(EOVueNivAdm.ORDRE_KEY,
+						EOSortOrdering.CompareAscending));
+		NSArray MstSort = new NSArray(new Object[] {
+				EOSortOrdering.sortOrderingWithKey(EOVueSpecMast.ORDRE_KEY,
+						EOSortOrdering.CompareAscending),
+				EOSortOrdering.sortOrderingWithKey(EOVueSpecMast.ID_KEY,
+						EOSortOrdering.CompareDescending) });
+		EOVueNivAdm virtual = new EOVueNivAdm();
+		if (periode == null && diplome == null && diploma == null) {
+			titeList = EOVueNivAdm.fetchAllEOVueNivAdms(ed, niveauOrderings);
+			for (int i = 0; i < titeList.count(); i++) {
+				virtual = (EOVueNivAdm) titeList.objectAtIndex(i);
+				if (listKey != null && !listKey.contains(virtual.primaryKey())) {
+					listKey.addObject(virtual.primaryKey());
+					listAdd.addObject(virtual);
+				}
+			}
+			niveaux = listAdd.mutableClone();
+			//NSLog.out.appendln("Liste Niveaux:" + niveaux.count());
+			nivoVisible = true;
+		} else if (periode == null && diplome == null && diploma != null) {
+			// Afficher toutes les niveaux ayant pour ID le diplome
+			// selectionnée
+			EOQualifier qual = EOQualifier.qualifierWithQualifierFormat(
+					"pdiplome=%@", new NSArray(diploma.primaryKey()));
+			niveaux = EOVueNivAdm.fetchEOVueNivAdms(ed, qual, niveauOrderings);
+			nivoVisible = true;
+		}
+		if (periode != null && diplome == null && diploma == null) {
+			EOQualifier qual = EOQualifier.qualifierWithQualifierFormat(
+					"pperiode=%@", new NSArray(periode.id()));
+			niveaux = EOVueNivAdm.fetchEOVueNivAdms(ed, qual, niveauOrderings);
+			nivoVisible = true;
+		} else if (periode != null && (diplome != null && diplome.primaryKey().equals("MST") && diploma == null)) {
+			NSMutableArray qual = new NSMutableArray();
+			qual.addObject(EOQualifier.qualifierWithQualifierFormat(
+					"pdiplome=%@", new NSArray(diplome.primaryKey())));
+			qual.addObject(EOQualifier.qualifierWithQualifierFormat(
+					"pperiode=%@", new NSArray(periode.id())));
+			niveauxMast = EOVueSpecMast.fetchEOVueSpecMasts(ed,
+					new EOAndQualifier(qual), MstSort);
+			nivoVisible = false;
+			return niveauxMast;
+		} else if (periode != null && diplome != null && diploma == null) {
+			NSMutableArray qual = new NSMutableArray();
+			qual.addObject(EOQualifier.qualifierWithQualifierFormat(
+					"pdiplome=%@", new NSArray(diplome.primaryKey())));
+			qual.addObject(EOQualifier.qualifierWithQualifierFormat(
+					"pperiode=%@", new NSArray(periode.id())));
+			niveaux = EOVueNivAdm.fetchEOVueNivAdms(ed,
+					new EOAndQualifier(qual), niveauOrderings);
+			nivoVisible = true;
+		} else if(periode != null && diplome == null && diploma != null){
+			NSMutableArray qual = new NSMutableArray();
+			qual.addObject(EOQualifier.qualifierWithQualifierFormat(
+					"pdiplome=%@", new NSArray(diploma.primaryKey())));
+			qual.addObject(EOQualifier.qualifierWithQualifierFormat(
+					"pperiode=%@", new NSArray(periode.id())));
+			niveaux = EOVueNivAdm.fetchEOVueNivAdms(ed,
+					new EOAndQualifier(qual), niveauOrderings);
+			nivoVisible = true;
+		}
+		return niveaux;
+	}
+	
+	protected NSArray<EOVueMention> comboBoxMention() {
+		mentions = EOVueMention.fetchAllEOVueMentions(ed);
+		return mentions;
+	}
+}

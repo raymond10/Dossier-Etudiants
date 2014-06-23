@@ -1,0 +1,36 @@
+{
+    attributes = (
+        {
+            columnName = ID; 
+            externalType = VARCHAR2; 
+            name = id; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = LIBELLE; 
+            externalType = VARCHAR2; 
+            name = libelle; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = ORDRE; 
+            externalType = NUMBER; 
+            name = ordre; 
+            valueType = d; 
+        }
+    ); 
+    attributesUsedForLocking = (id, libelle, ordre); 
+    className = "etudiants.utt.fr.eo.EOVuePeriodeParam"; 
+    classProperties = (id, libelle, ordre); 
+    externalName = "GERRY.VUE_PERIODE_PARAM"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOVuePeriodeParam; 
+    primaryKeyAttributes = (id); 
+}

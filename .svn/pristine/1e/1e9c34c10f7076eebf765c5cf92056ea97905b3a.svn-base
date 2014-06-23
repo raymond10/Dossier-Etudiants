@@ -1,0 +1,214 @@
+{
+    attributes = (
+        {
+            columnName = "AN_UNIV"; 
+            externalType = VARCHAR2; 
+            name = anUniv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }, 
+        {
+            columnName = "CODE_DIPLOME"; 
+            externalType = VARCHAR2; 
+            name = codeDiplome; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = DECISION; 
+            externalType = VARCHAR2; 
+            name = decision; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPLOME_NUM"; 
+            externalType = VARCHAR2; 
+            name = diplomeNum; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 10; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPL_OPT_C"; 
+            externalType = VARCHAR2; 
+            name = diplOptC; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "DIPL_SPEC_C"; 
+            externalType = VARCHAR2; 
+            name = diplSpecC; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "ETU_ID"; 
+            externalType = NUMBER; 
+            name = etuId; 
+            precision = 7; 
+            valueType = l; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = FORMATION; 
+            externalType = VARCHAR2; 
+            name = formation; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 18; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = ID; 
+            externalType = NUMBER; 
+            name = id; 
+            valueType = d; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "INCR_ADM_ID"; 
+            externalType = VARCHAR2; 
+            name = incrAdmId; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 18; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = LIBELLE; 
+            externalType = VARCHAR2; 
+            name = libelle; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = OBSERVATION; 
+            externalType = VARCHAR2; 
+            name = observation; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4000; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = PERIODE; 
+            externalType = VARCHAR2; 
+            name = periode; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PRD_SESSION"; 
+            externalType = VARCHAR2; 
+            name = prdSession; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 6; 
+        }, 
+        {
+            columnName = "PRD_UNIV"; 
+            externalType = VARCHAR2; 
+            name = prdUniv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = SITUATION; 
+            externalType = VARCHAR2; 
+            name = situation; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 30; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = SOUTENANCE; 
+            externalType = VARCHAR2; 
+            name = soutenance; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 10; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = STAGE; 
+            externalType = VARCHAR2; 
+            name = stage; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4000; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        anUniv, 
+        codeDiplome, 
+        decision, 
+        diplomeNum, 
+        diplOptC, 
+        diplSpecC, 
+        etuId, 
+        formation, 
+        id, 
+        incrAdmId, 
+        libelle, 
+        observation, 
+        periode, 
+        prdSession, 
+        prdUniv, 
+        situation, 
+        soutenance, 
+        stage
+    ); 
+    className = "etudiants.utt.fr.eo.EOVueDetailparcours"; 
+    classProperties = (
+        anUniv, 
+        codeDiplome, 
+        decision, 
+        diplomeNum, 
+        diplOptC, 
+        diplSpecC, 
+        eoVueAfficherdiplome, 
+        etuId, 
+        formation, 
+        incrAdmId, 
+        libelle, 
+        observation, 
+        periode, 
+        prdSession, 
+        prdUniv, 
+        situation, 
+        soutenance, 
+        stage
+    ); 
+    externalName = "GERRY.VUE_DETAILPARCOURS"; 
+    name = EOVueDetailparcours; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = EOVueAfficherdiplome; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = numeroEtu; sourceAttribute = etuId; }); 
+            name = eoVueAfficherdiplome; 
+        }
+    ); 
+}

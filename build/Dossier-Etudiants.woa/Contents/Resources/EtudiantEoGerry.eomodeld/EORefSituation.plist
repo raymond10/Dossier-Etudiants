@@ -1,0 +1,54 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = SITUATION; 
+            externalType = VARCHAR2; 
+            name = situation; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 30; 
+        }, 
+        {
+            columnName = "SITUATION_$C"; 
+            externalType = VARCHAR2; 
+            isReadOnly = Y; 
+            name = situationc; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            className = "java.lang.Number"; 
+            columnName = "SITUATION_TYPE"; 
+            externalType = NUMBER; 
+            name = situationType; 
+            precision = 2; 
+            valueType = l; 
+        }
+    ); 
+    attributesUsedForLocking = (situation, situationc, situationType); 
+    className = "etudiants.utt.fr.eo.EORefSituation"; 
+    classProperties = (etuInscrAdms, individus, situation, situationc, situationType); 
+    externalName = "GERRY.REF_SITUATION"; 
+    fetchSpecificationDictionary = {}; 
+    name = EORefSituation; 
+    primaryKeyAttributes = (situationc); 
+    relationships = (
+        {
+            destination = EOEtudiantInscrAdm; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = situationc; sourceAttribute = situationc; }); 
+            name = etuInscrAdms; 
+        }, 
+        {
+            destination = EOIndividu; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = situationc; sourceAttribute = situationc; }); 
+            name = individus; 
+        }
+    ); 
+}

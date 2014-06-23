@@ -1,0 +1,32 @@
+{
+    attributes = (
+        {
+            columnName = ID; 
+            externalType = VARCHAR2; 
+            name = id; 
+            valueClassName = NSString; 
+            width = 5; 
+        }, 
+        {
+            columnName = LIBELLE; 
+            externalType = VARCHAR2; 
+            name = libelle; 
+            valueClassName = NSString; 
+            width = 7; 
+        }, 
+        {
+            columnName = ORDRE; 
+            externalType = VARCHAR2; 
+            name = ordre; 
+            valueClassName = NSString; 
+            width = 7; 
+        }
+    ); 
+    attributesUsedForLocking = (id, libelle, ordre); 
+    className = "etudiants.utt.fr.eo.EOVueMention"; 
+    classProperties = (libelle, ordre); 
+    externalName = "GERRY.VUE_MENTION"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOVueMention; 
+    primaryKeyAttributes = (id); 
+}

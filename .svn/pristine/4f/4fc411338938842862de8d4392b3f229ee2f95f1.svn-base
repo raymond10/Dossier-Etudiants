@@ -1,0 +1,61 @@
+package etudiants.utt.fr.components;
+
+import org.login.fwkloginwebapp.server.components.LgnLoginResponder;
+
+import com.webobjects.appserver.WOContext;
+
+import etudiants.utt.fr.server.Application;
+import etudiants.utt.fr.server.VersionMe;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public class LoginLocal extends LoginCAS {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2451456228278004873L;
+
+	/** Le gestionnaire des evenements de composant de login local. */
+	private LgnLoginResponder loginResponder;
+
+	public LoginLocal(WOContext context) {
+		super(context);
+	}
+	
+	/**
+	 * @return the loginResponder
+	 */
+	public LgnLoginResponder getLoginResponder() {
+		return loginResponder;
+	}
+
+	/**
+	 * @param loginResponder
+	 *            the loginResponder to set
+	 */
+	public void registerLoginResponder(LgnLoginResponder loginResponder) {
+		this.loginResponder = loginResponder;
+	}
+
+	public String bdServerId() {
+		return Application.bdServerId;
+	}
+
+	public String copyright() {
+		return ((Application) application()).copyright();
+		// return VersionMe.copyright();
+	}
+
+	public String version() {
+		return VersionMe.htmlAppliVersion();
+	}
+
+	public String cssEtudiant() {
+		return application().resourceManager().urlForResourceNamed(
+				"css/etudiant.css", null, null, context().request());
+	}
+
+}

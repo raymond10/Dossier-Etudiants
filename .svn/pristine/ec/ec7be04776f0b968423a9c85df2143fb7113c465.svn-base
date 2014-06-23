@@ -1,0 +1,60 @@
+<html metal:use-macro = "here/getLayout">
+  <div metal:fill-slot = "contenu" tal:define = "global errors options/errors;
+              global opts options/options;
+							global edt opts/edt; 
+              etudiant opts/etudiant">
+    <tal:block condition = "errors">
+      <div class = "warn" tal:condition = "exists:errors/autorise"> Vous n'&ecirc;tes pas autoris&eacute; &agrave; consulter ce dossier. </div>
+    </tal:block>
+    <tal:block condition = "etudiant">
+      <h3>Emploi du temps de 
+        <span tal:replace = "etudiant/nom"></span>
+        pour 
+        <span tal:replace = "here/getSemestre"></span>
+      </h3>
+      <ul style = "text-align:left">
+        <li>
+          <a tal:attributes = "href string:dossieradm?id=${etudiant/id}">Dossier administratif</a>
+        </li>
+        <li>
+          <a tal:attributes = "href string:profil?id=${etudiant/id}">Profil de formation</a>
+        </li>
+        <li>
+          <a tal:attributes = "href string:resultatsuv?id=${etudiant/id}">R&eacute;sultats aux UV</a>
+        </li>
+      </ul>
+      <tal:block condition = "not:edt">
+        <div class = "info">L'emploi du temps n'est pas encore publi&eacute;.</div>
+      </tal:block>
+      <tal:block condition = "edt">
+        <div class = "form">
+          <table class = "globalTable" border = "0" cellspacing = "0" cellpadding = "0" summary = "edt">
+            <tr>
+              <th style = "border:0;background-color:white" />
+              <th>Lundi</th>
+              <th>Mardi</th>
+              <th>Mercredi</th>
+              <th>Jeudi</th>
+              <th>Vendredi</th>
+              <th>Samedi</th>
+            </tr>
+            <tr>
+              <td class = "timeline" valign = "top">
+                <tal:block repeat = "t edt/time">
+                  <div align = "right" style = "height:20px" tal:content = "t"></div>
+                </tal:block>
+              </td>
+              <div tal:replace = "structure edt/html"></div>
+            </tr>
+          </table>
+          <div style = "padding:0;margin-top:4px">LA DIRECTION AUX ENSEIGNEMENTS VOUS SOUHAITE BON COURAGE</div>
+        </div>
+      </tal:block>
+      <div class = "br"></div>
+    </tal:block>
+  </div>
+   <div metal:fill-slot = "contenu">
+      <iframe src = "http://gestion.utt.fr/applis/service2/etu_parcours_ing2/extraction/edit?new=o" frameborder = "no" style = "border:0;width: 100%; height: 900px; padding-bottom: 25px;"> </iframe>
+    </div>
+    <div class = "br"></div>
+</html>

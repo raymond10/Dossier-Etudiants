@@ -1,0 +1,156 @@
+/**
+ * 
+ */
+package etudiants.utt.fr.server;
+
+import org.apache.log4j.Logger;
+import org.cedre.fwkuttajaxwebext.serveur.UttAjaxWOComponent;
+import org.cedre.fwkuttajaxwebext.serveur.UttResourceProvider;
+
+import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WODisplayGroup;
+import com.webobjects.appserver.WORequest;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.eocontrol.EOEditingContext;
+
+import er.extensions.appserver.ERXWOContext;
+import er.extensions.localization.ERXLocalizer;
+import etudiants.utt.fr.eo.EOIndividu;
+import etudiants.utt.fr.roles.LeUser;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public class MyAjaxComponent extends UttAjaxWOComponent implements UttResourceProvider {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1435918229099891739L;
+	private final Session session = (Session) session();
+	public static final Logger LOG = Logger.getLogger(MyAjaxComponent.class);
+	private String _id;
+
+	public MyAjaxComponent(WOContext context) {
+		super(context);
+	}
+	
+	public boolean synchronizesVariablesWithBindings() {
+		return false;
+	}
+	
+	@Override
+	public void takeValuesFromRequest(WORequest aRequest, WOContext aContext) {
+		super.takeValuesFromRequest(aRequest, aContext);
+	}
+	
+	@Override
+	public void appendToResponse(WOResponse response, WOContext context) {
+		
+		super.appendToResponse(response, context);
+
+		
+	}
+	
+	@Override
+	public void injectResources(WOResponse response, WOContext context) {
+		// TODO Auto-generated method stub
+		ProfilHelpers.insertStylesSheet(context, response);	
+	}
+
+	public Application myApp() {
+		return (Application) application();
+	}
+
+	public Session mySession() {
+		return session;
+	}
+	
+	public ERXLocalizer localizer() {
+    	return mySession().localizer();
+    }
+
+	public EOIndividu utilisateur() {
+		return session.getUtilisateur();
+	}
+	
+/*	public EOIndividu etudiant(){
+		return session.getEtudiant();
+	}
+	
+	public void setLetudiant(EOIndividu etudiant){
+		session.setEtudiant(etudiant);
+	}*/
+	
+	public LeUser user(){
+		return session.getNewUser();
+	}
+	
+	public void setLeUser(LeUser user){
+		session.setNewUser(user);
+	}
+	
+	/**
+	 * @return the utilisateurAvecDroit
+	 */
+	public Boolean userAvecDroit() {
+		return session.getUtilisateurAvecDroit();
+	}
+
+	public void setUserAvecDroit(Boolean utilisateurAvecDroit) {
+		session.setUtilisateurAvecDroit(utilisateurAvecDroit);
+	}
+
+	public EOIndividu utilisateurInContext(EOEditingContext ed) {
+		EOIndividu user = session.getUtilisateur();
+		if (user.editingContext().equals(ed) == false) {
+			try {
+				user = (EOIndividu) ed.faultForGlobalID(
+					edc().globalIDForObject(user), ed);
+			} catch (Exception e) {
+			}
+		}
+		return user;
+	}
+
+	public EOEditingContext edc() {
+		return session.defaultEditingContext();
+	}
+
+	public WODisplayGroup getDgActif() {
+		return session.dgActif();
+	}
+
+	public void setDgActif(WODisplayGroup dgActif) {
+		session.setDgActif(dgActif);
+	}
+
+	public WODisplayGroup getEtudiantActif() {
+		return session.etudiantActif();
+	}
+
+	public void setEtudiantActif(WODisplayGroup etudiantActif) {
+		session.setEtudiantActif(etudiantActif);
+	}
+
+	protected String uniqueDomId() {
+		if (_id == null)
+			_id = ERXWOContext.safeIdentifierName(context(), true);
+		return _id;
+	}
+	
+	public WOActionResults doNothing() {
+		return null;
+	}
+	
+	public void addSimpleErrorMessage(String titre, Throwable exception) {
+		if (LOG.isDebugEnabled()) {
+			exception.printStackTrace();
+		}
+		session.addSimpleErrorMessage(titre, exception);
+	}
+
+}

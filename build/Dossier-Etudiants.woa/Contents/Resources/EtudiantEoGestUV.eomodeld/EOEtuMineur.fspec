@@ -1,0 +1,37 @@
+{
+    etuMineurs = {
+        class = EOFetchSpecification; 
+        entityName = EOEtuMineur; 
+        isDeep = YES; 
+        prefetchingRelationshipKeyPaths = (); 
+        qualifier = {
+            class = EOAndQualifier; 
+            qualifiers = (
+                {
+                    class = EOKeyValueQualifier; 
+                    key = etuId; 
+                    selectorName = "isEqualTo:"; 
+                    value = {"_key" = etuId; class = EOQualifierVariable; }; 
+                }, 
+                {
+                    class = EOOrQualifier; 
+                    qualifiers = (
+                        {
+                            class = EOKeyValueQualifier; 
+                            key = minResc; 
+                            selectorName = "isEqualTo:"; 
+                            value = ADM; 
+                        }, 
+                        {
+                            class = EOKeyValueQualifier; 
+                            key = minResc; 
+                            selectorName = "isEqualTo:"; 
+                            value = MEN; 
+                        }
+                    ); 
+                }
+            ); 
+        }; 
+        usesDistinct = YES; 
+    }; 
+}

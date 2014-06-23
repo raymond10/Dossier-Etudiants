@@ -1,0 +1,12 @@
+package etudiants.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+public class EORefSituation extends _EORefSituation {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1285321293255167243L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EORefSituation.class);
+}

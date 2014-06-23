@@ -1,0 +1,35 @@
+package etudiants.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+import com.webobjects.foundation.NSDictionary;
+
+@SuppressWarnings("rawtypes")
+public class EODiplome extends _EODiplome {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7725899376451394412L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EODiplome.class);
+	private NSDictionary dataDiplome;
+	
+	public EODiplome() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @return the dataDiplome
+	 */
+	public NSDictionary getDataDiplome() {
+		return dataDiplome;
+	}
+
+	/**
+	 * @param dataDiplome the dataDiplome to set
+	 */
+	public void setDataDiplome(NSDictionary dataDiplome) {
+		this.dataDiplome = dataDiplome;
+	}
+	
+}

@@ -1,0 +1,388 @@
+<webobject name = "Wrapper">
+  <webobject name = "errors">
+    <div class = "warn"> Vous n'&ecirc;tes pas autoris&eacute; &agrave; consulter ce dossier. </div>
+  </webobject>
+  <webobject name = "etudiant">
+    <h3>Dossier administratif de l'&eacute;tudiant&nbsp;<webobject name = "Indicateur1" /></h3>
+    <!-- 
+<div class="info">
+</div>
+ -->
+    <div class = "br"></div>
+    <webobject name = "browser">
+      <webobject name = "nav">Navigation</webobject>
+    </webobject>
+    <div class = "form">
+      <table cellpadding = "auto" cellspacing = "auto" border = "0" width = "82%">
+        <tr>
+          <td>
+            <table cellpadding = "0" cellspacing = "0" border = "0" class = "resume">
+              <tr>
+                <td rowspan = "5" style = "vertical-align: middle"><webobject name = "EtuPhoto" /></td>
+              </tr>
+              <tr>
+                <td>
+                  <b style = "font-size:14px">
+                    <span><webobject name = "civEtu" />&nbsp;</span>
+                    <span><webobject name = "nomEtu" />&nbsp;</span>
+                    <span><webobject name = "prenomEtu" />&nbsp;</span>
+                  </b>
+                  <span><webobject name = "etuEmail" /></span>&nbsp;N&deg; 
+                  <b><webobject name = "etuId" /></b>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>N&eacute;(e) le</b>
+                  <span><webobject name = "etuDateNais" /></span>
+                  <b>&agrave;</b>
+                  <span><webobject name = "etuComNais" /></span>
+                  <wo name = "depNais">
+                    <span>(<webobject name = "dept_nais" />)</span>
+                  </wo>
+                  <span><webobject name = "pays_nais" /></span>
+                </td>
+              </tr>
+              <wo name = "haveConseiller">
+                <tr>
+                  <td>
+                    <table cellpadding = "0" cellspacing = "0" border = "0" width = "100%" class = "resume1">
+                      <tr>
+                        <td valign = "top">
+                          <b>Conseiller</b>
+                          <span><wo name = "conseiller_nom" /></span>
+                          <span><wo name = "conseiller_prenom" /></span>
+                          <td valign = "top">
+                            <wo name = "existLocal">
+                              <div>
+                                <b>Bureau(x)</b>
+                                <wo name = "conslocalisations">
+                                  <span><wo name = "salle_no" /></span>
+                                </wo>
+                              </div>
+                              <div>
+                                <b>T&eacute;l(s)</b>
+                                <wo name = "conslocalisations">
+                                  <span><wo name = "tel" /></span>
+                                </wo>
+                              </div>
+                            </wo>
+                          </td>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </wo>
+            </table>
+          </td>
+          <td valign = "top" align = "center" style = "padding-left:5px;padding-right:5px">
+            <ul style = "text-align:left" id = "autresLien">
+              <li>
+                <webobject name = "profil">Profil de formation</webobject>
+              </li>
+              <li>
+                <webobject name = "resultatUv">R&eacute;sultats aux UV</webobject>
+              </li>
+              <li>
+                <webobject name = "edt">Emploi du temps</webobject>
+              </li>
+              <webobject name = "accessGctc">
+                <li>
+                  <webobject name = "versGestionContact">gestion des contacts</webobject>
+                </li>
+              </webobject>
+              <br />
+              <webobject name = "status">
+                <webobject name = "retourList">Retour &agrave; la liste&nbsp;<wo name = "iCone" /></webobject>
+              </webobject>
+            </ul>
+          </td>
+        </tr>
+      </table>
+      <br />
+      <table cellpadding = "2" cellspacing = "1" border = "0">
+        <tr>
+          <td>
+            <b>Num&eacute;ro de s&eacute;curit&eacute; sociale</b>
+          </td>
+          <td><wo name = "etudiant_nni" /></td>
+          <td>
+            <b>Nationalit&eacute;</b>
+          </td>
+          <td><wo name = "etudiant_pays_nat" /></td>
+          <td>
+            <b>Langue maternelle</b>
+          </td>
+          <td><wo name = "etudiant_langue_mat" /></td>
+        </tr>
+      </table>
+      <h4 class = "tdoss">Baccalaur&eacute;at</h4>
+      <table cellpadding = "2" cellspacing = "1" border = "0">
+        <tr>
+          <td>
+            <b>Ann&eacute;e</b>
+          </td>
+          <td><wo name = "etudiant_bac_an" /></td>
+        </tr>
+        <tr>
+          <td>
+            <b>S&eacute;rie</b>
+          </td>
+          <td><wo name = "etudiant_bac_serie" /></td>
+        </tr>
+        <tr>
+          <td>
+            <b>Mention</b>
+          </td>
+          <td><wo name = "etudiant_bac_mention" /></td>
+        </tr>
+        <tr>
+          <td>
+            <b>D&eacute;partement</b>
+          </td>
+          <td><wo name = "etudiant_dept_bac" /></td>
+        </tr>
+        <tr>
+          <td>
+            <b>Acad&eacute;mie</b>
+          </td>
+          <td><wo name = "etudiant_academie_bac" /></td>
+        </tr>
+        <tr>
+          <td>
+            <b>Pays</b>
+          </td>
+          <td><wo name = "etudiant_pays_bac" /></td>
+        </tr>
+        <tr>
+          <td>
+            <b>Ville</b>
+          </td>
+          <td><wo name = "etudiant_ville_bac" /></td>
+        </tr>
+        <tr>
+          <td>
+            <b>Etablissement</b>
+          </td>
+          <td><wo name = "etudiant_etab_bac" /></td>
+        </tr>
+      </table>
+      <br />
+      <h4 class = "tdoss">Dipl&ocirc;mes obtenus / formations suivies</h4>
+      <table cellpadding = "2" cellspacing = "1" border = "0" class = "tab-data" width = "70%">
+        <tr>
+          <th>Dipl&ocirc;me/formation</th>
+          <th>Ann&eacute;e</th>
+          <th>Type</th>
+          <th>Lieu</th>
+        </tr>
+        <wo name = "formations">
+          <tr class = "tr">
+            <td><wo name = "formation_dipl_obt" /></td>
+            <td><wo name = "formation_an_dipl" /></td>
+            <td><wo name = "formation_lib_dipl" /></td>
+            <td><wo name = "formation_lieu_dipl" /></td>
+          </tr>
+        </wo>
+      </table>
+      <wo name = "etudiant_adresses">
+        <h4 class = "tdoss">Adresses</h4>
+        <table cellpadding = "2" cellspacing = "1" border = "0" class = "tab-data" width = "70%">
+          <tr>
+            <th>Adresse de l'&eacute;tudiant</th>
+            <th>Adresse des parents</th>
+          </tr>
+          <tr>
+            <td>
+              <wo name = "ind">
+                <wo name = "exists_chez_qui">
+                  <div><wo name = "ind_chez_qui" /></div>
+                </wo>
+                <wo name = "exists_adr1">
+                  <div><wo name = "ind_adr1" /></div>
+                </wo>
+                <wo name = "exists_adr2">
+                  <div><wo name = "ind_adr2" /></div>
+                </wo>
+                <div>
+                  <wo name = "exists_bp"> <wo name = "ind_bp" />&nbsp;</wo>
+                  <wo name = "exists_commune"> <wo name = "ind_commune" /> </wo>
+                </div>
+                <wo name = "exists_pays">
+                  <div><wo name = "ind_pays" /></div>
+                </wo>
+                <div>t&eacute;l(s)&nbsp; 
+                  <span>
+                    <wo name = "exists_tel1"> <wo name = "ind_tel1" /> &nbsp; </wo>
+                    <wo name = "exists_tel2"> <wo name = "ind_tel2" /> </wo>
+                  </span>
+                </div>
+              </wo>
+            </td>
+            <td>
+              <wo name = "par">
+                <wo name = "exispar_chez_qui">
+                  <div><wo name = "par_chez_qui" /></div>
+                </wo>
+                <wo name = "exispar_adr1">
+                  <div><wo name = "par_adr1" /></div>
+                </wo>
+                <wo name = "exispar_adr2">
+                  <div><wo name = "par_adr2" /></div>
+                </wo>
+                <div>
+                  <wo name = "exispar_bp"> <wo name = "par_bp" /> &nbsp; </wo>
+                  <wo name = "exispar_commune"> <wo name = "par_commune" /> </wo>
+                </div>
+                <wo name = "exispar_pays">
+                  <div><wo name = "par_pays" /></div>
+                </wo>
+                <div>t&eacute;l(s)&nbsp; 
+                  <span>
+                    <wo name = "exispar_tel1"> <wo name = "par_tel1" /> &nbsp; </wo>
+                    <wo name = "exispar_tel2"> <wo name = "par_tel2" /> </wo>
+                  </span>
+                </div>
+              </wo>
+            </td>
+          </tr>
+        </table>
+      </wo>
+      <h4 class = "tdoss">Inscriptions</h4>
+      <table cellpadding = "2" cellspacing = "1" border = "0" class = "tab-data" width = "70%">
+        <th>P&eacute;riode</th>
+        <th>Dipl&ocirc;me</th>
+        <th>Formule</th>
+        <th>D&eacute;cision</th>
+        <th>Convention d'&eacute;change</th>
+        <wo name = "etudiant_inscriptions">
+          <tr class = "tr">
+            <td><wo name = "ins_periode" /></td>
+            <td>
+              <wo name = "ins_diplome" />
+              <wo name = "ins_dipl_spec_abr" />
+              <wo name = "existDilplOpt"> <wo name = "ins_dipl_opt_abr" /></wo>
+              <wo name = "ins_niveau_adm" />
+            </td>
+            <td>
+              <wo name = "existsFormule">
+                <wo name = "ins_formule" />
+                - 
+                <wo name = "ins_lib_formule" />
+              </wo>
+            </td>
+            <td>
+              <wo name = "existCodeDecision">
+                <wo name = "ins_code_decision" />
+                - 
+                <wo name = "ins_lib_decision" />
+              </wo>
+            </td>
+            <td>
+              <wo name = "existsEchange"> <wo name = "ins_echange" /> </wo>
+            </td>
+          </tr>
+        </wo>
+      </table>
+      <wo name = "voirInfos">
+        <wo name = "etudiant_nfosociales">
+          <h4 class = "tdoss">Informations sociales pour l'ann&eacute;e 
+            <span><wo name = "infos_an" /></span>
+          </h4>
+          <table cellpadding = "2" cellspacing = "1" border = "0">
+            <tr>
+              <td>
+                <b>Aides</b>
+              </td>
+              <td><wo name = "infos_bourse" /></td>
+            </tr>
+            <tr>
+              <td>
+                <b>R&eacute;gime s&eacute;curit&eacute; sociale</b>
+              </td>
+              <td><wo name = "infos_regime_secu" /></td>
+            </tr>
+            <tr>
+              <td>
+                <b>Centre de paiement</b>
+              </td>
+              <td><wo name = "infos_centre_secu" /></td>
+            </tr>
+          </table>
+          <h4 class = "tdoss">Adh&eacute;sions pour l'ann&eacute;e 
+            <span><wo name = "infos_an" /></span>
+          </h4>
+          <table cellpadding = "2" cellspacing = "1" border = "0">
+            <tr>
+              <td>
+                <b>Sport</b>
+              </td>
+              <td><wo name = "infos_sport" /></td>
+            </tr>
+            <tr>
+              <td>
+                <b>BDE</b>
+              </td>
+              <td><wo name = "infos_bde" /></td>
+            </tr>
+          </table>
+        </wo>
+        <wo name = "etudiant_paiement">
+          <h4 class = "tdoss">Paiement pour l'ann&eacute;e 
+            <span><wo name = "paiement_ann" /></span>
+          </h4>
+          <table cellpadding = "0" cellspacing = "0" border = "0">
+            <tr>
+              <td>
+                <table cellpadding = "2" cellspacing = "1" border = "0" class = "tab-data">
+                  <th>Type</th>
+                  <th>Montant</th>
+                  <wo name = "paiement_details">
+                    <tr class = "tr">
+                      <td><wo name = "detail_paie_lib" /></td>
+                      <td align = "right"><wo name = "detail_paie_mnt" /></td>
+                    </tr>
+                  </wo>
+                  <tr>
+                    <td>
+                      <b>TOTAL</b>
+                    </td>
+                    <td align = "right">
+                      <b><wo name = "paiement_total" /></b>&nbsp;&euro;</td>
+                  </tr>
+                </table>
+              </td>
+              <wo name = "opts_pcb">
+                <td align = "right">
+                  <wo name = "post_cond">
+                    <wo name = "montant" />
+                    <wo name = "payBoxForm">
+                      <wo name = "pbxMode" />
+                      <wo name = "pbxCmd" />
+                      <wo name = "pbxTotal" />
+                      <wo name = "pbxPorteur" />
+                      <wo name = "pbxLangue" />
+                      <wo name = "pbxOpt" />
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type = "submit" value = "payer" />
+                    </wo>
+                  </wo>
+                </td>
+              </wo>
+            </tr>
+          </table>
+        </wo>
+      </wo>
+    </div>
+    <div class = "br"></div>
+    <br />
+    <div>
+      La loi n°78-17 du 6 janvier 1978 s'applique aux données recueillies et exposées dans ce service.
+      Vous disposez d'un droit d'accès, de modification, et de suppression des données qui vous concernent.
+      <br />
+      Avis de la CNIL num&eacute;ro 815826. Il est rappel&eacute; que les droits des personnes figurant sur ce serveur sont garantis et prot&eacute;g&eacute;s par la l&eacute;gislation fran&ccedil;aise et qu'il est interdit de capturer les informations nominatives pour les utiliser &agrave; des fins commerciales, publicitaires ou autres (cf. loi du 6/01/1978). 
+    </div>
+    <div class = "br"></div>
+  </webobject>
+  <webobject name = "Busy10" />
+</webobject>

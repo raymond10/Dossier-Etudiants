@@ -1,0 +1,63 @@
+package etudiants.utt.fr.components;
+
+import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOComponent;
+import com.webobjects.appserver.WOResponse;
+import com.webobjects.foundation.NSLog;
+
+import er.ajax.UttAjaxUtils;
+import etudiants.utt.fr.server.MyAjaxComponent;
+
+/**
+ * @author Raymond NANEON <raymond.naneon at utt.fr>
+ * 
+ */
+
+public class OnException extends MyAjaxComponent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4776777728585332651L;
+	public String observations = null;
+	public String message = null;
+
+	// public Wrapper wrap;
+
+	public OnException(WOContext context) {
+		super(context);
+		// wrap.setConnectUser(true);
+		NSLog.out.appendln("OnException");
+	}
+	
+	public void appendToResponse(WOResponse res, WOContext ctx) {
+	    super.appendToResponse(res, ctx);
+	    UttAjaxUtils.addStylesheetResourceInHead(ctx, res, 
+	      "FwkCktlThemes.framework", "themes/mac_os_x.css");
+	    UttAjaxUtils.addStylesheetResourceInHead(ctx, res, null, 
+	      "css/etudiant.css");
+	  }
+
+	public WOComponent retourAcceuil() {
+		Main accueil = (Main) mySession().getSavedPageWithName(Main.class.getName());
+		mySession().setNestedEdc(null);
+		mySession().setAlertMessage(null);
+		mySession().setUtilisateur(null);
+		return accueil;
+	}
+
+	public String getObservations() {
+		return observations;
+	}
+
+	public void setObservations(String observations) {
+		this.observations = observations;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+}

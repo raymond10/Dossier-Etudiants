@@ -1,0 +1,42 @@
+{
+    attributes = (
+        {
+            columnName = "PARAM_DESCRIPTION"; 
+            externalType = VARCHAR2; 
+            name = paramDescription; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1000; 
+        }, 
+        {
+            className = "java.lang.Number"; 
+            columnName = "PARAM_ID"; 
+            externalType = NUMBER; 
+            name = paramId; 
+            valueType = d; 
+        }, 
+        {
+            columnName = "PARAM_KEY"; 
+            externalType = VARCHAR2; 
+            name = paramKey; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 20; 
+        }, 
+        {
+            columnName = "PARAM_VALUE"; 
+            externalType = VARCHAR2; 
+            name = paramValue; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 1000; 
+        }
+    ); 
+    attributesUsedForLocking = (paramDescription, paramId, paramKey, paramValue); 
+    className = "etudiants.utt.fr.eo.EOParametre"; 
+    classProperties = (paramDescription, paramKey, paramValue); 
+    externalName = "GERRY.VUE_PARAM_KEY"; 
+    fetchSpecificationDictionary = {}; 
+    name = EOParametre; 
+    primaryKeyAttributes = (paramId); 
+}

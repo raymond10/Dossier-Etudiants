@@ -1,0 +1,733 @@
+// DO NOT EDIT.  Make changes to EOVueAfficherdiplome.java instead.
+package etudiants.utt.fr.eo;
+
+import com.webobjects.eoaccess.*;
+import com.webobjects.eocontrol.*;
+import com.webobjects.foundation.*;
+import java.math.*;
+import java.util.*;
+import org.apache.log4j.Logger;
+
+import er.extensions.eof.*;
+import er.extensions.foundation.*;
+
+@SuppressWarnings("all")
+public abstract class _EOVueAfficherdiplome extends  ERXGenericRecord {
+  public static final String ENTITY_NAME = "EOVueAfficherdiplome";
+
+  // Attribute Keys
+  public static final ERXKey<String> CODE_DIPLOME = new ERXKey<String>("codeDiplome");
+  public static final ERXKey<String> DEBUT = new ERXKey<String>("debut");
+  public static final ERXKey<String> DIPL_SPEC = new ERXKey<String>("diplSpec");
+  public static final ERXKey<String> FIN = new ERXKey<String>("fin");
+  public static final ERXKey<String> LIBELLE = new ERXKey<String>("libelle");
+  public static final ERXKey<String> NIV_ENTREE = new ERXKey<String>("nivEntree");
+  public static final ERXKey<Long> NUMERO_ETU = new ERXKey<Long>("numeroEtu");
+  public static final ERXKey<String> PRD_DEBUT = new ERXKey<String>("prdDebut");
+  public static final ERXKey<String> PRD_FIN = new ERXKey<String>("prdFin");
+  public static final ERXKey<String> PROFIL_C = new ERXKey<String>("profilC");
+  public static final ERXKey<String> REORIENTE = new ERXKey<String>("reoriente");
+  // Relationship Keys
+  public static final ERXKey<gestionuv.utt.fr.eo.EORefProfil> EO_REF_PROFILS = new ERXKey<gestionuv.utt.fr.eo.EORefProfil>("eoRefProfils");
+  public static final ERXKey<gestionuv.utt.fr.eo.EORefProfilTotal> EO_REF_PROFIL_TOTALS = new ERXKey<gestionuv.utt.fr.eo.EORefProfilTotal>("eoRefProfilTotals");
+  public static final ERXKey<etudiants.utt.fr.eo.EOVueDetailetudiant> EO_VUE_DETAILETUDIANT = new ERXKey<etudiants.utt.fr.eo.EOVueDetailetudiant>("eoVueDetailetudiant");
+  public static final ERXKey<etudiants.utt.fr.eo.EOVueDetailparcours> EO_VUE_DETAILPARCOURSES = new ERXKey<etudiants.utt.fr.eo.EOVueDetailparcours>("eoVueDetailparcourses");
+  public static final ERXKey<gestionuv.utt.fr.eo.EOVueLescategories> EO_VUE_LESCATEGORIESES = new ERXKey<gestionuv.utt.fr.eo.EOVueLescategories>("eoVueLescategorieses");
+  public static final ERXKey<gestionuv.utt.fr.eo.EOVueSelectinsuv> EO_VUE_SELECTINSUVS = new ERXKey<gestionuv.utt.fr.eo.EOVueSelectinsuv>("eoVueSelectinsuvs");
+
+  // Attributes
+  public static final String CODE_DIPLOME_KEY = CODE_DIPLOME.key();
+  public static final String DEBUT_KEY = DEBUT.key();
+  public static final String DIPL_SPEC_KEY = DIPL_SPEC.key();
+  public static final String FIN_KEY = FIN.key();
+  public static final String LIBELLE_KEY = LIBELLE.key();
+  public static final String NIV_ENTREE_KEY = NIV_ENTREE.key();
+  public static final String NUMERO_ETU_KEY = NUMERO_ETU.key();
+  public static final String PRD_DEBUT_KEY = PRD_DEBUT.key();
+  public static final String PRD_FIN_KEY = PRD_FIN.key();
+  public static final String PROFIL_C_KEY = PROFIL_C.key();
+  public static final String REORIENTE_KEY = REORIENTE.key();
+  // Relationships
+  public static final String EO_REF_PROFILS_KEY = EO_REF_PROFILS.key();
+  public static final String EO_REF_PROFIL_TOTALS_KEY = EO_REF_PROFIL_TOTALS.key();
+  public static final String EO_VUE_DETAILETUDIANT_KEY = EO_VUE_DETAILETUDIANT.key();
+  public static final String EO_VUE_DETAILPARCOURSES_KEY = EO_VUE_DETAILPARCOURSES.key();
+  public static final String EO_VUE_LESCATEGORIESES_KEY = EO_VUE_LESCATEGORIESES.key();
+  public static final String EO_VUE_SELECTINSUVS_KEY = EO_VUE_SELECTINSUVS.key();
+
+  private static Logger LOG = Logger.getLogger(_EOVueAfficherdiplome.class);
+
+  public EOVueAfficherdiplome localInstanceIn(EOEditingContext editingContext) {
+    EOVueAfficherdiplome localInstance = (EOVueAfficherdiplome)EOUtilities.localInstanceOfObject(editingContext, this);
+    if (localInstance == null) {
+      throw new IllegalStateException("You attempted to localInstance " + this + ", which has not yet committed.");
+    }
+    return localInstance;
+  }
+
+  public String codeDiplome() {
+    return (String) storedValueForKey(_EOVueAfficherdiplome.CODE_DIPLOME_KEY);
+  }
+
+  public void setCodeDiplome(String value) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+    	_EOVueAfficherdiplome.LOG.debug( "updating codeDiplome from " + codeDiplome() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueAfficherdiplome.CODE_DIPLOME_KEY);
+  }
+
+  public String debut() {
+    return (String) storedValueForKey(_EOVueAfficherdiplome.DEBUT_KEY);
+  }
+
+  public void setDebut(String value) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+    	_EOVueAfficherdiplome.LOG.debug( "updating debut from " + debut() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueAfficherdiplome.DEBUT_KEY);
+  }
+
+  public String diplSpec() {
+    return (String) storedValueForKey(_EOVueAfficherdiplome.DIPL_SPEC_KEY);
+  }
+
+  public void setDiplSpec(String value) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+    	_EOVueAfficherdiplome.LOG.debug( "updating diplSpec from " + diplSpec() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueAfficherdiplome.DIPL_SPEC_KEY);
+  }
+
+  public String fin() {
+    return (String) storedValueForKey(_EOVueAfficherdiplome.FIN_KEY);
+  }
+
+  public void setFin(String value) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+    	_EOVueAfficherdiplome.LOG.debug( "updating fin from " + fin() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueAfficherdiplome.FIN_KEY);
+  }
+
+  public String libelle() {
+    return (String) storedValueForKey(_EOVueAfficherdiplome.LIBELLE_KEY);
+  }
+
+  public void setLibelle(String value) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+    	_EOVueAfficherdiplome.LOG.debug( "updating libelle from " + libelle() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueAfficherdiplome.LIBELLE_KEY);
+  }
+
+  public String nivEntree() {
+    return (String) storedValueForKey(_EOVueAfficherdiplome.NIV_ENTREE_KEY);
+  }
+
+  public void setNivEntree(String value) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+    	_EOVueAfficherdiplome.LOG.debug( "updating nivEntree from " + nivEntree() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueAfficherdiplome.NIV_ENTREE_KEY);
+  }
+
+  public Long numeroEtu() {
+    return (Long) storedValueForKey(_EOVueAfficherdiplome.NUMERO_ETU_KEY);
+  }
+
+  public void setNumeroEtu(Long value) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+    	_EOVueAfficherdiplome.LOG.debug( "updating numeroEtu from " + numeroEtu() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueAfficherdiplome.NUMERO_ETU_KEY);
+  }
+
+  public String prdDebut() {
+    return (String) storedValueForKey(_EOVueAfficherdiplome.PRD_DEBUT_KEY);
+  }
+
+  public void setPrdDebut(String value) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+    	_EOVueAfficherdiplome.LOG.debug( "updating prdDebut from " + prdDebut() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueAfficherdiplome.PRD_DEBUT_KEY);
+  }
+
+  public String prdFin() {
+    return (String) storedValueForKey(_EOVueAfficherdiplome.PRD_FIN_KEY);
+  }
+
+  public void setPrdFin(String value) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+    	_EOVueAfficherdiplome.LOG.debug( "updating prdFin from " + prdFin() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueAfficherdiplome.PRD_FIN_KEY);
+  }
+
+  public String profilC() {
+    return (String) storedValueForKey(_EOVueAfficherdiplome.PROFIL_C_KEY);
+  }
+
+  public void setProfilC(String value) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+    	_EOVueAfficherdiplome.LOG.debug( "updating profilC from " + profilC() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueAfficherdiplome.PROFIL_C_KEY);
+  }
+
+  public String reoriente() {
+    return (String) storedValueForKey(_EOVueAfficherdiplome.REORIENTE_KEY);
+  }
+
+  public void setReoriente(String value) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+    	_EOVueAfficherdiplome.LOG.debug( "updating reoriente from " + reoriente() + " to " + value);
+    }
+    takeStoredValueForKey(value, _EOVueAfficherdiplome.REORIENTE_KEY);
+  }
+
+  public etudiants.utt.fr.eo.EOVueDetailetudiant eoVueDetailetudiant() {
+    return (etudiants.utt.fr.eo.EOVueDetailetudiant)storedValueForKey(_EOVueAfficherdiplome.EO_VUE_DETAILETUDIANT_KEY);
+  }
+  
+  public void setEoVueDetailetudiant(etudiants.utt.fr.eo.EOVueDetailetudiant value) {
+    takeStoredValueForKey(value, _EOVueAfficherdiplome.EO_VUE_DETAILETUDIANT_KEY);
+  }
+
+  public void setEoVueDetailetudiantRelationship(etudiants.utt.fr.eo.EOVueDetailetudiant value) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+      _EOVueAfficherdiplome.LOG.debug("updating eoVueDetailetudiant from " + eoVueDetailetudiant() + " to " + value);
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	setEoVueDetailetudiant(value);
+    }
+    else if (value == null) {
+    	etudiants.utt.fr.eo.EOVueDetailetudiant oldValue = eoVueDetailetudiant();
+    	if (oldValue != null) {
+    		removeObjectFromBothSidesOfRelationshipWithKey(oldValue, _EOVueAfficherdiplome.EO_VUE_DETAILETUDIANT_KEY);
+      }
+    } else {
+    	addObjectToBothSidesOfRelationshipWithKey(value, _EOVueAfficherdiplome.EO_VUE_DETAILETUDIANT_KEY);
+    }
+  }
+  
+  public NSArray<gestionuv.utt.fr.eo.EORefProfil> eoRefProfils() {
+    return (NSArray<gestionuv.utt.fr.eo.EORefProfil>)storedValueForKey(_EOVueAfficherdiplome.EO_REF_PROFILS_KEY);
+  }
+
+  public NSArray<gestionuv.utt.fr.eo.EORefProfil> eoRefProfils(EOQualifier qualifier) {
+    return eoRefProfils(qualifier, null, false);
+  }
+
+  public NSArray<gestionuv.utt.fr.eo.EORefProfil> eoRefProfils(EOQualifier qualifier, boolean fetch) {
+    return eoRefProfils(qualifier, null, fetch);
+  }
+
+  public NSArray<gestionuv.utt.fr.eo.EORefProfil> eoRefProfils(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings, boolean fetch) {
+    NSArray<gestionuv.utt.fr.eo.EORefProfil> results;
+    if (fetch) {
+      EOQualifier fullQualifier;
+      EOQualifier inverseQualifier = new EOKeyValueQualifier(gestionuv.utt.fr.eo.EORefProfil.EO_VUE_AFFICHERDIPLOME_KEY, EOQualifier.QualifierOperatorEqual, this);
+    	
+      if (qualifier == null) {
+        fullQualifier = inverseQualifier;
+      }
+      else {
+        NSMutableArray<EOQualifier> qualifiers = new NSMutableArray<EOQualifier>();
+        qualifiers.addObject(qualifier);
+        qualifiers.addObject(inverseQualifier);
+        fullQualifier = new EOAndQualifier(qualifiers);
+      }
+
+      results = gestionuv.utt.fr.eo.EORefProfil.fetchEORefProfils(editingContext(), fullQualifier, sortOrderings);
+    }
+    else {
+      results = eoRefProfils();
+      if (qualifier != null) {
+        results = (NSArray<gestionuv.utt.fr.eo.EORefProfil>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
+      }
+      if (sortOrderings != null) {
+        results = (NSArray<gestionuv.utt.fr.eo.EORefProfil>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
+      }
+    }
+    return results;
+  }
+  
+  public void addToEoRefProfils(gestionuv.utt.fr.eo.EORefProfil object) {
+    includeObjectIntoPropertyWithKey(object, _EOVueAfficherdiplome.EO_REF_PROFILS_KEY);
+  }
+
+  public void removeFromEoRefProfils(gestionuv.utt.fr.eo.EORefProfil object) {
+    excludeObjectFromPropertyWithKey(object, _EOVueAfficherdiplome.EO_REF_PROFILS_KEY);
+  }
+
+  public void addToEoRefProfilsRelationship(gestionuv.utt.fr.eo.EORefProfil object) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+      _EOVueAfficherdiplome.LOG.debug("adding " + object + " to eoRefProfils relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	addToEoRefProfils(object);
+    }
+    else {
+    	addObjectToBothSidesOfRelationshipWithKey(object, _EOVueAfficherdiplome.EO_REF_PROFILS_KEY);
+    }
+  }
+
+  public void removeFromEoRefProfilsRelationship(gestionuv.utt.fr.eo.EORefProfil object) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+      _EOVueAfficherdiplome.LOG.debug("removing " + object + " from eoRefProfils relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	removeFromEoRefProfils(object);
+    }
+    else {
+    	removeObjectFromBothSidesOfRelationshipWithKey(object, _EOVueAfficherdiplome.EO_REF_PROFILS_KEY);
+    }
+  }
+
+  public gestionuv.utt.fr.eo.EORefProfil createEoRefProfilsRelationship() {
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( gestionuv.utt.fr.eo.EORefProfil.ENTITY_NAME );
+    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+    editingContext().insertObject(eo);
+    addObjectToBothSidesOfRelationshipWithKey(eo, _EOVueAfficherdiplome.EO_REF_PROFILS_KEY);
+    return (gestionuv.utt.fr.eo.EORefProfil) eo;
+  }
+
+  public void deleteEoRefProfilsRelationship(gestionuv.utt.fr.eo.EORefProfil object) {
+    removeObjectFromBothSidesOfRelationshipWithKey(object, _EOVueAfficherdiplome.EO_REF_PROFILS_KEY);
+    editingContext().deleteObject(object);
+  }
+
+  public void deleteAllEoRefProfilsRelationships() {
+    Enumeration<gestionuv.utt.fr.eo.EORefProfil> objects = eoRefProfils().immutableClone().objectEnumerator();
+    while (objects.hasMoreElements()) {
+      deleteEoRefProfilsRelationship(objects.nextElement());
+    }
+  }
+
+  public NSArray<gestionuv.utt.fr.eo.EORefProfilTotal> eoRefProfilTotals() {
+    return (NSArray<gestionuv.utt.fr.eo.EORefProfilTotal>)storedValueForKey(_EOVueAfficherdiplome.EO_REF_PROFIL_TOTALS_KEY);
+  }
+
+  public NSArray<gestionuv.utt.fr.eo.EORefProfilTotal> eoRefProfilTotals(EOQualifier qualifier) {
+    return eoRefProfilTotals(qualifier, null);
+  }
+
+  public NSArray<gestionuv.utt.fr.eo.EORefProfilTotal> eoRefProfilTotals(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings) {
+    NSArray<gestionuv.utt.fr.eo.EORefProfilTotal> results;
+      results = eoRefProfilTotals();
+      if (qualifier != null) {
+        results = (NSArray<gestionuv.utt.fr.eo.EORefProfilTotal>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
+      }
+      if (sortOrderings != null) {
+        results = (NSArray<gestionuv.utt.fr.eo.EORefProfilTotal>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
+      }
+    return results;
+  }
+  
+  public void addToEoRefProfilTotals(gestionuv.utt.fr.eo.EORefProfilTotal object) {
+    includeObjectIntoPropertyWithKey(object, _EOVueAfficherdiplome.EO_REF_PROFIL_TOTALS_KEY);
+  }
+
+  public void removeFromEoRefProfilTotals(gestionuv.utt.fr.eo.EORefProfilTotal object) {
+    excludeObjectFromPropertyWithKey(object, _EOVueAfficherdiplome.EO_REF_PROFIL_TOTALS_KEY);
+  }
+
+  public void addToEoRefProfilTotalsRelationship(gestionuv.utt.fr.eo.EORefProfilTotal object) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+      _EOVueAfficherdiplome.LOG.debug("adding " + object + " to eoRefProfilTotals relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	addToEoRefProfilTotals(object);
+    }
+    else {
+    	addObjectToBothSidesOfRelationshipWithKey(object, _EOVueAfficherdiplome.EO_REF_PROFIL_TOTALS_KEY);
+    }
+  }
+
+  public void removeFromEoRefProfilTotalsRelationship(gestionuv.utt.fr.eo.EORefProfilTotal object) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+      _EOVueAfficherdiplome.LOG.debug("removing " + object + " from eoRefProfilTotals relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	removeFromEoRefProfilTotals(object);
+    }
+    else {
+    	removeObjectFromBothSidesOfRelationshipWithKey(object, _EOVueAfficherdiplome.EO_REF_PROFIL_TOTALS_KEY);
+    }
+  }
+
+  public gestionuv.utt.fr.eo.EORefProfilTotal createEoRefProfilTotalsRelationship() {
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( gestionuv.utt.fr.eo.EORefProfilTotal.ENTITY_NAME );
+    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+    editingContext().insertObject(eo);
+    addObjectToBothSidesOfRelationshipWithKey(eo, _EOVueAfficherdiplome.EO_REF_PROFIL_TOTALS_KEY);
+    return (gestionuv.utt.fr.eo.EORefProfilTotal) eo;
+  }
+
+  public void deleteEoRefProfilTotalsRelationship(gestionuv.utt.fr.eo.EORefProfilTotal object) {
+    removeObjectFromBothSidesOfRelationshipWithKey(object, _EOVueAfficherdiplome.EO_REF_PROFIL_TOTALS_KEY);
+    editingContext().deleteObject(object);
+  }
+
+  public void deleteAllEoRefProfilTotalsRelationships() {
+    Enumeration<gestionuv.utt.fr.eo.EORefProfilTotal> objects = eoRefProfilTotals().immutableClone().objectEnumerator();
+    while (objects.hasMoreElements()) {
+      deleteEoRefProfilTotalsRelationship(objects.nextElement());
+    }
+  }
+
+  public NSArray<etudiants.utt.fr.eo.EOVueDetailparcours> eoVueDetailparcourses() {
+    return (NSArray<etudiants.utt.fr.eo.EOVueDetailparcours>)storedValueForKey(_EOVueAfficherdiplome.EO_VUE_DETAILPARCOURSES_KEY);
+  }
+
+  public NSArray<etudiants.utt.fr.eo.EOVueDetailparcours> eoVueDetailparcourses(EOQualifier qualifier) {
+    return eoVueDetailparcourses(qualifier, null);
+  }
+
+  public NSArray<etudiants.utt.fr.eo.EOVueDetailparcours> eoVueDetailparcourses(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings) {
+    NSArray<etudiants.utt.fr.eo.EOVueDetailparcours> results;
+      results = eoVueDetailparcourses();
+      if (qualifier != null) {
+        results = (NSArray<etudiants.utt.fr.eo.EOVueDetailparcours>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
+      }
+      if (sortOrderings != null) {
+        results = (NSArray<etudiants.utt.fr.eo.EOVueDetailparcours>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
+      }
+    return results;
+  }
+  
+  public void addToEoVueDetailparcourses(etudiants.utt.fr.eo.EOVueDetailparcours object) {
+    includeObjectIntoPropertyWithKey(object, _EOVueAfficherdiplome.EO_VUE_DETAILPARCOURSES_KEY);
+  }
+
+  public void removeFromEoVueDetailparcourses(etudiants.utt.fr.eo.EOVueDetailparcours object) {
+    excludeObjectFromPropertyWithKey(object, _EOVueAfficherdiplome.EO_VUE_DETAILPARCOURSES_KEY);
+  }
+
+  public void addToEoVueDetailparcoursesRelationship(etudiants.utt.fr.eo.EOVueDetailparcours object) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+      _EOVueAfficherdiplome.LOG.debug("adding " + object + " to eoVueDetailparcourses relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	addToEoVueDetailparcourses(object);
+    }
+    else {
+    	addObjectToBothSidesOfRelationshipWithKey(object, _EOVueAfficherdiplome.EO_VUE_DETAILPARCOURSES_KEY);
+    }
+  }
+
+  public void removeFromEoVueDetailparcoursesRelationship(etudiants.utt.fr.eo.EOVueDetailparcours object) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+      _EOVueAfficherdiplome.LOG.debug("removing " + object + " from eoVueDetailparcourses relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	removeFromEoVueDetailparcourses(object);
+    }
+    else {
+    	removeObjectFromBothSidesOfRelationshipWithKey(object, _EOVueAfficherdiplome.EO_VUE_DETAILPARCOURSES_KEY);
+    }
+  }
+
+  public etudiants.utt.fr.eo.EOVueDetailparcours createEoVueDetailparcoursesRelationship() {
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( etudiants.utt.fr.eo.EOVueDetailparcours.ENTITY_NAME );
+    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+    editingContext().insertObject(eo);
+    addObjectToBothSidesOfRelationshipWithKey(eo, _EOVueAfficherdiplome.EO_VUE_DETAILPARCOURSES_KEY);
+    return (etudiants.utt.fr.eo.EOVueDetailparcours) eo;
+  }
+
+  public void deleteEoVueDetailparcoursesRelationship(etudiants.utt.fr.eo.EOVueDetailparcours object) {
+    removeObjectFromBothSidesOfRelationshipWithKey(object, _EOVueAfficherdiplome.EO_VUE_DETAILPARCOURSES_KEY);
+    editingContext().deleteObject(object);
+  }
+
+  public void deleteAllEoVueDetailparcoursesRelationships() {
+    Enumeration<etudiants.utt.fr.eo.EOVueDetailparcours> objects = eoVueDetailparcourses().immutableClone().objectEnumerator();
+    while (objects.hasMoreElements()) {
+      deleteEoVueDetailparcoursesRelationship(objects.nextElement());
+    }
+  }
+
+  public NSArray<gestionuv.utt.fr.eo.EOVueLescategories> eoVueLescategorieses() {
+    return (NSArray<gestionuv.utt.fr.eo.EOVueLescategories>)storedValueForKey(_EOVueAfficherdiplome.EO_VUE_LESCATEGORIESES_KEY);
+  }
+
+  public NSArray<gestionuv.utt.fr.eo.EOVueLescategories> eoVueLescategorieses(EOQualifier qualifier) {
+    return eoVueLescategorieses(qualifier, null, false);
+  }
+
+  public NSArray<gestionuv.utt.fr.eo.EOVueLescategories> eoVueLescategorieses(EOQualifier qualifier, boolean fetch) {
+    return eoVueLescategorieses(qualifier, null, fetch);
+  }
+
+  public NSArray<gestionuv.utt.fr.eo.EOVueLescategories> eoVueLescategorieses(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings, boolean fetch) {
+    NSArray<gestionuv.utt.fr.eo.EOVueLescategories> results;
+    if (fetch) {
+      EOQualifier fullQualifier;
+      EOQualifier inverseQualifier = new EOKeyValueQualifier(gestionuv.utt.fr.eo.EOVueLescategories.EO_VUE_AFFICHERDIPLOME_KEY, EOQualifier.QualifierOperatorEqual, this);
+    	
+      if (qualifier == null) {
+        fullQualifier = inverseQualifier;
+      }
+      else {
+        NSMutableArray<EOQualifier> qualifiers = new NSMutableArray<EOQualifier>();
+        qualifiers.addObject(qualifier);
+        qualifiers.addObject(inverseQualifier);
+        fullQualifier = new EOAndQualifier(qualifiers);
+      }
+
+      results = gestionuv.utt.fr.eo.EOVueLescategories.fetchEOVueLescategorieses(editingContext(), fullQualifier, sortOrderings);
+    }
+    else {
+      results = eoVueLescategorieses();
+      if (qualifier != null) {
+        results = (NSArray<gestionuv.utt.fr.eo.EOVueLescategories>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
+      }
+      if (sortOrderings != null) {
+        results = (NSArray<gestionuv.utt.fr.eo.EOVueLescategories>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
+      }
+    }
+    return results;
+  }
+  
+  public void addToEoVueLescategorieses(gestionuv.utt.fr.eo.EOVueLescategories object) {
+    includeObjectIntoPropertyWithKey(object, _EOVueAfficherdiplome.EO_VUE_LESCATEGORIESES_KEY);
+  }
+
+  public void removeFromEoVueLescategorieses(gestionuv.utt.fr.eo.EOVueLescategories object) {
+    excludeObjectFromPropertyWithKey(object, _EOVueAfficherdiplome.EO_VUE_LESCATEGORIESES_KEY);
+  }
+
+  public void addToEoVueLescategoriesesRelationship(gestionuv.utt.fr.eo.EOVueLescategories object) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+      _EOVueAfficherdiplome.LOG.debug("adding " + object + " to eoVueLescategorieses relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	addToEoVueLescategorieses(object);
+    }
+    else {
+    	addObjectToBothSidesOfRelationshipWithKey(object, _EOVueAfficherdiplome.EO_VUE_LESCATEGORIESES_KEY);
+    }
+  }
+
+  public void removeFromEoVueLescategoriesesRelationship(gestionuv.utt.fr.eo.EOVueLescategories object) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+      _EOVueAfficherdiplome.LOG.debug("removing " + object + " from eoVueLescategorieses relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	removeFromEoVueLescategorieses(object);
+    }
+    else {
+    	removeObjectFromBothSidesOfRelationshipWithKey(object, _EOVueAfficherdiplome.EO_VUE_LESCATEGORIESES_KEY);
+    }
+  }
+
+  public gestionuv.utt.fr.eo.EOVueLescategories createEoVueLescategoriesesRelationship() {
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( gestionuv.utt.fr.eo.EOVueLescategories.ENTITY_NAME );
+    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+    editingContext().insertObject(eo);
+    addObjectToBothSidesOfRelationshipWithKey(eo, _EOVueAfficherdiplome.EO_VUE_LESCATEGORIESES_KEY);
+    return (gestionuv.utt.fr.eo.EOVueLescategories) eo;
+  }
+
+  public void deleteEoVueLescategoriesesRelationship(gestionuv.utt.fr.eo.EOVueLescategories object) {
+    removeObjectFromBothSidesOfRelationshipWithKey(object, _EOVueAfficherdiplome.EO_VUE_LESCATEGORIESES_KEY);
+    editingContext().deleteObject(object);
+  }
+
+  public void deleteAllEoVueLescategoriesesRelationships() {
+    Enumeration<gestionuv.utt.fr.eo.EOVueLescategories> objects = eoVueLescategorieses().immutableClone().objectEnumerator();
+    while (objects.hasMoreElements()) {
+      deleteEoVueLescategoriesesRelationship(objects.nextElement());
+    }
+  }
+
+  public NSArray<gestionuv.utt.fr.eo.EOVueSelectinsuv> eoVueSelectinsuvs() {
+    return (NSArray<gestionuv.utt.fr.eo.EOVueSelectinsuv>)storedValueForKey(_EOVueAfficherdiplome.EO_VUE_SELECTINSUVS_KEY);
+  }
+
+  public NSArray<gestionuv.utt.fr.eo.EOVueSelectinsuv> eoVueSelectinsuvs(EOQualifier qualifier) {
+    return eoVueSelectinsuvs(qualifier, null, false);
+  }
+
+  public NSArray<gestionuv.utt.fr.eo.EOVueSelectinsuv> eoVueSelectinsuvs(EOQualifier qualifier, boolean fetch) {
+    return eoVueSelectinsuvs(qualifier, null, fetch);
+  }
+
+  public NSArray<gestionuv.utt.fr.eo.EOVueSelectinsuv> eoVueSelectinsuvs(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings, boolean fetch) {
+    NSArray<gestionuv.utt.fr.eo.EOVueSelectinsuv> results;
+    if (fetch) {
+      EOQualifier fullQualifier;
+      EOQualifier inverseQualifier = new EOKeyValueQualifier(gestionuv.utt.fr.eo.EOVueSelectinsuv.EO_VUE_AFFICHERDIPLOME_KEY, EOQualifier.QualifierOperatorEqual, this);
+    	
+      if (qualifier == null) {
+        fullQualifier = inverseQualifier;
+      }
+      else {
+        NSMutableArray<EOQualifier> qualifiers = new NSMutableArray<EOQualifier>();
+        qualifiers.addObject(qualifier);
+        qualifiers.addObject(inverseQualifier);
+        fullQualifier = new EOAndQualifier(qualifiers);
+      }
+
+      results = gestionuv.utt.fr.eo.EOVueSelectinsuv.fetchEOVueSelectinsuvs(editingContext(), fullQualifier, sortOrderings);
+    }
+    else {
+      results = eoVueSelectinsuvs();
+      if (qualifier != null) {
+        results = (NSArray<gestionuv.utt.fr.eo.EOVueSelectinsuv>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
+      }
+      if (sortOrderings != null) {
+        results = (NSArray<gestionuv.utt.fr.eo.EOVueSelectinsuv>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
+      }
+    }
+    return results;
+  }
+  
+  public void addToEoVueSelectinsuvs(gestionuv.utt.fr.eo.EOVueSelectinsuv object) {
+    includeObjectIntoPropertyWithKey(object, _EOVueAfficherdiplome.EO_VUE_SELECTINSUVS_KEY);
+  }
+
+  public void removeFromEoVueSelectinsuvs(gestionuv.utt.fr.eo.EOVueSelectinsuv object) {
+    excludeObjectFromPropertyWithKey(object, _EOVueAfficherdiplome.EO_VUE_SELECTINSUVS_KEY);
+  }
+
+  public void addToEoVueSelectinsuvsRelationship(gestionuv.utt.fr.eo.EOVueSelectinsuv object) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+      _EOVueAfficherdiplome.LOG.debug("adding " + object + " to eoVueSelectinsuvs relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	addToEoVueSelectinsuvs(object);
+    }
+    else {
+    	addObjectToBothSidesOfRelationshipWithKey(object, _EOVueAfficherdiplome.EO_VUE_SELECTINSUVS_KEY);
+    }
+  }
+
+  public void removeFromEoVueSelectinsuvsRelationship(gestionuv.utt.fr.eo.EOVueSelectinsuv object) {
+    if (_EOVueAfficherdiplome.LOG.isDebugEnabled()) {
+      _EOVueAfficherdiplome.LOG.debug("removing " + object + " from eoVueSelectinsuvs relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	removeFromEoVueSelectinsuvs(object);
+    }
+    else {
+    	removeObjectFromBothSidesOfRelationshipWithKey(object, _EOVueAfficherdiplome.EO_VUE_SELECTINSUVS_KEY);
+    }
+  }
+
+  public gestionuv.utt.fr.eo.EOVueSelectinsuv createEoVueSelectinsuvsRelationship() {
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( gestionuv.utt.fr.eo.EOVueSelectinsuv.ENTITY_NAME );
+    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+    editingContext().insertObject(eo);
+    addObjectToBothSidesOfRelationshipWithKey(eo, _EOVueAfficherdiplome.EO_VUE_SELECTINSUVS_KEY);
+    return (gestionuv.utt.fr.eo.EOVueSelectinsuv) eo;
+  }
+
+  public void deleteEoVueSelectinsuvsRelationship(gestionuv.utt.fr.eo.EOVueSelectinsuv object) {
+    removeObjectFromBothSidesOfRelationshipWithKey(object, _EOVueAfficherdiplome.EO_VUE_SELECTINSUVS_KEY);
+    editingContext().deleteObject(object);
+  }
+
+  public void deleteAllEoVueSelectinsuvsRelationships() {
+    Enumeration<gestionuv.utt.fr.eo.EOVueSelectinsuv> objects = eoVueSelectinsuvs().immutableClone().objectEnumerator();
+    while (objects.hasMoreElements()) {
+      deleteEoVueSelectinsuvsRelationship(objects.nextElement());
+    }
+  }
+
+
+  public static EOVueAfficherdiplome createEOVueAfficherdiplome(EOEditingContext editingContext, String codeDiplome
+, Long numeroEtu
+, String prdDebut
+, String prdFin
+, String profilC
+, String reoriente
+, etudiants.utt.fr.eo.EOVueDetailetudiant eoVueDetailetudiant) {
+    EOVueAfficherdiplome eo = (EOVueAfficherdiplome) EOUtilities.createAndInsertInstance(editingContext, _EOVueAfficherdiplome.ENTITY_NAME);    
+		eo.setCodeDiplome(codeDiplome);
+		eo.setNumeroEtu(numeroEtu);
+		eo.setPrdDebut(prdDebut);
+		eo.setPrdFin(prdFin);
+		eo.setProfilC(profilC);
+		eo.setReoriente(reoriente);
+    eo.setEoVueDetailetudiantRelationship(eoVueDetailetudiant);
+    return eo;
+  }
+
+  public static ERXFetchSpecification<EOVueAfficherdiplome> fetchSpec() {
+    return new ERXFetchSpecification<EOVueAfficherdiplome>(_EOVueAfficherdiplome.ENTITY_NAME, null, null, false, true, null);
+  }
+
+  public static NSArray<EOVueAfficherdiplome> fetchAllEOVueAfficherdiplomes(EOEditingContext editingContext) {
+    return _EOVueAfficherdiplome.fetchAllEOVueAfficherdiplomes(editingContext, null);
+  }
+
+  public static NSArray<EOVueAfficherdiplome> fetchAllEOVueAfficherdiplomes(EOEditingContext editingContext, NSArray<EOSortOrdering> sortOrderings) {
+    return _EOVueAfficherdiplome.fetchEOVueAfficherdiplomes(editingContext, null, sortOrderings);
+  }
+
+  public static NSArray<EOVueAfficherdiplome> fetchEOVueAfficherdiplomes(EOEditingContext editingContext, EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings) {
+    ERXFetchSpecification<EOVueAfficherdiplome> fetchSpec = new ERXFetchSpecification<EOVueAfficherdiplome>(_EOVueAfficherdiplome.ENTITY_NAME, qualifier, sortOrderings);
+    fetchSpec.setIsDeep(true);
+    NSArray<EOVueAfficherdiplome> eoObjects = fetchSpec.fetchObjects(editingContext);
+    return eoObjects;
+  }
+
+  public static EOVueAfficherdiplome fetchEOVueAfficherdiplome(EOEditingContext editingContext, String keyName, Object value) {
+    return _EOVueAfficherdiplome.fetchEOVueAfficherdiplome(editingContext, new EOKeyValueQualifier(keyName, EOQualifier.QualifierOperatorEqual, value));
+  }
+
+  public static EOVueAfficherdiplome fetchEOVueAfficherdiplome(EOEditingContext editingContext, EOQualifier qualifier) {
+    NSArray<EOVueAfficherdiplome> eoObjects = _EOVueAfficherdiplome.fetchEOVueAfficherdiplomes(editingContext, qualifier, null);
+    EOVueAfficherdiplome eoObject;
+    int count = eoObjects.count();
+    if (count == 0) {
+      eoObject = null;
+    }
+    else if (count == 1) {
+      eoObject = eoObjects.objectAtIndex(0);
+    }
+    else {
+      throw new IllegalStateException("There was more than one EOVueAfficherdiplome that matched the qualifier '" + qualifier + "'.");
+    }
+    return eoObject;
+  }
+
+  public static EOVueAfficherdiplome fetchRequiredEOVueAfficherdiplome(EOEditingContext editingContext, String keyName, Object value) {
+    return _EOVueAfficherdiplome.fetchRequiredEOVueAfficherdiplome(editingContext, new EOKeyValueQualifier(keyName, EOQualifier.QualifierOperatorEqual, value));
+  }
+
+  public static EOVueAfficherdiplome fetchRequiredEOVueAfficherdiplome(EOEditingContext editingContext, EOQualifier qualifier) {
+    EOVueAfficherdiplome eoObject = _EOVueAfficherdiplome.fetchEOVueAfficherdiplome(editingContext, qualifier);
+    if (eoObject == null) {
+      throw new NoSuchElementException("There was no EOVueAfficherdiplome that matched the qualifier '" + qualifier + "'.");
+    }
+    return eoObject;
+  }
+
+  public static EOVueAfficherdiplome localInstanceIn(EOEditingContext editingContext, EOVueAfficherdiplome eo) {
+    EOVueAfficherdiplome localInstance = (eo == null) ? null : ERXEOControlUtilities.localInstanceOfObject(editingContext, eo);
+    if (localInstance == null && eo != null) {
+      throw new IllegalStateException("You attempted to localInstance " + eo + ", which has not yet committed.");
+    }
+    return localInstance;
+  }
+  public static NSArray<etudiants.utt.fr.eo.EOVueAfficherdiplome> fetchListDiplome(EOEditingContext editingContext, NSDictionary<String, Object> bindings) {
+    EOFetchSpecification fetchSpec = EOFetchSpecification.fetchSpecificationNamed("ListDiplome", _EOVueAfficherdiplome.ENTITY_NAME);
+    fetchSpec = fetchSpec.fetchSpecificationWithQualifierBindings(bindings);
+    return (NSArray<etudiants.utt.fr.eo.EOVueAfficherdiplome>)editingContext.objectsWithFetchSpecification(fetchSpec);
+  }
+  
+  public static NSArray<etudiants.utt.fr.eo.EOVueAfficherdiplome> fetchListDiplome(EOEditingContext editingContext,
+	Long numeroEtuBinding)
+  {
+    EOFetchSpecification fetchSpec = EOFetchSpecification.fetchSpecificationNamed("ListDiplome", _EOVueAfficherdiplome.ENTITY_NAME);
+    NSMutableDictionary<String, Object> bindings = new NSMutableDictionary<String, Object>();
+    bindings.takeValueForKey(numeroEtuBinding, "numeroEtu");
+	fetchSpec = fetchSpec.fetchSpecificationWithQualifierBindings(bindings);
+    return (NSArray<etudiants.utt.fr.eo.EOVueAfficherdiplome>)editingContext.objectsWithFetchSpecification(fetchSpec);
+  }
+  
+}

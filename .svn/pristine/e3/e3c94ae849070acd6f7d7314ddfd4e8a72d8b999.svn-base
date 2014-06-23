@@ -1,0 +1,72 @@
+<webobject name = "Wrapper">
+  <div metal:fill-slot = "contenu">
+    <webobject name = "errors">
+      <div class = "warn"> Vous n'&ecirc;tes pas autoris&eacute; &agrave; consulter ce dossier. </div>
+    </webobject>
+    <webobject name = "etudiant">
+      <h3>R&eacute;sultats aux UV pour 
+        <span><wo name = "annee"/></span><webobject name = "Indicateur1" />
+      </h3>
+      <webobject name = "annonce">
+      <div class = "warn">
+        	<webobject name = "optAnonce" />
+      </div>
+      </webobject>
+      <wo name = "insUv">
+        <div class = "info"> Pas de r&eacute;sultats pour ce semestre. </div>
+      </wo>
+      <div class = "br"></div>
+      <ul style = "text-align:left">
+        <li>
+          <wo name = "profil">Profil de formation</wo>
+        </li>
+        <li>
+          <wo name = "dossier">Dossier administratif</wo>
+        </li>
+        <li>
+          <wo name = "edt">Emploi du temps</wo>
+        </li>
+        <br>
+              <webobject name = "status">
+              <webobject name = "retourList">Retour &agrave; la liste&nbsp;<wo name = "iCone"></wo></webobject>
+              </webobject>
+      </ul>
+      <wo name = "insUv1">
+      <div class = "form">
+        <wo name = "modaliteUV">
+          <table border = "0" class = "tab-data" cellspacing = "1" cellpadding = "2" width = "100%">
+            <tr>
+              <th width = "5%">Dipl&ocirc;me</th>
+              <th width = "5%">UV</th>
+              <th width = "5%">R&eacute;sultat</th>
+              <th width = "5%">Cr&eacute;dits</th>
+              <th width = "40%">Modalit&eacute;s</th>
+              <th width = "40%">Observation</th>
+            </tr>
+            <wo name = "loopMod">
+              <tr class = "tr">
+                <td valign = "top" align = "left"><wo name = "diplome"/></td>
+                <td valign = "top" align = "left"><wo name = "uv"/></td>
+                <td align = "center"><wo name = "resuv"/></td>
+                <td align = "center"><wo name = "credit"/></td>
+                <td align = "left" valign = "top">
+                  <ul style = "margin:0;padding-left:15px">
+                  <wo name = "modLoop">
+                    <li>
+                      <div><wo name = "libelle"/>&nbsp;<wo name = "valeur"/>%&nbsp;<wo name = "elimNote"><wo name = "noteElim"/></wo></div>
+                    </li>
+                    </wo>
+                  </ul>
+                  <td valign = "top" align = "justify"><wo name = "observation"/></td>
+                </td>
+              </tr>
+            </wo>
+          </table>
+        </wo>
+      </div>
+      </wo>
+      <div class = "br"></div>
+    </webobject>
+  </div>
+  <webobject name = "Busy10" />
+</webobject>

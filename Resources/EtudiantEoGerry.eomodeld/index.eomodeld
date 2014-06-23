@@ -1,0 +1,67 @@
+{
+    EOModelVersion = "2.1"; 
+    adaptorName = JDBC; 
+    entities = (
+        {className = "etudiants.utt.fr.eo.EODiplome"; name = EODiplome; }, 
+        {className = "etudiants.utt.fr.eo.EODiplOption"; name = EODiplOption; }, 
+        {className = "etudiants.utt.fr.eo.EOEtudiant"; name = EOEtudiant; }, 
+        {
+            className = "etudiants.utt.fr.eo.EOEtudiantInscrAdm"; 
+            name = EOEtudiantInscrAdm; 
+        }, 
+        {className = "etudiants.utt.fr.eo.EOIndEmail"; name = EOIndEmail; }, 
+        {className = "etudiants.utt.fr.eo.EOIndividu"; name = EOIndividu; }, 
+        {className = "etudiants.utt.fr.eo.EOParametre"; name = EOParametre; }, 
+        {className = "etudiants.utt.fr.eo.EOParamPeriode"; name = EOParamPeriode; }, 
+        {
+            className = "etudiants.utt.fr.eo.EOProfilImpression"; 
+            name = EOProfilImpression; 
+        }, 
+        {className = "etudiants.utt.fr.eo.EORefCivilite"; name = EORefCivilite; }, 
+        {className = "etudiants.utt.fr.eo.EORefPeriode"; name = EORefPeriode; }, 
+        {className = "etudiants.utt.fr.eo.EORefSituation"; name = EORefSituation; }, 
+        {className = "etudiants.utt.fr.eo.EOUtPersPoste"; name = EOUtPersPoste; }, 
+        {className = "etudiants.utt.fr.eo.EOVDossetudiants"; name = EOVDossetudiants; }, 
+        {
+            className = "etudiants.utt.fr.eo.EOVueAfficherdiplome"; 
+            name = EOVueAfficherdiplome; 
+        }, 
+        {
+            className = "etudiants.utt.fr.eo.EOVueAfficherparcours"; 
+            name = EOVueAfficherparcours; 
+        }, 
+        {
+            className = "etudiants.utt.fr.eo.EOVueDetailetudiant"; 
+            name = EOVueDetailetudiant; 
+        }, 
+        {
+            className = "etudiants.utt.fr.eo.EOVueDetailparcours"; 
+            name = EOVueDetailparcours; 
+        }, 
+        {className = "etudiants.utt.fr.eo.EOVueDiplnoprd"; name = EOVueDiplnoprd; }, 
+        {className = "etudiants.utt.fr.eo.EOVueDiplSpec"; name = EOVueDiplSpec; }, 
+        {className = "etudiants.utt.fr.eo.EOVueDiplwithprd"; name = EOVueDiplwithprd; }, 
+        {className = "etudiants.utt.fr.eo.EOVueEiaAbr"; name = EOVueEiaAbr; }, 
+        {className = "etudiants.utt.fr.eo.EOVueMention"; name = EOVueMention; }, 
+        {className = "etudiants.utt.fr.eo.EOVueNivAdm"; name = EOVueNivAdm; }, 
+        {
+            className = "etudiants.utt.fr.eo.EOVuePeriodeParam"; 
+            name = EOVuePeriodeParam; 
+        }, 
+        {className = "etudiants.utt.fr.eo.EOVueSpecMast"; name = EOVueSpecMast; }, 
+        {className = "etudiants.utt.fr.roles.VEnseignant"; name = VEnseignant; }, 
+        {className = "etudiants.utt.fr.roles.VIadmin"; name = VIadmin; }, 
+        {className = "etudiants.utt.fr.roles.VPersonnel"; name = VPersonnel; }
+    ); 
+    storedProcedures = (
+        ProfilCategorie, 
+        ProfilDiplome, 
+        ProfilEtudiant, 
+        ProfilInsUv, 
+        ProfilParcours, 
+        ProfilTotal, 
+        ProfilTotaux, 
+        rechercheEtudiants
+    ); 
+    userInfo = {modelId = GERRY; }; 
+}

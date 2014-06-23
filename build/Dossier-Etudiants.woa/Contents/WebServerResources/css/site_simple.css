@@ -1,0 +1,223 @@
+/* debut style UTT -------------------------------------------------------------------------------------------------------*/
+
+.titre {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: 15px;
+	text-align: justify;
+	color: #993366;
+	text-decoration: none;
+	font-variant: normal;
+	font-weight: bold
+}
+
+.soustitre {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	line-height: 15px;
+	text-align: justify;
+	color: #993366;
+	text-decoration: none;
+	font-variant: normal;
+	font-weight: bold
+}
+
+.texte {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	line-height: 15px;
+	text-align: justify;
+	color: #000000;
+	text-decoration: none;
+	font-variant: normal;
+	font-weight: normal
+}
+
+.textecentre {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	line-height: 15px;
+	text-align: center;
+	color: #000000;
+	text-decoration: none;
+	font-variant: normal;
+	font-weight: normal
+}
+
+.textevaleur {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	line-height: 15px;
+	text-align: justify;
+	color: #FF9900;
+	text-decoration: none;
+	font-variant: normal;
+	font-weight: bold
+}
+
+.menu {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	line-height: 15px;
+	text-align: justify;
+	color: #FFFFFF;
+	font-variant: normal
+}
+
+.lien {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	line-height: 15px;
+	text-align: justify;
+	color: #993366 !important;
+	text-decoration: underline;
+	font-variant: normal;
+	font-weight: normal
+}
+
+.couleur {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	line-height: 15px;
+	text-align: justify;
+	color: #993366;
+	text-decoration: none;
+	font-variant: normal;
+	font-weight: normal
+}
+
+:link {
+	color: #000;
+}
+
+A:link {
+	text-decoration: none;
+	color: #FFFFFF
+}
+
+A:visited {
+	text-decoration: none;
+	color: #FFFFFF
+}
+
+A:hover {
+	text-decoration: underline;
+	color: #FFFFFF
+}
+
+A:active {
+	text-decoration: underline;
+	color: #FFFFFF
+}
+
+.mail {
+	color: #7BA7FE;
+}
+
+#principal {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#bandeau {
+	position: absolute;
+	height: 216px;
+	width: 720px;
+	top: 0;
+	left: 0;
+}
+/*
+#principal>#bandeau {
+	position:fixed;
+}
+*/
+#bandeau-contenu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-left: 145px;
+	color: #FFF;
+}
+
+#contenu-page { /*width:615px;*/
+	margin-left: 145px;
+	padding-left: 10px;
+	padding-right: 10px;
+	color: #000;
+}
+
+#colonne-droite {
+	float: left;
+	width: 145px;
+}
+
+#colonne-gauche {
+	float: left;
+	padding: 0.5em;
+	width: 140px;
+	position: absolute;
+	/*top:216px;*/
+	left: 0;
+}
+
+.erreur {
+	color: #F00;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	line-height: 15px;
+	text-align: justify;
+	text-decoration: none;
+	font-variant: normal;
+	font-weight: bold;
+}
+
+.textevaleur {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	line-height: 15px;
+	text-align: justify;
+	color: #FF9900;
+	text-decoration: none;
+	font-variant: normal;
+	font-weight: bold
+}
+
+/* ---------------------------------- Styles Menu Edition --------------------------------*/
+
+.menuEdition .cktl_simplemenu {
+    margin-left:40px;
+    width:200px;
+}
+
+.menuEdtion .menuitem {
+    font-size: 12px;
+    border-bottom: 1px solid #ccc;
+}
+
+.cktlajaxsimplemenu .menuitem a:hover {
+  background-color: #E8FEDC;
+}
+
+/*-Fin-*/
+/* ---------------------------------- Restyling des reports --------------------------------*/
+.FwkCktlReportingGuiAjax_ProgressAmount {
+    background-color: #6699CC !important;	
+}
+
+.FwkCktlReportingGuiAjax_RapExecMonitor{
+    background-color: lightblue !important;	
+}
+/** fin **/
+

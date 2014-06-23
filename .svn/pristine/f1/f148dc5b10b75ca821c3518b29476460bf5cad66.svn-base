@@ -1,0 +1,12 @@
+package etudiants.utt.fr.eo;
+
+import org.apache.log4j.Logger;
+
+public class EOUtPersPoste extends _EOUtPersPoste {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7280845798408828584L;
+	@SuppressWarnings("unused")
+	private static Logger log = Logger.getLogger(EOUtPersPoste.class);
+}

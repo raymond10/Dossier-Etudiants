@@ -1,0 +1,67 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = "AN_CIV"; 
+            externalType = VARCHAR2; 
+            name = anCiv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "AN_UNIV"; 
+            externalType = VARCHAR2; 
+            name = anUniv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 4; 
+        }, 
+        {
+            columnName = "PAR_PRD_TYPE"; 
+            externalType = VARCHAR2; 
+            isReadOnly = Y; 
+            name = parPrdType; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 5; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PAR_VAL"; 
+            externalType = VARCHAR2; 
+            name = parVal; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 50; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = "PRD_UNIV"; 
+            externalType = VARCHAR2; 
+            name = prdUniv; 
+            valueClassName = NSString; 
+            valueType = S; 
+            width = 2; 
+        }
+    ); 
+    attributesUsedForLocking = (anCiv, anUniv, parPrdType, parVal, prdUniv); 
+    className = "etudiants.utt.fr.eo.EOParamPeriode"; 
+    classProperties = (anCiv, anUniv, eoRefPeriode, parPrdType, parVal, prdUniv); 
+    externalName = "GERRY.PARAM_PRD"; 
+    name = EOParamPeriode; 
+    primaryKeyAttributes = (parPrdType); 
+    relationships = (
+        {
+            destination = EORefPeriode; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = (
+                {destinationAttribute = anUniv; sourceAttribute = anUniv; }, 
+                {destinationAttribute = prdUniv; sourceAttribute = prdUniv; }
+            ); 
+            name = eoRefPeriode; 
+        }
+    ); 
+}
