@@ -193,8 +193,6 @@ public class Recherche extends MyAjaxComponent {
 		// voirEtudiantsDg.setMasterObject(etudiants);
 		// voirEtudiantsDg.setNumberOfObjectsPerBatch(10);
 		// voirEtudiantsDg.setDataSource(ds);
-		// session.setPeriodeCourante((NSMutableDictionary)
-		// gestEtu.selectRawRowPeriodeCourante(ed).objectAtIndex(0));
 		comboBoxPeriode();
 		comboxDiplome(selectedPeriode);
 		comboxNiveau(selectedPrdDiplome, selectedDiplome, selectedPeriode);
@@ -889,7 +887,6 @@ public class Recherche extends MyAjaxComponent {
 		selectedPrdDiplome = null;
 		selectedNiveauMst = null;
 		selectedNiveaux = null;
-		@SuppressWarnings("rawtypes")
 		NSArray OrdreSort = new NSArray(new Object[] {
 				EOSortOrdering.sortOrderingWithKey(EOVuePeriodeParam.ORDRE_KEY,
 						EOSortOrdering.CompareAscending),
@@ -897,6 +894,9 @@ public class Recherche extends MyAjaxComponent {
 						EOSortOrdering.CompareDescending) });
 		periodes = EOVuePeriodeParam.fetchAllEOVuePeriodeParams(edc(),
 				OrdreSort);
+		//RN 09/07/2014 Correction javaNullpointerException
+		mySession().setPeriodeCourante((NSMutableDictionary)
+		 gestEtu.selectRawRowPeriodeCourante(edc()).objectAtIndex(0));
 		String annUnivPrdUniv = (String) mySession().getPeriodeCourante()
 				.valueForKey("PERIODE");
 		for (int i = 0; periodes.count() > i; i++) {
