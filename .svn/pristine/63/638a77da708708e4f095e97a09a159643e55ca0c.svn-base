@@ -31,6 +31,7 @@ import etudiants.utt.fr.sql.RechercheSQL;
 import etudiants.utt.fr.util.EdtUtilitaires;
 import etudiants.utt.fr.util.LesURLs;
 import etudiants.utt.fr.util.RegEx;
+import etudiants.utt.fr.util.StringOperation;
 
 /**
  * @author Raymond NANEON <raymond.naneon at utt.fr>
@@ -41,24 +42,24 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 
 	public Integer HEIGHT = 20;
 	public Integer WEIGHT = 48;
-	public EmploiDuTemps wocomponent;
-	public EOEditingContext edc;
-	public Session sess;
+	private EmploiDuTemps wocomponent;
+	private EOEditingContext edc;
+	private Session sess;
 	private Boolean isAutorizUser;
 	private Boolean isEtudiant;
 	private LeUser user;
-	public NSMutableDictionary unUser;
+	private NSMutableDictionary unUser;
 	private NSMutableDictionary publi;
 	private NSMutableDictionary students;
-	WODisplayGroup dg;
-	NSDictionary bdgs;
+	private WODisplayGroup dg;
+	private NSDictionary bdgs;
 	public static RechercheSQL sqli;
 	public static ProcessGestionEdt gestEdt;
 	private NSMutableDictionary edt;
 	private NSMutableDictionary data;
 	private NSMutableArray ttime;
 	private String html;
-	public NSArray etu;
+	private NSArray etu;
 	private Number id;
 	private Number cid;
 	String uv = null;
@@ -69,66 +70,176 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 	String sale = null;
 	String weak = null;
 	public boolean publique = false;
-	public NSMutableDictionary type;
-	public NSMutableArray<String> jours;
-	public NSMutableArray couleurs;
+	private NSMutableDictionary type;
+	private NSMutableArray<String> jours;
+	private NSMutableArray couleurs;
 	private NSMutableDictionary couleur;
 	private NSMutableArray horaire;
 	private String horaireLoop;
 	private String leHTML;
 	public String tplVide = null;
 	public String tplPlein = null;
-	RegEx regex;
+	private RegEx regex;
 	private String nom;
 	private String courante;
 
 	public EmploiDuTempsCtrl(EmploiDuTemps aComponent) {
 		// TODO Auto-generated constructor stub
-		wocomponent = aComponent;
-		type = wocomponent.getEdtUtil().theType();
-		jours = wocomponent.getEdtUtil().theDay();
-		couleurs = wocomponent.getEdtUtil().theColor();
-		horaire = new NSMutableArray();
-		regex = new RegEx();
-		unUser = new NSMutableDictionary();
-		data = new NSMutableDictionary();
-		publi = new NSMutableDictionary();
-		students = new NSMutableDictionary();
-		couleur = new NSMutableDictionary();
-		edt = new NSMutableDictionary();
-		user = new LeUser();
-		dg = new WODisplayGroup();
-		bdgs = new NSDictionary();
+		setWocomponent(aComponent);
+		setUser(wocomponent().user());
+		setUnUser(user().leUser());
+		type();
+		jours();
+		couleurs();
+		//Initialisation des composants principaux		
 		sqli = new RechercheSQL();
 		gestEdt = new ProcessGestionEdt();
-		etu = new NSArray();
-		ttime = new NSMutableArray();
-		id = 0;
-		cid = 0;
-		edc = wocomponent.edc();
-		dg = wocomponent.getEtudiantActif();
-		sess = wocomponent.mySession();
-		user = wocomponent.user();
-		unUser = user.leUser();
+		setDg(wocomponent().getEtudiantActif());
 		NSMutableDictionary bindinds = new NSMutableDictionary();
-		bindinds.put("numero", sess.getEtudiant().primaryKey());
-		etu = reWriteListDico(sqli.getRawRowSearchEtudiants(edc, bindinds));
-		publi = reWriteDico((NSMutableDictionary) gestEdt.selectRawRowEdtPubli(
-				edc).lastObject());
-		if (publi != null && publi.objectForKey("PUBLI").equals("O")
-				&& data != null) {
+		bindinds.put("numero", sess().getEtudiant().primaryKey());
+		setEtu(reWriteListDico(sqli.getRawRowSearchEtudiants(edc(), bindinds)));
+		setPubli(reWriteDico((NSMutableDictionary) gestEdt.selectRawRowEdtPubli(
+				edc()).lastObject()));
+		if (getPubli() != null && getPubli().objectForKey("PUBLI").equals("O")
+				&& getData() != null) {
 			publique = true;
 		} else {
 			publique = false;
 		}
-		courante = (String) sess.getPeriodeCourante().objectForKey("LIBELLE");
+		setCourante((String) sess().getPeriodeCourante().objectForKey("LIBELLE"));
+	}
+
+	/**
+	 * @return the wocomponent
+	 */
+	public EmploiDuTemps wocomponent() {
+		return wocomponent;
+	}
+
+	/**
+	 * @param wocomponent the wocomponent to set
+	 */
+	public void setWocomponent(EmploiDuTemps wocomponent) {
+		this.wocomponent = wocomponent;
+	}
+
+	/**
+	 * @return the edc
+	 */
+	public EOEditingContext edc() {
+		if(edc == null)
+			edc = wocomponent().edc();
+		return edc;
+	}
+
+	/**
+	 * @param edc the edc to set
+	 */
+	public void setEdc(EOEditingContext edc) {
+		this.edc = edc;
+	}
+
+	/**
+	 * @return the sess
+	 */
+	public Session sess() {
+		if(sess == null)
+			sess = wocomponent().mySession();
+		return sess;
+	}
+
+	/**
+	 * @param sess the sess to set
+	 */
+	public void setSess(Session sess) {
+		this.sess = sess;
+	}
+
+	/**
+	 * @return the unUser
+	 */
+	public NSMutableDictionary unUser() {
+		if(unUser == null)
+			unUser = user().leUser();
+		return unUser;
+	}
+
+	/**
+	 * @param unUser the unUser to set
+	 */
+	public void setUnUser(NSMutableDictionary unUser) {
+		this.unUser = unUser;
+	}
+
+	/**
+	 * @return the dg
+	 */
+	public WODisplayGroup dg() {
+		if(dg == null)
+			dg = new WODisplayGroup();
+		return dg;
+	}
+
+	/**
+	 * @param dg the dg to set
+	 */
+	public void setDg(WODisplayGroup dg) {
+		this.dg = dg;
+	}
+
+	/**
+	 * @return the bdgs
+	 */
+	public NSDictionary bdgs() {
+		if(bdgs == null)
+			bdgs = new NSDictionary();
+		return bdgs;
+	}
+
+	/**
+	 * @param bdgs the bdgs to set
+	 */
+	public void setBdgs(NSDictionary bdgs) {
+		this.bdgs = bdgs;
+	}
+
+	/**
+	 * @return the etu
+	 */
+	public NSArray etu() {
+		if(etu == null)
+			etu = new NSArray();
+		return etu;
+	}
+
+	/**
+	 * @param etu the etu to set
+	 */
+	public void setEtu(NSArray etu) {
+		this.etu = etu;
+	}
+
+	/**
+	 * @return the regex
+	 */
+	public RegEx regex() {
+		if(regex == null)
+			regex = new RegEx();
+		return regex;
+	}
+
+	/**
+	 * @param regex the regex to set
+	 */
+	public void setRegex(RegEx regex) {
+		this.regex = regex;
 	}
 
 	/**
 	 * @return the isAutorizUser
 	 */
 	public Boolean getIsAutorizUser() {
-		isAutorizUser = (Boolean) unUser.valueForKey("isAutorized");
+		isAutorizUser = (Boolean) unUser.valueForKey(StringOperation.AUTORIZED);
 		return isAutorizUser;
 	}
 
@@ -144,7 +255,7 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 	 * @return the isEtudiant
 	 */
 	public Boolean getIsEtudiant() {
-		isEtudiant = sess.getEtudiant().isNonNull() && isAutorizUser;
+		isEtudiant = sess.getEtudiant().isNonNull() && getIsAutorizUser();
 		return isEtudiant;
 	}
 
@@ -159,7 +270,9 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 	/**
 	 * @return the user
 	 */
-	public LeUser getUser() {
+	public LeUser user() {
+		if(user == null)
+			user = wocomponent().user();
 		return user;
 	}
 
@@ -175,6 +288,8 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 	 * @return the publi
 	 */
 	public NSMutableDictionary getPubli() {
+		if(publi == null)
+			publi = new NSMutableDictionary();
 		return publi;
 	}
 
@@ -190,6 +305,8 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 	 * @return the students
 	 */
 	public NSMutableDictionary getStudents() {
+		if(students == null)
+			students = new NSMutableDictionary();
 		return students;
 	}
 
@@ -205,6 +322,8 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 	 * @return the id
 	 */
 	public Number getId() {
+		if(id == null)
+			id = 0;
 		return id;
 	}
 
@@ -220,6 +339,8 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 	 * @return the cid
 	 */
 	public Number getCid() {
+		if(cid == null)
+			cid = 0;
 		return cid;
 	}
 
@@ -235,6 +356,8 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 	 * @return the edt
 	 */
 	public NSMutableDictionary getEdt() {
+		if(edt == null)
+			edt = new NSMutableDictionary();
 		return edt;
 	}
 
@@ -250,6 +373,8 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 	 * @return the couleur
 	 */
 	public NSMutableDictionary getCouleur() {
+		if(couleur == null)
+			couleur = new NSMutableDictionary();
 		return couleur;
 	}
 
@@ -265,6 +390,8 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 	 * @return the data
 	 */
 	public NSMutableDictionary getData() {
+		if(data == null)
+			data = new NSMutableDictionary();
 		return data;
 	}
 
@@ -280,6 +407,8 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 	 * @return the ttime
 	 */
 	public NSMutableArray getTtime() {
+		if(ttime == null)
+			ttime = new NSMutableArray();
 		return ttime;
 	}
 
@@ -310,6 +439,8 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 	 * @return the horaire
 	 */
 	public NSMutableArray getHoraire() {
+		if(horaire == null)
+			horaire = new NSMutableArray();
 		return horaire;
 	}
 
@@ -381,88 +512,136 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 		this.courante = courante;
 	}
 
+	/**
+	 * @return the type
+	 */
+	public NSMutableDictionary type() {
+		if(type == null)
+			type = wocomponent().edtUtil().theType();
+		return type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(NSMutableDictionary type) {
+		this.type = type;
+	}
+
+	/**
+	 * @return the jours
+	 */
+	public NSMutableArray<String> jours() {
+		if(jours == null)
+			jours = wocomponent().edtUtil().theDay();
+		return jours;
+	}
+
+	/**
+	 * @param jours the jours to set
+	 */
+	public void setJours(NSMutableArray<String> jours) {
+		this.jours = jours;
+	}
+
+	/**
+	 * @return the couleurs
+	 */
+	public NSMutableArray couleurs() {
+		if(couleurs == null)
+			couleurs = wocomponent().edtUtil().theColor();
+		return couleurs;
+	}
+
+	/**
+	 * @param couleurs the couleurs to set
+	 */
+	public void setCouleurs(NSMutableArray couleurs) {
+		this.couleurs = couleurs;
+	}
+
 	// Lien page etudiant
 	public WOActionResults dossier() {
-		sess.setRetourAlaListe(true);
-		if (sess.dgActif() == null || sess.dgActif().allObjects().count() == 0) {
-			sess.setRetourAlaListe(false);
+		sess().setRetourAlaListe(true);
+		if (sess().dgActif() == null || sess().dgActif().allObjects().count() == 0) {
+			sess().setRetourAlaListe(false);
 		}
-		sess.setEtudiant(sess.getEtudiant());
-		DossierAdm dossierPage = (DossierAdm) wocomponent
+		sess().setEtudiant(sess().getEtudiant());
+		DossierAdm dossierPage = (DossierAdm) wocomponent()
 				.pageWithName(DossierAdm.class.getName());
 		EOEditingContext newEdc = ERXEC.newEditingContext();
-		sess.setNestedEdc(newEdc);
+		sess().setNestedEdc(newEdc);
 		return dossierPage;
 	}
 
 	public WOActionResults leprofil() {
-		sess.setRetourAlaListe(true);
-		if (sess.dgActif() == null || sess.dgActif().allObjects().count() == 0) {
-			sess.setRetourAlaListe(false);
+		sess().setRetourAlaListe(true);
+		if (sess().dgActif() == null || sess().dgActif().allObjects().count() == 0) {
+			sess().setRetourAlaListe(false);
 		}
-		if (etu != null && etu.count() != 0) {
-			sess.setEtudiant(sess.getEtudiant());
+		if (etu() != null && etu().count() != 0) {
+			sess().setEtudiant(sess().getEtudiant());
 		}
-		ProfilEtudiants profilPage = (ProfilEtudiants) wocomponent
+		ProfilEtudiants profilPage = (ProfilEtudiants) wocomponent()
 				.pageWithName(ProfilEtudiants.class.getName());
 		EOEditingContext newEdc = ERXEC.newEditingContext();
-		sess.setNestedEdc(newEdc);
+		sess().setNestedEdc(newEdc);
 		return profilPage;
 	}
 
 	public WOActionResults leResultatUv() {
-		sess.setRetourAlaListe(true);
-		if (sess.dgActif() == null || sess.dgActif().allObjects().count() == 0) {
-			sess.setRetourAlaListe(false);
+		sess().setRetourAlaListe(true);
+		if (sess().dgActif() == null || sess().dgActif().allObjects().count() == 0) {
+			sess().setRetourAlaListe(false);
 		}
-		if (etu != null && etu.count() != 0) {
-			sess.setEtudiant(sess.getEtudiant());
+		if (etu() != null && etu().count() != 0) {
+			sess().setEtudiant(sess().getEtudiant());
 		}
-		ResultatsUV resUvPage = (ResultatsUV) wocomponent
+		ResultatsUV resUvPage = (ResultatsUV) wocomponent()
 				.pageWithName(ResultatsUV.class.getName());
 		EOEditingContext newEdc = ERXEC.newEditingContext();
-		sess.setNestedEdc(newEdc);
+		sess().setNestedEdc(newEdc);
 		return resUvPage;
 	}
 
 	public WOActionResults lEmploiDuTemps() {
-		sess.setRetourAlaListe(true);
-		if (sess.dgActif() == null || sess.dgActif().allObjects().count() == 0) {
-			sess.setRetourAlaListe(false);
+		sess().setRetourAlaListe(true);
+		if (sess().dgActif() == null || sess().dgActif().allObjects().count() == 0) {
+			sess().setRetourAlaListe(false);
 		}
-		if (etu != null && etu.count() != 0) {
-			sess.setEtudiant(sess.getEtudiant());
+		if (etu() != null && etu().count() != 0) {
+			sess().setEtudiant(sess().getEtudiant());
 		}
-		EmploiDuTemps lEdtPage = (EmploiDuTemps) wocomponent
+		EmploiDuTemps lEdtPage = (EmploiDuTemps) wocomponent()
 				.pageWithName(EmploiDuTemps.class.getName());
 		EOEditingContext newEdc = ERXEC.newEditingContext();
-		sess.setNestedEdc(newEdc);
+		sess().setNestedEdc(newEdc);
 		return lEdtPage;
 	}
 	
 	public boolean accessLinkGctc(){
-		boolean access =  (Boolean) unUser.valueForKey("isAutorizedGcTc");
+		boolean access =  (Boolean) unUser().valueForKey(StringOperation.GCTC);
 		return access;
 	}
 	
 	public String LinkGcTc() {
 		ProcessGestionRechercheEtudiants gestEtu = new ProcessGestionRechercheEtudiants();
 		LesURLs url = new LesURLs();
-		sess.setRetourAlaListe(true);
-		if (wocomponent.getDgActif() == null || wocomponent.getDgActif().allObjects().count() == 0) {
-			sess.setRetourAlaListe(false);
+		sess().setRetourAlaListe(true);
+		if (wocomponent().getDgActif() == null || wocomponent().getDgActif().allObjects().count() == 0) {
+			sess().setRetourAlaListe(false);
 		}
-		if (etu != null && etu.count() != 0) {
-			sess.setEtudiant(sess.getEtudiant());
+		if (etu() != null && etu().count() != 0) {
+			sess().setEtudiant(sess().getEtudiant());
 		}
-		Integer etuId = Integer.valueOf(sess.getEtudiant().primaryKey());
+		Integer etuId = Integer.valueOf(sess().getEtudiant().primaryKey());
 		String link = url.getGctcUrl();
 		NSMutableDictionary requetePersId = (NSMutableDictionary) gestEtu
-				.selectRawRowrequetePersId(edc, etuId).lastObject();
+				.selectRawRowrequetePersId(edc(), etuId).lastObject();
 		String persId = requetePersId.valueForKey("COCK_PERS_ID").toString();
 		String urlGctc = link+persId;
 		EOEditingContext newEdc = ERXEC.newEditingContext();
-	    sess.setNestedEdc(newEdc);
+	    sess().setNestedEdc(newEdc);
 		return urlGctc;
 	}
 
@@ -471,109 +650,106 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 	public WOActionResults retourAlaListe() {
 		WOComponent searchPage = null;
 		NSArray<EOIndividu> lesEtudiants = new NSArray<EOIndividu>();
-		WODisplayGroup dg = wocomponent.getDgActif();
+		WODisplayGroup dg = wocomponent().getDgActif();
 		if (dg.allObjects().count() == 0) {
-			wocomponent.setDgActif(dg);
+			wocomponent().setDgActif(dg);
 			NSDictionary bdgs = dg.queryBindings();
 			String mst = (String) bdgs.valueForKey("diplome");
 			if (mst == null) {
 				mst = (String) bdgs.valueForKey("prdDiplome");
 			}
 			if (mst != null && mst.equals("MST")) {
-				lesEtudiants = EOIndividu.EtudiantsMST(edc, bdgs, null);
+				lesEtudiants = EOIndividu.EtudiantsMST(edc(), bdgs, null);
 			} else {
-				lesEtudiants = EOIndividu.EtudiantsNonMST(edc, bdgs, null);
+				lesEtudiants = EOIndividu.EtudiantsNonMST(edc(), bdgs, null);
 			}
-			wocomponent.getDgActif().setObjectArray(lesEtudiants);
-			wocomponent.getDgActif().setCurrentBatchIndex(
-					sess.getCurrentBatchIndex());
+			wocomponent().getDgActif().setObjectArray(lesEtudiants);
+			wocomponent().getDgActif().setCurrentBatchIndex(
+					sess().getCurrentBatchIndex());
 		} else {
-			wocomponent.setDgActif(dg);
-			wocomponent.getDgActif().setCurrentBatchIndex(
-					sess.getCurrentBatchIndex());
+			wocomponent().setDgActif(dg);
+			wocomponent().getDgActif().setCurrentBatchIndex(
+					sess().getCurrentBatchIndex());
 		}
-		searchPage = wocomponent.pageWithName("Recherche");
+		searchPage = wocomponent().pageWithName("Recherche");
 		return searchPage;
 	}
 
 	public void letudiant() {
-		if (dg == null) {
-			dg = new WODisplayGroup();
-			dg.setObjectArray(new NSArray(sess.getEtudiant()));
-			dg.queryBindings().setObjectForKey(sess.getEtudiant().primaryKey(),
+		if (dg().allObjects().isEmpty()) {
+			dg().setObjectArray(new NSArray(sess().getEtudiant()));
+			dg().queryBindings().setObjectForKey(sess().getEtudiant().primaryKey(),
 					"numero");
 		}
-		id = Integer.valueOf(sess.getEtudiant().primaryKey());
-		bdgs = dg.queryBindings();
+		id = Integer.valueOf(sess().getEtudiant().primaryKey());
+		setBdgs(dg().queryBindings());
 		try {
 			NSMutableDictionary etuDico = new NSMutableDictionary();
 			etuDico = (NSMutableDictionary) ProcessGestionEtudiant
-					.selectRawRowEtudiants(edc, bdgs).lastObject();
+					.selectRawRowEtudiants(edc(), bdgs()).lastObject();
 			reWriteDico(etuDico);
-			wocomponent.setDicEtudiant(etuDico);
+			wocomponent().setDicEtudiant(etuDico);
 		} catch (FactoryException e) {
 			String alertMessage = e.getMessageFormatte();
 			if (e.isBloquant()) {
 				if (e.isInformatif()) {
 					// Exception contenant un message d'information pour
 					// l'utilisateur
-					sess.addSimpleErrorMessage(
+					sess().addSimpleErrorMessage(
 							"message d'information pour l'utilisateur",
 							alertMessage);
-					sess.setMessageErreur(alertMessage);
+					sess().setMessageErreur(alertMessage);
 				} else {
 					e.printStackTrace();
 					throw e;
 				}
 			} else {
-				sess.addSimpleErrorMessage("FactoryException ", alertMessage);
-				sess.setMessageErreur(alertMessage);
+				sess().addSimpleErrorMessage("FactoryException ", alertMessage);
+				sess().setMessageErreur(alertMessage);
 			}
 
 		} catch (RuntimeException e1) {
-			sess.addSimpleErrorMessage("RuntimeException ", e1.getMessage());
-			sess.setMessageErreur(e1.getMessage());
+			sess().addSimpleErrorMessage("RuntimeException ", e1.getMessage());
+			sess().setMessageErreur(e1.getMessage());
 			e1.printStackTrace();
 			throw e1;
 		}
 	}
 
 	public void edtUvSelection() {
-		// 6380
-		if (dg == null) {
-			dg = new WODisplayGroup();
-			dg.setObjectArray(new NSArray(sess.getEtudiant()));
-			dg.queryBindings().setObjectForKey(sess.getEtudiant().primaryKey(),
+		if (dg().allObjects().isEmpty()) {
+			dg().setObjectArray(new NSArray(sess().getEtudiant()));
+			dg().queryBindings().setObjectForKey(sess().getEtudiant().primaryKey(),
 					"numero");
 		}
-		bdgs = dg.queryBindings();
+		setBdgs(dg().queryBindings());
 		try {
 			NSMutableArray uvList = new NSMutableArray();
-			uvList = reWriteListDico(gestEdt.selectRawRowFunctionEdtUV(edc,
-					bdgs));
-			wocomponent.setListUv(uvList);
+			uvList = reWriteListDico(gestEdt.selectRawRowFunctionEdtUV(edc(),
+					bdgs()));
+			wocomponent().setListUv(uvList);
 		} catch (FactoryException e) {
 			String alertMessage = e.getMessageFormatte();
 			if (e.isBloquant()) {
 				if (e.isInformatif()) {
 					// Exception contenant un message d'information pour
 					// l'utilisateur
-					sess.addSimpleErrorMessage(
+					sess().addSimpleErrorMessage(
 							"message d'information pour l'utilisateur",
 							alertMessage);
-					sess.setMessageErreur(alertMessage);
+					sess().setMessageErreur(alertMessage);
 				} else {
 					e.printStackTrace();
 					throw e;
 				}
 			} else {
-				sess.addSimpleErrorMessage("FactoryException ", alertMessage);
-				sess.setMessageErreur(alertMessage);
+				sess().addSimpleErrorMessage("FactoryException ", alertMessage);
+				sess().setMessageErreur(alertMessage);
 			}
 
 		} catch (RuntimeException e1) {
-			sess.addSimpleErrorMessage("RuntimeException ", e1.getMessage());
-			sess.setMessageErreur(e1.getMessage());
+			sess().addSimpleErrorMessage("RuntimeException ", e1.getMessage());
+			sess().setMessageErreur(e1.getMessage());
 			e1.printStackTrace();
 			throw e1;
 		}
@@ -583,31 +759,30 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 		for (int i = 0; i < uvs.count(); i++) {
 			NSMutableDictionary tmpUv = new NSMutableDictionary();
 			tmpUv = (NSMutableDictionary) uvs.objectAtIndex(i);
-			couleur.put(tmpUv.valueForKey("UV"), couleurs.objectAtIndex(i));
+			getCouleur().put(tmpUv.valueForKey("UV"), couleurs().objectAtIndex(i));
 		}
 	}
 
 	public void horaires() {
-		edt = wocomponent.getEdtUtil().horaires();
+		setEdt(wocomponent().edtUtil().horaires());
 	}
 
 	// Refonte de l'emploi du temps
 	public void edtIdSelection() {
-		data = new NSMutableDictionary();
-		html = "<!-- Début du HTML--> \n";
-		if (dg == null) {
-			dg = new WODisplayGroup();
-			dg.setObjectArray(new NSArray(sess.getEtudiant()));
-			dg.queryBindings().setObjectForKey(sess.getEtudiant().primaryKey(),
+		setData(new NSMutableDictionary());
+		setHtml("<!-- Début du HTML--> \n");
+		if (dg().allObjects().isEmpty()) {
+			dg().setObjectArray(new NSArray(sess().getEtudiant()));
+			dg().queryBindings().setObjectForKey(sess().getEtudiant().primaryKey(),
 					"numero");
 		}
-		nom = sess.getEtudiant().nomAndPrenom();
-		id = Integer.valueOf(sess.getEtudiant().primaryKey());
-		bdgs = dg.queryBindings();
+		setNom(sess().getEtudiant().nomAndPrenom());
+		setId(Integer.valueOf(sess().getEtudiant().primaryKey()));
+		setBdgs(dg().queryBindings());
 		try {
 			NSMutableArray edtEtuList = new NSMutableArray();
-			edtEtuList = reWriteListDico(gestEdt.selectRawRowFunctionEdt(edc,
-					bdgs));
+			edtEtuList = reWriteListDico(gestEdt.selectRawRowFunctionEdt(edc(),
+					bdgs()));
 			for (int i = 0; i < edtEtuList.count(); i++) {
 				NSMutableDictionary dicoJour = new NSMutableDictionary();
 				NSMutableDictionary dicoDebut = new NSMutableDictionary();
@@ -616,12 +791,12 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 				String jour = (String) ln.objectForKey("JOUR");
 				// On vérifie si le dictionnaire principal contient les jours de
 				// la semaine
-				if (!data.containsKey(jour)) {
-					data.put(jour, dicoJour);
+				if (!getData().containsKey(jour)) {
+					getData().put(jour, dicoJour);
 				}
 				NSMutableDictionary debut = (NSMutableDictionary) data
 						.valueForKey(jour);
-				Integer deb = wocomponent.getEdtUtil().code((String) ln.objectForKey("DEBUT"));
+				Integer deb = wocomponent().edtUtil().code((String) ln.objectForKey("DEBUT"));
 				// On vérifie si les jours de la semaine ont un numéro de début
 				if (!debut.containsKey(deb)) {
 					debut.put(deb, dicoDebut);
@@ -636,8 +811,8 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 					edtData.put("salle2", ln.objectForKey("SALLE2"));
 					edtData.put("salle3", ln.objectForKey("SALLE3"));
 					edtData.put("salle4", ln.objectForKey("SALLE4"));
-					Integer fin = wocomponent.getEdtUtil().code((String) ln.objectForKey("FIN"));
-					Integer debInt = wocomponent.getEdtUtil().code((String) ln.objectForKey("DEBUT"));
+					Integer fin = wocomponent().edtUtil().code((String) ln.objectForKey("FIN"));
+					Integer debInt = wocomponent().edtUtil().code((String) ln.objectForKey("DEBUT"));
 					edtData.put("temp", (fin - debInt));
 					debList.addObject(edtData);
 					debut.put(deb, debList);
@@ -657,8 +832,8 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 					edtData.put("salle2", ln.objectForKey("SALLE2"));
 					edtData.put("salle3", ln.objectForKey("SALLE3"));
 					edtData.put("salle4", ln.objectForKey("SALLE4"));
-					Integer fin = wocomponent.getEdtUtil().code((String) ln.objectForKey("FIN"));
-					Integer debInt = wocomponent.getEdtUtil().code((String) ln.objectForKey("DEBUT"));
+					Integer fin = wocomponent().edtUtil().code((String) ln.objectForKey("FIN"));
+					Integer debInt = wocomponent().edtUtil().code((String) ln.objectForKey("DEBUT"));
 					edtData.put("temp", (fin - debInt));
 					List.addObject(oldDico);
 					List.addObject(edtData);
@@ -666,14 +841,14 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 				}
 			}
 			// On parcourt chaque jour de la semaine
-			for(String jour : jours) {
-				html += "<td class=\"jourField\"> \n";
+			for(String jour : jours()) {
+				setHtml(html += "<td class=\"jourField\"> \n");
 				// Pour le jour on va parcourir les heures qui sont codés en demi-
 				// heure !
 				for (int time = 16; time < 45; time++) {
-					html += "<!-- Début for principale--> \n";
+					setHtml(html += "<!-- Début for principale--> \n");
 					// On recupère le jour
-					NSMutableDictionary data_jour = (NSMutableDictionary) data
+					NSMutableDictionary data_jour = (NSMutableDictionary) getData()
 							.objectForKey(jour);
 					NSMutableArray jourTime = null;
 					if (data_jour != null) {
@@ -716,8 +891,8 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 							}
 							//On va maintenant parcourir a gauche puis a drouite le 2Tableaux
 							Integer droite = time;
-							html += "<table class=\"tableinner\"><tr><td> \n";
-							html += "<!-- debut colonne gauche--> \n";
+							setHtml(html += "<table class=\"tableinner\"><tr><td> \n");
+							setHtml(html += "<!-- debut colonne gauche--> \n");
 							//GAUCHE
 							for(time = time; time < max; time++) {
 								NSMutableArray jourGauche = (NSMutableArray) data_jour.objectForKey(time);
@@ -726,19 +901,19 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 									jourGauche_T2 = (NSMutableDictionary) jourGauche.objectAtIndex(0);
 								if(jourGauche_T2 != null){
 									Integer depile = time;
-									html+= wocomponent.getEdtUtil().crenoPlein(jourGauche_T2, jour, time);
-									time = wocomponent.getEdtUtil().getIniTime();
+									setHtml(html+= wocomponent().edtUtil().crenoPlein(jourGauche_T2, jour, time));
+									time = wocomponent().edtUtil().getIniTime();
 									//ARRET ICI
 									jourGauche.removeObjectAtIndex(0);
 									data_jour.setObjectForKey(jourGauche, depile);
 								} else {
 									//crenoVide
-									html += wocomponent.getEdtUtil().crenoVide("2");
+									setHtml(html += wocomponent().edtUtil().crenoVide("2"));
 								}	
 							}
-							html += "<!-- fin colonne gauche--> \n";
-							html += "</td><td> \n";
-							html += "<!-- debut colonne droite--> \n";
+							setHtml(html += "<!-- fin colonne gauche--> \n");
+							setHtml(html += "</td><td> \n");
+							setHtml(html += "<!-- debut colonne droite--> \n");
 							//DROITE
 							for(time = droite; time < max; time++){
 								NSMutableArray jourDroite = (NSMutableArray) data_jour.objectForKey(time);
@@ -750,24 +925,24 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 										jourDroite_T2B = (NSMutableDictionary) jourDroite.objectAtIndex(1);
 								}
 								if(jourDroite_T2A != null){
-									html+= wocomponent.getEdtUtil().crenoPlein(jourDroite_T2A, jour, time);
-									time = wocomponent.getEdtUtil().getIniTime();
+									setHtml(html+= wocomponent().edtUtil().crenoPlein(jourDroite_T2A, jour, time));
+									time = wocomponent().edtUtil().getIniTime();
 								} else if(jourDroite_T2B != null) {
-									html+= wocomponent.getEdtUtil().crenoPlein(jourDroite_T2B, jour, time);
-									time = wocomponent.getEdtUtil().getIniTime();
+									setHtml(html+= wocomponent().edtUtil().crenoPlein(jourDroite_T2B, jour, time));
+									time = wocomponent().edtUtil().getIniTime();
 								} else {
 									//crenoVide
-									html += wocomponent.getEdtUtil().crenoVide("2");
+									setHtml(html += wocomponent().edtUtil().crenoVide("2"));
 								}
 							}
-							html += "<!-- fin colonne droite--> \n";
-							html += "</td></tr></table> \n";
+							setHtml(html += "<!-- fin colonne droite--> \n");
+							setHtml(html += "</td></tr></table> \n");
 							time = max - 1;
 							//Ce else correspond a s'il n'y a pas de 2Tableaux (mode : normal)
 						} else {
 							// crenoPlein
-							html+= wocomponent.getEdtUtil().crenoPlein(jourTime_T2, jour, time);
-							time = wocomponent.getEdtUtil().getIniTime();
+							setHtml(html+= wocomponent().edtUtil().crenoPlein(jourTime_T2, jour, time));
+							time = wocomponent().edtUtil().getIniTime();
 						}// FIN de si il y a un creno de semaine 2Tableaux
 					} else {
 						// crenoVide
@@ -779,41 +954,41 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 							valueData = (NSMutableDictionary) jourTime.objectAtIndex(0);
 							sem = (String) valueData.objectForKey("semaine");
 						}
-						html += wocomponent.getEdtUtil().crenoVide(sem);
+						setHtml(html += wocomponent().edtUtil().crenoVide(sem));
 					}// Fin du IF qui verifie qui il y a un creno ou non (le cas
 						// au dessus est un else )
 				}// FIn du for qui parcour les heures !!!
 					// Fin for principal
-				html += "<!-- Fin for principal--> \n";
-				html += "</td> \n";
+				setHtml(html += "<!-- Fin for principal--> \n");
+				setHtml(html += "</td> \n");
 			}
-			edt.put("html", html);
+			getEdt().put("html", getHtml());
 			// NSLog.out.appendln("page HTML :" + edt.objectForKey("html"));
 			// NSLog.out.appendln("page TIME :" + edt.objectForKey("time"));
-			horaire = (NSMutableArray) edt.objectForKey("time");
-			leHTML = (String) edt.objectForKey("html");
+			setHoraire((NSMutableArray) getEdt().objectForKey("time"));
+			setLeHTML((String) getEdt().objectForKey("html"));
 		} catch (FactoryException e) {
 			String alertMessage = e.getMessageFormatte();
 			if (e.isBloquant()) {
 				if (e.isInformatif()) {
 					// Exception contenant un message d'information pour
 					// l'utilisateur
-					sess.addSimpleErrorMessage(
+					sess().addSimpleErrorMessage(
 							"message d'information pour l'utilisateur",
 							alertMessage);
-					sess.setMessageErreur(alertMessage);
+					sess().setMessageErreur(alertMessage);
 				} else {
 					e.printStackTrace();
 					throw e;
 				}
 			} else {
-				sess.addSimpleErrorMessage("FactoryException ", alertMessage);
-				sess.setMessageErreur(alertMessage);
+				sess().addSimpleErrorMessage("FactoryException ", alertMessage);
+				sess().setMessageErreur(alertMessage);
 			}
 
 		} catch (RuntimeException e1) {
-			sess.addSimpleErrorMessage("RuntimeException ", e1.getMessage());
-			sess.setMessageErreur(e1.getMessage());
+			sess().addSimpleErrorMessage("RuntimeException ", e1.getMessage());
+			sess().setMessageErreur(e1.getMessage());
 			e1.printStackTrace();
 			throw e1;
 		}
@@ -844,7 +1019,7 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 		}
 		return ledico;
 	}
-
+/*
 	// Time decoder / coder protected
 	String decode(Number ptime) {
 		String ttime = null;
@@ -910,5 +1085,5 @@ public class EmploiDuTempsCtrl extends AComponentCtrl {
 		couleurs.addObject("#00FF00");
 		// couleurs.addObject("#BBFF00"); //couleurs.addObject("#CCFFCC");
 	}
-
+*/
 }

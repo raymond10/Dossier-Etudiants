@@ -1,0 +1,36 @@
+Body : WOBody {
+    onload = onload;
+    
+}
+
+Contenu : WOComponentContent {
+    
+}
+
+Notifs : UttAjaxUiMessageContainer {
+    id = myApp.messageContainerID;
+}
+
+TestNavigateur : WOConditional {
+	condition = mySession.browser.iE;
+}
+
+Elses : WOConditional {
+	condition = mySession.browser.iE;
+	negate = true;
+}
+
+Copyrights : WOString {
+	value = copyright;
+	escapeHTML = false;
+}
+
+Version : WOString {
+	value = version;
+	escapeHTML = false;
+}
+
+ServerId : WOString {
+	value = bdServerId;
+	escapeHTML = false;
+}

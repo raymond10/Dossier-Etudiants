@@ -9,7 +9,7 @@ formAdmin : WOForm {
 }
 
 formPCB : WOForm {
-	name = "pcb";
+	name = "pcbForm";
 }
 
 errors : WOConditional {
@@ -64,12 +64,14 @@ Observe2 : AjaxObserveField {
 }
 
 savedMsg : UttAjaxSubmitButton {
+	id = "msgButtonSaveId";
+	name = "msgButtonSave";
 	action = annoCtrl.updateMsgAnnonce;
-	name = "enregistrer";
 	value = "enregistrer";
 	text = "Valider";
 	type = "validate";
 	onClick = "onSubmitAnnonce();";
+	title = "Activer / Désactiver l'annonce sur l'ENT";
 }
 
 radio3 : WORadioButton {
@@ -99,11 +101,14 @@ Observe4 : AjaxObserveField {
 }
 
 savedPcb : UttAjaxSubmitButton {
+	id = "pcbButtonSaveId";
+	name = "pcbButtonSave";
 	action = annoCtrl.updatePcbf;
-	name = "enregistrer";
 	value = "enregistrer";
 	text = "Valider";
 	type = "validate";
+	onClick="document.forms.pcbForm.submit();";
+	title = "Activer / Désactiver le paiement en ligne";
 }
 
 Busy10: AjaxBusyIndicator {

@@ -89,7 +89,7 @@ recherche : WOHyperlink {
 }
 
 lAdmin : WOConditional {
-	condition = ctrl.admin;
+	condition = ctrl.adminUser;
 }
 
 

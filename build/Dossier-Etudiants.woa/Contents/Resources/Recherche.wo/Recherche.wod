@@ -33,7 +33,8 @@ recherche : WOForm {
 }
 
 rechercher : UttAjaxSubmitButton {
-	id="Rechercher";
+	id="searchEtudiantId";
+	name="searchEtudiant";
 	class="rechercher";
 	formName = "searchForm";
 	value="Rechercher";

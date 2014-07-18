@@ -246,8 +246,8 @@ printEdtio : WOString {
 
 searchPv : UttAjaxSubmitButton {
 	//onClickBefore="confirm('Les éditions sont en cours... elles seront disponibles d'ici quelques instants.')";
-	id="Rechercher";
-	name ="Editions";
+	id="printPvId";
+	name ="printPv";
 	class="rechercher";
 	formName = "editionpv";
 	value="rechercher";
@@ -336,8 +336,8 @@ printEdtion : WOString {
 
 searchMST : UttAjaxSubmitButton {
 	//onClickBefore="confirm('Les éditions sont en cours... elles seront disponibles d'ici quelques instants.')";
-	id="Rechercher";
-	name ="Master";
+	id="printPvMasterId";
+	name ="printPvMaster";
 	class="rechercher";
 	formName = "editionMST";
 	value="rechercher";

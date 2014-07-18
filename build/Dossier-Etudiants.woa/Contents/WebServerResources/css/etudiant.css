@@ -300,6 +300,18 @@ div#page {
 	float: inherit;
 }
 
+.pageLogin {
+	position: absolute;
+	width: 90%;
+	height: 600px;
+	left: 50%;
+	top: 50%;
+	margin-left: -45%;
+	margin-top: -300px;
+	padding: 0;
+	text-align: left;
+}
+
 .titre {
 	position: relative;
 	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
@@ -414,6 +426,14 @@ div#page {
 	/*overflow: auto;*/
 	float: inherit;
 	/* width: 500px; */
+}
+
+.contenuLogin {
+	height: 80%;
+	background: url(../image/bg.png);
+	border: 1px solid #80C65A;
+	padding: 4px 4px 4px 4px;
+	overflow: auto;
 }
 
 .info,.warn,.aide {

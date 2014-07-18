@@ -487,6 +487,21 @@ Busy10: AjaxBusyIndicator {
 	divID = "busy10";
 }
 
+ExceptionModalDialog: UttAjaxModalDialog {
+	id = "ExceptionModalDialog";
+	pageName = "Erreur";
+	title = "Une erreur inattendue est survenue";
+	minWidth = 700;
+	resizable = false;
+	minimizable = false;
+	closable = false;
+	maximizable = false;
+	draggable = true;
+	centerVertically = true;
+	open = isOpenFenetreException;
+	showOpener = false;
+}
+
 Indicateur1 : WOImage {
 	border = 0;
 	filename = "newImages/indicator_arrows.gif";

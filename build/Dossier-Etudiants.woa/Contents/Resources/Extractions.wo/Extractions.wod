@@ -91,6 +91,8 @@ SimpleMenu : UttAjaxSimpleMenu {
 }
 
 ExportUvAction : LoginButton {
+	id = "ExportUvId";
+	name = "ExportUv";
 	action = imprimerExportUV;
 	class="rechercher";
 	text = "Exporter";
@@ -139,6 +141,8 @@ uvsUv : WOPopUpButton {
 }
 
 ExportListUvAction : LoginButton {
+	id = "ExportListUvId";
+	name = "ExportListUv";
 	action = imprimerExport_List_Uv1;
 	text = "Exporter";
 	type = "print";
@@ -174,6 +178,8 @@ periodesB2 : WOPopUpButton {
 }
 
 ExportEffectifAction: LoginButton {
+	id = "ExportListUvId";
+	name = "ExportListUv";
 	action = imprimerExport_Effectif;
 	text = "Exporter";
 	type = "print";
@@ -222,6 +228,8 @@ diplomeEtu : WOPopUpButton {
 }
 
 ExportResultatAction : LoginButton {
+	id = "ExportListUvId";
+	name = "ExportListUv";
 	action = imprimerExport_Resultat;
 	text = "Exporter";
 	type = "print";
@@ -260,6 +268,8 @@ nivInsUv : WOPopUpButton {
 }
 
 ExportInsUvAction : LoginButton {
+	id = "ExportListUvId";
+	name = "ExportListUv";
 	action = imprimerExport_InsUv;
 	text = "Exporter";
 	type = "print";
@@ -290,6 +300,8 @@ pBornJery2 : WOPopUpButton {
 }
 
 ExportJuryAction : LoginButton {
+	id = "ExportJuryId";
+	name = "ExportJury";
 	action = imprimerExport_Decision;
 	text = "Exporter";
 	type = "print";
@@ -353,6 +365,8 @@ niveauRespUV : WOPopUpButton {
 }
 
 ExportJuryApAction : LoginButton {
+	id = "ExportJuryApId";
+	name = "ExportJuryAp";
 	action = imprimerExport_Decision2;
 	text = "Exporter";
 	type = "print";
@@ -375,6 +389,8 @@ periodeRespUV : WOPopUpButton {
 }
 
 ExportRespUvAction : LoginButton {
+	id = "ExportRespUvId";
+	name = "ExportRespUv";
 	action = imprimerExport_Respuv;
 	//onclick = "Element.show('busy');";
 	text = "Exporter";

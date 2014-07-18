@@ -521,6 +521,17 @@ pbxOpt : WOHiddenField {
 	value = pbxOpt;
 }
 
+payer : UttAjaxSubmitButton {
+	id = "paiementButtonId";
+	action = null;
+	text = "Payer";
+	type = "validate";
+	formName = "paybox";
+	//<input type = "submit" value = "payer" />
+	onClick="document.forms.paybox.submit();";
+	title = "Payer en ligne le montant s'affichant dans le total";
+}
+
 browser : WOConditional {
 	condition = browser;
 }
